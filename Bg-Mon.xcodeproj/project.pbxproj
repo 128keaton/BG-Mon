@@ -8,13 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D83E1CB337E6007558B4 /* AppDelegate.swift */; };
-		8A45D8411CB337E6007558B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8401CB337E6007558B4 /* ViewController.swift */; };
 		8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8421CB337E6007558B4 /* Main.storyboard */; };
 		8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */; };
 		8A45D8491CB337E6007558B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8481CB337E6007558B4 /* Assets.xcassets */; };
 		8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D84A1CB337E6007558B4 /* LaunchScreen.storyboard */; };
 		8A45D8571CB337E6007558B4 /* Bg_MonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8561CB337E6007558B4 /* Bg_MonTests.swift */; };
 		8A45D8621CB337E6007558B4 /* Bg_MonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8611CB337E6007558B4 /* Bg_MonUITests.swift */; };
+		8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D86F1CB33912007558B4 /* DashboardViewController.swift */; };
+		8A45D8721CB33BA3007558B4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A45D8711CB33BA3007558B4 /* HealthKit.framework */; };
+		8A45D8751CB351FB007558B4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8741CB351FB007558B4 /* MenuViewController.swift */; };
+		8A45D8771CB3528E007558B4 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8761CB3528E007558B4 /* MenuManager.swift */; };
+		8A45D8791CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8781CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg */; };
+		8A45D87B1CB361E1007558B4 /* IMG_1382.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */; };
+		8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */; };
+		8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC51FF51CB4187500E1872E /* SuperCell.swift */; };
+		B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +45,6 @@
 /* Begin PBXFileReference section */
 		8A45D83B1CB337E6007558B4 /* Bg-Mon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bg-Mon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D83E1CB337E6007558B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8A45D8401CB337E6007558B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8A45D8431CB337E6007558B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A45D8461CB337E6007558B4 /* Bg_Mon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bg_Mon.xcdatamodel; sourceTree = "<group>"; };
 		8A45D8481CB337E6007558B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +56,18 @@
 		8A45D85D1CB337E6007558B4 /* Bg-MonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bg-MonUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D8611CB337E6007558B4 /* Bg_MonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bg_MonUITests.swift; sourceTree = "<group>"; };
 		8A45D8631CB337E6007558B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A45D86F1CB33912007558B4 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		8A45D8711CB33BA3007558B4 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		8A45D8731CB33BA3007558B4 /* Bg-Mon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Bg-Mon.entitlements"; sourceTree = "<group>"; };
+		8A45D8741CB351FB007558B4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		8A45D8761CB3528E007558B4 /* MenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
+		8A45D8781CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Note I'm not responsible if your screen breaks or you go blind.jpg"; sourceTree = "<group>"; };
+		8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_1382.JPG; sourceTree = "<group>"; };
+		8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8AC51FF51CB4187500E1872E /* SuperCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperCell.swift; sourceTree = "<group>"; };
+		B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bg_Mon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E091F18638122BDD2E48DF7C /* Pods-Bg-Mon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bg-Mon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon.release.xcconfig"; sourceTree = "<group>"; };
+		EC7D4FF91569ED98574F0D5B /* Pods-Bg-Mon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bg-Mon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */,
+				8A45D8721CB33BA3007558B4 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +104,8 @@
 				8A45D8551CB337E6007558B4 /* Bg-MonTests */,
 				8A45D8601CB337E6007558B4 /* Bg-MonUITests */,
 				8A45D83C1CB337E6007558B4 /* Products */,
+				E5734EEB76940CA15C27FEEF /* Pods */,
+				9C0435CD34FC9A7439C96182 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,9 +122,16 @@
 		8A45D83D1CB337E6007558B4 /* Bg-Mon */ = {
 			isa = PBXGroup;
 			children = (
+				8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */,
+				8A45D8781CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg */,
+				8A45D8731CB33BA3007558B4 /* Bg-Mon.entitlements */,
 				8A45D83E1CB337E6007558B4 /* AppDelegate.swift */,
-				8A45D8401CB337E6007558B4 /* ViewController.swift */,
+				8A45D8741CB351FB007558B4 /* MenuViewController.swift */,
 				8A45D8421CB337E6007558B4 /* Main.storyboard */,
+				8AC51FF51CB4187500E1872E /* SuperCell.swift */,
+				8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */,
+				8A45D8761CB3528E007558B4 /* MenuManager.swift */,
+				8A45D86F1CB33912007558B4 /* DashboardViewController.swift */,
 				8A45D8481CB337E6007558B4 /* Assets.xcassets */,
 				8A45D84A1CB337E6007558B4 /* LaunchScreen.storyboard */,
 				8A45D84D1CB337E6007558B4 /* Info.plist */,
@@ -128,6 +158,24 @@
 			path = "Bg-MonUITests";
 			sourceTree = "<group>";
 		};
+		9C0435CD34FC9A7439C96182 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A45D8711CB33BA3007558B4 /* HealthKit.framework */,
+				B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5734EEB76940CA15C27FEEF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EC7D4FF91569ED98574F0D5B /* Pods-Bg-Mon.debug.xcconfig */,
+				E091F18638122BDD2E48DF7C /* Pods-Bg-Mon.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A45D8661CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-Mon" */;
 			buildPhases = (
+				FEB2A528771A1BF5FFCC8082 /* Check Pods Manifest.lock */,
 				8A45D8371CB337E6007558B4 /* Sources */,
 				8A45D8381CB337E6007558B4 /* Frameworks */,
 				8A45D8391CB337E6007558B4 /* Resources */,
+				02A6409DAC7BA80ACC66C6F7 /* Embed Pods Frameworks */,
+				FECFC09B2493CBD41811F4E9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -196,6 +247,12 @@
 				TargetAttributes = {
 					8A45D83A1CB337E6007558B4 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = Z48RKT6B3T;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					8A45D8511CB337E6007558B4 = {
 						CreatedOnToolsVersion = 7.3;
@@ -234,6 +291,8 @@
 			files = (
 				8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */,
 				8A45D8491CB337E6007558B4 /* Assets.xcassets in Resources */,
+				8A45D8791CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg in Resources */,
+				8A45D87B1CB361E1007558B4 /* IMG_1382.JPG in Resources */,
 				8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,14 +313,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		02A6409DAC7BA80ACC66C6F7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FEB2A528771A1BF5FFCC8082 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FECFC09B2493CBD41811F4E9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8A45D8371CB337E6007558B4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A45D8411CB337E6007558B4 /* ViewController.swift in Sources */,
+				8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */,
+				8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */,
 				8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */,
+				8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */,
 				8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */,
+				8A45D8771CB3528E007558B4 /* MenuManager.swift in Sources */,
+				8A45D8751CB351FB007558B4 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,9 +514,12 @@
 		};
 		8A45D8671CB337E6007558B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC7D4FF91569ED98574F0D5B /* Pods-Bg-Mon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Bg-Mon/Bg-Mon.entitlements";
 				INFOPLIST_FILE = "Bg-Mon/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-Mon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -414,9 +528,12 @@
 		};
 		8A45D8681CB337E6007558B4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E091F18638122BDD2E48DF7C /* Pods-Bg-Mon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Bg-Mon/Bg-Mon.entitlements";
 				INFOPLIST_FILE = "Bg-Mon/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-Mon";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -488,6 +605,7 @@
 				8A45D8681CB337E6007558B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A45D8691CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-MonTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +614,7 @@
 				8A45D86B1CB337E6007558B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A45D86C1CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-MonUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +623,7 @@
 				8A45D86E1CB337E6007558B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

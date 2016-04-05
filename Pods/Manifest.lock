@@ -1,0 +1,32 @@
+PODS:
+  - BEMSimpleLineGraph (4.1.1)
+  - SlideMenuControllerSwift (2.1.0)
+  - UIImageColors (1.0.3)
+
+DEPENDENCIES:
+  - BEMSimpleLineGraph (from `https://github.com/Boris-Em/BEMSimpleLineGraph.git`,
+    branch `feature`)
+  - SlideMenuControllerSwift
+  - UIImageColors (from `https://github.com/jathu/UIImageColors.git`)
+
+EXTERNAL SOURCES:
+  BEMSimpleLineGraph:
+    :branch: feature
+    :git: https://github.com/Boris-Em/BEMSimpleLineGraph.git
+  UIImageColors:
+    :git: https://github.com/jathu/UIImageColors.git
+
+CHECKOUT OPTIONS:
+  BEMSimpleLineGraph:
+    :commit: a1fefe8a297f495ddcceb26d771545d0ba6b8bbe
+    :git: https://github.com/Boris-Em/BEMSimpleLineGraph.git
+  UIImageColors:
+    :commit: 0a5415f9f3f144e386c68136e5d5d9db3925a05e
+    :git: https://github.com/jathu/UIImageColors.git
+
+SPEC CHECKSUMS:
+  BEMSimpleLineGraph: 90d30ff3111380f93a0ea25db0eaaf41a5fc8579
+  SlideMenuControllerSwift: 0ed532750dc8574eefda189d0f25805bc967ab7a
+  UIImageColors: 3c3b04ecd5786d3235f7f783316c6ef0f631216d
+
+COCOAPODS: 0.39.0
