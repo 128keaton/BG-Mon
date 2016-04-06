@@ -16,12 +16,20 @@ class MenuViewController: UITableViewController {
     
     var profileViewController: UIViewController?
     var dashboardViewController: UIViewController?
+    var mealsViewController: UIViewController?
     
     
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        if objectAlreadyExist("profile-pic") {
+            profileImage?.image = UIImage.init(data: fetchImage("profile-pic"))
+        }
+        let nc = NSNotificationCenter.defaultCenter()
+        nc.addObserver(self, selector: #selector(MenuViewController.updateView), name: "updateView", object: nil)
+        
+        
         let image = profileImage?.image
         let colors = image!.getColors()
         profileView?.backgroundColor = colors.backgroundColor
@@ -31,6 +39,11 @@ class MenuViewController: UITableViewController {
         profileImage?.layer.borderColor = colors.detailColor.CGColor
         profileImage?.clipsToBounds = true
         
+       
+        if objectAlreadyExist("profile-name") {
+            profileLabel?.text = fetchUsername("profile-name") as String
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let profileViewController = storyboard.instantiateViewControllerWithIdentifier("Profile") 
         self.profileViewController = profileViewController as UIViewController
@@ -38,7 +51,27 @@ class MenuViewController: UITableViewController {
         let dashboardViewController = storyboard.instantiateViewControllerWithIdentifier("Dash")
         self.dashboardViewController = dashboardViewController as UIViewController
         
+        let mealsViewController = storyboard.instantiateViewControllerWithIdentifier("Food")
+        self.mealsViewController = mealsViewController as UIViewController
+        
      
+        
+    }
+
+   @objc func updateView(){
+        print("updating View")
+        if objectAlreadyExist("profile-pic") {
+            profileImage?.image = UIImage.init(data: fetchImage("profile-pic"))
+        }
+        let image = profileImage?.image
+        let colors = image!.getColors()
+        profileView?.backgroundColor = colors.backgroundColor
+        profileLabel?.textColor = colors.primaryColor
+        profileImage?.layer.borderColor = colors.detailColor.CGColor
+        if objectAlreadyExist("profile-name") {
+            profileLabel?.text = fetchUsername("profile-name") as String
+        }
+
         
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -46,11 +79,23 @@ class MenuViewController: UITableViewController {
         case 0:
             slideMenuController()?.changeMainViewController(dashboardViewController!, close: true)
         case 1:
+            slideMenuController()?.changeMainViewController(mealsViewController!, close: true)
+        case 2:
             slideMenuController()?.changeMainViewController(profileViewController!, close: true)
         default:
             print("pressed")
         }
     }
+    func objectAlreadyExist(key: String) -> Bool {
+        return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
+    }
+    func fetchImage(key: String) -> NSData{
+        return NSUserDefaults.standardUserDefaults().dataForKey(key)!
+    }
+    func fetchUsername(key: String) -> NSString{
+        return NSUserDefaults.standardUserDefaults().objectForKey(key)! as! NSString
+    }
+    
     
  
     

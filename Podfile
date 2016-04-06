@@ -4,6 +4,8 @@
 use_frameworks!
 
 target 'Bg-Mon' do
+pod 'BTNavigationDropdownMenu', :git => "https://github.com/mkral/BTNavigationDropdownMenu.git"
+pod 'MBProgressHUD'
 pod 'UIImageColors',  :git => "https://github.com/jathu/UIImageColors.git"
 pod 'SlideMenuControllerSwift'
 pod 'BEMSimpleLineGraph', :git => 'https://github.com/Boris-Em/BEMSimpleLineGraph.git', :branch => 'feature'

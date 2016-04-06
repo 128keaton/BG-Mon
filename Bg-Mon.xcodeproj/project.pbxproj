@@ -21,6 +21,9 @@
 		8A45D8791CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8781CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg */; };
 		8A45D87B1CB361E1007558B4 /* IMG_1382.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */; };
 		8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */; };
+		8AB1BE281CB46EFA00A291E7 /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */; };
+		8AB1BE2A1CB4B14800A291E7 /* Plus Math-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AB1BE291CB4B14800A291E7 /* Plus Math-100.png */; };
+		8AB1BE2C1CB4B23000A291E7 /* Plus Math-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AB1BE2B1CB4B23000A291E7 /* Plus Math-50.png */; };
 		8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC51FF51CB4187500E1872E /* SuperCell.swift */; };
 		B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */; };
 /* End PBXBuildFile section */
@@ -64,6 +67,9 @@
 		8A45D8781CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Note I'm not responsible if your screen breaks or you go blind.jpg"; sourceTree = "<group>"; };
 		8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_1382.JPG; sourceTree = "<group>"; };
 		8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
+		8AB1BE291CB4B14800A291E7 /* Plus Math-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plus Math-100.png"; sourceTree = "<group>"; };
+		8AB1BE2B1CB4B23000A291E7 /* Plus Math-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plus Math-50.png"; sourceTree = "<group>"; };
 		8AC51FF51CB4187500E1872E /* SuperCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperCell.swift; sourceTree = "<group>"; };
 		B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bg_Mon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E091F18638122BDD2E48DF7C /* Pods-Bg-Mon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bg-Mon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,12 +128,15 @@
 		8A45D83D1CB337E6007558B4 /* Bg-Mon */ = {
 			isa = PBXGroup;
 			children = (
+				8AB1BE291CB4B14800A291E7 /* Plus Math-100.png */,
+				8AB1BE2B1CB4B23000A291E7 /* Plus Math-50.png */,
 				8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */,
 				8A45D8781CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg */,
 				8A45D8731CB33BA3007558B4 /* Bg-Mon.entitlements */,
 				8A45D83E1CB337E6007558B4 /* AppDelegate.swift */,
 				8A45D8741CB351FB007558B4 /* MenuViewController.swift */,
 				8A45D8421CB337E6007558B4 /* Main.storyboard */,
+				8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */,
 				8AC51FF51CB4187500E1872E /* SuperCell.swift */,
 				8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */,
 				8A45D8761CB3528E007558B4 /* MenuManager.swift */,
@@ -291,9 +300,11 @@
 			files = (
 				8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */,
 				8A45D8491CB337E6007558B4 /* Assets.xcassets in Resources */,
+				8AB1BE2A1CB4B14800A291E7 /* Plus Math-100.png in Resources */,
 				8A45D8791CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg in Resources */,
 				8A45D87B1CB361E1007558B4 /* IMG_1382.JPG in Resources */,
 				8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */,
+				8AB1BE2C1CB4B23000A291E7 /* Plus Math-50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +382,7 @@
 				8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */,
 				8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */,
 				8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */,
+				8AB1BE281CB46EFA00A291E7 /* MealsViewController.swift in Sources */,
 				8A45D8771CB3528E007558B4 /* MenuManager.swift in Sources */,
 				8A45D8751CB351FB007558B4 /* MenuViewController.swift in Sources */,
 			);
