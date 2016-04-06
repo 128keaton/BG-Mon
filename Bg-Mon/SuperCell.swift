@@ -14,10 +14,13 @@ class MealCell: UITableViewCell {
 	@IBOutlet weak var carbs: UILabel?
 }
 class CorrectionCell: UITableViewCell {
-	@IBOutlet weak var insulin: UILabel?
-	@IBOutlet weak var bloodGlucose: UILabel?
+	@IBOutlet weak var insulin: UITextField?
+
 }
 class GlucoseCell: UITableViewCell {
-	@IBOutlet weak var bloodGlucose: UILabel?
-	@IBOutlet weak var insulin: UILabel?
+	@IBOutlet weak var bloodGlucose: UITextField?
+
+}
+class CarbCell: UITableViewCell {
+    @IBOutlet weak var carbs: UITextField?
 }

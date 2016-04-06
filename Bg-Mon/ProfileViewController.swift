@@ -24,6 +24,11 @@ public extension UIImage {
 class ProfileViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	@IBOutlet var highscore: UILabel?
 	@IBOutlet var lowscore: UILabel?
+    
+    @IBOutlet var sensitivity: UITextField?
+    @IBOutlet var targetBG: UITextField?
+    @IBOutlet var carbRatio: UITextField?
+    
 
 	@IBOutlet var name: UITextField?
 
@@ -42,6 +47,15 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 		if objectAlreadyExist("profile-name") {
 			name!.text = fetchUsername("profile-name") as String
 		}
+        if objectAlreadyExist("target") {
+            targetBG?.text = fetchUsername("target") as String
+        }
+        if objectAlreadyExist("ratio") {
+            carbRatio?.text = fetchUsername("ratio") as String
+        }
+        if objectAlreadyExist("sensitivity") {
+            sensitivity?.text = fetchUsername("sensitivity") as String
+        }
 
 		let tapGesture = UIGestureRecognizer.init(target: self, action: #selector(ProfileViewController.chooseImage))
 
@@ -117,6 +131,23 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 	}
 
 	@IBAction func saveAll() {
+        if sensitivity?.text != "" {
+            NSUserDefaults.standardUserDefaults().setObject(sensitivity?.text, forKey: "sensitivity")
+        }
+        if carbRatio?.text != "" {
+              NSUserDefaults.standardUserDefaults().setObject(carbRatio?.text, forKey: "ratio")
+        }
+        if targetBG?.text != "" {
+              NSUserDefaults.standardUserDefaults().setObject(targetBG?.text, forKey: "target")
+        }
+        
+        for view in self.view.subviews {
+            if view is UITextField{
+                let view = view as! UITextField
+                view.resignFirstResponder()
+            }
+        }
+        NSUserDefaults.standardUserDefaults().synchronize()
 		hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
 		let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
 		dispatch_async(dispatch_get_global_queue(priority, 0)) {

@@ -16,6 +16,10 @@ class MealsViewController: UITableViewController {
 	var nav: UINavigationController?
 
 	var addViewController: AddMeal?
+    
+    @IBOutlet var glucoseField: UITextField?
+    @IBOutlet var insulinField: UITextField?
+    @IBOutlet var carbsField: UITextField?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -69,7 +73,7 @@ class MealsViewController: UITableViewController {
 		if mealArray == nil {
 			tableView.separatorStyle = UITableViewCellSeparatorStyle.None
 			let label = UILabel.init(frame: self.view.frame)
-			label.text = "No meals :("
+			label.text = "No data :("
 			label.textAlignment = .Center
 			label.textColor = self.view.tintColor
 			tableView.addSubview(label)
@@ -78,6 +82,12 @@ class MealsViewController: UITableViewController {
 			return (mealArray?.count)!
 		}
 	}
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+       
+        addViewController?.correctionCell?.insulin?.text = add
+        return true;
+    }
+    
 	@IBAction func openMenu() {
 		openLeft()
 	}
@@ -97,9 +107,9 @@ class MealsViewController: UITableViewController {
 
 class AddMeal: UITableViewController {
 
-	@IBOutlet var carbCell: UITableViewCell?
-	@IBOutlet var bloodGlucoseCell: UITableViewCell?
-	@IBOutlet var correctionCell: UITableViewCell?
+	@IBOutlet var carbCell:  CarbCell?
+	@IBOutlet var bloodGlucoseCell: GlucoseCell?
+	@IBOutlet var correctionCell: CorrectionCell?
 	@IBOutlet var longLastingCell: UITableViewCell?
 
 	enum AddType {
