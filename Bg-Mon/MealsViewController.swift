@@ -29,7 +29,7 @@ class MealsViewController: UITableViewController {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
 		addViewController = storyboard.instantiateViewControllerWithIdentifier("AddMeal2") as? AddMeal
-        let navigationForFood = storyboard.instantiateViewControllerWithIdentifier("AddMeal")
+		let navigationForFood = storyboard.instantiateViewControllerWithIdentifier("AddMeal")
 
 		menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
 		menuView?.cellSeparatorColor = UIColor.clearColor()
@@ -43,18 +43,17 @@ class MealsViewController: UITableViewController {
 			switch indexPath {
 			case 0:
 				self.addViewController?.configureView(AddMeal.AddType.Meal)
-				
-            case 1:
-                self.addViewController?.configureView(AddMeal.AddType.Correction)
-         
-            case 2:
-                self.addViewController?.configureView(AddMeal.AddType.LongLasting)
 
-                
+			case 1:
+				self.addViewController?.configureView(AddMeal.AddType.Correction)
+
+			case 2:
+				self.addViewController?.configureView(AddMeal.AddType.LongLasting)
+
 			default:
 				print("Did select item at index: \(indexPath)")
 			}
-            self.presentViewController(navigationForFood, animated: true, completion: nil)
+			self.presentViewController(navigationForFood, animated: true, completion: nil)
 		}
 
 		if objectAlreadyExist("meals") {
@@ -98,6 +97,11 @@ class MealsViewController: UITableViewController {
 
 class AddMeal: UITableViewController {
 
+	@IBOutlet var carbCell: UITableViewCell?
+	@IBOutlet var bloodGlucoseCell: UITableViewCell?
+	@IBOutlet var correctionCell: UITableViewCell?
+	@IBOutlet var longLastingCell: UITableViewCell?
+
 	enum AddType {
 		case Meal
 		case Correction
@@ -118,12 +122,23 @@ class AddMeal: UITableViewController {
 		}
 	}
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if configurationType == "Meal" {
-            return 3
-        }else {
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return configurationType
+    }
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if configurationType == "Meal" {
+			longLastingCell?.hidden = true
+		} else if configurationType == "Correction" {
+			carbCell?.hidden = true
+			longLastingCell?.hidden = true
+		} else if configurationType == "Long Lasting" {
+			carbCell?.hidden = true
+			longLastingCell?.hidden = true
+		}
+		return 3
         
-        return 1
-        }
+	}
+    @IBAction func dismissYoSelf(){
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
