@@ -17,7 +17,8 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 	var mealArray: NSMutableArray?
 	var nav: UINavigationController?
 
-    
+    let effect = UIBlurEffect(style: .Dark)
+    let resizingMask = UIViewAutoresizing.FlexibleWidth
 	var addViewController: AddMeal?
 
 	@IBOutlet var glucoseField: UITextField?
@@ -49,6 +50,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		menuView?.cellTextLabelAlignment = NSTextAlignment.Center
 		menuView?.cellBackgroundColor = UIColor.clearColor()
 		menuView?.cellTextLabelColor = UIColor.whiteColor()
+    
 		menuView?.checkMarkImage = nil
 		menuView?.cellHeight = 100
 		menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
@@ -80,14 +82,58 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 			configType = nil
 			self.addViewController = nil
 		}
+        let backgroundView = UIView.init(frame: self.view.frame)
+
+        
+
+        backgroundView.autoresizingMask = resizingMask
+        backgroundView.addSubview(self.buildImageView())
+        backgroundView.addSubview(self.buildBlurView())
+        tableView.backgroundView = backgroundView
+        tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
 
 		
 	}
+    func buildImageView() -> UIImageView {
+        let imageView = UIImageView(image: UIImage(named: "pattern.jpg"))
+        imageView.frame = view.bounds
+        imageView.autoresizingMask = resizingMask
+        return imageView
+    }
+    
+    func buildBlurView() -> UIVisualEffectView {
+        let blurView = UIVisualEffectView(effect: effect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = resizingMask
+        return blurView
+    }
+    
     override func viewDidAppear(animated: Bool) {
         if objectAlreadyExist("meals") {
             mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray
         }
+        if mealArray?.count != 0 && mealArray != nil {
          self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+        }
+    }
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if mealArray?.count == 0 || mealArray == nil {
+            let label = UILabel.init(frame: self.view.frame)
+            label.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.4)
+            label.text = "No data"
+            label.tag = 6
+            self.tableView.separatorStyle = .None
+            label.textAlignment = .Center
+            self.tableView.backgroundView?.addSubview(label)
+            return 1
+        }
+        for view in (self.tableView.backgroundView?.subviews)! {
+            if view.tag == 6 {
+                view.removeFromSuperview()
+            }
+        }
+        self.tableView.separatorStyle = .SingleLine
+        return 1
     }
 
 	func objectAlreadyExist(key: String) -> Bool {
@@ -96,24 +142,10 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 
     
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		var label: UILabel?
-		if mealArray == nil {
-            return 0
-		} else if mealArray?.count != 0 {
+	
+        
 			return (mealArray?.count)!
-            
-		} else {
-			if (label == nil) {
-				self.tableView.separatorStyle = .None
-				label = UILabel.init(frame: self.view.bounds)
-				label!.text = "No data"
-				label?.textAlignment = .Center
-				self.view.addSubview(label!)
-				return 0
-			} else {
-				return 0
-			}
-		}
+ 
 
 		
 	}
@@ -141,10 +173,30 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String) mg/dL"
 		cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String) carbs"
 		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String) units"
-
+        cell.type?.text = mealArray![indexPath.row]["type"] as? String
+		cell.backgroundColor = UIColor.clearColor()
+        cell.time?.text = self.getTime(indexPath)
+        cell.time?.backgroundColor = self.view.tintColor
+        cell.time?.textColor = UIColor.whiteColor()
+        cell.time?.clipsToBounds = true
+        cell.time?.layer.cornerRadius = 5
 		return cell
 	}
+    
+    func getTime(indexPath: NSIndexPath) -> String{
+        let dictionary = mealArray![indexPath.row] as! NSMutableDictionary
+        if let exists = dictionary["date"]{
+            let formatter = NSDateFormatter()
+            formatter.dateStyle = NSDateFormatterStyle.LongStyle
+            formatter.timeStyle = .MediumStyle
+            return formatter.stringFromDate(exists as! NSDate)
+        }else{
+            return "No time recorded"
+        }
+    }
+    
 }
+
 
 class AddMeal: UITableViewController {
 
@@ -153,7 +205,11 @@ class AddMeal: UITableViewController {
 	@IBOutlet var correctionCell: CorrectionCell?
 	@IBOutlet var longLastingCell: LongLasting?
     var intValue: Int?
-   
+    let effect = UIBlurEffect(style: .Dark)
+    let resizingMask = UIViewAutoresizing.FlexibleWidth
+    
+    
+     private var healthStore = HKHealthStore()
     enum AddType: String {
 
 		case LongLasting = "Long Lasting"
@@ -168,6 +224,16 @@ class AddMeal: UITableViewController {
         self.tableView.endUpdates()
         self.tableView.reloadData()
         self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .None)
+        let backgroundView = UIView.init(frame: self.view.frame)
+        
+        
+        
+        backgroundView.autoresizingMask = resizingMask
+        backgroundView.addSubview(self.buildImageView())
+        backgroundView.addSubview(self.buildBlurView())
+        tableView.backgroundView = backgroundView
+        tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
+        
 	}
     override func viewDidAppear(animated: Bool) {
         
@@ -180,6 +246,25 @@ class AddMeal: UITableViewController {
         }
   
     }
+    func buildImageView() -> UIImageView {
+        let imageView = UIImageView(image: UIImage(named: "pattern2.png"))
+        imageView.frame = view.bounds
+        imageView.autoresizingMask = resizingMask
+        return imageView
+    }
+    
+    func buildBlurView() -> UIVisualEffectView {
+        let blurView = UIVisualEffectView(effect: effect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = resizingMask
+        return blurView
+    }
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.backgroundView?.backgroundColor = UIColor.clearColor()
+        header.textLabel?.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.4)
+    }
+    
     func uploadToHealthKit(bloodGlucoseLevel: Double, carbs: Double){
         
 
@@ -188,43 +273,34 @@ class AddMeal: UITableViewController {
         
         let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
         
-     
-        let healthStore = HKHealthStore()
-        
-        
-        let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
-        let bloodGlucose = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
-        
-        let healthKitTypes = Set<HKQuantityType>(arrayLiteral: carbs!, bloodGlucose!)
-        
-        healthStore.requestAuthorizationToShareTypes(healthKitTypes as Set, readTypes: healthKitTypes as Set) { (success, error) -> Void in
-            if (success) {
-                NSLog("HealthKit authorization success...")
-                
-                healthStore.preferredUnitsForQuantityTypes(healthKitTypes as Set, completion: { (preferredUnits, error) -> Void in
-                    if (error == nil) {
-                        NSLog("...preferred unts %@", preferredUnits)
-                        prefUnit = preferredUnits[sampleType!]
-                        let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
-                        
-                        let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
-                        
-                        
-                        
-                        healthStore.saveObjects([quantitySample]) { (success, error) -> Void in
-                            if (success) {
-                                NSLog("Saved to healthkiit.....")
-              
-                                })
-                            }
-                        }
 
-                        
-                    }
-                })
-            }
-        }
-        
+		let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
+		let bloodGlucose = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+
+		let healthKitTypes = Set<HKQuantityType>(arrayLiteral: carbs!, bloodGlucose!)
+
+        self.healthStore.requestAuthorizationToShareTypes(healthKitTypes as Set, readTypes: healthKitTypes as Set) { (success, error) -> Void in
+			if (success) {
+				NSLog("HealthKit authorization success...")
+
+				self.healthStore.preferredUnitsForQuantityTypes(healthKitTypes as Set, completion: { (preferredUnits, error) -> Void in
+					if (error == nil) {
+						NSLog("...preferred unts %@", preferredUnits)
+						prefUnit = preferredUnits[sampleType!]
+						let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
+
+						let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
+
+						self.healthStore.saveObjects([quantitySample]) { (success, error) -> Void in
+							if (success) {
+								NSLog("Saved blood glucose level")
+							}
+						}
+					}
+				})
+			}
+		}
+
   
         
    
@@ -236,11 +312,11 @@ class AddMeal: UITableViewController {
         if self.configurationType == "Full Meal" {
             let pissOff = intValue?.description
             print("Int: \(self.intValue)")
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "carbs" : (self.carbCell?.carbs?.text)!, "insulin" : pissOff!]
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "carbs" : (self.carbCell?.carbs?.text)!, "insulin" : pissOff! , "date": NSDate()]
         }else if self.configurationType == "Insulin Correction" {
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.correctionCell?.insulin?.text)!]
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.correctionCell?.insulin?.text)!, "date": NSDate()]
         }else if self.configurationType == "Long Lasting"{
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.longLastingCell?.insulin)!]
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.longLastingCell?.insulin)!, "date": NSDate()]
         }
         
         self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbs: Double((self.carbCell?.carbs?.text)!)!)
@@ -382,6 +458,7 @@ class AddMeal: UITableViewController {
 		if (cell == nil) {
 			cell = UITableViewCell.init()
 		}
+        cell?.backgroundColor = UIColor.clearColor()
 		return cell!
 	}
 

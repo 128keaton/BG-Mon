@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A1EA89A1CB7058200343019 /* pattern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA8991CB7058200343019 /* pattern.jpg */; };
+		8A1EA89C1CB7085A00343019 /* pattern2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA89B1CB7085A00343019 /* pattern2.png */; };
+		8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA89D1CB7092100343019 /* bananas.jpg */; };
 		8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D83E1CB337E6007558B4 /* AppDelegate.swift */; };
 		8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8421CB337E6007558B4 /* Main.storyboard */; };
 		8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */; };
@@ -21,6 +24,7 @@
 		8A45D8791CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8781CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg */; };
 		8A45D87B1CB361E1007558B4 /* IMG_1382.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */; };
 		8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */; };
+		8A7E30321CB6FDAE00306788 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 8A7E30311CB6FDAE00306788 /* AppIcon.appiconset */; };
 		8AB1BE281CB46EFA00A291E7 /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */; };
 		8AB1BE2A1CB4B14800A291E7 /* Plus Math-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AB1BE291CB4B14800A291E7 /* Plus Math-100.png */; };
 		8AB1BE2C1CB4B23000A291E7 /* Plus Math-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8AB1BE2B1CB4B23000A291E7 /* Plus Math-50.png */; };
@@ -47,6 +51,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A1EA8991CB7058200343019 /* pattern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pattern.jpg; sourceTree = "<group>"; };
+		8A1EA89B1CB7085A00343019 /* pattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern2.png; sourceTree = "<group>"; };
+		8A1EA89D1CB7092100343019 /* bananas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bananas.jpg; sourceTree = "<group>"; };
 		8A45D83B1CB337E6007558B4 /* Bg-Mon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bg-Mon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D83E1CB337E6007558B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A45D8431CB337E6007558B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,6 +75,7 @@
 		8A45D8781CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Note I'm not responsible if your screen breaks or you go blind.jpg"; sourceTree = "<group>"; };
 		8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_1382.JPG; sourceTree = "<group>"; };
 		8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8A7E30311CB6FDAE00306788 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
 		8AB1BE291CB4B14800A291E7 /* Plus Math-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plus Math-100.png"; sourceTree = "<group>"; };
 		8AB1BE2B1CB4B23000A291E7 /* Plus Math-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Plus Math-50.png"; sourceTree = "<group>"; };
@@ -130,6 +138,7 @@
 		8A45D83D1CB337E6007558B4 /* Bg-Mon */ = {
 			isa = PBXGroup;
 			children = (
+				8A7E30311CB6FDAE00306788 /* AppIcon.appiconset */,
 				8AB1BE291CB4B14800A291E7 /* Plus Math-100.png */,
 				8AB1BE2B1CB4B23000A291E7 /* Plus Math-50.png */,
 				8A45D87A1CB361E1007558B4 /* IMG_1382.JPG */,
@@ -144,6 +153,9 @@
 				8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */,
 				8A45D8761CB3528E007558B4 /* MenuManager.swift */,
 				8A45D86F1CB33912007558B4 /* DashboardViewController.swift */,
+				8A1EA8991CB7058200343019 /* pattern.jpg */,
+				8A1EA89D1CB7092100343019 /* bananas.jpg */,
+				8A1EA89B1CB7085A00343019 /* pattern2.png */,
 				8A45D8481CB337E6007558B4 /* Assets.xcassets */,
 				8A45D84A1CB337E6007558B4 /* LaunchScreen.storyboard */,
 				8A45D84D1CB337E6007558B4 /* Info.plist */,
@@ -301,12 +313,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A7E30321CB6FDAE00306788 /* AppIcon.appiconset in Resources */,
 				8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */,
 				8A45D8491CB337E6007558B4 /* Assets.xcassets in Resources */,
 				8AB1BE2A1CB4B14800A291E7 /* Plus Math-100.png in Resources */,
 				8A45D8791CB360D3007558B4 /* Note I'm not responsible if your screen breaks or you go blind.jpg in Resources */,
 				8A45D87B1CB361E1007558B4 /* IMG_1382.JPG in Resources */,
+				8A1EA89C1CB7085A00343019 /* pattern2.png in Resources */,
 				8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */,
+				8A1EA89A1CB7058200343019 /* pattern.jpg in Resources */,
+				8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */,
 				8AB1BE2C1CB4B23000A291E7 /* Plus Math-50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,7 +548,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC7D4FF91569ED98574F0D5B /* Pods-Bg-Mon.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = "Bg-Mon/Bg-Mon.entitlements";
 				INFOPLIST_FILE = "Bg-Mon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -546,7 +562,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E091F18638122BDD2E48DF7C /* Pods-Bg-Mon.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = "Bg-Mon/Bg-Mon.entitlements";
 				INFOPLIST_FILE = "Bg-Mon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

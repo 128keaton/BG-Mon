@@ -70,6 +70,7 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 		profileImage?.layer.borderColor = profileImage?.tintColor.CGColor
 		profileImage?.clipsToBounds = true
 	}
+  
 	@IBAction func openMenu() {
 		openLeft()
 	}

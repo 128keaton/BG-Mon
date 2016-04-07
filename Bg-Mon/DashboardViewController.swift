@@ -29,7 +29,9 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 	private var results = [HKQuantitySample]()
 	var sampleInsulin = [CGFloat]()
-
+    let effect = UIBlurEffect(style: .Dark)
+    let resizingMask = UIViewAutoresizing.FlexibleWidth
+    
     override func awakeFromNib() {
         super.awakeFromNib()
        
@@ -57,6 +59,30 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
         lineChart?.alwaysDisplayPopUpLabels = true
 
         
+        let backgroundView = UIView.init(frame: self.view.frame)
+        
+        
+        
+        backgroundView.autoresizingMask = resizingMask
+        backgroundView.addSubview(self.buildImageView())
+        backgroundView.addSubview(self.buildBlurView())
+        tableView!.backgroundView = backgroundView
+        tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
+        
+        var mealsArray: NSMutableArray?
+        
+        if objectAlreadyExist("meals") {
+            mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
+        }else{
+            mealsArray = NSMutableArray()
+        }
+        for object in mealsArray!{
+            let meal = object["insulin"] as! NSString
+
+            let doubleValue = CGFloat(meal.doubleValue)
+            sampleInsulin.append(doubleValue)
+        }
+        
         
 		sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
 
@@ -79,8 +105,16 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 		self.healthStore.executeQuery(query)
 	}
+    
+    
+    func objectAlreadyExist(key: String) -> Bool {
+        return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
+    }
+    
 	override func viewDidAppear(animated: Bool) {
 		self.authorizeHealthKit(nil)
+        self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+        
 		super.viewDidAppear(true)
 	}
     func lineGraph(graph: BEMSimpleLineGraphView, didTouchGraphWithClosestIndex index: Int) {
@@ -135,6 +169,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 			let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
 			return determinePoint(doubleValue)
 		} else {
+            print("Sample: \(sampleInsulin[index])")
 			return sampleInsulin[index]
 		}
 	}
@@ -149,10 +184,32 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 		let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
 
 		cell.bloodGlucose!.text = "\(doubleValue) mg/dL"
-        cell.insulin?.text = "\(self.sampleInsulin[indexPath.row]) units"
+        if indexPath.row < self.sampleInsulin.count{
+                cell.insulin?.text = "\(self.sampleInsulin[indexPath.row]) units"
+        }else{
+            cell.insulin?.text = "No data"
+        }
+
+        cell.backgroundColor = UIColor.clearColor()
+        cell.contentView.backgroundColor = UIColor.clearColor()
         
 		return cell
 	}
+    
+    func buildImageView() -> UIImageView {
+        let imageView = UIImageView(image: UIImage(named: "bananas.jpg"))
+        imageView.frame = view.bounds
+        imageView.autoresizingMask = resizingMask
+        return imageView
+    }
+    
+    func buildBlurView() -> UIVisualEffectView {
+        let blurView = UIVisualEffectView(effect: effect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = resizingMask
+        return blurView
+    }
+    
 	private func refreshData() {
 		NSLog("refreshData......")
 		let timeSortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
@@ -164,10 +221,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
                     let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
                     maxArray.append(doubleValue)
                 }
-                for _ in self.results {
-                    
-                    self.sampleInsulin.append(CGFloat(arc4random_uniform(20) + 1))
-                }
+            
         
                 
                 NSUserDefaults.standardUserDefaults().setDouble(maxArray.maxElement()!, forKey: "highscore")
