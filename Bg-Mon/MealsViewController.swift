@@ -13,18 +13,26 @@ import Notie
 class MealsViewController: UITableViewController, UITextFieldDelegate {
 
 	var menuView: BTNavigationDropdownMenu?
-	var mealArray: [NSDictionary]?
+	var mealArray: NSMutableArray?
 	var nav: UINavigationController?
 
+    
 	var addViewController: AddMeal?
 
 	@IBOutlet var glucoseField: UITextField?
 	@IBOutlet var insulinField: UITextField?
 	@IBOutlet var carbsField: UITextField?
 
+    override func awakeFromNib() {
+        if objectAlreadyExist("meals") {
+            mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals") as? NSMutableArray
+        }
+        super.awakeFromNib()
+    }
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+        
 		let items = ["Add Meal", "Add Correction", "Add Slow Release"]
 		if let navigationController = navigationController {
 			nav = navigationController
@@ -72,27 +80,26 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 			self.addViewController = nil
 		}
 
-		if objectAlreadyExist("meals") {
-			mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals") as? [NSDictionary]
-		}
+		
 	}
+    override func viewDidAppear(animated: Bool) {
+        if objectAlreadyExist("meals") {
+            mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals") as? NSMutableArray
+        }
+        self.tableView.reloadData()
+    }
 
 	func objectAlreadyExist(key: String) -> Bool {
 		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
 	}
 
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if mealArray == nil {
-			tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-			let label = UILabel.init(frame: self.view.frame)
-			label.text = "No data :("
-			label.textAlignment = .Center
-			label.textColor = self.view.tintColor
-			tableView.addSubview(label)
-			return 0
-		} else {
+        if mealArray == nil {
+            return 0
+        }else{
 			return (mealArray?.count)!
-		}
+        }
+		
 	}
 
 	@IBAction func openMenu() {
@@ -104,9 +111,9 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 	}
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! MealCell
-		cell.bloodGlucose?.text = mealArray![indexPath.row]["bloodGlucose"] as? String
-		cell.carbs?.text = mealArray![indexPath.row]["carbs"] as? String
-		cell.insulin?.text = mealArray![indexPath.row]["bloodGlucose"] as? String
+		cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String) mg/dL"
+		cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String) carbs"
+		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String) units"
 
 		return cell
 	}
@@ -118,7 +125,7 @@ class AddMeal: UITableViewController {
 	@IBOutlet var bloodGlucoseCell: GlucoseCell?
 	@IBOutlet var correctionCell: CorrectionCell?
 	@IBOutlet var longLastingCell: LongLasting?
-
+    var intValue: Int?
    
     enum AddType: String {
 
@@ -146,12 +153,94 @@ class AddMeal: UITableViewController {
         }
   
     }
+    func saveAndDie(){
+        var beetusDictionary: NSMutableDictionary?
+        if self.configurationType == "Full Meal" {
+            let pissOff = intValue?.description
+            print("Int: \(self.intValue)")
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "carbs" : (self.carbCell?.carbs?.text)!, "insulin" : pissOff!]
+        }else if self.configurationType == "Insulin Correction" {
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.correctionCell?.insulin?.text)!]
+        }else if self.configurationType == "Long Lasting"{
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.longLastingCell?.insulin)!]
+        }
+        var mealsArray: NSMutableArray?
+        
+        if objectAlreadyExist("meals") {
+            mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
+        }else{
+            mealsArray = NSMutableArray()
+        }
 
+        mealsArray?.insertObject(beetusDictionary!, atIndex: 0)
+        NSUserDefaults.standardUserDefaults().setObject(mealsArray, forKey: "meals")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        print("Dictionary: \(beetusDictionary)")
+        print("Meals: \(mealsArray)")
+        print("probably saved, maybe, geez dont ask me")
+        
+    }
+
+    @IBAction func checkAndSubmit(){
+        if self.configurationType == "Full Meal" {
+         
+
+			self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
+			self.carbCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? CarbCell
+
+			if (bloodGlucoseCell?.bloodGlucose?.text != "" && carbCell?.carbs?.text != "") {
+
+				self.intValue = Int(round(self.calculateInsulin()))
+                print("IntVALUE \(self.intValue)")
+				self.performSegueWithIdentifier("save", sender: self)
+			} else {
+				let alert = UIAlertController.init(title: "Error", message: "One or more fields are unset", preferredStyle: UIAlertControllerStyle.Alert)
+				let ok = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
+					alert.dismissViewControllerAnimated(true, completion: nil)
+				})
+				alert.addAction(ok)
+				self.presentViewController(alert, animated: true, completion: nil)
+			}
+		} else if self.configurationType == "Insulin Correction" {
+            self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
+            self.correctionCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? CorrectionCell
+            if (bloodGlucoseCell?.bloodGlucose?.text != "" && correctionCell?.insulin?.text != "") {
+                self.performSegueWithIdentifier("save", sender: self)
+            } else {
+                let alert = UIAlertController.init(title: "Error", message: "One or more fields are unset", preferredStyle: UIAlertControllerStyle.Alert)
+                let ok = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                })
+                alert.addAction(ok)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+           
+		} else if self.configurationType == "Long Lasting"{
+            self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
+            self.longLastingCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? LongLasting
+            if (bloodGlucoseCell?.bloodGlucose?.text != "" && longLastingCell?.insulin!.text != "") {
+                self.performSegueWithIdentifier("save", sender: self)
+            } else {
+                let alert = UIAlertController.init(title: "Error", message: "One or more fields are unset", preferredStyle: UIAlertControllerStyle.Alert)
+                let ok = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                })
+                alert.addAction(ok)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+
+        }
+        self.saveAndDie()
+        
+    }
 	 func calculateInsulin() -> Double{
+      
+     
 		var target: Double?
 		var ratio: Double?
 		var sensitivity: Double?
-        self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
+
 		let glucose = Double((self.bloodGlucoseCell?.bloodGlucose!.text)!)
 
 		var dosage: Double?
@@ -171,7 +260,7 @@ class AddMeal: UITableViewController {
 		if correction < 0 {
 			correction = 0
 		}
-        self.carbCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? CarbCell
+       
 		var carbCalulation = Double((self.carbCell?.carbs!.text)!)
 		carbCalulation = carbCalulation! / ratio!
 
@@ -185,8 +274,14 @@ class AddMeal: UITableViewController {
 	}
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let viewController = segue.destinationViewController as! SuccessViewController
+        if configurationType == "Full Meal" {
+            
+             viewController.glucoseObject = [intValue!.description]
+        }else{
+            viewController.glucoseObject = nil
+        }
         
-        viewController.glucoseObject = [self.calculateInsulin().description]
+       
     }
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		var cell: UITableViewCell?
@@ -210,6 +305,7 @@ class AddMeal: UITableViewController {
 		return cell!
 	}
 
+   
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return self.configurationType
 	}

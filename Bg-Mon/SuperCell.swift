@@ -30,5 +30,6 @@ class DashboardCell: UITableViewCell{
     
 }
 class LongLasting: UITableViewCell{
+    @IBOutlet weak var insulin: UITextField?
     
 }
