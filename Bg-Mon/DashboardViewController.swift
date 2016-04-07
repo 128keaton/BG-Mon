@@ -15,8 +15,8 @@ let healthKitStore: HKHealthStore = HKHealthStore()
 class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEMSimpleLineGraphDataSource, UITableViewDataSource, UITableViewDelegate {
 
 	private var objects = [HKQuantityType!]()
-	private var preferredUnits = [NSObject: AnyObject]()
-	private var healthStore = HKHealthStore()
+    var preferredUnits = [NSObject: AnyObject]()
+	 var healthStore = HKHealthStore()
 
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import BTNavigationDropdownMenu
 import Notie
+import HealthKit
 class MealsViewController: UITableViewController, UITextFieldDelegate {
 
 	var menuView: BTNavigationDropdownMenu?
@@ -25,7 +26,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 
     override func awakeFromNib() {
         if objectAlreadyExist("meals") {
-            mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals") as? NSMutableArray
+            mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray
         }
         super.awakeFromNib()
     }
@@ -84,28 +85,54 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 	}
     override func viewDidAppear(animated: Bool) {
         if objectAlreadyExist("meals") {
-            mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals") as? NSMutableArray
+            mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray
         }
-        self.tableView.reloadData()
+         self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
     }
 
 	func objectAlreadyExist(key: String) -> Bool {
 		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
 	}
 
+    
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if mealArray == nil {
+		var label: UILabel?
+		if mealArray == nil {
             return 0
-        }else{
+		} else if mealArray?.count != 0 {
 			return (mealArray?.count)!
-        }
+            
+		} else {
+			if (label == nil) {
+				self.tableView.separatorStyle = .None
+				label = UILabel.init(frame: self.view.bounds)
+				label!.text = "No data"
+				label?.textAlignment = .Center
+				self.view.addSubview(label!)
+				return 0
+			} else {
+				return 0
+			}
+		}
+
 		
 	}
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.Delete
+    }
 
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        self.mealArray?.removeObjectAtIndex(indexPath.row)
+        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        NSUserDefaults.standardUserDefaults().setObject(self.mealArray, forKey: "meals")
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
 	@IBAction func openMenu() {
 		openLeft()
 	}
 
+    
 	@IBAction func addMeal() {
 		menuView?.show()
 	}
@@ -153,6 +180,57 @@ class AddMeal: UITableViewController {
         }
   
     }
+    func uploadToHealthKit(bloodGlucoseLevel: Double, carbs: Double){
+        
+
+
+        var prefUnit: HKUnit?
+        
+        let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+        
+     
+        let healthStore = HKHealthStore()
+        
+        
+        let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
+        let bloodGlucose = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+        
+        let healthKitTypes = Set<HKQuantityType>(arrayLiteral: carbs!, bloodGlucose!)
+        
+        healthStore.requestAuthorizationToShareTypes(healthKitTypes as Set, readTypes: healthKitTypes as Set) { (success, error) -> Void in
+            if (success) {
+                NSLog("HealthKit authorization success...")
+                
+                healthStore.preferredUnitsForQuantityTypes(healthKitTypes as Set, completion: { (preferredUnits, error) -> Void in
+                    if (error == nil) {
+                        NSLog("...preferred unts %@", preferredUnits)
+                        prefUnit = preferredUnits[sampleType!]
+                        let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
+                        
+                        let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
+                        
+                        
+                        
+                        healthStore.saveObjects([quantitySample]) { (success, error) -> Void in
+                            if (success) {
+                                NSLog("Saved to healthkiit.....")
+              
+                                })
+                            }
+                        }
+
+                        
+                    }
+                })
+            }
+        }
+        
+  
+        
+   
+        
+        
+    }
     func saveAndDie(){
         var beetusDictionary: NSMutableDictionary?
         if self.configurationType == "Full Meal" {
@@ -164,6 +242,8 @@ class AddMeal: UITableViewController {
         }else if self.configurationType == "Long Lasting"{
             beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.longLastingCell?.insulin)!]
         }
+        
+        self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbs: Double((self.carbCell?.carbs?.text)!)!)
         var mealsArray: NSMutableArray?
         
         if objectAlreadyExist("meals") {
