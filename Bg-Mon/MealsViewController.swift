@@ -9,17 +9,18 @@
 import Foundation
 import UIKit
 import BTNavigationDropdownMenu
-class MealsViewController: UITableViewController {
+import Notie
+class MealsViewController: UITableViewController, UITextFieldDelegate {
 
 	var menuView: BTNavigationDropdownMenu?
 	var mealArray: [NSDictionary]?
 	var nav: UINavigationController?
 
 	var addViewController: AddMeal?
-    
-    @IBOutlet var glucoseField: UITextField?
-    @IBOutlet var insulinField: UITextField?
-    @IBOutlet var carbsField: UITextField?
+
+	@IBOutlet var glucoseField: UITextField?
+	@IBOutlet var insulinField: UITextField?
+	@IBOutlet var carbsField: UITextField?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -31,9 +32,8 @@ class MealsViewController: UITableViewController {
 			nav = UIApplication.sharedApplication().keyWindow?.rootViewController?.parentViewController?.navigationController
 		}
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-		addViewController = storyboard.instantiateViewControllerWithIdentifier("AddMeal2") as? AddMeal
-		let navigationForFood = storyboard.instantiateViewControllerWithIdentifier("AddMeal")
+		let addViewControllerNavigation = storyboard.instantiateViewControllerWithIdentifier("AddMeal") as! UINavigationController
+		self.addViewController = addViewControllerNavigation.viewControllers[0] as? AddMeal
 
 		menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
 		menuView?.cellSeparatorColor = UIColor.clearColor()
@@ -44,20 +44,32 @@ class MealsViewController: UITableViewController {
 		menuView?.cellHeight = 100
 		menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
 
+			var configType: AddMeal.AddType?
+
 			switch indexPath {
 			case 0:
-				self.addViewController?.configureView(AddMeal.AddType.Meal)
-
+				configType = AddMeal.AddType.Meal
+				print(configType)
 			case 1:
-				self.addViewController?.configureView(AddMeal.AddType.Correction)
+				configType = AddMeal.AddType.Correction
+				print(configType)
 
 			case 2:
-				self.addViewController?.configureView(AddMeal.AddType.LongLasting)
-
+				configType = AddMeal.AddType.LongLasting
+                
+				print(configType)
 			default:
 				print("Did select item at index: \(indexPath)")
 			}
-			self.presentViewController(navigationForFood, animated: true, completion: nil)
+            NSUserDefaults.standardUserDefaults().setObject(configType?.rawValue, forKey: "configType")
+            NSUserDefaults.standardUserDefaults().synchronize()
+
+			self.navigationController!.presentViewController(addViewControllerNavigation, animated: true, completion: nil)
+           
+     
+            
+			configType = nil
+			self.addViewController = nil
 		}
 
 		if objectAlreadyExist("meals") {
@@ -82,12 +94,7 @@ class MealsViewController: UITableViewController {
 			return (mealArray?.count)!
 		}
 	}
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-       
-        addViewController?.correctionCell?.insulin?.text = add
-        return true;
-    }
-    
+
 	@IBAction func openMenu() {
 		openLeft()
 	}
@@ -107,48 +114,113 @@ class MealsViewController: UITableViewController {
 
 class AddMeal: UITableViewController {
 
-	@IBOutlet var carbCell:  CarbCell?
+	@IBOutlet var carbCell: CarbCell?
 	@IBOutlet var bloodGlucoseCell: GlucoseCell?
 	@IBOutlet var correctionCell: CorrectionCell?
-	@IBOutlet var longLastingCell: UITableViewCell?
+	@IBOutlet var longLastingCell: LongLasting?
 
-	enum AddType {
-		case Meal
-		case Correction
-		case LongLasting
+   
+    enum AddType: String {
+
+		case LongLasting = "Long Lasting"
+        case Meal = "Full Meal"
+        case Correction = "Insulin Correction"
 	}
-	var configurationType: String?
+	 var configurationType: String?
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        self.tableView.beginUpdates()
+        self.configurationType  = NSUserDefaults.standardUserDefaults().objectForKey("configType") as? String
+        self.tableView.endUpdates()
+        self.tableView.reloadData()
+        self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .None)
 	}
-	func configureView(type: AddType) {
-		switch type {
-		case .Meal:
-			configurationType = "Meal"
-		case .Correction:
-			configurationType = "Correction"
-		case .LongLasting:
-			configurationType = "Long Lasting"
-		}
-	}
-
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return configurationType
+    override func viewDidAppear(animated: Bool) {
+        
+        if self.tableView(tableView, titleForHeaderInSection: 0) != NSUserDefaults.standardUserDefaults().objectForKey("configType") as? String{
+            self.tableView.beginUpdates()
+            self.configurationType  = NSUserDefaults.standardUserDefaults().objectForKey("configType") as? String
+            self.tableView.endUpdates()
+            self.tableView.reloadData()
+            self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+        }
+  
     }
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if configurationType == "Meal" {
-			longLastingCell?.hidden = true
-		} else if configurationType == "Correction" {
-			carbCell?.hidden = true
-			longLastingCell?.hidden = true
-		} else if configurationType == "Long Lasting" {
-			carbCell?.hidden = true
-			longLastingCell?.hidden = true
+
+	 func calculateInsulin() -> Double{
+		var target: Double?
+		var ratio: Double?
+		var sensitivity: Double?
+        self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
+		let glucose = Double((self.bloodGlucoseCell?.bloodGlucose!.text)!)
+
+		var dosage: Double?
+
+		if objectAlreadyExist("target") {
+			target = NSUserDefaults.standardUserDefaults().objectForKey("target")?.doubleValue
 		}
-		return 3
+		if objectAlreadyExist("ratio") {
+			ratio = NSUserDefaults.standardUserDefaults().objectForKey("ratio")?.doubleValue
+		}
+		if objectAlreadyExist("sensitivity") {
+			sensitivity = NSUserDefaults.standardUserDefaults().objectForKey("sensitivity")?.doubleValue
+		}
+		// Calulating correction
+		var correction = glucose! - target!
+		correction = correction / sensitivity!
+		if correction < 0 {
+			correction = 0
+		}
+        self.carbCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? CarbCell
+		var carbCalulation = Double((self.carbCell?.carbs!.text)!)
+		carbCalulation = carbCalulation! / ratio!
+
+		dosage = carbCalulation! + correction
+
+        return dosage!
         
 	}
-    @IBAction func dismissYoSelf(){
-        self.dismissViewControllerAnimated(true, completion: nil)
+	func objectAlreadyExist(key: String) -> Bool {
+		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
+	}
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let viewController = segue.destinationViewController as! SuccessViewController
+        
+        viewController.glucoseObject = [self.calculateInsulin().description]
     }
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		var cell: UITableViewCell?
+		print("Cell Reading: \(self.configurationType)")
+		if self.configurationType == "Full Meal" && indexPath.row == 0 {
+			cell = self.tableView.dequeueReusableCellWithIdentifier("bloodGlucose")
+		} else if self.configurationType == "Full Meal" && indexPath.row == 1 {
+			cell = self.tableView.dequeueReusableCellWithIdentifier("carbs")
+		} else if self.configurationType == "Insulin Correction" && indexPath.row == 0 {
+			cell = self.tableView.dequeueReusableCellWithIdentifier("bloodGlucose")
+		} else if self.configurationType == "Insulin Correction" && indexPath.row == 1 {
+			cell = self.tableView.dequeueReusableCellWithIdentifier("insulin")
+		} else if self.configurationType == "Long Lasting" && indexPath.row == 0 {
+			cell = self.tableView.dequeueReusableCellWithIdentifier("bloodGlucose")
+		} else if self.configurationType == "Long Lasting" && indexPath.row == 1 {
+			cell = self.tableView.dequeueReusableCellWithIdentifier("longLasting")
+		}
+		if (cell == nil) {
+			cell = UITableViewCell.init()
+		}
+		return cell!
+	}
+
+	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return self.configurationType
+	}
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+	}
+
+	@IBAction func dismissYoSelf() {
+        
+        self.dismissViewControllerAnimated(true, completion: { (action) in
+            self.viewDidLoad()
+        })
+	}
 }

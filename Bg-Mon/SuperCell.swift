@@ -24,3 +24,11 @@ class GlucoseCell: UITableViewCell {
 class CarbCell: UITableViewCell {
     @IBOutlet weak var carbs: UITextField?
 }
+class DashboardCell: UITableViewCell{
+    @IBOutlet weak var bloodGlucose: UILabel?
+    @IBOutlet weak var insulin: UILabel?
+    
+}
+class LongLasting: UITableViewCell{
+    
+}

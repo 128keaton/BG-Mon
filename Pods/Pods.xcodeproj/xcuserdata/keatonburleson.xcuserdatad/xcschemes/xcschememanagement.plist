@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Notie.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Bg-Mon.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,7 +42,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>39D69452A2FF1B92F60B1D0CBCE76A16</key>
+		<key>3E5B243DFC6D50AEAA27FAE5785C894C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>432DBE07857036C3260D8046D450BB2F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>835C2FAD7B0B6214C8895D4037167183</key>
+		<key>A5B25F61ED99CAF727F3A1A1B2803158</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9A0E51090384D6445558E9F05B53A2BD</key>
+		<key>D75E8D58C2E272BF3DCFE2981B3F119E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

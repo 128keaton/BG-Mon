@@ -2,6 +2,7 @@ PODS:
   - BEMSimpleLineGraph (4.1.1)
   - BTNavigationDropdownMenu (0.2.1)
   - MBProgressHUD (0.9.2)
+  - Notie (1.0.4)
   - SlideMenuControllerSwift (2.1.0)
   - UIImageColors (1.0.3)
 
@@ -10,6 +11,7 @@ DEPENDENCIES:
     branch `feature`)
   - BTNavigationDropdownMenu (from `https://github.com/mkral/BTNavigationDropdownMenu.git`)
   - MBProgressHUD
+  - Notie
   - SlideMenuControllerSwift
   - UIImageColors (from `https://github.com/jathu/UIImageColors.git`)
 
@@ -37,6 +39,7 @@ SPEC CHECKSUMS:
   BEMSimpleLineGraph: 90d30ff3111380f93a0ea25db0eaaf41a5fc8579
   BTNavigationDropdownMenu: 9cf4060162c96510ee27c388412e28678320cdc0
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  Notie: 1acc7a2dd65b7ddbecd0d7bff0f71ef83df11caf
   SlideMenuControllerSwift: 0ed532750dc8574eefda189d0f25805bc967ab7a
   UIImageColors: 3c3b04ecd5786d3235f7f783316c6ef0f631216d
 

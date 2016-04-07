@@ -4,6 +4,7 @@
 use_frameworks!
 
 target 'Bg-Mon' do
+pod 'Notie'
 pod 'BTNavigationDropdownMenu', :git => "https://github.com/mkral/BTNavigationDropdownMenu.git"
 pod 'MBProgressHUD'
 pod 'UIImageColors',  :git => "https://github.com/jathu/UIImageColors.git"

@@ -143,10 +143,11 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
         
         for view in self.view.subviews {
             if view is UITextField{
-                let view = view as! UITextField
-                view.resignFirstResponder()
+                let field = view as! UITextField
+                field.resignFirstResponder()
             }
         }
+        self.view.endEditing(true)
         NSUserDefaults.standardUserDefaults().synchronize()
 		hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
 		let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT

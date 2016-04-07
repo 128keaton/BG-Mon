@@ -87,6 +87,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Bg-Mon/BEMSimpleLineGraph.framework"
   install_framework "Pods-Bg-Mon/BTNavigationDropdownMenu.framework"
   install_framework "Pods-Bg-Mon/MBProgressHUD.framework"
+  install_framework "Pods-Bg-Mon/Notie.framework"
   install_framework "Pods-Bg-Mon/SlideMenuControllerSwift.framework"
   install_framework "Pods-Bg-Mon/UIImageColors.framework"
 fi
@@ -94,6 +95,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Bg-Mon/BEMSimpleLineGraph.framework"
   install_framework "Pods-Bg-Mon/BTNavigationDropdownMenu.framework"
   install_framework "Pods-Bg-Mon/MBProgressHUD.framework"
+  install_framework "Pods-Bg-Mon/Notie.framework"
   install_framework "Pods-Bg-Mon/SlideMenuControllerSwift.framework"
   install_framework "Pods-Bg-Mon/UIImageColors.framework"
 fi

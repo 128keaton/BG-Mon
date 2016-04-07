@@ -143,7 +143,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 	}
 
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = self.tableView?.dequeueReusableCellWithIdentifier("cell") as! GlucoseCell
+		let cell = self.tableView?.dequeueReusableCellWithIdentifier("cell") as! DashboardCell
 		let sample = self.results[indexPath.row];
 
 		let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
