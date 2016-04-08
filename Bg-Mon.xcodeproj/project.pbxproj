@@ -49,7 +49,7 @@
 		8A1EA8991CB7058200343019 /* pattern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pattern.jpg; sourceTree = "<group>"; };
 		8A1EA89B1CB7085A00343019 /* pattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern2.png; sourceTree = "<group>"; };
 		8A1EA89D1CB7092100343019 /* bananas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bananas.jpg; sourceTree = "<group>"; };
-		8A45D83B1CB337E6007558B4 /* Bg-Mon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bg-Mon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A45D83B1CB337E6007558B4 /* M.E.G.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M.E.G.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D83E1CB337E6007558B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A45D8431CB337E6007558B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A45D8461CB337E6007558B4 /* Bg_Mon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bg_Mon.xcdatamodel; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 		8A45D83C1CB337E6007558B4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8A45D83B1CB337E6007558B4 /* Bg-Mon.app */,
+				8A45D83B1CB337E6007558B4 /* M.E.G.app */,
 				8A45D8521CB337E6007558B4 /* Bg-MonTests.xctest */,
 				8A45D85D1CB337E6007558B4 /* Bg-MonUITests.xctest */,
 			);
@@ -188,9 +188,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8A45D83A1CB337E6007558B4 /* Bg-Mon */ = {
+		8A45D83A1CB337E6007558B4 /* M.E.G */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8A45D8661CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-Mon" */;
+			buildConfigurationList = 8A45D8661CB337E6007558B4 /* Build configuration list for PBXNativeTarget "M.E.G" */;
 			buildPhases = (
 				FEB2A528771A1BF5FFCC8082 /* Check Pods Manifest.lock */,
 				8A45D8371CB337E6007558B4 /* Sources */,
@@ -203,9 +203,9 @@
 			);
 			dependencies = (
 			);
-			name = "Bg-Mon";
+			name = M.E.G;
 			productName = "Bg-Mon";
-			productReference = 8A45D83B1CB337E6007558B4 /* Bg-Mon.app */;
+			productReference = 8A45D83B1CB337E6007558B4 /* M.E.G.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8A45D8511CB337E6007558B4 /* Bg-MonTests */ = {
@@ -286,7 +286,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8A45D83A1CB337E6007558B4 /* Bg-Mon */,
+				8A45D83A1CB337E6007558B4 /* M.E.G */,
 				8A45D8511CB337E6007558B4 /* Bg-MonTests */,
 				8A45D85C1CB337E6007558B4 /* Bg-MonUITests */,
 			);
@@ -409,12 +409,12 @@
 /* Begin PBXTargetDependency section */
 		8A45D8541CB337E6007558B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A45D83A1CB337E6007558B4 /* Bg-Mon */;
+			target = 8A45D83A1CB337E6007558B4 /* M.E.G */;
 			targetProxy = 8A45D8531CB337E6007558B4 /* PBXContainerItemProxy */;
 		};
 		8A45D85F1CB337E6007558B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8A45D83A1CB337E6007558B4 /* Bg-Mon */;
+			target = 8A45D83A1CB337E6007558B4 /* M.E.G */;
 			targetProxy = 8A45D85E1CB337E6007558B4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -610,7 +610,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8A45D8661CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-Mon" */ = {
+		8A45D8661CB337E6007558B4 /* Build configuration list for PBXNativeTarget "M.E.G" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A45D8671CB337E6007558B4 /* Debug */,

@@ -123,6 +123,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
             }
          self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
         }
+        
       
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -210,7 +211,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 }
 
 
-class AddMeal: UITableViewController {
+class AddMeal: UITableViewController, UITextFieldDelegate {
 
 	@IBOutlet var carbCell: CarbCell?
 	@IBOutlet var bloodGlucoseCell: GlucoseCell?
@@ -247,6 +248,39 @@ class AddMeal: UITableViewController {
         tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
         
 	}
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+       /* print("typing")
+        let currentText = textField.text
+        let mutableString = NSMutableString.init(string: currentText!)
+       
+        if textField == bloodGlucoseCell?.bloodGlucose{
+            mutableString.replaceCharactersInRange(range, withString: string)
+            mutableString.appendString(" mg/dL")
+            textField.text = mutableString as String
+            self.bloodGlucoseCell?.bloodGlucose?.text = mutableString as String
+            return false
+        }else if textField == carbCell?.carbs{
+            mutableString.replaceCharactersInRange(range, withString: string)
+            mutableString.appendString(" g")
+            textField.text = mutableString as String
+            self.carbCell?.carbs?.text = mutableString as String
+            return false
+        }else if textField == correctionCell?.insulin{
+            mutableString.replaceCharactersInRange(range, withString: string)
+            mutableString.appendString(" units")
+            textField.text = mutableString as String
+            self.correctionCell?.insulin?.text = mutableString as String
+           return false
+        }else if textField == longLastingCell?.insulin{
+            mutableString.replaceCharactersInRange(range, withString: string)
+            mutableString.appendString(" units")
+            textField.text = mutableString as String
+            self.longLastingCell?.insulin?.text = mutableString as String
+           return false
+        }
+ */
+        return true
+    }
     override func viewDidAppear(animated: Bool) {
         
         if self.tableView(tableView, titleForHeaderInSection: 0) != NSUserDefaults.standardUserDefaults().objectForKey("configType") as? String{
@@ -255,6 +289,22 @@ class AddMeal: UITableViewController {
             self.tableView.endUpdates()
             self.tableView.reloadData()
             self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+        }
+        if self.configurationType == "Full Meal" {
+            self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
+            self.carbCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? CarbCell
+            self.carbCell?.carbs?.delegate = self
+            self.bloodGlucoseCell?.bloodGlucose?.delegate = self
+        }else if self.configurationType == "Long Lasting"{
+            self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
+            self.longLastingCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? LongLasting
+            self.bloodGlucoseCell?.bloodGlucose?.delegate = self
+            self.longLastingCell?.insulin!.delegate = self
+        }else if self.configurationType == "Insulin Correction"{
+            self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
+            self.correctionCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? CorrectionCell
+            self.bloodGlucoseCell?.bloodGlucose?.delegate = self
+            self.correctionCell?.insulin!.delegate = self
         }
   
     }
@@ -378,6 +428,7 @@ class AddMeal: UITableViewController {
 				self.intValue = Int(round(self.calculateInsulin()))
                 print("IntVALUE \(self.intValue)")
 				self.performSegueWithIdentifier("save", sender: self)
+                self.saveAndDie()
 			} else {
 				let alert = UIAlertController.init(title: "Error", message: "One or more fields are unset", preferredStyle: UIAlertControllerStyle.Alert)
 				let ok = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
@@ -391,6 +442,7 @@ class AddMeal: UITableViewController {
             self.correctionCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? CorrectionCell
             if (bloodGlucoseCell?.bloodGlucose?.text != "" && correctionCell?.insulin?.text != "") {
                 self.performSegueWithIdentifier("save", sender: self)
+                self.saveAndDie()
             } else {
                 let alert = UIAlertController.init(title: "Error", message: "One or more fields are unset", preferredStyle: UIAlertControllerStyle.Alert)
                 let ok = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
@@ -405,6 +457,7 @@ class AddMeal: UITableViewController {
             self.longLastingCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? LongLasting
             if (bloodGlucoseCell?.bloodGlucose?.text != "" && longLastingCell?.insulin!.text != "") {
                 self.performSegueWithIdentifier("save", sender: self)
+                self.saveAndDie()
             } else {
                 let alert = UIAlertController.init(title: "Error", message: "One or more fields are unset", preferredStyle: UIAlertControllerStyle.Alert)
                 let ok = UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
@@ -415,9 +468,10 @@ class AddMeal: UITableViewController {
             }
 
         }
-        self.saveAndDie()
+        
         
     }
+   
 	 func calculateInsulin() -> Double{
       
      
@@ -509,3 +563,7 @@ class AddMeal: UITableViewController {
         })
 	}
 }
+
+
+
+
