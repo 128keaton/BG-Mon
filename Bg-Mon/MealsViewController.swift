@@ -218,7 +218,7 @@ class AddMeal: UITableViewController {
 	@IBOutlet var longLastingCell: LongLasting?
     var intValue: Int?
     let effect = UIBlurEffect(style: .Dark)
-    let resizingMask = UIViewAutoresizing.FlexibleWidth
+    let resizingMask = [.UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
     
     
      private var healthStore = HKHealthStore()
