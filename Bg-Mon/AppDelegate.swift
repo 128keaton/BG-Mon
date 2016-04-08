@@ -110,3 +110,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension NSUserDefaults {
+    // check for is first launch - only true on first invocation after app install, false on all further invocations
+    static func isFirstLaunch() -> Bool {
+        let firstLaunchFlag = "FirstLaunchFlag"
+        let isFirstLaunch = NSUserDefaults.standardUserDefaults().stringForKey(firstLaunchFlag) == nil
+        if (isFirstLaunch) {
+            NSUserDefaults.standardUserDefaults().setObject("false", forKey: firstLaunchFlag)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        return isFirstLaunch
+    }
+}
+

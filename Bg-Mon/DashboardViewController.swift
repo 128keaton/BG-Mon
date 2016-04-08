@@ -20,7 +20,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
-
+    
 	
 	@IBOutlet var tableView: UITableView?
 
@@ -82,7 +82,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
             let doubleValue = CGFloat(meal.doubleValue)
             sampleInsulin.append(doubleValue)
         }
-        
+ 
         
 		sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
 
@@ -115,6 +115,16 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 		self.authorizeHealthKit(nil)
         self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
         
+        let query = HKObserverQuery(sampleType: self.sampleType, predicate: nil) { (query, completionHandler, error) -> Void in
+            NSLog("Observer fired for .... %@", query.sampleType!.identifier);
+            if (error == nil) {
+                self.refreshData()
+            }
+        }
+        
+        self.healthStore.executeQuery(query)
+
+        
 		super.viewDidAppear(true)
 	}
     func lineGraph(graph: BEMSimpleLineGraphView, didTouchGraphWithClosestIndex index: Int) {
@@ -141,6 +151,16 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
                 return 25
             }
 	}
+    func noDataLabelTextForLineGraph(graph: BEMSimpleLineGraphView) -> String {
+        if graph == insulinChart {
+            return "No insulin data"
+        }else{
+            return "No blood glucose data"
+        }
+     
+    }
+    
+    
     func lineGraph(graph: BEMSimpleLineGraphView, alwaysDisplayPopUpAtIndex index: CGFloat) -> Bool {
         return true
     }
@@ -223,10 +243,11 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
                 }
             
         
-                
+                if(maxArray.maxElement() != nil){
                 NSUserDefaults.standardUserDefaults().setDouble(maxArray.maxElement()!, forKey: "highscore")
                 NSUserDefaults.standardUserDefaults().setDouble(maxArray.minElement()!, forKey: "lowscore")
                 NSUserDefaults.standardUserDefaults().synchronize()
+                }
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
 
 					self.tableView!.reloadData()

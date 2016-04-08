@@ -81,7 +81,7 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 		return NSUserDefaults.standardUserDefaults().dataForKey(key)!
 	}
 	func saveImage(key: String, data: UIImage) {
-		NSUserDefaults.standardUserDefaults().setObject(UIImagePNGRepresentation(data), forKey: "profile-pic")
+		NSUserDefaults.standardUserDefaults().setObject(UIImageJPEGRepresentation(data, 100), forKey: "profile-pic")
 		NSUserDefaults.standardUserDefaults().synchronize()
 	}
 	func saveName(key: String, name: String) {
@@ -114,20 +114,29 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 			self.notifyNextOfKin()
 			self.saveImage("profile-pic", data: UIImage.init(color: self.profileImage!.tintColor))
 		})
-		let updateButton = UIAlertAction.init(title: "Change", style: UIAlertActionStyle.Default, handler: { (action) in
+		let updateButton = UIAlertAction.init(title: "Choose from Library", style: UIAlertActionStyle.Default, handler: { (action) in
 			self.imagePicker.allowsEditing = false
 			self.imagePicker.sourceType = .PhotoLibrary
 
 			self.presentViewController(self.imagePicker, animated: true, completion: nil)
 		})
+        let cameraButton = UIAlertAction.init(title: "Take New Photo", style: UIAlertActionStyle.Default, handler: { (action) in
+    
+            self.imagePicker.delegate = self
+            self.imagePicker.sourceType = .Camera
+            
+            self.presentViewController(self.imagePicker, animated: true, completion: nil)
+        })
 		let canelButton = UIAlertAction.init(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
 
 			alertController.dismissViewControllerAnimated(true, completion: nil)
 			}
 		)
 		alertController.addAction(canelButton)
+        alertController.addAction(cameraButton)
 		alertController.addAction(updateButton)
 		alertController.addAction(deleteButton)
+  
 		self.presentViewController(alertController, animated: true, completion: nil)
 	}
 

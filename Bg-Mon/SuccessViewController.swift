@@ -16,11 +16,21 @@ class SuccessViewController: UIViewController {
     @IBOutlet var postLabel: UILabel?
     @IBOutlet var okButton: UIButton?
     
+    let effect = UIBlurEffect(style: .Dark)
+    let resizingMask = UIViewAutoresizing.FlexibleWidth
+    
     var glucoseObject: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  
+         self.view.backgroundColor = UIColor.clearColor()
+        let blurView = UIVisualEffectView(effect: effect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = resizingMask
+        self.view.addSubview(blurView)
+        self.view.sendSubviewToBack(blurView)
+       
+
         
         if glucoseObject != nil {
             successLabel?.text = "\(glucoseObject![0]) units"

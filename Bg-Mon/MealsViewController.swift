@@ -33,7 +33,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     }
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MealsViewController.manuallyUpdateTableView), name: "newCell", object: nil)
         
 		let items = ["Add Meal", "Add Correction", "Add Slow Release"]
 		if let navigationController = navigationController {
@@ -48,7 +48,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
 		menuView?.cellSeparatorColor = UIColor.clearColor()
 		menuView?.cellTextLabelAlignment = NSTextAlignment.Center
-		menuView?.cellBackgroundColor = UIColor.clearColor()
+		menuView?.cellBackgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
 		menuView?.cellTextLabelColor = UIColor.whiteColor()
     
 		menuView?.checkMarkImage = nil
@@ -94,6 +94,9 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 
 		
 	}
+    func manuallyUpdateTableView(){
+        self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Middle)
+    }
     func buildImageView() -> UIImageView {
         let imageView = UIImageView(image: UIImage(named: "pattern.jpg"))
         imageView.frame = view.bounds
@@ -113,8 +116,14 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
             mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray
         }
         if mealArray?.count != 0 && mealArray != nil {
+            if(mealArray?.count == 1){
+                if(self.tableView.numberOfRowsInSection(0) != mealArray?.count){
+                    self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Top)
+                }
+            }
          self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
         }
+      
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if mealArray?.count == 0 || mealArray == nil {
@@ -143,8 +152,11 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 	
-        
+        if(mealArray == nil){
+            return 0
+        }else{
 			return (mealArray?.count)!
+        }
  
 
 		
@@ -314,12 +326,17 @@ class AddMeal: UITableViewController {
             print("Int: \(self.intValue)")
             beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "carbs" : (self.carbCell?.carbs?.text)!, "insulin" : pissOff! , "date": NSDate()]
         }else if self.configurationType == "Insulin Correction" {
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.correctionCell?.insulin?.text)!, "date": NSDate()]
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.correctionCell?.insulin?.text)!, "date": NSDate(), "carbs" : "0"]
         }else if self.configurationType == "Long Lasting"{
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.longLastingCell?.insulin)!, "date": NSDate()]
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.longLastingCell?.insulin?.text)!, "date": NSDate(), "carbs" : "0"]
         }
         
-        self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbs: Double((self.carbCell?.carbs?.text)!)!)
+        
+        if(self.carbCell != nil && self.configurationType == "Full Meal") {
+           self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbs: Double((self.carbCell?.carbs?.text)!)!)
+        }else{
+            self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbs: Double((0)))
+        }
         var mealsArray: NSMutableArray?
         
         if objectAlreadyExist("meals") {
@@ -329,12 +346,23 @@ class AddMeal: UITableViewController {
         }
 
         mealsArray?.insertObject(beetusDictionary!, atIndex: 0)
+        
         NSUserDefaults.standardUserDefaults().setObject(mealsArray, forKey: "meals")
         NSUserDefaults.standardUserDefaults().synchronize()
+        if (self.bloodGlucoseCell != nil) {
+            self.bloodGlucoseCell?.bloodGlucose?.text = ""
+        }
+        if (self.carbCell != nil) {
+            self.carbCell?.carbs?.text = ""
+        }
         
-        print("Dictionary: \(beetusDictionary)")
-        print("Meals: \(mealsArray)")
-        print("probably saved, maybe, geez dont ask me")
+        if((self.correctionCell) != nil){
+            self.correctionCell?.insulin?.text = ""
+        }
+        if((self.longLastingCell) != nil){
+            self.longLastingCell?.insulin?.text = ""
+        }
+        NSNotificationCenter.defaultCenter().postNotificationName("newCell", object: nil)
         
     }
 
@@ -393,9 +421,9 @@ class AddMeal: UITableViewController {
 	 func calculateInsulin() -> Double{
       
      
-		var target: Double?
-		var ratio: Double?
-		var sensitivity: Double?
+		var target: Double? = 120
+		var ratio: Double? = 8
+		var sensitivity: Double? = 30
 
 		let glucose = Double((self.bloodGlucoseCell?.bloodGlucose!.text)!)
 
@@ -433,9 +461,13 @@ class AddMeal: UITableViewController {
         if configurationType == "Full Meal" {
             
              viewController.glucoseObject = [intValue!.description]
+ 
         }else{
             viewController.glucoseObject = nil
+            
+           
         }
+      
         
        
     }
