@@ -183,16 +183,23 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 	}
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! MealCell
+        let type = mealArray![indexPath.row]["type"] as! String
 		cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String) mg/dL"
 		cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String) carbs"
 		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String) units"
         cell.type?.text = mealArray![indexPath.row]["type"] as? String
 		cell.backgroundColor = UIColor.clearColor()
         cell.time?.text = self.getTime(indexPath)
-        cell.time?.backgroundColor = self.view.tintColor
         cell.time?.textColor = UIColor.whiteColor()
         cell.time?.clipsToBounds = true
         cell.time?.layer.cornerRadius = 5
+        if(type == "Full Meal"){
+            cell.mealType?.image = UIImage.init(named: "Meal.png")
+        }else if(type == "Insulin Correction"){
+            cell.mealType?.image = UIImage.init(named: "Adjustment.png")
+        }else if(type == "Long Lasting"){
+            cell.mealType?.image = UIImage.init(named: "24H.png")
+        }
 		return cell
 	}
     

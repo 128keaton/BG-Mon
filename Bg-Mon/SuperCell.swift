@@ -14,6 +14,16 @@ class MealCell: UITableViewCell {
 	@IBOutlet weak var carbs: UILabel?
     @IBOutlet weak var time: UILabel?
     @IBOutlet weak var type: UILabel?
+    @IBOutlet weak var mealType: UIImageView?
+    
+    required init?(coder aDecoder: NSCoder) {
+        time?.textColor = UIColor.whiteColor()
+        time?.clipsToBounds = true
+        time?.layer.cornerRadius = 5
+        super.init(coder: aDecoder)
+    }
+
+    
     
 }
 class CorrectionCell: UITableViewCell {

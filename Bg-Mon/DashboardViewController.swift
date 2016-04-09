@@ -59,24 +59,36 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
         insulinChart?.alwaysDisplayDots = true
         insulinChart?.enableTouchReport = true
         insulinChart?.enablePopUpReport = true
-        
+        insulinChart?.positionYAxisRight = true
         lineChart?.alwaysDisplayDots = true
         lineChart?.enableTouchReport = true
         lineChart?.enablePopUpReport = true
         lineChart?.enableYAxisLabel = true
         lineChart?.colorYaxisLabel = UIColor.whiteColor()
+        lineChart?.autoScaleYAxis = true
         
+        insulinChart?.animationGraphStyle = .Expand
         insulinChart?.enableYAxisLabel = true
-        insulinChart?.colorYaxisLabel = UIColor.orangeColor()
+        insulinChart?.colorYaxisLabel = UIColor.whiteColor()
         insulinChart?.colorXaxisLabel = UIColor.whiteColor()
         
+        insulinChart?.enableReferenceAxisFrame = true
+        lineChart?.enableReferenceYAxisLines = true
+        insulinChart?.enableReferenceXAxisLines = true
+        insulinChart?.colorReferenceLines = UIColor.whiteColor()
         let backgroundView = UIView.init(frame: self.view.frame)
         
-        
+      
+        lineChart?.backgroundColor = UIColor.clearColor()
+        lineChart?.alphaTop = 0
+        lineChart?.alphaBottom = 0
+   
         
         backgroundView.autoresizingMask = resizingMask
         backgroundView.addSubview(self.buildImageView())
         backgroundView.addSubview(self.buildBlurView())
+        lineChart?.addSubview(backgroundView)
+        lineChart?.sendSubviewToBack(backgroundView)
         tableView!.backgroundView = backgroundView
         tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
         
@@ -131,15 +143,23 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
             return ""
         }
 	}
-
-    func numberOfGapsBetweenLabelsOnLineGraph(graph: BEMSimpleLineGraphView) -> Int {
-        return 30
+    func yAxisSuffixOnLineGraph(graph: BEMSimpleLineGraphView) -> String {
+        if graph == insulinChart {
+            return " units  "
+        }else{
+            return " mg/dL"
+        }
+        
     }
+   
     
     func objectAlreadyExist(key: String) -> Bool {
         return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
     }
     
+    func incrementIndexForXAxisOnLineGraph(graph: BEMSimpleLineGraphView) -> Int {
+        return 10
+    }
 	override func viewDidAppear(animated: Bool) {
 		self.authorizeHealthKit(nil)
         self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
@@ -173,13 +193,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
             return " mg/Dl"
         }
     }
-	func maxValueForLineGraph(graph: BEMSimpleLineGraphView) -> CGFloat {
-        if(graph != insulinChart){
-		return 1000
-        } else{
-                return 25
-            }
-	}
+
     func noDataLabelTextForLineGraph(graph: BEMSimpleLineGraphView) -> String {
         if graph == insulinChart {
             return "No insulin data"
@@ -193,13 +207,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
     func lineGraph(graph: BEMSimpleLineGraphView, alwaysDisplayPopUpAtIndex index: CGFloat) -> Bool {
         return true
     }
-	func minValueForLineGraph(graph: BEMSimpleLineGraphView) -> CGFloat {
-        if(graph != insulinChart){
-            return 0
-        }else{
-            return 1
-        }
-	}
+
 	func determinePoint(bloodGlucoseLevel: Double) -> CGFloat {
 		return CGFloat(bloodGlucoseLevel)
 	}
@@ -227,21 +235,43 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 	}
 
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = self.tableView?.dequeueReusableCellWithIdentifier("cell") as! DashboardCell
+		let cell = self.tableView?.dequeueReusableCellWithIdentifier("cell") as! MealCell
 		let sample = self.results[indexPath.row];
 
 		let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
 
 		cell.bloodGlucose!.text = "\(doubleValue) mg/dL"
-        if indexPath.row < self.sampleInsulin.count{
-                cell.insulin?.text = "\(self.sampleInsulin[indexPath.row]) units"
-        }else{
-            cell.insulin?.text = "No data"
+		if indexPath.row < self.sampleInsulin.count {
+			cell.insulin?.text = "\(self.sampleInsulin[indexPath.row]) units"
+			let formatter = NSDateFormatter()
+			formatter.dateStyle = .FullStyle
+            formatter.timeStyle = .MediumStyle
+			if (indexPath.row < self.mealsArray?.count && self.mealsArray != nil) {
+				let xcodeSTOPBREAKING = self.mealsArray![indexPath.row]["date"] as! NSDate
+				let REALLYITSGETTINGOLD = self.mealsArray![indexPath.row]["carbs"] as! String
+				cell.time?.text = formatter.stringFromDate(xcodeSTOPBREAKING)
+				cell.carbs!.text = REALLYITSGETTINGOLD
+			}
+		} else {
+			cell.insulin?.text = "No data"
+		}
+		cell.time?.textColor = UIColor.whiteColor()
+		cell.time?.clipsToBounds = true
+		cell.time?.layer.cornerRadius = 5
+		cell.backgroundColor = UIColor.clearColor()
+		cell.contentView.backgroundColor = UIColor.clearColor()
+        
+        let type = mealsArray![indexPath.row]["type"] as! String
+        if(type == "Full Meal"){
+            cell.mealType?.image = UIImage.init(named: "Meal.png")
+        }else if(type == "Insulin Correction"){
+            cell.mealType?.image = UIImage.init(named: "Adjustment.png")
+        }else if(type == "Long Lasting"){
+            cell.mealType?.image = UIImage.init(named: "24H.png")
         }
 
-        cell.backgroundColor = UIColor.clearColor()
-        cell.contentView.backgroundColor = UIColor.clearColor()
         
+
 		return cell
 	}
     
