@@ -24,10 +24,10 @@
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="sizePoint">
-                                        <real key="value" value="3"/>
+                                        <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="colorPoint">
-                                        <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -44,9 +44,6 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="alphaTop">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="alphaLine">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="alphaBottom">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
@@ -54,10 +51,10 @@
                                         <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="colorPoint">
-                                        <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="sizePoint">
-                                        <real key="value" value="7"/>
+                                        <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>

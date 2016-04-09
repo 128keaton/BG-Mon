@@ -32,6 +32,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
     let effect = UIBlurEffect(style: .Dark)
     let resizingMask = UIViewAutoresizing.FlexibleWidth
     
+    var mealsArray: NSMutableArray?
     override func awakeFromNib() {
         super.awakeFromNib()
        
@@ -55,9 +56,19 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 		insulinChart?.autoScaleYAxis = true
         insulinChart?.colorLine = UIColor.orangeColor()
         
-        insulinChart?.alwaysDisplayPopUpLabels = true
-        lineChart?.alwaysDisplayPopUpLabels = true
-
+        insulinChart?.alwaysDisplayDots = true
+        insulinChart?.enableTouchReport = true
+        insulinChart?.enablePopUpReport = true
+        
+        lineChart?.alwaysDisplayDots = true
+        lineChart?.enableTouchReport = true
+        lineChart?.enablePopUpReport = true
+        lineChart?.enableYAxisLabel = true
+        lineChart?.colorYaxisLabel = UIColor.whiteColor()
+        
+        insulinChart?.enableYAxisLabel = true
+        insulinChart?.colorYaxisLabel = UIColor.orangeColor()
+        insulinChart?.colorXaxisLabel = UIColor.whiteColor()
         
         let backgroundView = UIView.init(frame: self.view.frame)
         
@@ -69,7 +80,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
         tableView!.backgroundView = backgroundView
         tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
         
-        var mealsArray: NSMutableArray?
+       
         
         if objectAlreadyExist("meals") {
             mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
@@ -105,7 +116,25 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 		self.healthStore.executeQuery(query)
 	}
-    
+	func lineGraph(graph: BEMSimpleLineGraphView, labelOnXAxisForIndex index: Int) -> String? {
+		if (graph == insulinChart) {
+			let formatter = NSDateFormatter()
+			formatter.dateFormat = "hh:mm"
+			if (mealsArray != nil && index < mealsArray?.count) {
+				let dateString = formatter.stringFromDate(self.mealsArray![index]["date"] as! NSDate)
+
+				return dateString
+			} else {
+				return ""
+			}
+        }else{
+            return ""
+        }
+	}
+
+    func numberOfGapsBetweenLabelsOnLineGraph(graph: BEMSimpleLineGraphView) -> Int {
+        return 30
+    }
     
     func objectAlreadyExist(key: String) -> Bool {
         return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
@@ -128,7 +157,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 		super.viewDidAppear(true)
 	}
     func lineGraph(graph: BEMSimpleLineGraphView, didTouchGraphWithClosestIndex index: Int) {
-        self.tableView?.selectRowAtIndexPath(NSIndexPath.init(forRow: index, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.None)
+        self.tableView?.selectRowAtIndexPath(NSIndexPath.init(forRow: index, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
