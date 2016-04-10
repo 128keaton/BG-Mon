@@ -25,6 +25,7 @@
 		8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650D61CB8BDED00A86BE5 /* Meal.png */; };
 		8A9650DB1CB8C19C00A86BE5 /* Adjustment.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */; };
 		8A9650DD1CB8C1F500A86BE5 /* 24H.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DC1CB8C1F500A86BE5 /* 24H.png */; };
+		8A9650DF1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DE1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png */; };
 		8AB1BE281CB46EFA00A291E7 /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */; };
 		8AB1BE2E1CB5F5ED00A291E7 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1BE2D1CB5F5ED00A291E7 /* SuccessViewController.swift */; };
 		8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC51FF51CB4187500E1872E /* SuperCell.swift */; };
@@ -74,6 +75,7 @@
 		8A9650D61CB8BDED00A86BE5 /* Meal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Meal.png; sourceTree = "<group>"; };
 		8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Adjustment.png; sourceTree = "<group>"; };
 		8A9650DC1CB8C1F500A86BE5 /* 24H.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24H.png; sourceTree = "<group>"; };
+		8A9650DE1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HealthKit_iOS_8_icon.png; sourceTree = "<group>"; };
 		8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
 		8AB1BE2D1CB5F5ED00A291E7 /* SuccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		8AC51FF51CB4187500E1872E /* SuperCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperCell.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */,
 				8A45D8761CB3528E007558B4 /* MenuManager.swift */,
 				8A45D86F1CB33912007558B4 /* DashboardViewController.swift */,
+				8A9650DE1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png */,
 				8A1EA8991CB7058200343019 /* pattern.jpg */,
 				8A1EA89D1CB7092100343019 /* bananas.jpg */,
 				8A1EA89B1CB7085A00343019 /* pattern2.png */,
@@ -313,6 +316,7 @@
 				8A45D8491CB337E6007558B4 /* Assets.xcassets in Resources */,
 				8A1EA89C1CB7085A00343019 /* pattern2.png in Resources */,
 				8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */,
+				8A9650DF1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png in Resources */,
 				8A1EA89A1CB7058200343019 /* pattern.jpg in Resources */,
 				8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */,
 				8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */,

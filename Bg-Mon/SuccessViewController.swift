@@ -20,6 +20,7 @@ class SuccessViewController: UIViewController {
     let resizingMask = UIViewAutoresizing.FlexibleWidth
     
     var glucoseObject: [String]?
+    var shouldShowMeal: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,9 @@ class SuccessViewController: UIViewController {
         
         if glucoseObject != nil {
             successLabel?.text = "\(glucoseObject![0]) units"
+            if(shouldShowMeal == false){
+                postLabel?.hidden = true
+            }
             
         }else{
             successLabel?.text = "Success!"

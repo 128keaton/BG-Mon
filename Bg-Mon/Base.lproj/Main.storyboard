@@ -668,15 +668,15 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insulin Units:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoZ-ou-9gN">
                                             <rect key="frame" x="8" y="9" width="122" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="122" id="mJs-W3-Yh1"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="3 units" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWZ-V5-Qr0">
                                             <rect key="frame" x="229" y="5" width="363" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="363" id="8aL-Tk-FRK"/>
-                                            </constraints>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -691,13 +691,13 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="aoZ-ou-9gN" firstAttribute="leading" secondItem="Qjg-YN-4wf" secondAttribute="leadingMargin" id="2bR-cd-v0W"/>
-                                        <constraint firstItem="aoZ-ou-9gN" firstAttribute="top" secondItem="Qjg-YN-4wf" secondAttribute="topMargin" constant="1" id="8R4-NP-7no"/>
-                                        <constraint firstItem="fWZ-V5-Qr0" firstAttribute="leading" secondItem="aoZ-ou-9gN" secondAttribute="trailing" constant="99" id="94L-aa-6uq"/>
-                                        <constraint firstItem="aoZ-ou-9gN" firstAttribute="centerY" secondItem="fWZ-V5-Qr0" secondAttribute="centerY" id="e7P-f9-AIm"/>
-                                        <constraint firstItem="aoZ-ou-9gN" firstAttribute="centerY" secondItem="Qjg-YN-4wf" secondAttribute="centerY" id="fp8-Uo-zIJ"/>
-                                        <constraint firstItem="fWZ-V5-Qr0" firstAttribute="trailing" secondItem="Qjg-YN-4wf" secondAttribute="trailingMargin" id="fzS-RZ-mJl"/>
-                                        <constraint firstItem="fWZ-V5-Qr0" firstAttribute="top" secondItem="Qjg-YN-4wf" secondAttribute="topMargin" constant="-3" id="mTc-hF-err"/>
+                                        <constraint firstItem="aoZ-ou-9gN" firstAttribute="top" secondItem="Qjg-YN-4wf" secondAttribute="topMargin" constant="1" id="076-KZ-e4s"/>
+                                        <constraint firstItem="fWZ-V5-Qr0" firstAttribute="trailing" secondItem="Qjg-YN-4wf" secondAttribute="trailingMargin" id="E4q-sA-18I"/>
+                                        <constraint firstItem="aoZ-ou-9gN" firstAttribute="centerY" secondItem="Qjg-YN-4wf" secondAttribute="centerY" id="MPZ-54-bAC"/>
+                                        <constraint firstItem="fWZ-V5-Qr0" firstAttribute="top" secondItem="Qjg-YN-4wf" secondAttribute="topMargin" constant="-3" id="S43-if-r41"/>
+                                        <constraint firstItem="aoZ-ou-9gN" firstAttribute="leading" secondItem="Qjg-YN-4wf" secondAttribute="leadingMargin" id="UGg-FX-Yk3"/>
+                                        <constraint firstItem="aoZ-ou-9gN" firstAttribute="centerY" secondItem="fWZ-V5-Qr0" secondAttribute="centerY" id="Vis-lI-dOU"/>
+                                        <constraint firstItem="fWZ-V5-Qr0" firstAttribute="leading" secondItem="aoZ-ou-9gN" secondAttribute="trailing" constant="99" id="emw-vc-akf"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

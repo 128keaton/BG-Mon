@@ -318,6 +318,7 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
     func buildImageView() -> UIImageView {
         let imageView = UIImageView(image: UIImage(named: "pattern2.png"))
         imageView.frame = view.bounds
+        imageView.contentMode = .ScaleAspectFill
         imageView.autoresizingMask = resizingMask
         return imageView
     }
@@ -379,11 +380,11 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
     func saveAndDie(){
         var beetusDictionary: NSMutableDictionary?
         if self.configurationType == "Full Meal" {
-            let pissOff = intValue?.description
-            print("Int: \(self.intValue)")
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "carbs" : (self.carbCell?.carbs?.text)!, "insulin" : pissOff! , "date": NSDate()]
+     
+    
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "carbs" : (self.carbCell?.carbs?.text)!, "insulin" : self.calculateInsulin().description , "date": NSDate()]
         }else if self.configurationType == "Insulin Correction" {
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.correctionCell?.insulin?.text)!, "date": NSDate(), "carbs" : "0"]
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : self.calculateCorrection().description, "date": NSDate(), "carbs" : "0"]
         }else if self.configurationType == "Long Lasting"{
             beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.longLastingCell?.insulin?.text)!, "date": NSDate(), "carbs" : "0"]
         }
@@ -446,8 +447,8 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 			}
 		} else if self.configurationType == "Insulin Correction" {
             self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
-            self.correctionCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 1, inSection: 0)) as? CorrectionCell
-            if (bloodGlucoseCell?.bloodGlucose?.text != "" && correctionCell?.insulin?.text != "") {
+
+            if (correctionCell?.insulin?.text != "") {
                 self.performSegueWithIdentifier("save", sender: self)
                 self.saveAndDie()
             } else {
@@ -514,22 +515,49 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         return dosage!
         
 	}
+    func calculateCorrection() -> Double{
+        
+        var target: Double? = 120
+        var sensitivity: Double? = 30
+        
+        let glucose = Double((self.bloodGlucoseCell?.bloodGlucose!.text)!)
+        
+        
+        
+        if objectAlreadyExist("target") {
+            target = NSUserDefaults.standardUserDefaults().objectForKey("target")?.doubleValue
+        }
+
+        if objectAlreadyExist("sensitivity") {
+            sensitivity = NSUserDefaults.standardUserDefaults().objectForKey("sensitivity")?.doubleValue
+        }
+        // Calulating correction
+        var correction = glucose! - target!
+        correction = correction / sensitivity!
+        if correction < 0 {
+            correction = 0
+        }
+        correction = round(correction)
+        return correction
+        
+    }
 	func objectAlreadyExist(key: String) -> Bool {
 		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
 	}
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let viewController = segue.destinationViewController as! SuccessViewController
-        if configurationType == "Full Meal" {
-            
-             viewController.glucoseObject = [intValue!.description]
- 
-        }else{
-            viewController.glucoseObject = nil
-            
-           
-        }
-      
-        
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		let viewController = segue.destinationViewController as! SuccessViewController
+		if configurationType == "Full Meal" {
+
+			viewController.glucoseObject = [self.calculateCorrection().description]
+            viewController.shouldShowMeal = true
+		} else if configurationType == "Insulin Correction" {
+
+			viewController.glucoseObject = [self.calculateCorrection().description]
+			viewController.shouldShowMeal = false
+		} else {
+			viewController.glucoseObject = nil
+		}
+
        
     }
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -560,7 +588,11 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 		return self.configurationType
 	}
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if(configurationType == "Insulin Correction"){
+            return 1
+        }else{
+            return 2
+        }
 	}
 
 	@IBAction func dismissYoSelf() {
