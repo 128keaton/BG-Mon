@@ -232,25 +232,39 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 		cell.bloodGlucose!.text = "\(doubleValue) mg/dL"
 		if indexPath.row < self.sampleInsulin.count {
-			cell.insulin?.text = "\(self.sampleInsulin[indexPath.row]) units"
+            let integer = Int(self.sampleInsulin[indexPath.row])
+			cell.insulin?.text = "\(integer)  units"
 			let formatter = NSDateFormatter()
-			formatter.dateStyle = .FullStyle
-			formatter.timeStyle = .MediumStyle
+			formatter.dateStyle = .ShortStyle
+			formatter.timeStyle = .ShortStyle
 			if (indexPath.row < self.mealsArray?.count && self.mealsArray != nil) {
 				let xcodeSTOPBREAKING = self.mealsArray![indexPath.row]["date"] as! NSDate
 				let REALLYITSGETTINGOLD = self.mealsArray![indexPath.row]["carbs"] as! String
 				cell.time?.text = formatter.stringFromDate(xcodeSTOPBREAKING)
-				cell.carbs!.text = REALLYITSGETTINGOLD
+				cell.carbs!.text = "\(REALLYITSGETTINGOLD) grams"
 			}
 		} else {
 			cell.insulin?.text = "No data"
 		}
+        cell.bloodGlucose?.layer.cornerRadius = 5
+        cell.bloodGlucose?.clipsToBounds = true
+        cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
+        cell.bloodGlucose?.textColor = UIColor.blackColor()
+        
+        cell.carbs?.layer.cornerRadius = 5
+        cell.carbs?.clipsToBounds = true
+        cell.carbs?.backgroundColor = self.view.tintColor
+        
+        cell.insulin?.layer.cornerRadius = 5
+        cell.insulin?.clipsToBounds = true
+        cell.insulin?.backgroundColor = UIColor.greenColor()
+        
 		cell.time?.textColor = UIColor.whiteColor()
 		cell.time?.clipsToBounds = true
 		cell.time?.layer.cornerRadius = 5
 		cell.backgroundColor = UIColor.clearColor()
 		cell.contentView.backgroundColor = UIColor.clearColor()
-		if (indexPath.row < mealsArray?.count) {
+		if (indexPath.row <= mealsArray?.count) {
 			let type = mealsArray![indexPath.row]["type"] as! String
 			if (type == "Full Meal") {
 				cell.mealType?.image = UIImage.init(named: "Meal.png")
@@ -264,9 +278,16 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
             cell.type?.text = "Fetched from Health"
             cell.carbs?.text = "No data"
             let formatter = NSDateFormatter()
-            formatter.dateStyle = .FullStyle
-            formatter.timeStyle = .MediumStyle
+            formatter.dateFormat = "MM/dd/yy"
+            formatter.timeStyle = .ShortStyle
             cell.time?.text = formatter.stringFromDate(self.results[indexPath.row].startDate)
+            cell.insulinLabel?.hidden = true
+            cell.carbLabel?.hidden = true
+            cell.carbs?.hidden = true
+            cell.insulin?.hidden = true
+            
+            cell.bloodGlucose?.center = cell.center
+            cell.bloodGlucoseLabel?.center = CGPointMake((cell.bloodGlucoseLabel?.center.x)!, cell.center.y)
         }
 
 		return cell

@@ -4,6 +4,7 @@
 use_frameworks!
 
 target 'Bg-Mon' do
+pod 'SkyFloatingLabelTextField', '~> 1.0'
 pod 'Notie'
 pod 'BTNavigationDropdownMenu', :git => "https://github.com/mkral/BTNavigationDropdownMenu.git"
 pod 'MBProgressHUD'

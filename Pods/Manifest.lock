@@ -3,6 +3,7 @@ PODS:
   - BTNavigationDropdownMenu (0.2.1)
   - MBProgressHUD (0.9.2)
   - Notie (1.0.4)
+  - SkyFloatingLabelTextField (1.1.1)
   - SlideMenuControllerSwift (2.1.0)
   - UIImageColors (1.0.3)
 
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - BTNavigationDropdownMenu (from `https://github.com/mkral/BTNavigationDropdownMenu.git`)
   - MBProgressHUD
   - Notie
+  - SkyFloatingLabelTextField (~> 1.0)
   - SlideMenuControllerSwift
   - UIImageColors (from `https://github.com/jathu/UIImageColors.git`)
 
@@ -40,6 +42,7 @@ SPEC CHECKSUMS:
   BTNavigationDropdownMenu: 9cf4060162c96510ee27c388412e28678320cdc0
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   Notie: 1acc7a2dd65b7ddbecd0d7bff0f71ef83df11caf
+  SkyFloatingLabelTextField: 98a79b52d47988848f8c86442020c78b580a464f
   SlideMenuControllerSwift: 0ed532750dc8574eefda189d0f25805bc967ab7a
   UIImageColors: 3c3b04ecd5786d3235f7f783316c6ef0f631216d
 

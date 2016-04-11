@@ -16,6 +16,10 @@ class MealCell: UITableViewCell {
     @IBOutlet weak var type: UILabel?
     @IBOutlet weak var mealType: UIImageView?
     
+    @IBOutlet weak var insulinLabel: UILabel?
+    @IBOutlet weak var carbLabel: UILabel?
+    @IBOutlet weak var bloodGlucoseLabel: UILabel?
+    
     required init?(coder aDecoder: NSCoder) {
         time?.textColor = UIColor.whiteColor()
         time?.clipsToBounds = true
