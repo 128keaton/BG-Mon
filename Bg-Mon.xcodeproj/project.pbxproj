@@ -30,7 +30,6 @@
 		8AB1BE2E1CB5F5ED00A291E7 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1BE2D1CB5F5ED00A291E7 /* SuccessViewController.swift */; };
 		8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC51FF51CB4187500E1872E /* SuperCell.swift */; };
 		B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */; };
-		FAB5254C534FF4545DD461D5 /* Pods_M_E_G.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB6B3392F615C360E41EB762 /* Pods_M_E_G.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,7 +82,6 @@
 		B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bg_Mon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E091F18638122BDD2E48DF7C /* Pods-Bg-Mon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bg-Mon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon.release.xcconfig"; sourceTree = "<group>"; };
 		EC7D4FF91569ED98574F0D5B /* Pods-Bg-Mon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bg-Mon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon.debug.xcconfig"; sourceTree = "<group>"; };
-		FB6B3392F615C360E41EB762 /* Pods_M_E_G.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_M_E_G.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +91,6 @@
 			files = (
 				B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */,
 				8A45D8721CB33BA3007558B4 /* HealthKit.framework in Frameworks */,
-				FAB5254C534FF4545DD461D5 /* Pods_M_E_G.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,7 +184,6 @@
 			children = (
 				8A45D8711CB33BA3007558B4 /* HealthKit.framework */,
 				B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */,
-				FB6B3392F615C360E41EB762 /* Pods_M_E_G.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -184,9 +184,9 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! MealCell
         let type = mealArray![indexPath.row]["type"] as! String
-		cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String)     mg/dL"
-		cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String) carbs"
-		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String)    units"
+		cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String)\nmg/dL"
+		cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String)\ncarbs"
+		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String)\nunits"
         cell.type?.text = mealArray![indexPath.row]["type"] as? String
 		cell.backgroundColor = UIColor.clearColor()
         cell.time?.text = self.getTime(indexPath)
@@ -398,9 +398,9 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         if self.configurationType == "Full Meal" {
      
     
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "carbs" : (self.carbCell?.carbs?.text)!, "insulin" : self.calculateInsulin().description , "date": NSDate()]
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "carbs" : (self.carbCell?.carbs?.text)!, "insulin" : (self.intValue?.description)!, "date": NSDate()]
         }else if self.configurationType == "Insulin Correction" {
-            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : self.calculateCorrection().description, "date": NSDate(), "carbs" : "0"]
+            beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.intValue?.description)!, "date": NSDate(), "carbs" : "0"]
         }else if self.configurationType == "Long Lasting"{
             beetusDictionary = ["type" : self.configurationType!, "bloodGlucose" : (self.bloodGlucoseCell?.bloodGlucose?.text)!, "insulin" : (self.longLastingCell?.insulin?.text)!, "date": NSDate(), "carbs" : "0"]
         }
@@ -463,7 +463,7 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 			}
 		} else if self.configurationType == "Insulin Correction" {
             self.bloodGlucoseCell = self.tableView.cellForRowAtIndexPath(NSIndexPath.init(forRow: 0, inSection: 0)) as? GlucoseCell
-
+            self.intValue = Int(round(self.calculateCorrection()))
             if (correctionCell?.insulin?.text != "") {
                 self.performSegueWithIdentifier("save", sender: self)
                 self.saveAndDie()
@@ -564,11 +564,11 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 		let viewController = segue.destinationViewController as! SuccessViewController
 		if configurationType == "Full Meal" {
 
-			viewController.glucoseObject = [self.calculateCorrection().description]
+			viewController.glucoseObject = [(self.intValue?.description)!]
             viewController.shouldShowMeal = true
 		} else if configurationType == "Insulin Correction" {
 
-			viewController.glucoseObject = [self.calculateCorrection().description]
+			viewController.glucoseObject = [(self.intValue?.description)!]
 			viewController.shouldShowMeal = false
 		} else {
 			viewController.glucoseObject = nil

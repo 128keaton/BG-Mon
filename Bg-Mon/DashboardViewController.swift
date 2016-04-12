@@ -230,10 +230,10 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 		let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
 
-		cell.bloodGlucose!.text = "\(doubleValue) mg/dL"
+		cell.bloodGlucose!.text = "\(doubleValue)\nmg/dL"
 		if indexPath.row < self.sampleInsulin.count {
             let integer = Int(self.sampleInsulin[indexPath.row])
-			cell.insulin?.text = "\(integer)     units"
+			cell.insulin?.text = "\(integer)\nunits"
 			let formatter = NSDateFormatter()
 			formatter.dateStyle = .ShortStyle
 			formatter.timeStyle = .ShortStyle
@@ -241,7 +241,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 				let xcodeSTOPBREAKING = self.mealsArray![indexPath.row]["date"] as! NSDate
 				let REALLYITSGETTINGOLD = self.mealsArray![indexPath.row]["carbs"] as! String
 				cell.time?.text = formatter.stringFromDate(xcodeSTOPBREAKING)
-				cell.carbs!.text = "\(REALLYITSGETTINGOLD) grams"
+				cell.carbs!.text = "\(REALLYITSGETTINGOLD)\ngrams"
 			}
 		} else {
 			cell.insulin?.text = "No data"
