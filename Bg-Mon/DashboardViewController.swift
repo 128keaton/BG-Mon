@@ -273,6 +273,10 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 			} else if (type == "Long Lasting") {
 				cell.mealType?.image = UIImage.init(named: "24H.png")
 			}
+            cell.insulinLabel?.hidden = false
+            cell.carbLabel?.hidden = false
+            cell.carbs?.hidden = false
+            cell.insulin?.hidden = false
         }else{
             cell.mealType?.image = UIImage.init(named: "HealthKit_iOS_8_icon.png")
             cell.type?.text = "Fetched from Health"
