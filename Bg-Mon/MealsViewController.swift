@@ -184,15 +184,31 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! MealCell
         let type = mealArray![indexPath.row]["type"] as! String
-		cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String) mg/dL"
+		cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String)     mg/dL"
 		cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String) carbs"
-		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String) units"
+		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String)    units"
         cell.type?.text = mealArray![indexPath.row]["type"] as? String
 		cell.backgroundColor = UIColor.clearColor()
         cell.time?.text = self.getTime(indexPath)
+
+        cell.bloodGlucose?.layer.cornerRadius = 5
+        cell.bloodGlucose?.clipsToBounds = true
+        cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
+        cell.bloodGlucose?.textColor = UIColor.blackColor()
+        
+        cell.carbs?.layer.cornerRadius = 5
+        cell.carbs?.clipsToBounds = true
+        cell.carbs?.backgroundColor = self.view.tintColor
+        
+        cell.insulin?.layer.cornerRadius = 5
+        cell.insulin?.clipsToBounds = true
+        cell.insulin?.backgroundColor = UIColor.greenColor()
+        
         cell.time?.textColor = UIColor.whiteColor()
         cell.time?.clipsToBounds = true
         cell.time?.layer.cornerRadius = 5
+
+        
         if(type == "Full Meal"){
             cell.mealType?.image = UIImage.init(named: "Meal.png")
         }else if(type == "Insulin Correction"){
@@ -207,8 +223,8 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
         let dictionary = mealArray![indexPath.row] as! NSMutableDictionary
         if let exists = dictionary["date"]{
             let formatter = NSDateFormatter()
-            formatter.dateStyle = NSDateFormatterStyle.LongStyle
-            formatter.timeStyle = .MediumStyle
+            formatter.dateStyle = .ShortStyle
+            formatter.timeStyle = .ShortStyle
             return formatter.stringFromDate(exists as! NSDate)
         }else{
             return "No time recorded"

@@ -233,7 +233,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 		cell.bloodGlucose!.text = "\(doubleValue) mg/dL"
 		if indexPath.row < self.sampleInsulin.count {
             let integer = Int(self.sampleInsulin[indexPath.row])
-			cell.insulin?.text = "\(integer)  units"
+			cell.insulin?.text = "\(integer)     units"
 			let formatter = NSDateFormatter()
 			formatter.dateStyle = .ShortStyle
 			formatter.timeStyle = .ShortStyle
@@ -264,7 +264,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 		cell.time?.layer.cornerRadius = 5
 		cell.backgroundColor = UIColor.clearColor()
 		cell.contentView.backgroundColor = UIColor.clearColor()
-		if (indexPath.row <= mealsArray?.count) {
+		if (indexPath.row < mealsArray?.count) {
 			let type = mealsArray![indexPath.row]["type"] as! String
 			if (type == "Full Meal") {
 				cell.mealType?.image = UIImage.init(named: "Meal.png")
@@ -324,6 +324,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 					NSUserDefaults.standardUserDefaults().setDouble(maxArray.minElement()!, forKey: "lowscore")
 					NSUserDefaults.standardUserDefaults().synchronize()
 				}
+      
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
 
 					self.tableView!.reloadData()
