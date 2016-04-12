@@ -292,7 +292,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
             
             cell.bloodGlucose?.autoresizingMask = .FlexibleWidth
             cell.bloodGlucose?.center = cell.center
-            cell.bloodGlucose?.center = CGPointMake((cell.bloodGlucoseLabel?.center.x)!, cell.center.y)
+         
         }
 
 		return cell
