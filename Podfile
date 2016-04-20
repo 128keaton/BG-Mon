@@ -10,7 +10,6 @@ pod 'BTNavigationDropdownMenu', :git => "https://github.com/mkral/BTNavigationDr
 pod 'MBProgressHUD'
 pod 'UIImageColors',  :git => "https://github.com/jathu/UIImageColors.git"
 pod 'SlideMenuControllerSwift'
-pod 'BEMSimpleLineGraph', :git => 'https://github.com/Boris-Em/BEMSimpleLineGraph.git', :branch => 'feature'
 end
 
 target 'Bg-MonTests' do

@@ -48,9 +48,9 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
 		menuView?.cellSeparatorColor = UIColor.clearColor()
 		menuView?.cellTextLabelAlignment = NSTextAlignment.Center
-		menuView?.cellBackgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+		menuView?.cellBackgroundColor = UIColor.blackColor()
 		menuView?.cellTextLabelColor = UIColor.whiteColor()
-    
+        self.tableView.backgroundColor = UIColor.blackColor()
 		menuView?.checkMarkImage = nil
 		menuView?.cellHeight = 100
 		menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
@@ -82,17 +82,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 			configType = nil
 			self.addViewController = nil
 		}
-        let backgroundView = UIView.init(frame: self.view.frame)
-
-        
-
-        backgroundView.autoresizingMask = resizingMask
-        backgroundView.addSubview(self.buildImageView())
-        backgroundView.addSubview(self.buildBlurView())
-        tableView.backgroundView = backgroundView
-        tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
-
-		
+     
 	}
     func manuallyUpdateTableView(){
         self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Middle)
@@ -137,11 +127,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
             self.tableView.backgroundView?.addSubview(label)
             return 1
         }
-        for view in (self.tableView.backgroundView?.subviews)! {
-            if view.tag == 6 {
-                view.removeFromSuperview()
-            }
-        }
+  
         self.tableView.separatorStyle = .SingleLine
         return 1
     }
@@ -188,9 +174,9 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String)\ncarbs"
 		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String)\nunits"
         cell.type?.text = mealArray![indexPath.row]["type"] as? String
-		cell.backgroundColor = UIColor.clearColor()
+		cell.backgroundColor = UIColor.blackColor()
         cell.time?.text = self.getTime(indexPath)
-
+        
         cell.bloodGlucose?.layer.cornerRadius = 5
         cell.bloodGlucose?.clipsToBounds = true
         cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
@@ -351,7 +337,7 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         header.textLabel?.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.4)
     }
     
-    func uploadToHealthKit(bloodGlucoseLevel: Double, carbs: Double){
+    func uploadToHealthKit(bloodGlucoseLevel: Double, carbAmount: Double){
         
 
 
@@ -376,8 +362,12 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 						let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
 
 						let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
+                        
+                        let quantityCarbs = HKQuantity(unit: prefUnit!, doubleValue: carbAmount)
+                        
+                        let quantitySampleCarbs = HKQuantitySample(type: sampleType!, quantity: quantityCarbs, startDate: NSDate(), endDate: NSDate())
 
-						self.healthStore.saveObjects([quantitySample]) { (success, error) -> Void in
+						self.healthStore.saveObjects([quantitySample, quantitySampleCarbs]) { (success, error) -> Void in
 							if (success) {
 								NSLog("Saved blood glucose level")
 							}
@@ -407,9 +397,9 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         
         
         if(self.carbCell != nil && self.configurationType == "Full Meal") {
-           self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbs: Double((self.carbCell?.carbs?.text)!)!)
+           self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbAmount: Double((self.carbCell?.carbs?.text)!)!)
         }else{
-            self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbs: Double((0)))
+            self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbAmount: Double((0)))
         }
         var mealsArray: NSMutableArray?
         

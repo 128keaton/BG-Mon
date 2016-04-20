@@ -8,11 +8,12 @@
 
 import Foundation
 import UIKit
-import BEMSimpleLineGraph
+import Charts
 import HealthKit
+
 let healthKitStore: HKHealthStore = HKHealthStore()
 
-class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEMSimpleLineGraphDataSource, UITableViewDataSource, UITableViewDelegate {
+class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChartViewDelegate {
 
 	private var objects = [HKQuantityType!]()
 	var preferredUnits = [NSObject: AnyObject]()
@@ -23,82 +24,48 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 	@IBOutlet var tableView: UITableView?
 
-	@IBOutlet var lineChart: BEMSimpleLineGraphView?
-	@IBOutlet var insulinChart: BEMSimpleLineGraphView?
+	@IBOutlet var lineChart: LineChartView?
+	@IBOutlet weak var insulinChart: CombinedChartView?
 
 	private var results = [HKQuantitySample]()
-	var sampleInsulin = [CGFloat]()
+	var sampleInsulin = [Double]()
 	let effect = UIBlurEffect(style: .Dark)
 	let resizingMask = UIViewAutoresizing.FlexibleWidth
+    
 
 	var mealsArray: NSMutableArray?
 	override func awakeFromNib() {
 		super.awakeFromNib()
 	}
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        self.configureGraphs()
 
-		lineChart?.delegate = self
-		lineChart?.dataSource = self
-		lineChart?.enableBezierCurve = true
-		lineChart?.autoScaleYAxis = true
-		lineChart?.colorLine = UIColor.greenColor()
-
-		insulinChart?.backgroundColor = UIColor.clearColor()
-		insulinChart?.delegate = self
-		insulinChart?.dataSource = self
-		insulinChart?.enableBezierCurve = true
-		insulinChart?.autoScaleYAxis = true
-		insulinChart?.colorLine = UIColor.orangeColor()
-
-        if results.count == 0 && sampleInsulin.count == 0 {
-            insulinChart?.noDataLabelColor = UIColor.clearColor()
-          
-        }
-		insulinChart?.alwaysDisplayDots = true
-		insulinChart?.enableTouchReport = true
-		insulinChart?.enablePopUpReport = true
-		insulinChart?.positionYAxisRight = true
-		lineChart?.alwaysDisplayDots = true
-		lineChart?.enableTouchReport = true
-		lineChart?.enablePopUpReport = true
-		lineChart?.enableYAxisLabel = true
-		lineChart?.colorYaxisLabel = UIColor.whiteColor()
-		lineChart?.autoScaleYAxis = true
-
-		insulinChart?.animationGraphStyle = .Expand
-		insulinChart?.enableYAxisLabel = true
-		insulinChart?.colorYaxisLabel = UIColor.whiteColor()
-		insulinChart?.colorXaxisLabel = UIColor.whiteColor()
-
-		insulinChart?.enableReferenceAxisFrame = true
-		lineChart?.enableReferenceYAxisLines = true
-		insulinChart?.enableReferenceXAxisLines = true
-		insulinChart?.colorReferenceLines = UIColor.whiteColor()
-		let backgroundView = UIView.init(frame: self.view.frame)
-
-		lineChart?.backgroundColor = UIColor.clearColor()
-		lineChart?.alphaTop = 0
-		lineChart?.alphaBottom = 0
-
-		backgroundView.autoresizingMask = resizingMask
-		backgroundView.addSubview(self.buildImageView())
-		backgroundView.addSubview(self.buildBlurView())
-		lineChart?.addSubview(backgroundView)
-		lineChart?.sendSubviewToBack(backgroundView)
-		tableView!.backgroundView = backgroundView
-		tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
-
+        
+        insulinChart!.delegate = self;
+        
+        insulinChart!.descriptionText = "";
+        insulinChart!.noDataTextDescription = "Data will be loaded soon."
+        
+        insulinChart!.drawBarShadowEnabled = false
+        insulinChart!.drawValueAboveBarEnabled = true
+        
+        insulinChart!.maxVisibleValueCount = 60
+        insulinChart!.pinchZoomEnabled = false
+        insulinChart!.drawGridBackgroundEnabled = true
+        insulinChart!.drawBordersEnabled = false
+        
 		if objectAlreadyExist("meals") {
 			mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
 		} else {
 			mealsArray = NSMutableArray()
 		}
 		for object in mealsArray! {
-			let meal = object["insulin"] as! NSString
+			let meal = object["insulin"] as! String
 
-			let doubleValue = CGFloat(meal.doubleValue)
-			sampleInsulin.append(doubleValue)
+            print("Insulin \(object["insulin"])")
+			sampleInsulin.append(Double(meal)!)
 		}
 
 		sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
@@ -122,37 +89,54 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 		self.healthStore.executeQuery(query)
 	}
-    
-	func lineGraph(graph: BEMSimpleLineGraphView, labelOnXAxisForIndex index: Int) -> String? {
-		if (graph == insulinChart) {
-			let formatter = NSDateFormatter()
-			formatter.dateFormat = "hh:mm"
-			if (mealsArray != nil && index < mealsArray?.count) {
-				let dateString = formatter.stringFromDate(self.mealsArray![index]["date"] as! NSDate)
+    func configureGraphs(){
+        
+       
+        
+        let timeVals = ["8:00", "12:00", "4:00"];
+        var insulinVals: [BarChartDataEntry] = []
+        var bgVals: [ChartDataEntry] = [ChartDataEntry]()
+        for i in 0..<self.sampleInsulin.count{
+            insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
+        }
+        for i in 0..<self.results.count{
+            let sample = self.results[i];
+            
+            let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
+            bgVals.append(ChartDataEntry(value: doubleValue, xIndex: i))
+            
+        }
+        
+        let chartDataSet = LineChartDataSet(yVals: bgVals, label: "Blood Glucose")
+        chartDataSet.setColor(self.view.tintColor, alpha: 1.0);
+        chartDataSet.axisDependency = .Left
+        
+        chartDataSet.fill = ChartFill(color: UIColor.blackColor())
+        let barChartDataSet = BarChartDataSet(yVals: insulinVals, label: "Insulin Units")
+        barChartDataSet.valueTextColor = UIColor.whiteColor()
+        barChartDataSet.barSpace = 0.25
+        let data: CombinedChartData = CombinedChartData(xVals: timeVals)
+        data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
+        data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
+        data.setValueTextColor(UIColor.whiteColor())
+        insulinChart?.gridBackgroundColor = UIColor.clearColor()
+        insulinChart?.scaleXEnabled = false
+        
+        insulinChart?.scaleYEnabled = false
 
-				return dateString
-			} else {
-				return ""
-			}
-		} else {
-			return ""
-		}
-	}
-	func yAxisSuffixOnLineGraph(graph: BEMSimpleLineGraphView) -> String {
-		if graph == insulinChart {
-			return " units  "
-		} else {
-			return " mg/dL"
-		}
-	}
+        insulinChart?.data = data
+        insulinChart?.xAxis.labelTextColor = UIColor.whiteColor()
+    
+        self.view.reloadInputViews()
+        
+        
+    }
 
 	func objectAlreadyExist(key: String) -> Bool {
 		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
 	}
 
-	func incrementIndexForXAxisOnLineGraph(graph: BEMSimpleLineGraphView) -> Int {
-		return 10
-	}
+
 	override func viewDidAppear(animated: Bool) {
 		self.authorizeHealthKit(nil)
 		self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
@@ -168,9 +152,7 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 
 		super.viewDidAppear(true)
 	}
-	func lineGraph(graph: BEMSimpleLineGraphView, didTouchGraphWithClosestIndex index: Int) {
-		self.tableView?.selectRowAtIndexPath(NSIndexPath.init(forRow: index, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
-	}
+
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
 	}
@@ -178,48 +160,8 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 		openLeft()
 	}
 
-	func popUpSuffixForlineGraph(graph: BEMSimpleLineGraphView) -> String {
-		if graph == insulinChart {
-			return " units"
-		} else {
-			return " mg/Dl"
-		}
-	}
 
-	func noDataLabelTextForLineGraph(graph: BEMSimpleLineGraphView) -> String {
-		if graph == insulinChart {
-			return "No insulin data"
-		} else {
-			return "No blood glucose data"
-		}
-	}
 
-	func lineGraph(graph: BEMSimpleLineGraphView, alwaysDisplayPopUpAtIndex index: CGFloat) -> Bool {
-		return true
-	}
-
-	func determinePoint(bloodGlucoseLevel: Double) -> CGFloat {
-		return CGFloat(bloodGlucoseLevel)
-	}
-	func numberOfPointsInLineGraph(graph: BEMSimpleLineGraphView) -> Int {
-		if graph != insulinChart {
-			return results.count
-		} else {
-			return sampleInsulin.count
-		}
-	}
-	func lineGraph(graph: BEMSimpleLineGraphView, valueForPointAtIndex index: Int) -> CGFloat {
-		if graph != insulinChart {
-
-			let sample = self.results[index];
-
-			let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
-			return determinePoint(doubleValue)
-		} else {
-			print("Sample: \(sampleInsulin[index])")
-			return sampleInsulin[index]
-		}
-	}
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return results.count
 	}
@@ -238,10 +180,11 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 			formatter.dateStyle = .ShortStyle
 			formatter.timeStyle = .ShortStyle
 			if (indexPath.row < self.mealsArray?.count && self.mealsArray != nil) {
-				let xcodeSTOPBREAKING = self.mealsArray![indexPath.row]["date"] as! NSDate
-				let REALLYITSGETTINGOLD = self.mealsArray![indexPath.row]["carbs"] as! String
+                let stopIT = self.mealsArray![indexPath.row];
+				let xcodeSTOPBREAKING = stopIT["date"] as! NSDate
+				let REALLYITSGETTINGOLD = stopIT["carbs"] as! String
 				cell.time?.text = formatter.stringFromDate(xcodeSTOPBREAKING)
-				cell.carbs!.text = "\(REALLYITSGETTINGOLD)\ngrams"
+				cell.carbs!.text = "\(REALLYITSGETTINGOLD)\ncarbs"
 			}
 		} else {
 			cell.insulin?.text = "No data"
@@ -333,8 +276,8 @@ class DashboardViewController: UIViewController, BEMSimpleLineGraphDelegate, BEM
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
 
 					self.tableView!.reloadData()
-					self.insulinChart?.reloadGraph()
-					self.lineChart?.reloadGraph()
+                    self.configureGraphs()
+	
 				})
 			}
 			NSLog("Results %@", self.results)

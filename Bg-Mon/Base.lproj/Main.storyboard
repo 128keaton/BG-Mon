@@ -19,50 +19,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xm-Cp-xHP" customClass="BEMSimpleLineGraphView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-fq-LEv" customClass="CombinedChartView" customModule="Charts">
                                 <rect key="frame" x="0.0" y="64" width="414" height="374"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="sizePoint">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="colorPoint">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="colorTop">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="colorBottom">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-fq-LEv" customClass="BEMSimpleLineGraphView">
-                                <rect key="frame" x="0.0" y="64" width="414" height="374"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="colorTop">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="colorLine">
-                                        <color key="value" red="0.92941182850000004" green="0.36470589040000001" blue="0.392156899" alpha="1" colorSpace="deviceRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="alphaTop">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="alphaBottom">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="colorBottom">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="colorPoint">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="sizePoint">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="IZh-1j-j40">
                                 <rect key="frame" x="0.0" y="438" width="414" height="44"/>
@@ -185,36 +144,36 @@
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="7Eb-Tk-lfk"/>
-                                                    <exclude reference="GO7-8Y-dso"/>
                                                     <exclude reference="FzO-1K-9qa"/>
+                                                    <exclude reference="GO7-8Y-dso"/>
                                                     <exclude reference="BHj-bv-5eL"/>
-                                                    <exclude reference="RhQ-cU-fYF"/>
-                                                    <exclude reference="rhQ-ZM-Xwb"/>
-                                                    <exclude reference="d8T-se-kLc"/>
                                                     <exclude reference="DZX-h5-KZX"/>
+                                                    <exclude reference="RhQ-cU-fYF"/>
+                                                    <exclude reference="d8T-se-kLc"/>
+                                                    <exclude reference="rhQ-ZM-Xwb"/>
+                                                    <exclude reference="4b7-l4-Y0g"/>
                                                     <exclude reference="9ra-XH-CXL"/>
+                                                    <exclude reference="C7S-ha-swE"/>
                                                     <exclude reference="PfZ-mv-j44"/>
+                                                    <exclude reference="VOJ-gb-eks"/>
                                                     <exclude reference="g9z-Xb-C2l"/>
                                                     <exclude reference="kt0-HZ-JVu"/>
                                                     <exclude reference="vU7-5p-gs3"/>
-                                                    <exclude reference="VOJ-gb-eks"/>
-                                                    <exclude reference="C7S-ha-swE"/>
-                                                    <exclude reference="4b7-l4-Y0g"/>
-                                                    <exclude reference="ujJ-H4-Une"/>
-                                                    <exclude reference="fFA-hH-Wu4"/>
+                                                    <exclude reference="7Km-05-14K"/>
+                                                    <exclude reference="I5g-gd-sWz"/>
                                                     <exclude reference="IEk-5D-QEw"/>
                                                     <exclude reference="Job-zr-OZe"/>
                                                     <exclude reference="MAb-Ab-yJV"/>
-                                                    <exclude reference="I5g-gd-sWz"/>
                                                     <exclude reference="Znk-z9-lQk"/>
-                                                    <exclude reference="wWe-rk-Lk2"/>
+                                                    <exclude reference="fFA-hH-Wu4"/>
+                                                    <exclude reference="ujJ-H4-Une"/>
                                                     <exclude reference="wTG-YM-JGt"/>
-                                                    <exclude reference="7Km-05-14K"/>
+                                                    <exclude reference="wWe-rk-Lk2"/>
+                                                    <exclude reference="5Wg-MJ-Qvp"/>
+                                                    <exclude reference="Woa-Yb-lJe"/>
+                                                    <exclude reference="bVi-Ve-m2x"/>
                                                     <exclude reference="wib-dw-YNi"/>
                                                     <exclude reference="xR3-Sd-q58"/>
-                                                    <exclude reference="Woa-Yb-lJe"/>
-                                                    <exclude reference="5Wg-MJ-Qvp"/>
-                                                    <exclude reference="bVi-Ve-m2x"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -236,17 +195,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4xm-Cp-xHP" firstAttribute="trailing" secondItem="p5i-fq-LEv" secondAttribute="trailing" id="Glg-WY-cZq"/>
-                            <constraint firstAttribute="trailing" secondItem="4xm-Cp-xHP" secondAttribute="trailing" id="Rxj-vi-s7s"/>
+                            <constraint firstItem="p5i-fq-LEv" firstAttribute="top" secondItem="lo9-ho-1qM" secondAttribute="bottom" id="MMJ-hD-soK"/>
                             <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="IZh-1j-j40" secondAttribute="leading" id="SHU-Vw-z1M"/>
+                            <constraint firstAttribute="trailing" secondItem="p5i-fq-LEv" secondAttribute="trailing" id="SYT-dc-bMy"/>
+                            <constraint firstItem="p5i-fq-LEv" firstAttribute="trailing" secondItem="IZh-1j-j40" secondAttribute="trailing" id="Thd-0o-45t"/>
                             <constraint firstItem="Msg-Je-6u4" firstAttribute="top" secondItem="IZh-1j-j40" secondAttribute="bottom" id="VgL-kY-qVy"/>
-                            <constraint firstItem="4xm-Cp-xHP" firstAttribute="trailing" secondItem="IZh-1j-j40" secondAttribute="trailing" id="cU8-dJ-eYc"/>
                             <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="eNa-pV-cnr" secondAttribute="leading" id="cxY-jn-6R6"/>
                             <constraint firstItem="IZh-1j-j40" firstAttribute="trailing" secondItem="Msg-Je-6u4" secondAttribute="trailing" id="eOa-o2-GuA"/>
-                            <constraint firstItem="4xm-Cp-xHP" firstAttribute="top" secondItem="p5i-fq-LEv" secondAttribute="top" id="f6c-eM-MXE"/>
-                            <constraint firstItem="IZh-1j-j40" firstAttribute="top" secondItem="4xm-Cp-xHP" secondAttribute="bottom" id="fBP-cz-67e"/>
-                            <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="4xm-Cp-xHP" secondAttribute="leading" id="g4A-5f-dDZ"/>
-                            <constraint firstItem="4xm-Cp-xHP" firstAttribute="top" secondItem="lo9-ho-1qM" secondAttribute="bottom" id="kkZ-yg-0Yo"/>
                             <constraint firstItem="IZh-1j-j40" firstAttribute="top" secondItem="p5i-fq-LEv" secondAttribute="bottom" id="qm7-71-m68"/>
                             <constraint firstItem="IZh-1j-j40" firstAttribute="leading" secondItem="Msg-Je-6u4" secondAttribute="leading" id="sOb-sH-pBg"/>
                             <constraint firstItem="Msg-Je-6u4" firstAttribute="bottom" secondItem="4DY-Ln-2zO" secondAttribute="top" id="vL9-Vt-xyA"/>
@@ -262,8 +217,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="insulinChart" destination="p5i-fq-LEv" id="W1G-ft-WcR"/>
-                        <outlet property="lineChart" destination="4xm-Cp-xHP" id="ko4-Ku-HPw"/>
+                        <outlet property="insulinChart" destination="p5i-fq-LEv" id="4Mn-4m-XXk"/>
                         <outlet property="tableView" destination="Msg-Je-6u4" id="WX2-ji-nuQ"/>
                     </connections>
                 </viewController>
@@ -371,23 +325,6 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h2b-iJ-zvv">
                                                     <rect key="frame" x="8" y="11" width="92" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="mHU-Qf-ewb">
-                                        <rect key="frame" x="0.0" y="260" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mHU-Qf-ewb" id="SOK-7A-SSo">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Llz-ca-s6a">
-                                                    <rect key="frame" x="8" y="11" width="82" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
