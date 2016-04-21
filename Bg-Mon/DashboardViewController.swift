@@ -19,6 +19,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	var preferredUnits = [NSObject: AnyObject]()
 	var healthStore = HKHealthStore()
 
+    @IBOutlet var hourSelector: UISegmentedControl?
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
 
@@ -41,6 +42,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
         self.configureGraphs()
 
         
@@ -101,25 +103,42 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 		self.healthStore.executeQuery(query)
 	}
-    func configureGraphs(){
+    @IBAction func configureForSegment(){
         
+            self.configureGraphs()
+            self.insulinChart?.notifyDataSetChanged()
+    
+    }
+    func configureGraphs(){
+        let serialQueue: dispatch_queue_t = dispatch_queue_create("com.128keaton.refreshQueue", nil)
+        
+        dispatch_sync(serialQueue, { () -> Void in
        
         
-        let timeVals = ["8:00", "12:00", "4:00"];
+      
+    
         var insulinVals: [BarChartDataEntry] = []
         var bgVals: [ChartDataEntry] = [ChartDataEntry]()
         for i in 0..<self.sampleInsulin.count{
-            insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
-        }
-        for i in 0..<self.sampleInsulin.count{
-            let sample = self.results[i];
-            let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
-            let prefUnit = self.preferredUnits[sampleType!]
-            let doubleValue = sample.quantity.doubleValueForUnit(prefUnit as! HKUnit)
-            bgVals.append(ChartDataEntry(value: doubleValue, xIndex: i))
+      
+            let stopIT = self.mealsArray![i];
+            let now = stopIT["date"] as! NSDate
             
+
+            let then = self.getThen()
+            
+            if (now.isBetweeen(date: then, andDate: NSDate())){
+                insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
+                let sample = self.results[i];
+                let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+                let prefUnit = self.preferredUnits[sampleType!]
+                let doubleValue = sample.quantity.doubleValueForUnit(prefUnit as! HKUnit)
+                bgVals.append(ChartDataEntry(value: doubleValue, xIndex: i))
+            }
+           
         }
-        
+     
+        let timeVals = self.getYAxisCount(self.sampleInsulin.count)
         let chartDataSet = LineChartDataSet(yVals: bgVals, label: "Blood Glucose")
         chartDataSet.setColor(self.view.tintColor, alpha: 1.0);
         chartDataSet.axisDependency = .Left
@@ -128,44 +147,76 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let barChartDataSet = BarChartDataSet(yVals: insulinVals, label: "Insulin Units")
         barChartDataSet.valueTextColor = UIColor.whiteColor()
         barChartDataSet.setColor(UIColor.greenColor(), alpha: 1.0)
-        barChartDataSet.barSpace = 0.50
+   
         let data: CombinedChartData = CombinedChartData(xVals: timeVals)
         data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
         data.setValueTextColor(UIColor.whiteColor())
-        insulinChart?.gridBackgroundColor = UIColor.clearColor()
-        insulinChart?.scaleXEnabled = false
+        self.insulinChart?.gridBackgroundColor = UIColor.clearColor()
+        self.insulinChart?.scaleXEnabled = false
         
-        insulinChart!.xAxis.labelPosition = .Bottom
-        insulinChart?.scaleYEnabled = false
+        self.insulinChart!.xAxis.labelPosition = .Bottom
+        self.insulinChart?.scaleYEnabled = false
   
-        insulinChart?.data = data
-        insulinChart?.xAxis.labelTextColor = UIColor.whiteColor()
+        self.insulinChart?.data = data
+        self.insulinChart?.xAxis.labelTextColor = UIColor.whiteColor()
     
         self.view.reloadInputViews()
+             })
         
     
     }
+    func getThen() -> NSDate{
+        switch Int((hourSelector?.selectedSegmentIndex)!) {
+        case 0:
+            return NSDate().dateByAddingTimeInterval(-21600)
+         
+        case 1:
+            return NSDate().dateByAddingTimeInterval(-43200)
+          
+        case 2:
+            return NSDate().dateByAddingTimeInterval(-86400)
+         
+        default:
+            return NSDate()
+        }
+    }
+    func getYAxisCount(count: Int) -> [String]{
 
+        let formatter = NSDateFormatter()
+        formatter.timeStyle = .ShortStyle
+        formatter.dateStyle = .NoStyle
+        var hours: [String] = []
+        for i in 0..<count {
+            hours.append(formatter.stringFromDate(NSDate().dateByAddingTimeInterval(-60*Double(i))))
+        }
+        return hours
+        
+        
+    }
+    
 	func objectAlreadyExist(key: String) -> Bool {
 		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
 	}
 
 
 	override func viewDidAppear(animated: Bool) {
-		self.authorizeHealthKit(nil)
-		self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+		let serialQueue: dispatch_queue_t = dispatch_queue_create("com.128keaton.refreshQueue", nil)
 
-		let query = HKObserverQuery(sampleType: self.sampleType, predicate: nil) { (query, completionHandler, error) -> Void in
-			NSLog("Observer fired for .... %@", query.sampleType!.identifier);
-			if (error == nil) {
-				self.refreshData()
+		dispatch_sync(serialQueue, { () -> Void in
+			self.authorizeHealthKit(nil)
+			self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+
+			let query = HKObserverQuery(sampleType: self.sampleType, predicate: nil) { (query, completionHandler, error) -> Void in
+				NSLog("Observer fired for .... %@", query.sampleType!.identifier);
+				if (error == nil) {
+					self.refreshData()
+				}
+				self.insulinChart?.notifyDataSetChanged()
 			}
-                self.insulinChart?.notifyDataSetChanged()
-		}
 
-		self.healthStore.executeQuery(query)
-
+			self.healthStore.executeQuery(query)
+		})
 		super.viewDidAppear(true)
 	}
 
@@ -272,6 +323,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	}
 
 
+    
 
 	private func refreshData() {
 		NSLog("refreshData......")
@@ -328,3 +380,79 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		self.objects = [carbs, bloodGlucose]
 	}
 }
+
+
+extension NSDate
+{
+    func isBetween(date: NSDate, blackDate: NSDate)-> Bool{
+        if (NSDate().laterDate(date) == NSDate()) && (NSDate().laterDate(blackDate) == blackDate)  {
+            return true
+        }
+        return false
+    }
+    
+    func isBetweeen(date date1: NSDate, andDate date2: NSDate) -> Bool {
+        return date1.compare(self) == self.compare(date2)
+    }
+
+    /**
+     This adds a new method dateAt to NSDate.
+     
+     It returns a new date at the specified hours and minutes of the receiver
+     
+     :param: hours: The hours value
+     :param: minutes: The new minutes
+     
+     :returns: a new NSDate with the same year/month/day as the receiver, but with the specified hours/minutes values
+     */
+    func dateAt(hours: Int, minutes: Int) -> NSDate
+    {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        
+        //get the month/day/year componentsfor today's date.
+        
+        print("Now = \(self)")
+        
+        let date_components = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month,NSCalendarUnit.Day], fromDate: self)
+        
+        //Create an NSDate for 8:00 AM today.
+        date_components.hour = hours
+        date_components.minute = minutes
+        date_components.second = 0
+        
+        let newDate = calendar.dateFromComponents(date_components)!
+        return newDate
+    }
+}
+//-------------------------------------------------------------
+//Tell the system that NSDates can be compared with ==, >, >=, <, and <= operators
+extension NSDate: Comparable {}
+
+//-------------------------------------------------------------
+//Define the global operators for the
+//Equatable and Comparable protocols for comparing NSDates
+
+public func ==(lhs: NSDate, rhs: NSDate) -> Bool
+{
+    return lhs.timeIntervalSince1970 == rhs.timeIntervalSince1970
+}
+
+public func <(lhs: NSDate, rhs: NSDate) -> Bool
+{
+    return lhs.timeIntervalSince1970 < rhs.timeIntervalSince1970
+}
+public func >(lhs: NSDate, rhs: NSDate) -> Bool
+{
+    return lhs.timeIntervalSince1970 > rhs.timeIntervalSince1970
+}
+public func <=(lhs: NSDate, rhs: NSDate) -> Bool
+{
+    return lhs.timeIntervalSince1970 <= rhs.timeIntervalSince1970
+}
+public func >=(lhs: NSDate, rhs: NSDate) -> Bool
+{
+    return lhs.timeIntervalSince1970 >= rhs.timeIntervalSince1970
+}
+//-------------------------------------------------------------
+
+

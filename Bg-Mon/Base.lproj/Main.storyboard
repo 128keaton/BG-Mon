@@ -192,7 +192,7 @@
                                     <outlet property="delegate" destination="PLj-F4-KPK" id="qRn-xM-nRS"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rSc-rK-ufO">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rSc-rK-ufO">
                                 <rect key="frame" x="82" y="72" width="250" height="29"/>
                                 <segments>
                                     <segment title="Six Hours"/>
@@ -200,6 +200,9 @@
                                     <segment title="24 Hours"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="configureForSegment" destination="PLj-F4-KPK" eventType="valueChanged" id="PJS-Zy-hzB"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -229,6 +232,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="hourSelector" destination="rSc-rK-ufO" id="Six-CX-NhD"/>
                         <outlet property="insulinChart" destination="p5i-fq-LEv" id="4Mn-4m-XXk"/>
                         <outlet property="tableView" destination="Msg-Je-6u4" id="WX2-ji-nuQ"/>
                     </connections>
