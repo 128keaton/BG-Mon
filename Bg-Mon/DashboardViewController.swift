@@ -27,6 +27,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	@IBOutlet var lineChart: LineChartView?
 	@IBOutlet weak var insulinChart: CombinedChartView?
 
+    
 	private var results = [HKQuantitySample]()
 	var sampleInsulin = [Double]()
 	let effect = UIBlurEffect(style: .Dark)
@@ -55,6 +56,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         insulinChart!.pinchZoomEnabled = false
         insulinChart!.drawGridBackgroundEnabled = true
         insulinChart!.drawBordersEnabled = false
+        insulinChart?.gridBackgroundColor = UIColor.clearColor()
+        
+        let backgroundView = UIView(frame: view.bounds)
+        backgroundView.autoresizingMask = resizingMask
+        backgroundView.addSubview(self.buildImageView())
+        backgroundView.addSubview(self.buildBlurView())
+        
+        self.view.addSubview(backgroundView)
+        
+        tableView!.backgroundView = backgroundView
+        tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
         
 		if objectAlreadyExist("meals") {
 			mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
@@ -99,10 +111,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         for i in 0..<self.sampleInsulin.count{
             insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
         }
-        for i in 0..<self.results.count{
+        for i in 0..<self.sampleInsulin.count{
             let sample = self.results[i];
-            
-            let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
+            let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+            let prefUnit = self.preferredUnits[sampleType!]
+            let doubleValue = sample.quantity.doubleValueForUnit(prefUnit as! HKUnit)
             bgVals.append(ChartDataEntry(value: doubleValue, xIndex: i))
             
         }
@@ -110,11 +123,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let chartDataSet = LineChartDataSet(yVals: bgVals, label: "Blood Glucose")
         chartDataSet.setColor(self.view.tintColor, alpha: 1.0);
         chartDataSet.axisDependency = .Left
-        
-        chartDataSet.fill = ChartFill(color: UIColor.blackColor())
+        chartDataSet.drawCubicEnabled = true
+        chartDataSet.fill = ChartFill(color: UIColor.clearColor())
         let barChartDataSet = BarChartDataSet(yVals: insulinVals, label: "Insulin Units")
         barChartDataSet.valueTextColor = UIColor.whiteColor()
-        barChartDataSet.barSpace = 0.25
+        barChartDataSet.setColor(UIColor.greenColor(), alpha: 1.0)
+        barChartDataSet.barSpace = 0.50
         let data: CombinedChartData = CombinedChartData(xVals: timeVals)
         data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
@@ -122,14 +136,15 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         insulinChart?.gridBackgroundColor = UIColor.clearColor()
         insulinChart?.scaleXEnabled = false
         
+        insulinChart!.xAxis.labelPosition = .Bottom
         insulinChart?.scaleYEnabled = false
-
+  
         insulinChart?.data = data
         insulinChart?.xAxis.labelTextColor = UIColor.whiteColor()
     
         self.view.reloadInputViews()
         
-        
+    
     }
 
 	func objectAlreadyExist(key: String) -> Bool {
@@ -146,6 +161,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 			if (error == nil) {
 				self.refreshData()
 			}
+                self.insulinChart?.notifyDataSetChanged()
 		}
 
 		self.healthStore.executeQuery(query)
@@ -161,6 +177,20 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	}
 
 
+    func buildImageView() -> UIImageView {
+        let imageView = UIImageView(image: UIImage(named: "pattern.jpg"))
+        imageView.frame = view.bounds
+        imageView.autoresizingMask = resizingMask
+        return imageView
+    }
+    
+    func buildBlurView() -> UIVisualEffectView {
+        let blurView = UIVisualEffectView(effect: effect)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = resizingMask
+        return blurView
+    }
+    
 
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return results.count
@@ -241,19 +271,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		return cell
 	}
 
-	func buildImageView() -> UIImageView {
-		let imageView = UIImageView(image: UIImage(named: "bananas.jpg"))
-		imageView.frame = view.bounds
-		imageView.autoresizingMask = resizingMask
-		return imageView
-	}
 
-	func buildBlurView() -> UIVisualEffectView {
-		let blurView = UIVisualEffectView(effect: effect)
-		blurView.frame = view.bounds
-		blurView.autoresizingMask = resizingMask
-		return blurView
-	}
 
 	private func refreshData() {
 		NSLog("refreshData......")
@@ -276,11 +294,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
 
 					self.tableView!.reloadData()
+                    self.insulinChart?.notifyDataSetChanged()
                     self.configureGraphs()
 	
 				})
 			}
-			NSLog("Results %@", self.results)
+		
 		}
 
 		self.healthStore.executeQuery(query)

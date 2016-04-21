@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Bg-Mon/BTNavigationDropdownMenu.framework"
+  install_framework "Pods-Bg-Mon/Charts.framework"
   install_framework "Pods-Bg-Mon/MBProgressHUD.framework"
   install_framework "Pods-Bg-Mon/Notie.framework"
   install_framework "Pods-Bg-Mon/SkyFloatingLabelTextField.framework"
@@ -93,6 +94,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Bg-Mon/BTNavigationDropdownMenu.framework"
+  install_framework "Pods-Bg-Mon/Charts.framework"
   install_framework "Pods-Bg-Mon/MBProgressHUD.framework"
   install_framework "Pods-Bg-Mon/Notie.framework"
   install_framework "Pods-Bg-Mon/SkyFloatingLabelTextField.framework"
