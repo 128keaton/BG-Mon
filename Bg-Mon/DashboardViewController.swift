@@ -53,13 +53,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         insulinChart!.drawBarShadowEnabled = false
         insulinChart!.drawValueAboveBarEnabled = true
-        
+
         insulinChart!.maxVisibleValueCount = 60
         insulinChart!.pinchZoomEnabled = false
         insulinChart!.drawGridBackgroundEnabled = true
         insulinChart!.drawBordersEnabled = false
         insulinChart?.gridBackgroundColor = UIColor.clearColor()
-        
+        insulinChart!.maxVisibleValueCount = 15
         let backgroundView = UIView(frame: view.bounds)
         backgroundView.autoresizingMask = resizingMask
         backgroundView.addSubview(self.buildImageView())
@@ -78,8 +78,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		for object in mealsArray! {
 			let meal = object["insulin"] as! String
 
-            print("Insulin \(object["insulin"])")
-			sampleInsulin.append(Double(meal)!)
+                sampleInsulin.append(Double(meal)!)
 		}
 
 		sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
@@ -105,8 +104,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	}
     @IBAction func configureForSegment(){
         
-            self.configureGraphs()
-            self.insulinChart?.notifyDataSetChanged()
+            self.refreshData()
     
     }
     func configureGraphs(){
@@ -178,7 +176,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             return NSDate().dateByAddingTimeInterval(-86400)
          
         default:
-            return NSDate()
+            return NSDate().dateByAddingTimeInterval(-21600)
         }
     }
     func getYAxisCount(count: Int) -> [String]{
@@ -190,6 +188,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         for i in 0..<count {
             hours.append(formatter.stringFromDate(NSDate().dateByAddingTimeInterval(-60*Double(i))))
         }
+       // insulinChart?.scaleY = CGFloat(count)
         return hours
         
         
@@ -344,7 +343,18 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 				}
       
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-
+                    if self.objectAlreadyExist("meals") {
+                        self.mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
+                    } else {
+                        self.mealsArray = NSMutableArray()
+                    }
+                    self.sampleInsulin.removeAll()
+                    for object in self.mealsArray! {
+                        let meal = object["insulin"] as! String
+                        
+       
+                        self.sampleInsulin.append(Double(meal)!)
+                    }
 					self.tableView!.reloadData()
                     self.insulinChart?.notifyDataSetChanged()
                     self.configureGraphs()

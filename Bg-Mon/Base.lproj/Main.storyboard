@@ -201,7 +201,7 @@
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="configureForSegment" destination="PLj-F4-KPK" eventType="valueChanged" id="PJS-Zy-hzB"/>
+                                    <action selector="configureForSegment" destination="PLj-F4-KPK" eventType="valueChanged" id="cSG-WF-WHC"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
