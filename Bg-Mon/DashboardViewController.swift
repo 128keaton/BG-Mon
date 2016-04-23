@@ -53,7 +53,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         insulinChart!.drawBarShadowEnabled = false
         insulinChart!.drawValueAboveBarEnabled = true
-
+        insulinChart?.scaleXEnabled = true
+        insulinChart?.scaleYEnabled = true
         insulinChart!.maxVisibleValueCount = 60
         insulinChart!.pinchZoomEnabled = false
         insulinChart!.drawGridBackgroundEnabled = true
@@ -151,10 +152,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
         data.setValueTextColor(UIColor.whiteColor())
         self.insulinChart?.gridBackgroundColor = UIColor.clearColor()
-        self.insulinChart?.scaleXEnabled = false
+        self.insulinChart?.legend.textColor = UIColor.whiteColor()
         
         self.insulinChart!.xAxis.labelPosition = .Bottom
-        self.insulinChart?.scaleYEnabled = false
+        self.insulinChart!.animate(xAxisDuration: 0.5, yAxisDuration: 1.0)
+
   
         self.insulinChart?.data = data
         self.insulinChart?.xAxis.labelTextColor = UIColor.whiteColor()
@@ -247,47 +249,51 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	}
 
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = self.tableView?.dequeueReusableCellWithIdentifier("cell") as! MealCell
-		let sample = self.results[indexPath.row];
 
-		let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
-
-		cell.bloodGlucose!.text = "\(doubleValue)\nmg/dL"
-		if indexPath.row < self.sampleInsulin.count {
-            let integer = Int(self.sampleInsulin[indexPath.row])
-			cell.insulin?.text = "\(integer)\nunits"
-			let formatter = NSDateFormatter()
-			formatter.dateStyle = .ShortStyle
-			formatter.timeStyle = .ShortStyle
-			if (indexPath.row < self.mealsArray?.count && self.mealsArray != nil) {
-                let stopIT = self.mealsArray![indexPath.row];
-				let xcodeSTOPBREAKING = stopIT["date"] as! NSDate
-				let REALLYITSGETTINGOLD = stopIT["carbs"] as! String
-				cell.time?.text = formatter.stringFromDate(xcodeSTOPBREAKING)
-				cell.carbs!.text = "\(REALLYITSGETTINGOLD)\ncarbs"
-			}
-		} else {
-			cell.insulin?.text = "No data"
-		}
-        cell.bloodGlucose?.layer.cornerRadius = 5
-        cell.bloodGlucose?.clipsToBounds = true
-        cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
-        cell.bloodGlucose?.textColor = UIColor.blackColor()
-        
-        cell.carbs?.layer.cornerRadius = 5
-        cell.carbs?.clipsToBounds = true
-        cell.carbs?.backgroundColor = self.view.tintColor
-        
-        cell.insulin?.layer.cornerRadius = 5
-        cell.insulin?.clipsToBounds = true
-        cell.insulin?.backgroundColor = UIColor.greenColor()
-        
-		cell.time?.textColor = UIColor.whiteColor()
-		cell.time?.clipsToBounds = true
-		cell.time?.layer.cornerRadius = 5
-		cell.backgroundColor = UIColor.clearColor()
-		cell.contentView.backgroundColor = UIColor.clearColor()
 		if (indexPath.row < mealsArray?.count) {
+            let cell = self.tableView?.dequeueReusableCellWithIdentifier("cell") as! MealCell
+            let sample = self.results[indexPath.row];
+            
+            let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
+            
+            cell.bloodGlucose!.text = "\(doubleValue)\nmg/dL"
+            if indexPath.row < self.sampleInsulin.count {
+                let integer = Int(self.sampleInsulin[indexPath.row])
+                cell.insulin?.text = "\(integer)\nunits"
+                let formatter = NSDateFormatter()
+                formatter.dateStyle = .ShortStyle
+                formatter.timeStyle = .ShortStyle
+                if (indexPath.row < self.mealsArray?.count && self.mealsArray != nil) {
+                    let stopIT = self.mealsArray![indexPath.row];
+                    let xcodeSTOPBREAKING = stopIT["date"] as! NSDate
+                    let REALLYITSGETTINGOLD = stopIT["carbs"] as! String
+                    cell.time?.text = formatter.stringFromDate(xcodeSTOPBREAKING)
+                    cell.carbs!.text = "\(REALLYITSGETTINGOLD)\ncarbs"
+                }
+            } else {
+                cell.insulin?.text = "No data"
+            }
+            cell.bloodGlucose?.layer.cornerRadius = 5
+            cell.bloodGlucose?.clipsToBounds = true
+            cell.bloodGlucose?.backgroundColor = self.view.tintColor
+            cell.bloodGlucose?.textColor = UIColor.whiteColor()
+            
+            cell.carbs?.textColor = UIColor.blackColor()
+            cell.carbs?.layer.cornerRadius = 5
+            cell.carbs?.clipsToBounds = true
+            cell.carbs?.backgroundColor = UIColor.whiteColor()
+            
+            cell.insulin?.layer.cornerRadius = 5
+            
+            cell.insulin?.clipsToBounds = true
+            cell.insulin?.backgroundColor = UIColor.greenColor()
+            
+            cell.time?.textColor = UIColor.whiteColor()
+            cell.time?.clipsToBounds = true
+            cell.time?.layer.cornerRadius = 5
+            cell.backgroundColor = UIColor.clearColor()
+            cell.contentView.backgroundColor = UIColor.clearColor()
+            
 			let type = mealsArray![indexPath.row]["type"] as! String
 			if (type == "Full Meal") {
 				cell.mealType?.image = UIImage.init(named: "Meal.png")
@@ -300,25 +306,38 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             cell.carbLabel?.hidden = false
             cell.carbs?.hidden = false
             cell.insulin?.hidden = false
+            return cell
         }else{
+            let cell = self.tableView?.dequeueReusableCellWithIdentifier("healthkit") as! HealthKitCell
+            let sample = self.results[indexPath.row];
+            
+            let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
+            
+            cell.bloodGlucose!.text = "\(doubleValue)\nmg/dL"
+            cell.bloodGlucose?.layer.cornerRadius = 5
+            cell.bloodGlucose?.clipsToBounds = true
+            cell.bloodGlucose?.backgroundColor = self.view.tintColor
+            cell.bloodGlucose?.textColor = UIColor.whiteColor()
+            
+            
+            cell.time?.textColor = UIColor.whiteColor()
+            cell.time?.clipsToBounds = true
+            cell.time?.layer.cornerRadius = 5
+            cell.backgroundColor = UIColor.clearColor()
+            cell.contentView.backgroundColor = UIColor.clearColor()
+            
             cell.mealType?.image = UIImage.init(named: "HealthKit_iOS_8_icon.png")
-            cell.type?.text = "Fetched from Health"
-            cell.carbs?.text = "No data"
             let formatter = NSDateFormatter()
             formatter.dateFormat = "MM/dd/yy"
             formatter.timeStyle = .ShortStyle
+            formatter.dateStyle = .ShortStyle
             cell.time?.text = formatter.stringFromDate(self.results[indexPath.row].startDate)
-            cell.insulinLabel?.hidden = true
-            cell.carbLabel?.hidden = true
-            cell.carbs?.hidden = true
-            cell.insulin?.hidden = true
             
             cell.bloodGlucose?.autoresizingMask = .FlexibleWidth
             cell.bloodGlucose?.center = cell.center
-         
+            return cell
         }
 
-		return cell
 	}
 
 

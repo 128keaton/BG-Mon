@@ -30,6 +30,16 @@ class MealCell: UITableViewCell {
     
     
 }
+class HealthKitCell: UITableViewCell{
+    @IBOutlet weak var bloodGlucose: UILabel?
+
+    @IBOutlet weak var time: UILabel?
+
+    @IBOutlet weak var mealType: UIImageView?
+    
+    
+
+}
 class CorrectionCell: UITableViewCell {
 	@IBOutlet weak var insulin: UITextField?
 
