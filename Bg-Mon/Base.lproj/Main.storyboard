@@ -312,6 +312,12 @@
                                 <action selector="openMenu" destination="PLj-F4-KPK" id="gQX-QO-b2t"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2kJ-nl-rRm">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="addMeal" destination="PLj-F4-KPK" id="ndR-79-j5z"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Charts
 import HealthKit
+import BTNavigationDropdownMenu
 
 let healthKitStore: HKHealthStore = HKHealthStore()
 
@@ -19,6 +20,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	var preferredUnits = [NSObject: AnyObject]()
 	var healthStore = HKHealthStore()
 
+    var menuView: BTNavigationDropdownMenu?
+    var nav: UINavigationController?
+    
     @IBOutlet var hourSelector: UISegmentedControl?
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
@@ -28,6 +32,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	@IBOutlet var lineChart: LineChartView?
 	@IBOutlet weak var insulinChart: CombinedChartView?
 
+    var addViewController: AddMeal?
+    
     
 	private var results = [HKQuantitySample]()
 	var sampleInsulin = [Double]()
@@ -46,6 +52,54 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         self.configureGraphs()
 
         
+        let items = ["Add Meal", "Add Correction", "Add Slow Release"]
+        if let navigationController = navigationController {
+            nav = navigationController
+        } else {
+            nav = UIApplication.sharedApplication().keyWindow?.rootViewController?.parentViewController?.navigationController
+        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let addViewControllerNavigation = storyboard.instantiateViewControllerWithIdentifier("AddMeal") as! UINavigationController
+        self.addViewController = addViewControllerNavigation.viewControllers[0] as? AddMeal
+        
+        menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
+        menuView?.cellSeparatorColor = UIColor.clearColor()
+        menuView?.cellTextLabelAlignment = NSTextAlignment.Center
+        menuView?.cellBackgroundColor = UIColor.blackColor()
+        menuView?.cellTextLabelColor = UIColor.whiteColor()
+        self.tableView!.backgroundColor = UIColor.blackColor()
+        menuView?.checkMarkImage = nil
+        menuView?.cellHeight = 100
+        menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
+
+            var configType: AddMeal.AddType?
+            
+            switch indexPath {
+            case 0:
+                configType = AddMeal.AddType.Meal
+                print(configType)
+            case 1:
+                configType = AddMeal.AddType.Correction
+                print(configType)
+                
+            case 2:
+                configType = AddMeal.AddType.LongLasting
+                
+                print(configType)
+            default:
+                print("Did select item at index: \(indexPath)")
+            }
+            NSUserDefaults.standardUserDefaults().setObject(configType?.rawValue, forKey: "configType")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            self.navigationController!.presentViewController(addViewControllerNavigation, animated: true, completion: nil)
+            
+            
+            
+            configType = nil
+            self.addViewController = nil
+        }
+
         insulinChart!.delegate = self;
         
         insulinChart!.descriptionText = "";
@@ -108,6 +162,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             self.refreshData()
     
     }
+    @IBAction func addMeal() {
+        menuView?.show()
+    }
+    
     func configureGraphs(){
         let serialQueue: dispatch_queue_t = dispatch_queue_create("com.128keaton.refreshQueue", nil)
         
@@ -222,6 +280,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	}
 
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        insulinChart?.highlightValue(ChartHighlight.init(xIndex: indexPath.row, dataSetIndex: 0))
 		self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	@IBAction func openMenu() {
@@ -341,8 +400,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	}
 
 
-    
-
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        let row = entry.xIndex
+       self.tableView?.selectRowAtIndexPath(NSIndexPath.init(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
+    }
 	private func refreshData() {
 		NSLog("refreshData......")
 		let timeSortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
