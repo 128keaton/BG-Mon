@@ -146,7 +146,7 @@
 		8A45D8321CB337E6007558B4 = {
 			isa = PBXGroup;
 			children = (
-				8A45D83D1CB337E6007558B4 /* Bg-Mon */,
+				8A45D83D1CB337E6007558B4 /* Logglu */,
 				8A45D8551CB337E6007558B4 /* Bg-MonTests */,
 				8A45D8601CB337E6007558B4 /* Bg-MonUITests */,
 				8A45D83C1CB337E6007558B4 /* Products */,
@@ -165,7 +165,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8A45D83D1CB337E6007558B4 /* Bg-Mon */ = {
+		8A45D83D1CB337E6007558B4 /* Logglu */ = {
 			isa = PBXGroup;
 			children = (
 				8A9650D61CB8BDED00A86BE5 /* Meal.png */,
@@ -191,6 +191,7 @@
 				8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */,
 				8AE61E681CC812EA00865ACA /* Charts.xcodeproj */,
 			);
+			name = Logglu;
 			path = "Bg-Mon";
 			sourceTree = "<group>";
 		};
