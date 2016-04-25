@@ -342,9 +342,9 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 
 
         var prefUnit: HKUnit?
-        
+         var prefUnitCarbs: HKUnit?
         let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
-        
+        let sampleTypeCarbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
 
 		let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
 		let bloodGlucose = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
@@ -359,18 +359,20 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 					if (error == nil) {
 						NSLog("...preferred unts %@", preferredUnits)
 						prefUnit = preferredUnits[sampleType!]
+                        prefUnitCarbs = preferredUnits[sampleTypeCarbs!]
 						let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
 
 						let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
                         
-                        let quantityCarbs = HKQuantity(unit: prefUnit!, doubleValue: carbAmount)
+                        let quantityCarbs = HKQuantity(unit: prefUnitCarbs!, doubleValue: carbAmount)
                         
-                        let quantitySampleCarbs = HKQuantitySample(type: sampleType!, quantity: quantityCarbs, startDate: NSDate(), endDate: NSDate())
+                        let quantitySampleCarbs = HKQuantitySample(type: sampleTypeCarbs!, quantity: quantityCarbs, startDate: NSDate(), endDate: NSDate())
 
 						self.healthStore.saveObjects([quantitySample, quantitySampleCarbs]) { (success, error) -> Void in
 							if (success) {
 								NSLog("Saved blood glucose level")
 							}
+                            print("Blood glucose: \(bloodGlucoseLevel)")
 						}
 					}
 				})
@@ -396,7 +398,7 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         }
         
         
-        if(self.carbCell != nil && self.configurationType == "Full Meal") {
+        if(self.carbCell != nil && self.configurationType == "Full Meal" && self.bloodGlucoseCell != nil) {
            self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbAmount: Double((self.carbCell?.carbs?.text)!)!)
         }else{
             self.uploadToHealthKit(Double((self.bloodGlucoseCell?.bloodGlucose?.text)!)!, carbAmount: Double((0)))

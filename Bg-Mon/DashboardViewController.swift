@@ -176,7 +176,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
         var insulinVals: [BarChartDataEntry] = []
         var bgVals: [ChartDataEntry] = [ChartDataEntry]()
-        let reversedInsulin = Array(self.sampleInsulin.reverse())
+
         for i in 0..<self.sampleInsulin.count{
       
             let stopIT = self.mealsArray![i];
@@ -186,7 +186,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             let then = self.getThen()
             
             if (now.isBetweeen(date: then, andDate: NSDate())){
-                insulinVals.append(BarChartDataEntry(value: reversedInsulin[i], xIndex: i))
+                if(self.sampleInsulin[i] < 400){
+                    
+                }
+                insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
                 let sample = self.results[i];
                 let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
                 let prefUnit = self.preferredUnits[sampleType!]
@@ -314,9 +317,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             let cell = self.tableView?.dequeueReusableCellWithIdentifier("cell") as! MealCell
             let sample = self.results[indexPath.row];
             
-            let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
-            
-            cell.bloodGlucose!.text = "\(doubleValue)\nmg/dL"
             if indexPath.row < self.sampleInsulin.count {
                 let integer = Int(self.sampleInsulin[indexPath.row])
                 cell.insulin?.text = "\(integer)\nunits"
@@ -337,6 +337,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             cell.bloodGlucose?.clipsToBounds = true
             cell.bloodGlucose?.backgroundColor = self.view.tintColor
             cell.bloodGlucose?.textColor = UIColor.whiteColor()
+            
+            let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
+            
+            cell.bloodGlucose!.text = "\(doubleValue)\nmg/dL"
+
+            
             
             cell.carbs?.textColor = UIColor.blackColor()
             cell.carbs?.layer.cornerRadius = 5
