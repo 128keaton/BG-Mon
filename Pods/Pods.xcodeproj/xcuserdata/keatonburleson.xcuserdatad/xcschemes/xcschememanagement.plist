@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>BEMSimpleLineGraph.xcscheme</key>
+		<key>BTNavigationDropdownMenu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BTNavigationDropdownMenu.xcscheme</key>
+		<key>Charts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,12 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>78DD729E6F6BE3C1326232CD5DFFFBB7</key>
+		<key>0D24F22CE22D8B7963B4AD0361CB0B1A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>89C86520A9EB4B32AE757573202DAE37</key>
+		<key>51B22FCD184B5B2CADDFEFAE38AD6365</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,22 +62,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BBE205D1CCE2BA598DF397F3C1BD122B</key>
+		<key>C6828C2508515BC0428D6BDAA1292DC9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E260FB021D5AC6F85A06A6FDE29A7B47</key>
+		<key>DE5AD7851EA531896AF51F56A796C802</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DE8E494C0F43603B8B4CDACADFBFD837</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EC2E3C369CBA8361A17595B000627792</key>
 		<dict>
 			<key>primary</key>
 			<true/>
