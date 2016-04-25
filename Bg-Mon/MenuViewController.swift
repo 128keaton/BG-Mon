@@ -31,13 +31,14 @@ class MenuViewController: UITableViewController {
         
         
         let image = profileImage?.image
-        let colors = image!.getColors()
-        profileView?.backgroundColor = colors.backgroundColor
-        profileLabel?.textColor = colors.primaryColor
-        profileImage?.layer.cornerRadius = (profileImage?.bounds.width)! / 2
-        profileImage?.layer.borderWidth = 2
-        profileImage?.layer.borderColor = colors.detailColor.CGColor
-        profileImage?.clipsToBounds = true
+		image!.getColors({ (colors) in
+			self.profileView?.backgroundColor = colors.backgroundColor
+			self.profileLabel?.textColor = colors.primaryColor
+			self.profileImage?.layer.cornerRadius = (self.profileImage?.bounds.width)! / 2
+			self.profileImage?.layer.borderWidth = 2
+			self.profileImage?.layer.borderColor = colors.detailColor.CGColor
+			self.profileImage?.clipsToBounds = true
+		})
         
        
         if objectAlreadyExist("profile-name") {
@@ -64,10 +65,12 @@ class MenuViewController: UITableViewController {
             profileImage?.image = UIImage.init(data: fetchImage("profile-pic"))
         }
         let image = profileImage?.image
-        let colors = image!.getColors()
-        profileView?.backgroundColor = colors.backgroundColor
-        profileLabel?.textColor = colors.primaryColor
-        profileImage?.layer.borderColor = colors.detailColor.CGColor
+        image!.getColors({ (colors) in
+            self.profileView?.backgroundColor = colors.backgroundColor
+            self.profileLabel?.textColor = colors.primaryColor
+            self.profileImage?.layer.borderColor = colors.detailColor.CGColor
+        })
+
         if objectAlreadyExist("profile-name") {
             profileLabel?.text = fetchUsername("profile-name") as String
         }
