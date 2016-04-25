@@ -10,6 +10,7 @@
 		8A1EA89A1CB7058200343019 /* pattern.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA8991CB7058200343019 /* pattern.jpg */; };
 		8A1EA89C1CB7085A00343019 /* pattern2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA89B1CB7085A00343019 /* pattern2.png */; };
 		8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA89D1CB7092100343019 /* bananas.jpg */; };
+		8A25C6131CCE78D300B50B4E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 8A25C6121CCE78D300B50B4E /* README.md */; };
 		8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D83E1CB337E6007558B4 /* AppDelegate.swift */; };
 		8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8421CB337E6007558B4 /* Main.storyboard */; };
 		8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */; };
@@ -53,6 +54,7 @@
 		8A1EA8991CB7058200343019 /* pattern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pattern.jpg; sourceTree = "<group>"; };
 		8A1EA89B1CB7085A00343019 /* pattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern2.png; sourceTree = "<group>"; };
 		8A1EA89D1CB7092100343019 /* bananas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bananas.jpg; sourceTree = "<group>"; };
+		8A25C6121CCE78D300B50B4E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8A2C1A851CC8116700159962 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Bg-Mon-dtwmpflrjllmhdcvtsjxdsjoeavc/Build/Products/Debug-iphoneos/Charts.framework"; sourceTree = "<group>"; };
 		8A45D83B1CB337E6007558B4 /* Logglu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logglu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D83E1CB337E6007558B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		8A45D83D1CB337E6007558B4 /* Logglu */ = {
 			isa = PBXGroup;
 			children = (
+				8A25C6121CCE78D300B50B4E /* README.md */,
 				8A9650D61CB8BDED00A86BE5 /* Meal.png */,
 				8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */,
 				8A9650DC1CB8C1F500A86BE5 /* 24H.png */,
@@ -401,6 +404,7 @@
 			files = (
 				8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */,
 				8AB1BE2E1CB5F5ED00A291E7 /* SuccessViewController.swift in Sources */,
+				8A25C6131CCE78D300B50B4E /* README.md in Sources */,
 				8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */,
 				8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */,
 				8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */,
