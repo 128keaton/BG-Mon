@@ -332,7 +332,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8A45D8361CB337E6007558B4 /* Build configuration list for PBXProject "Bg-Mon" */;
+			buildConfigurationList = 8A45D8361CB337E6007558B4 /* Build configuration list for PBXProject "Logglu" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -701,7 +701,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8A45D8361CB337E6007558B4 /* Build configuration list for PBXProject "Bg-Mon" */ = {
+		8A45D8361CB337E6007558B4 /* Build configuration list for PBXProject "Logglu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8A45D8641CB337E6007558B4 /* Debug */,

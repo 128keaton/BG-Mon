@@ -218,6 +218,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
         data.setValueTextColor(UIColor.whiteColor())
         self.insulinChart?.gridBackgroundColor = UIColor.blackColor()
+        self.insulinChart?.backgroundColor = UIColor.blackColor()
+        
         self.insulinChart?.legend.textColor = UIColor.whiteColor()
         
         self.insulinChart!.xAxis.labelPosition = .Bottom
@@ -486,8 +488,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 
     @IBAction func export(){
-        let alertController = UIAlertController.init(title: "", message: "", preferredStyle: .ActionSheet)
-        let export = UIAlertAction.init(title: "Export to CSV", style: .Default, handler: { (action) in
+        let alertController = UIAlertController.init(title: "Export?", message: "", preferredStyle: .ActionSheet)
+        let export = UIAlertAction.init(title: "CSV File", style: .Default, handler: { (action) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
             let writeString = NSMutableString.init(capacity: 0)
             let formatter = NSDateFormatter.init()
@@ -504,7 +506,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
         })
         
-        let snapshot = UIAlertAction.init(title: "Export Snapshot", style: .Default, handler: { (action) in
+        let snapshot = UIAlertAction.init(title: "Snapshot", style: .Default, handler: { (action) in
             self.insulinChart?.saveToCameraRoll()
             _ = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(DashboardViewController.findandSendImage), userInfo: nil, repeats: false)
         
@@ -526,8 +528,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients(["keaton.burleson@me.com"])
-            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+            mail.setToRecipients(["keaton.burleson@me.com"]) //TODO doctor :)
+            mail.setSubject("Insulin and Blood Glucose Graph \(NSDate())")
             if options["csv"] as! Bool != false {
                 mail.addAttachmentData(csv, mimeType: "text/csv", fileName: "Data \(NSDate()).csv")
             }
