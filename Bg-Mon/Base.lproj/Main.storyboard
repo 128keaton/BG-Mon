@@ -10,7 +10,7 @@
         <!--Dashboard-->
         <scene sceneID="L8O-ri-9Kg">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="PLj-F4-KPK" customClass="DashboardViewController" customModule="Bg_Mon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="PLj-F4-KPK" customClass="DashboardViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lo9-ho-1qM"/>
                         <viewControllerLayoutGuide type="bottom" id="4DY-Ln-2zO"/>
@@ -26,7 +26,14 @@
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="IZh-1j-j40">
                                 <rect key="frame" x="0.0" y="438" width="414" height="44"/>
                                 <items>
-                                    <navigationItem title="Data" id="aGD-kn-Y8J"/>
+                                    <navigationItem title="Data" id="aGD-kn-Y8J">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="N0E-2P-pGr">
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="export" destination="PLj-F4-KPK" id="uMO-i4-qaS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Msg-Je-6u4">
@@ -36,7 +43,7 @@
                                     <constraint firstAttribute="height" constant="254" id="j0m-RM-0XR"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="diR-yu-M0D" customClass="MealCell" customModule="Bg_Mon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="diR-yu-M0D" customClass="MealCell" customModule="Logglu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="diR-yu-M0D" id="7Lm-1P-hmm">
@@ -143,37 +150,37 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="jFE-7V-6tk"/>
                                                     <exclude reference="Yeo-br-ads"/>
+                                                    <exclude reference="jFE-7V-6tk"/>
                                                     <exclude reference="qzl-lc-v1K"/>
-                                                    <exclude reference="tki-x3-IZm"/>
                                                     <exclude reference="dFm-Qv-cTi"/>
-                                                    <exclude reference="zVW-Qp-scP"/>
                                                     <exclude reference="oDC-RC-aTx"/>
+                                                    <exclude reference="tki-x3-IZm"/>
                                                     <exclude reference="xef-LB-D2j"/>
+                                                    <exclude reference="zVW-Qp-scP"/>
+                                                    <exclude reference="2X0-zc-GNa"/>
                                                     <exclude reference="3KF-tg-Hwr"/>
-                                                    <exclude reference="ban-Yi-gIi"/>
+                                                    <exclude reference="DHy-oJ-r6C"/>
                                                     <exclude reference="M0p-sw-yUD"/>
                                                     <exclude reference="NKk-OR-enp"/>
-                                                    <exclude reference="tkd-oT-lQC"/>
-                                                    <exclude reference="2X0-zc-GNa"/>
+                                                    <exclude reference="ban-Yi-gIi"/>
                                                     <exclude reference="sj4-yT-SvO"/>
-                                                    <exclude reference="DHy-oJ-r6C"/>
-                                                    <exclude reference="qNT-nm-HJ8"/>
-                                                    <exclude reference="WW3-CY-VYC"/>
+                                                    <exclude reference="tkd-oT-lQC"/>
                                                     <exclude reference="4k5-Ci-sCg"/>
-                                                    <exclude reference="wEL-Uw-7gv"/>
+                                                    <exclude reference="SFk-yz-iGB"/>
+                                                    <exclude reference="SfZ-xS-tuv"/>
+                                                    <exclude reference="WW3-CY-VYC"/>
+                                                    <exclude reference="bqP-H9-N8J"/>
                                                     <exclude reference="kqE-Et-qfz"/>
                                                     <exclude reference="mqx-TI-WYM"/>
+                                                    <exclude reference="qNT-nm-HJ8"/>
+                                                    <exclude reference="wEL-Uw-7gv"/>
                                                     <exclude reference="xSl-tN-5ZA"/>
-                                                    <exclude reference="SfZ-xS-tuv"/>
-                                                    <exclude reference="bqP-H9-N8J"/>
-                                                    <exclude reference="SFk-yz-iGB"/>
                                                     <exclude reference="8y9-kf-Q76"/>
-                                                    <exclude reference="blR-Cx-8lp"/>
-                                                    <exclude reference="KWI-1E-l7K"/>
                                                     <exclude reference="9ur-GX-ac0"/>
                                                     <exclude reference="Dn3-Le-dlc"/>
+                                                    <exclude reference="KWI-1E-l7K"/>
+                                                    <exclude reference="blR-Cx-8lp"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -186,7 +193,7 @@
                                             <outlet property="time" destination="n0a-EU-J5f" id="TKI-Qg-Jmo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthkit" rowHeight="150" id="90J-S0-CYz" customClass="HealthKitCell" customModule="Bg_Mon" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthkit" rowHeight="150" id="90J-S0-CYz" customClass="HealthKitCell" customModule="Logglu" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="151" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="90J-S0-CYz" id="dsS-n3-rP5">
@@ -351,7 +358,7 @@
         <!--Menu View Controller-->
         <scene sceneID="O5K-3U-hKm">
             <objects>
-                <tableViewController storyboardIdentifier="Menu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z2G-0M-1EK" customClass="MenuViewController" customModule="Bg_Mon" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Menu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z2G-0M-1EK" customClass="MenuViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="JDR-cW-67h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -460,13 +467,13 @@
         <!--Meals-->
         <scene sceneID="HMX-UX-LD1">
             <objects>
-                <tableViewController id="zc6-fy-CDY" customClass="MealsViewController" customModule="Bg_Mon" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="zc6-fy-CDY" customClass="MealsViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="7s6-A3-mtA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="E9M-H4-jTW" customClass="MealCell" customModule="Bg_Mon" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="E9M-H4-jTW" customClass="MealCell" customModule="Logglu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="414" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E9M-H4-jTW" id="3Bt-ar-S22">
@@ -645,13 +652,13 @@
         <!--Add Meal-->
         <scene sceneID="KQp-Fq-v5Y">
             <objects>
-                <tableViewController storyboardIdentifier="AddMeal2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QUF-9w-1rH" customClass="AddMeal" customModule="Bg_Mon" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddMeal2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QUF-9w-1rH" customClass="AddMeal" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="40" sectionHeaderHeight="18" sectionFooterHeight="18" id="DGD-6x-0eY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bloodGlucose" rowHeight="40" id="Wgh-bx-F1g" customClass="GlucoseCell" customModule="Bg_Mon" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bloodGlucose" rowHeight="40" id="Wgh-bx-F1g" customClass="GlucoseCell" customModule="Logglu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="114" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wgh-bx-F1g" id="YO8-RD-Vze">
@@ -708,7 +715,7 @@
                                     <outlet property="bloodGlucose" destination="60n-NG-ypg" id="vTH-w8-HMj"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="carbs" rowHeight="40" id="KyI-gG-3p5" customClass="CarbCell" customModule="Bg_Mon" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="carbs" rowHeight="40" id="KyI-gG-3p5" customClass="CarbCell" customModule="Logglu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="154" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KyI-gG-3p5" id="j0h-Tm-Uvy">
@@ -756,7 +763,7 @@
                                     <outlet property="carbs" destination="xQB-Ir-zBA" id="Fjl-zV-EE1"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="insulin" rowHeight="40" id="Gh1-p3-39G" customClass="CorrectionCell" customModule="Bg_Mon" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="insulin" rowHeight="40" id="Gh1-p3-39G" customClass="CorrectionCell" customModule="Logglu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="194" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gh1-p3-39G" id="Qjg-YN-4wf">
@@ -802,7 +809,7 @@
                                     <outlet property="insulin" destination="fWZ-V5-Qr0" id="kqp-r0-YOt"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="longLasting" rowHeight="40" id="m5n-DW-B31" customClass="LongLasting" customModule="Bg_Mon" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="longLasting" rowHeight="40" id="m5n-DW-B31" customClass="LongLasting" customModule="Logglu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="234" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m5n-DW-B31" id="Rz9-Rn-lbD">
@@ -871,14 +878,14 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ro7-ni-KDy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="GwE-iu-6UC" customClass="MealsViewController" customModule="Bg_Mon" customModuleProvider="target"/>
+                <customObject id="GwE-iu-6UC" customClass="MealsViewController" customModule="Logglu" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="3545" y="2016"/>
         </scene>
         <!--Success View Controller-->
         <scene sceneID="r31-65-gc8">
             <objects>
-                <viewController id="xLB-iY-8qm" customClass="SuccessViewController" customModule="Bg_Mon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xLB-iY-8qm" customClass="SuccessViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VF5-aQ-DNd"/>
                         <viewControllerLayoutGuide type="bottom" id="VfZ-tH-vIc"/>
@@ -971,7 +978,7 @@
         <!--Profile-->
         <scene sceneID="iAM-1T-a3e">
             <objects>
-                <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="yV0-uu-YWX" customClass="ProfileViewController" customModule="Bg_Mon" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="yV0-uu-YWX" customClass="ProfileViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="5pL-Je-9PT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1227,7 +1234,7 @@
         <!--Menu Manager-->
         <scene sceneID="kwa-nN-G0c">
             <objects>
-                <viewController id="vQx-Tp-6f6" customClass="MenuManager" customModule="Bg_Mon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vQx-Tp-6f6" customClass="MenuManager" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LLm-uP-mPy"/>
                         <viewControllerLayoutGuide type="bottom" id="PJ4-pQ-kSg"/>

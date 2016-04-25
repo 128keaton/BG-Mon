@@ -11,10 +11,11 @@ import UIKit
 import Charts
 import HealthKit
 import BTNavigationDropdownMenu
-
+import MessageUI
+import Photos
 let healthKitStore: HKHealthStore = HKHealthStore()
 
-class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChartViewDelegate {
+class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChartViewDelegate, MFMailComposeViewControllerDelegate {
 
 	private var objects = [HKQuantityType!]()
 	var preferredUnits = [NSObject: AnyObject]()
@@ -187,9 +188,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
             if (now.isBetweeen(date: then, andDate: NSDate())){
                 if(self.sampleInsulin[i] < 400){
-                    
+                        insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
+                }else{
+                        insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
                 }
-                insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
+                
+
                 let sample = self.results[i];
                 let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
                 let prefUnit = self.preferredUnits[sampleType!]
@@ -213,7 +217,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
         data.setValueTextColor(UIColor.whiteColor())
-        self.insulinChart?.gridBackgroundColor = UIColor.clearColor()
+        self.insulinChart?.gridBackgroundColor = UIColor.blackColor()
         self.insulinChart?.legend.textColor = UIColor.whiteColor()
         
         self.insulinChart!.xAxis.labelPosition = .Bottom
@@ -453,7 +457,94 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 		self.healthStore.executeQuery(query)
 	}
+    func findandSendImage(){
+        
+        let imgManager = PHImageManager.defaultManager()
+        
+        
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.synchronous = true
+        
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: true)]
+        
+        if let fetchResult: PHFetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: nil) {
+            
+            if fetchResult.count > 0 {
+                
+                imgManager.requestImageForAsset(fetchResult.objectAtIndex(fetchResult.count - 1) as! PHAsset, targetSize: self.view.frame.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions, resultHandler: { (image, _) in
+                    
+                    self.sendEmail(UIImagePNGRepresentation(image!)!, csv: NSData(), options: ["csv" : false, "snapshot" : true])
+                    
+                })
+            }
+        }
+        
+    }
 
+
+
+    @IBAction func export(){
+        let alertController = UIAlertController.init(title: "", message: "", preferredStyle: .ActionSheet)
+        let export = UIAlertAction.init(title: "Export to CSV", style: .Default, handler: { (action) in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+            let writeString = NSMutableString.init(capacity: 0)
+            let formatter = NSDateFormatter.init()
+            formatter.dateStyle = .ShortStyle
+            formatter.timeStyle = .ShortStyle
+            for i in 0..<self.sampleInsulin.count{
+                let object = self.results[i]
+                let doubleValue = object.quantity.doubleValueForUnit(self.preferredUnit)
+                writeString.appendString("\(doubleValue) mg/dL, \(formatter.stringFromDate(self.results[i].startDate)), \r\n")
+                
+            }
+            self.sendEmail(NSData(), csv: writeString.dataUsingEncoding(NSUTF8StringEncoding)!, options: ["csv" : true, "snapshot" : false])
+
+            
+        })
+        
+        let snapshot = UIAlertAction.init(title: "Export Snapshot", style: .Default, handler: { (action) in
+            self.insulinChart?.saveToCameraRoll()
+            _ = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(DashboardViewController.findandSendImage), userInfo: nil, repeats: false)
+        
+        })
+
+        let cancel = UIAlertAction.init(title: "Cancel", style: .Cancel, handler: { (action) in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+
+        })
+        alertController.addAction(export)
+        alertController.addAction(snapshot)
+        alertController.addAction(cancel)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
+    func sendEmail(snapshot: NSData, csv: NSData, options: NSDictionary) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["keaton.burleson@me.com"])
+            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+            if options["csv"] as! Bool != false {
+                mail.addAttachmentData(csv, mimeType: "text/csv", fileName: "Data \(NSDate()).csv")
+            }
+            if options["snapshot"] as! Bool != false {
+                mail.addAttachmentData(snapshot, mimeType: "image/png", fileName: "Data \(NSDate()).png")
+            }
+ 
+            presentViewController(mail, animated: true, completion: nil)
+        } else {
+            // show failure alert
+        }
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 	func authorizeHealthKit(completion: ((success: Bool, error: NSError!) -> Void)!)
 	{
 		let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
@@ -477,6 +568,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		self.objects = [carbs, bloodGlucose]
 	}
 }
+
 
 
 extension NSDate

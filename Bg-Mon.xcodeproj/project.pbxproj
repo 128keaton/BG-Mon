@@ -13,7 +13,6 @@
 		8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D83E1CB337E6007558B4 /* AppDelegate.swift */; };
 		8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8421CB337E6007558B4 /* Main.storyboard */; };
 		8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */; };
-		8A45D8491CB337E6007558B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8481CB337E6007558B4 /* Assets.xcassets */; };
 		8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D84A1CB337E6007558B4 /* LaunchScreen.storyboard */; };
 		8A45D8571CB337E6007558B4 /* Bg_MonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8561CB337E6007558B4 /* Bg_MonTests.swift */; };
 		8A45D8621CB337E6007558B4 /* Bg_MonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8611CB337E6007558B4 /* Bg_MonUITests.swift */; };
@@ -22,6 +21,7 @@
 		8A45D8751CB351FB007558B4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8741CB351FB007558B4 /* MenuViewController.swift */; };
 		8A45D8771CB3528E007558B4 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8761CB3528E007558B4 /* MenuManager.swift */; };
 		8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */; };
+		8A5251561CCE6A5D00DD34F5 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A5251551CCE6A5D00DD34F5 /* Media.xcassets */; };
 		8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650D61CB8BDED00A86BE5 /* Meal.png */; };
 		8A9650DB1CB8C19C00A86BE5 /* Adjustment.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */; };
 		8A9650DD1CB8C1F500A86BE5 /* 24H.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DC1CB8C1F500A86BE5 /* 24H.png */; };
@@ -82,11 +82,10 @@
 		8A1EA89B1CB7085A00343019 /* pattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern2.png; sourceTree = "<group>"; };
 		8A1EA89D1CB7092100343019 /* bananas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bananas.jpg; sourceTree = "<group>"; };
 		8A2C1A851CC8116700159962 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Bg-Mon-dtwmpflrjllmhdcvtsjxdsjoeavc/Build/Products/Debug-iphoneos/Charts.framework"; sourceTree = "<group>"; };
-		8A45D83B1CB337E6007558B4 /* Bg-Mon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bg-Mon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A45D83B1CB337E6007558B4 /* Logglu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Logglu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D83E1CB337E6007558B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A45D8431CB337E6007558B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A45D8461CB337E6007558B4 /* Bg_Mon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bg_Mon.xcdatamodel; sourceTree = "<group>"; };
-		8A45D8481CB337E6007558B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A45D84B1CB337E6007558B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A45D84D1CB337E6007558B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A45D8521CB337E6007558B4 /* Bg-MonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bg-MonTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +100,7 @@
 		8A45D8741CB351FB007558B4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8A45D8761CB3528E007558B4 /* MenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8A5251551CCE6A5D00DD34F5 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8A9650D61CB8BDED00A86BE5 /* Meal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Meal.png; sourceTree = "<group>"; };
 		8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Adjustment.png; sourceTree = "<group>"; };
 		8A9650DC1CB8C1F500A86BE5 /* 24H.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24H.png; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		8A45D83C1CB337E6007558B4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8A45D83B1CB337E6007558B4 /* Bg-Mon.app */,
+				8A45D83B1CB337E6007558B4 /* Logglu.app */,
 				8A45D8521CB337E6007558B4 /* Bg-MonTests.xctest */,
 				8A45D85D1CB337E6007558B4 /* Bg-MonUITests.xctest */,
 			);
@@ -185,9 +185,9 @@
 				8A1EA8991CB7058200343019 /* pattern.jpg */,
 				8A1EA89D1CB7092100343019 /* bananas.jpg */,
 				8A1EA89B1CB7085A00343019 /* pattern2.png */,
-				8A45D8481CB337E6007558B4 /* Assets.xcassets */,
 				8A45D84A1CB337E6007558B4 /* LaunchScreen.storyboard */,
 				8A45D84D1CB337E6007558B4 /* Info.plist */,
+				8A5251551CCE6A5D00DD34F5 /* Media.xcassets */,
 				8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */,
 				8AE61E681CC812EA00865ACA /* Charts.xcodeproj */,
 			);
@@ -264,7 +264,7 @@
 			);
 			name = "Bg-Mon";
 			productName = "Bg-Mon";
-			productReference = 8A45D83B1CB337E6007558B4 /* Bg-Mon.app */;
+			productReference = 8A45D83B1CB337E6007558B4 /* Logglu.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8A45D8511CB337E6007558B4 /* Bg-MonTests */ = {
@@ -394,10 +394,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A5251561CCE6A5D00DD34F5 /* Media.xcassets in Resources */,
 				8A9650DD1CB8C1F500A86BE5 /* 24H.png in Resources */,
 				8A9650DB1CB8C19C00A86BE5 /* Adjustment.png in Resources */,
 				8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */,
-				8A45D8491CB337E6007558B4 /* Assets.xcassets in Resources */,
 				8A1EA89C1CB7085A00343019 /* pattern2.png in Resources */,
 				8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */,
 				8A9650DF1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png in Resources */,
@@ -634,7 +634,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-Mon";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Logglu;
 			};
 			name = Debug;
 		};
@@ -648,7 +648,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-Mon";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Logglu;
 			};
 			name = Release;
 		};
