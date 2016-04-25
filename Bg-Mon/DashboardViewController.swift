@@ -176,16 +176,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
         var insulinVals: [BarChartDataEntry] = []
         var bgVals: [ChartDataEntry] = [ChartDataEntry]()
+        let reversedInsulin = Array(self.sampleInsulin.reverse())
         for i in 0..<self.sampleInsulin.count{
       
             let stopIT = self.mealsArray![i];
             let now = stopIT["date"] as! NSDate
-            
+          
 
             let then = self.getThen()
             
             if (now.isBetweeen(date: then, andDate: NSDate())){
-                insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i))
+                insulinVals.append(BarChartDataEntry(value: reversedInsulin[i], xIndex: i))
                 let sample = self.results[i];
                 let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
                 let prefUnit = self.preferredUnits[sampleType!]
