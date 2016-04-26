@@ -207,7 +207,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let chartDataSet = LineChartDataSet(yVals: bgVals, label: "Blood Glucose")
         chartDataSet.setColor(self.view.tintColor, alpha: 1.0);
         chartDataSet.axisDependency = .Left
-        chartDataSet.drawCubicEnabled = true
+        chartDataSet.mode = LineChartDataSet.Mode.CubicBezier
         chartDataSet.fill = ChartFill(color: UIColor.clearColor())
         let barChartDataSet = BarChartDataSet(yVals: insulinVals, label: "Insulin Units")
         barChartDataSet.valueTextColor = UIColor.whiteColor()
@@ -459,31 +459,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 		self.healthStore.executeQuery(query)
 	}
-    func findandSendImage(){
-        
-        let imgManager = PHImageManager.defaultManager()
-        
-        
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.synchronous = true
-        
-        
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: true)]
-        
-        if let fetchResult: PHFetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: nil) {
-            
-            if fetchResult.count > 0 {
-                
-                imgManager.requestImageForAsset(fetchResult.objectAtIndex(fetchResult.count - 1) as! PHAsset, targetSize: self.view.frame.size, contentMode: PHImageContentMode.AspectFill, options: requestOptions, resultHandler: { (image, _) in
-                    
-                    self.sendEmail(UIImagePNGRepresentation(image!)!, csv: NSData(), options: ["csv" : false, "snapshot" : true])
-                    
-                })
-            }
-        }
-        
-    }
 
 
 
@@ -507,8 +482,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         })
         
         let snapshot = UIAlertAction.init(title: "Snapshot", style: .Default, handler: { (action) in
-            self.insulinChart?.saveToCameraRoll()
-            _ = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: #selector(DashboardViewController.findandSendImage), userInfo: nil, repeats: false)
+          
+            
+            self.sendEmail(UIImagePNGRepresentation((self.insulinChart?.getSnapshot())!)!, csv: NSData(), options: ["csv" : false, "snapshot" : true])
         
         })
 

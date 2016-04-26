@@ -11,7 +11,7 @@ PODS:
 
 DEPENDENCIES:
   - BTNavigationDropdownMenu (from `https://github.com/mkral/BTNavigationDropdownMenu.git`)
-  - Charts
+  - Charts (from `https://github.com/128keaton/Charts.git`)
   - MBProgressHUD
   - Notie
   - SkyFloatingLabelTextField (~> 1.0)
@@ -21,6 +21,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   BTNavigationDropdownMenu:
     :git: https://github.com/mkral/BTNavigationDropdownMenu.git
+  Charts:
+    :git: https://github.com/128keaton/Charts.git
   UIImageColors:
     :git: https://github.com/jathu/UIImageColors.git
 
@@ -28,6 +30,9 @@ CHECKOUT OPTIONS:
   BTNavigationDropdownMenu:
     :commit: be49b7417d9a3f606df733666f78c9adb9b5c751
     :git: https://github.com/mkral/BTNavigationDropdownMenu.git
+  Charts:
+    :commit: 9bf511e5f1be31bfbaeac5d742caec7da286a25c
+    :git: https://github.com/128keaton/Charts.git
   UIImageColors:
     :commit: 4843cce131449b097431ed45edede4fd62c2365e
     :git: https://github.com/jathu/UIImageColors.git
