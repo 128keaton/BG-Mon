@@ -13,6 +13,8 @@ import HealthKit
 import BTNavigationDropdownMenu
 import MessageUI
 import Photos
+
+
 let healthKitStore: HKHealthStore = HKHealthStore()
 
 class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChartViewDelegate, MFMailComposeViewControllerDelegate {
@@ -507,6 +509,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
       
             mail.setSubject("Insulin and Blood Glucose Graph \(NSDate())")
             if NSUserDefaults.standardUserDefaults().objectForKey("dr-email") != nil &&  NSUserDefaults.standardUserDefaults().objectForKey("dr-name") != nil{
+                if(isValidEmail(NSUserDefaults.standardUserDefaults().objectForKey("dr-email") as! String) == false){
+                   
+                }
                       mail.setToRecipients([NSUserDefaults.standardUserDefaults().objectForKey("dr-email") as! String])
                 mail.setMessageBody("Dear \(NSUserDefaults.standardUserDefaults().objectForKey("dr-name") as! String), <br> Enclosed is a copy of my blood sugar and insulin data. Hope this is good news!", isHTML: true)
             }
@@ -522,6 +527,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             // show failure alert
         }
     }
+    func isValidEmail(testStr:String) -> Bool {
+        // println("validate calendar: \(testStr)")
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluateWithObject(testStr)
+    }
+    
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)

@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'Bg-Mon' do
 pod 'SkyFloatingLabelTextField', '~> 1.0'
+pod 'EZAlertController', '0.3'
 pod 'Notie'
 pod 'BTNavigationDropdownMenu', :git => "https://github.com/mkral/BTNavigationDropdownMenu.git"
 pod 'Charts', :git => "https://github.com/128keaton/Charts.git"
