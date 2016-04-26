@@ -13,7 +13,7 @@ import HealthKit
 import BTNavigationDropdownMenu
 import MessageUI
 import Photos
-
+import EZAlertController
 
 let healthKitStore: HKHealthStore = HKHealthStore()
 
@@ -465,8 +465,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 
     @IBAction func export(){
-        let alertController = UIAlertController.init(title: "Export?", message: "", preferredStyle: .ActionSheet)
-        let export = UIAlertAction.init(title: "CSV File", style: .Default, handler: { (action) in
+        let alertController = UIAlertController.init(title: "Export", message: "What data would you like to email your doctor in?", preferredStyle: .ActionSheet)
+        let export = UIAlertAction.init(title: "Database of all logs", style: .Default, handler: { (action) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
             let writeString = NSMutableString.init(capacity: 0)
             let formatter = NSDateFormatter.init()
@@ -483,7 +483,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             
         })
         
-        let snapshot = UIAlertAction.init(title: "Snapshot", style: .Default, handler: { (action) in
+        let snapshot = UIAlertAction.init(title: "Snapshot of Graph", style: .Default, handler: { (action) in
           
             
             self.sendEmail(UIImagePNGRepresentation((self.insulinChart?.getSnapshot())!)!, csv: NSData(), options: ["csv" : false, "snapshot" : true])
@@ -510,7 +510,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             mail.setSubject("Insulin and Blood Glucose Graph \(NSDate())")
             if NSUserDefaults.standardUserDefaults().objectForKey("dr-email") != nil &&  NSUserDefaults.standardUserDefaults().objectForKey("dr-name") != nil{
                 if(isValidEmail(NSUserDefaults.standardUserDefaults().objectForKey("dr-email") as! String) == false){
-                   
+                    EZAlertController.alert("Invalid email", message: "The email for your doctor is invalid", acceptMessage: "OK") { () -> () in
+                        print("Accepted their fate")
+                    }
                 }
                       mail.setToRecipients([NSUserDefaults.standardUserDefaults().objectForKey("dr-email") as! String])
                 mail.setMessageBody("Dear \(NSUserDefaults.standardUserDefaults().objectForKey("dr-name") as! String), <br> Enclosed is a copy of my blood sugar and insulin data. Hope this is good news!", isHTML: true)

@@ -3,7 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>SchemeUserState</key>
-	<dict/>
+	<dict>
+		<key>Test Strip Watch (Glance).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>Test Strip Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>8A45D83A1CB337E6007558B4</key>
@@ -27,6 +38,16 @@
 			<true/>
 		</dict>
 		<key>8A797B731CD00F560082DFEF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8AEC38F71CD0237D00394F9A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8AEC391E1CD024C100394F9A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

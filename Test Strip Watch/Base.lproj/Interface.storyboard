@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Test_Strip_Watch" customModuleProvider="target">
+                    <items>
+                        <button width="0.69999999999999996" height="0.69999999999999996" alignment="center" verticalAlignment="center" title="Add" id="X7G-rb-iNl">
+                            <connections>
+                                <segue destination="f5f-VI-Ozv" kind="push" id="tbJ-0y-1H3"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="565" y="430"/>
+        </scene>
+        <!--Meal-->
+        <scene sceneID="4Xa-35-EIn">
+            <objects>
+                <controller id="f5f-VI-Ozv" customClass="Meal" customModule="Test_Strip_Watch_Extension">
+                    <items>
+                        <label width="136" height="36.5" alignment="center" text="Add Meal:" textAlignment="center" id="F4m-la-2p5">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                        </label>
+                        <picker height="100" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="75q-Lp-LCQ"/>
+                        <separator alignment="left" id="DsR-1Y-obq"/>
+                        <picker height="100" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="NSZ-la-2Rg"/>
+                        <button width="1" alignment="left" title="Save" id="Ssl-9H-D9f">
+                            <connections>
+                                <action selector="dismiss" destination="f5f-VI-Ozv" id="WZz-s4-mbW"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="bgPicker" destination="75q-Lp-LCQ" id="pl2-Dg-SHX"/>
+                        <outlet property="carbPicker" destination="NSZ-la-2Rg" id="ZBd-pW-57H"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="869" y="430"/>
+        </scene>
+    </scenes>
+</document>

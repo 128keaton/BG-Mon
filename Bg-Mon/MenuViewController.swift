@@ -17,7 +17,7 @@ class MenuViewController: UITableViewController {
     var profileViewController: UIViewController?
     var dashboardViewController: UIViewController?
     var mealsViewController: UIViewController?
-    
+    var aboutViewController: UIViewController?
     
     
     override func viewDidLoad() {
@@ -55,6 +55,10 @@ class MenuViewController: UITableViewController {
         let mealsViewController = storyboard.instantiateViewControllerWithIdentifier("Food")
         self.mealsViewController = mealsViewController as UIViewController
         
+        let aboutViewController = storyboard.instantiateViewControllerWithIdentifier("about")
+        self.aboutViewController = aboutViewController as UIViewController
+        
+        
      
         
     }
@@ -76,6 +80,9 @@ class MenuViewController: UITableViewController {
         }
 
         
+    }
+    @IBAction func presentAbout(){
+        self.performSegueWithIdentifier("about", sender: self)
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row {
