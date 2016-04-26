@@ -1281,6 +1281,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="carbRatio" destination="Pg1-KX-IGZ" id="p6N-Kk-QXW"/>
+                        <outlet property="doctorEmail" destination="0oS-Dg-cQT" id="Qdc-kR-VEa"/>
+                        <outlet property="doctorName" destination="Lk8-8f-ih0" id="ZsY-hN-pgk"/>
                         <outlet property="highscore" destination="sJp-hN-n8p" id="hiL-hR-EWb"/>
                         <outlet property="lowscore" destination="1ze-18-NQt" id="1D5-dM-wV9"/>
                         <outlet property="name" destination="9qk-FW-xEc" id="MQ2-LS-QIR"/>

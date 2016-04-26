@@ -508,7 +508,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             mail.setSubject("Insulin and Blood Glucose Graph \(NSDate())")
             if NSUserDefaults.standardUserDefaults().objectForKey("dr-email") != nil &&  NSUserDefaults.standardUserDefaults().objectForKey("dr-name") != nil{
                       mail.setToRecipients([NSUserDefaults.standardUserDefaults().objectForKey("dr-email") as! String])
-                mail.setMessageBody("Dear \(NSUserDefaults.standardUserDefaults().objectForKey("dr-email")), <br> Enclosed is a copy of my blood sugar and insulin data. Hope this is good news!", isHTML: true)
+                mail.setMessageBody("Dear \(NSUserDefaults.standardUserDefaults().objectForKey("dr-name") as! String), <br> Enclosed is a copy of my blood sugar and insulin data. Hope this is good news!", isHTML: true)
             }
             if options["csv"] as! Bool != false {
                 mail.addAttachmentData(csv, mimeType: "text/csv", fileName: "Data \(NSDate()).csv")
