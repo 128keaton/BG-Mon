@@ -48,6 +48,26 @@
                ReferencedContainer = "container:Logglu.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8A797B651CD00F370082DFEF"
+               BuildableName = "Test Strip - UITest.xctest"
+               BlueprintName = "Test Strip - UITest"
+               ReferencedContainer = "container:Logglu.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8A797B731CD00F560082DFEF"
+               BuildableName = "Test Strip - Bundle.xctest"
+               BlueprintName = "Test Strip - Bundle"
+               ReferencedContainer = "container:Logglu.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

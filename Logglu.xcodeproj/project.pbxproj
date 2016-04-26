@@ -20,6 +20,8 @@
 		8A45D8751CB351FB007558B4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8741CB351FB007558B4 /* MenuViewController.swift */; };
 		8A45D8771CB3528E007558B4 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8761CB3528E007558B4 /* MenuManager.swift */; };
 		8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */; };
+		8A797B691CD00F370082DFEF /* Test_Strip___UITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A797B681CD00F370082DFEF /* Test_Strip___UITest.m */; };
+		8A797B771CD00F560082DFEF /* Test_Strip___Bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A797B761CD00F560082DFEF /* Test_Strip___Bundle.m */; };
 		8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650D61CB8BDED00A86BE5 /* Meal.png */; };
 		8A9650DB1CB8C19C00A86BE5 /* Adjustment.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */; };
 		8A9650DD1CB8C1F500A86BE5 /* 24H.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DC1CB8C1F500A86BE5 /* 24H.png */; };
@@ -29,6 +31,23 @@
 		8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC51FF51CB4187500E1872E /* SuperCell.swift */; };
 		B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8A797B6B1CD00F370082DFEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A45D8331CB337E6007558B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A45D83A1CB337E6007558B4;
+			remoteInfo = "Bg-Mon";
+		};
+		8A797B791CD00F560082DFEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A45D8331CB337E6007558B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A45D83A1CB337E6007558B4;
+			remoteInfo = "Bg-Mon";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8A1EA8991CB7058200343019 /* pattern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pattern.jpg; sourceTree = "<group>"; };
@@ -53,6 +72,12 @@
 		8A45D8741CB351FB007558B4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8A45D8761CB3528E007558B4 /* MenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8A797B661CD00F370082DFEF /* Test Strip - UITest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test Strip - UITest.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A797B681CD00F370082DFEF /* Test_Strip___UITest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Test_Strip___UITest.m"; sourceTree = "<group>"; };
+		8A797B6A1CD00F370082DFEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A797B741CD00F560082DFEF /* Test Strip - Bundle.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test Strip - Bundle.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A797B761CD00F560082DFEF /* Test_Strip___Bundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Test_Strip___Bundle.m"; sourceTree = "<group>"; };
+		8A797B781CD00F560082DFEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A9650D61CB8BDED00A86BE5 /* Meal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Meal.png; sourceTree = "<group>"; };
 		8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Adjustment.png; sourceTree = "<group>"; };
 		8A9650DC1CB8C1F500A86BE5 /* 24H.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24H.png; sourceTree = "<group>"; };
@@ -77,6 +102,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A797B631CD00F370082DFEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A797B711CD00F560082DFEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -86,6 +125,8 @@
 				8A45D83D1CB337E6007558B4 /* Logglu */,
 				8A45D8551CB337E6007558B4 /* Bg-MonTests */,
 				8A45D8601CB337E6007558B4 /* Bg-MonUITests */,
+				8A797B671CD00F370082DFEF /* Test Strip - UITest */,
+				8A797B751CD00F560082DFEF /* Test Strip - Bundle */,
 				8A45D83C1CB337E6007558B4 /* Products */,
 				E5734EEB76940CA15C27FEEF /* Pods */,
 				9C0435CD34FC9A7439C96182 /* Frameworks */,
@@ -96,6 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				8A45D83B1CB337E6007558B4 /* Test Strip.app */,
+				8A797B661CD00F370082DFEF /* Test Strip - UITest.xctest */,
+				8A797B741CD00F560082DFEF /* Test Strip - Bundle.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,6 +191,24 @@
 			path = "Bg-MonUITests";
 			sourceTree = "<group>";
 		};
+		8A797B671CD00F370082DFEF /* Test Strip - UITest */ = {
+			isa = PBXGroup;
+			children = (
+				8A797B681CD00F370082DFEF /* Test_Strip___UITest.m */,
+				8A797B6A1CD00F370082DFEF /* Info.plist */,
+			);
+			path = "Test Strip - UITest";
+			sourceTree = "<group>";
+		};
+		8A797B751CD00F560082DFEF /* Test Strip - Bundle */ = {
+			isa = PBXGroup;
+			children = (
+				8A797B761CD00F560082DFEF /* Test_Strip___Bundle.m */,
+				8A797B781CD00F560082DFEF /* Info.plist */,
+			);
+			path = "Test Strip - Bundle";
+			sourceTree = "<group>";
+		};
 		9C0435CD34FC9A7439C96182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +253,42 @@
 			productReference = 8A45D83B1CB337E6007558B4 /* Test Strip.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8A797B651CD00F370082DFEF /* Test Strip - UITest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A797B6F1CD00F370082DFEF /* Build configuration list for PBXNativeTarget "Test Strip - UITest" */;
+			buildPhases = (
+				8A797B621CD00F370082DFEF /* Sources */,
+				8A797B631CD00F370082DFEF /* Frameworks */,
+				8A797B641CD00F370082DFEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A797B6C1CD00F370082DFEF /* PBXTargetDependency */,
+			);
+			name = "Test Strip - UITest";
+			productName = "Test Strip - UITest";
+			productReference = 8A797B661CD00F370082DFEF /* Test Strip - UITest.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		8A797B731CD00F560082DFEF /* Test Strip - Bundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A797B7B1CD00F560082DFEF /* Build configuration list for PBXNativeTarget "Test Strip - Bundle" */;
+			buildPhases = (
+				8A797B701CD00F560082DFEF /* Sources */,
+				8A797B711CD00F560082DFEF /* Frameworks */,
+				8A797B721CD00F560082DFEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A797B7A1CD00F560082DFEF /* PBXTargetDependency */,
+			);
+			name = "Test Strip - Bundle";
+			productName = "Test Strip - Bundle";
+			productReference = 8A797B741CD00F560082DFEF /* Test Strip - Bundle.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -211,6 +308,14 @@
 							};
 						};
 					};
+					8A797B651CD00F370082DFEF = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 8A45D83A1CB337E6007558B4;
+					};
+					8A797B731CD00F560082DFEF = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 8A45D83A1CB337E6007558B4;
+					};
 				};
 			};
 			buildConfigurationList = 8A45D8361CB337E6007558B4 /* Build configuration list for PBXProject "Logglu" */;
@@ -227,6 +332,8 @@
 			projectRoot = "";
 			targets = (
 				8A45D83A1CB337E6007558B4 /* Bg-Mon */,
+				8A797B651CD00F370082DFEF /* Test Strip - UITest */,
+				8A797B731CD00F560082DFEF /* Test Strip - Bundle */,
 			);
 		};
 /* End PBXProject section */
@@ -246,6 +353,20 @@
 				8A1EA89A1CB7058200343019 /* pattern.jpg in Resources */,
 				8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */,
 				8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A797B641CD00F370082DFEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A797B721CD00F560082DFEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +437,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A797B621CD00F370082DFEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A797B691CD00F370082DFEF /* Test_Strip___UITest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A797B701CD00F560082DFEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A797B771CD00F560082DFEF /* Test_Strip___Bundle.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8A797B6C1CD00F370082DFEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A45D83A1CB337E6007558B4 /* Bg-Mon */;
+			targetProxy = 8A797B6B1CD00F370082DFEF /* PBXContainerItemProxy */;
+		};
+		8A797B7A1CD00F560082DFEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A45D83A1CB337E6007558B4 /* Bg-Mon */;
+			targetProxy = 8A797B791CD00F560082DFEF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8A45D8421CB337E6007558B4 /* Main.storyboard */ = {
@@ -451,6 +601,52 @@
 			};
 			name = Release;
 		};
+		8A797B6D1CD00F370082DFEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Test Strip - UITest/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Test-Strip---UITest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Bg-Mon";
+			};
+			name = Debug;
+		};
+		8A797B6E1CD00F370082DFEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Test Strip - UITest/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Test-Strip---UITest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Bg-Mon";
+			};
+			name = Release;
+		};
+		8A797B7C1CD00F560082DFEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Test Strip - Bundle/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Test-Strip---Bundle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Test Strip.app/Test Strip";
+			};
+			name = Debug;
+		};
+		8A797B7D1CD00F560082DFEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Test Strip - Bundle/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Test-Strip---Bundle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Test Strip.app/Test Strip";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -471,6 +667,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8A797B6F1CD00F370082DFEF /* Build configuration list for PBXNativeTarget "Test Strip - UITest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A797B6D1CD00F370082DFEF /* Debug */,
+				8A797B6E1CD00F370082DFEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8A797B7B1CD00F560082DFEF /* Build configuration list for PBXNativeTarget "Test Strip - Bundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A797B7C1CD00F560082DFEF /* Debug */,
+				8A797B7D1CD00F560082DFEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
