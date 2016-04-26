@@ -13,11 +13,4 @@ pod 'UIImageColors',  :git => "https://github.com/jathu/UIImageColors.git"
 pod 'SlideMenuControllerSwift'
 end
 
-target 'Bg-MonTests' do
-
-end
-
-target 'Bg-MonUITests' do
-
-end
 
