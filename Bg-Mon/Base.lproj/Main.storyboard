@@ -10,7 +10,7 @@
         <!--Dashboard-->
         <scene sceneID="L8O-ri-9Kg">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="PLj-F4-KPK" customClass="DashboardViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="PLj-F4-KPK" customClass="DashboardViewController" customModule="Test_Strip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lo9-ho-1qM"/>
                         <viewControllerLayoutGuide type="bottom" id="4DY-Ln-2zO"/>
@@ -43,7 +43,7 @@
                                     <constraint firstAttribute="height" constant="254" id="j0m-RM-0XR"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="diR-yu-M0D" customClass="MealCell" customModule="Logglu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="diR-yu-M0D" customClass="MealCell" customModule="Test_Strip" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="diR-yu-M0D" id="7Lm-1P-hmm">
@@ -193,7 +193,7 @@
                                             <outlet property="time" destination="n0a-EU-J5f" id="TKI-Qg-Jmo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthkit" rowHeight="150" id="90J-S0-CYz" customClass="HealthKitCell" customModule="Logglu" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="healthkit" rowHeight="150" id="90J-S0-CYz" customClass="HealthKitCell" customModule="Test_Strip" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="151" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="90J-S0-CYz" id="dsS-n3-rP5">
@@ -358,7 +358,7 @@
         <!--Menu View Controller-->
         <scene sceneID="O5K-3U-hKm">
             <objects>
-                <tableViewController storyboardIdentifier="Menu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z2G-0M-1EK" customClass="MenuViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Menu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z2G-0M-1EK" customClass="MenuViewController" customModule="Test_Strip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="JDR-cW-67h">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -467,13 +467,13 @@
         <!--Meals-->
         <scene sceneID="HMX-UX-LD1">
             <objects>
-                <tableViewController id="zc6-fy-CDY" customClass="MealsViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="zc6-fy-CDY" customClass="MealsViewController" customModule="Test_Strip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="7s6-A3-mtA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="E9M-H4-jTW" customClass="MealCell" customModule="Logglu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="E9M-H4-jTW" customClass="MealCell" customModule="Test_Strip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="414" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E9M-H4-jTW" id="3Bt-ar-S22">
@@ -652,13 +652,13 @@
         <!--Add Meal-->
         <scene sceneID="KQp-Fq-v5Y">
             <objects>
-                <tableViewController storyboardIdentifier="AddMeal2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QUF-9w-1rH" customClass="AddMeal" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddMeal2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QUF-9w-1rH" customClass="AddMeal" customModule="Test_Strip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="40" sectionHeaderHeight="18" sectionFooterHeight="18" id="DGD-6x-0eY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bloodGlucose" rowHeight="40" id="Wgh-bx-F1g" customClass="GlucoseCell" customModule="Logglu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bloodGlucose" rowHeight="40" id="Wgh-bx-F1g" customClass="GlucoseCell" customModule="Test_Strip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="114" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wgh-bx-F1g" id="YO8-RD-Vze">
@@ -715,7 +715,7 @@
                                     <outlet property="bloodGlucose" destination="60n-NG-ypg" id="vTH-w8-HMj"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="carbs" rowHeight="40" id="KyI-gG-3p5" customClass="CarbCell" customModule="Logglu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="carbs" rowHeight="40" id="KyI-gG-3p5" customClass="CarbCell" customModule="Test_Strip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="154" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KyI-gG-3p5" id="j0h-Tm-Uvy">
@@ -763,7 +763,7 @@
                                     <outlet property="carbs" destination="xQB-Ir-zBA" id="Fjl-zV-EE1"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="insulin" rowHeight="40" id="Gh1-p3-39G" customClass="CorrectionCell" customModule="Logglu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="insulin" rowHeight="40" id="Gh1-p3-39G" customClass="CorrectionCell" customModule="Test_Strip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="194" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gh1-p3-39G" id="Qjg-YN-4wf">
@@ -809,7 +809,7 @@
                                     <outlet property="insulin" destination="fWZ-V5-Qr0" id="kqp-r0-YOt"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="longLasting" rowHeight="40" id="m5n-DW-B31" customClass="LongLasting" customModule="Logglu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="longLasting" rowHeight="40" id="m5n-DW-B31" customClass="LongLasting" customModule="Test_Strip" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="234" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m5n-DW-B31" id="Rz9-Rn-lbD">
@@ -878,14 +878,14 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ro7-ni-KDy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="GwE-iu-6UC" customClass="MealsViewController" customModule="Logglu" customModuleProvider="target"/>
+                <customObject id="GwE-iu-6UC" customClass="MealsViewController" customModule="Test_Strip" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="3545" y="2016"/>
         </scene>
         <!--Success View Controller-->
         <scene sceneID="r31-65-gc8">
             <objects>
-                <viewController id="xLB-iY-8qm" customClass="SuccessViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xLB-iY-8qm" customClass="SuccessViewController" customModule="Test_Strip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VF5-aQ-DNd"/>
                         <viewControllerLayoutGuide type="bottom" id="VfZ-tH-vIc"/>
@@ -978,7 +978,7 @@
         <!--Profile-->
         <scene sceneID="iAM-1T-a3e">
             <objects>
-                <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="yV0-uu-YWX" customClass="ProfileViewController" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="yV0-uu-YWX" customClass="ProfileViewController" customModule="Test_Strip" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="5pL-Je-9PT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1131,10 +1131,72 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Medical" id="y6J-CT-YhI">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="q9o-2s-JFj">
+                                        <rect key="frame" x="0.0" y="464" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q9o-2s-JFj" id="OZG-7e-NYX">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dr. Hyde" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lk8-8f-ih0">
+                                                    <rect key="frame" x="131" y="7" width="461" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doctor's Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqq-pX-vmG">
+                                                    <rect key="frame" x="8" y="11" width="119" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Lk8-8f-ih0" firstAttribute="top" secondItem="OZG-7e-NYX" secondAttribute="topMargin" constant="-1" id="GY3-Be-Thg"/>
+                                                <constraint firstItem="Xqq-pX-vmG" firstAttribute="centerY" secondItem="OZG-7e-NYX" secondAttribute="centerY" id="cFx-ei-lFj"/>
+                                                <constraint firstItem="Lk8-8f-ih0" firstAttribute="centerY" secondItem="Xqq-pX-vmG" secondAttribute="centerY" id="eD0-RV-W2h"/>
+                                                <constraint firstItem="Xqq-pX-vmG" firstAttribute="leading" secondItem="OZG-7e-NYX" secondAttribute="leadingMargin" id="fwl-CV-Yv0"/>
+                                                <constraint firstItem="Lk8-8f-ih0" firstAttribute="trailing" secondItem="OZG-7e-NYX" secondAttribute="trailingMargin" id="ggs-JZ-gD2"/>
+                                                <constraint firstItem="Lk8-8f-ih0" firstAttribute="leading" secondItem="Xqq-pX-vmG" secondAttribute="trailing" constant="4" id="ug0-Wx-uk7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Ws4-Kc-8Bh">
+                                        <rect key="frame" x="0.0" y="508" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ws4-Kc-8Bh" id="fXy-T3-8yb">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="doctor@dr-office.org" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0oS-Dg-cQT">
+                                                    <rect key="frame" x="131" y="7" width="461" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doctor's Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ol-od-hpx">
+                                                    <rect key="frame" x="8" y="11" width="115" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1Ol-od-hpx" firstAttribute="leading" secondItem="fXy-T3-8yb" secondAttribute="leadingMargin" id="0tH-cw-29G"/>
+                                                <constraint firstItem="0oS-Dg-cQT" firstAttribute="centerY" secondItem="1Ol-od-hpx" secondAttribute="centerY" id="55P-Bq-VIS"/>
+                                                <constraint firstItem="0oS-Dg-cQT" firstAttribute="trailing" secondItem="fXy-T3-8yb" secondAttribute="trailingMargin" id="8Xb-tb-ufg"/>
+                                                <constraint firstItem="1Ol-od-hpx" firstAttribute="centerY" secondItem="fXy-T3-8yb" secondAttribute="centerY" id="Wt1-pu-aHf"/>
+                                                <constraint firstItem="0oS-Dg-cQT" firstAttribute="leading" secondItem="1Ol-od-hpx" secondAttribute="trailing" constant="8" symbolic="YES" id="c9J-hB-B9p"/>
+                                                <constraint firstItem="0oS-Dg-cQT" firstAttribute="top" secondItem="fXy-T3-8yb" secondAttribute="topMargin" constant="-1" id="enR-hY-GUG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="stats" id="xt2-ol-cPG">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="WsM-Ef-YgK">
-                                        <rect key="frame" x="0.0" y="464" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="603" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WsM-Ef-YgK" id="Dj9-4b-Sp9">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1165,7 +1227,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="1fa-Rg-L9C">
-                                        <rect key="frame" x="0.0" y="508" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="647" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1fa-Rg-L9C" id="Lrl-K0-tOk">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1234,7 +1296,7 @@
         <!--Menu Manager-->
         <scene sceneID="kwa-nN-G0c">
             <objects>
-                <viewController id="vQx-Tp-6f6" customClass="MenuManager" customModule="Logglu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vQx-Tp-6f6" customClass="MenuManager" customModule="Test_Strip" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LLm-uP-mPy"/>
                         <viewControllerLayoutGuide type="bottom" id="PJ4-pQ-kSg"/>

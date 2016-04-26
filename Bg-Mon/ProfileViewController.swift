@@ -29,7 +29,10 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
     @IBOutlet var targetBG: UITextField?
     @IBOutlet var carbRatio: UITextField?
     
+    @IBOutlet var doctorName: UITextField?
 
+    @IBOutlet var doctorEmail: UITextField?
+    
 	@IBOutlet var name: UITextField?
 
 	var hud: MBProgressHUD?
@@ -55,6 +58,12 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
         }
         if objectAlreadyExist("sensitivity") {
             sensitivity?.text = fetchUsername("sensitivity") as String
+        }
+        if objectAlreadyExist("dr-email") {
+            doctorEmail!.text = fetchUsername("dr-email") as String
+        }
+        if objectAlreadyExist("dr-name") {
+            doctorName!.text = fetchUsername("dr-name") as String
         }
 
 		let tapGesture = UIGestureRecognizer.init(target: self, action: #selector(ProfileViewController.chooseImage))
@@ -151,6 +160,12 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
               NSUserDefaults.standardUserDefaults().setObject(targetBG?.text, forKey: "target")
         }
         
+        if doctorEmail?.text != "" {
+            NSUserDefaults.standardUserDefaults().setObject(doctorEmail?.text, forKey: "dr-email")
+        }
+        if doctorName?.text != "" {
+            NSUserDefaults.standardUserDefaults().setObject(doctorName?.text, forKey: "dr-name")
+        }
         for view in self.view.subviews {
             if view is UITextField{
                 let field = view as! UITextField

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8A45D83A1CB337E6007558B4"
-               BuildableName = "Logglu.app"
+               BuildableName = "Test Strip.app"
                BlueprintName = "Bg-Mon"
                ReferencedContainer = "container:Logglu.xcodeproj">
             </BuildableReference>
@@ -53,7 +53,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A45D83A1CB337E6007558B4"
-            BuildableName = "Logglu.app"
+            BuildableName = "Test Strip.app"
             BlueprintName = "Bg-Mon"
             ReferencedContainer = "container:Logglu.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A45D83A1CB337E6007558B4"
-            BuildableName = "Logglu.app"
+            BuildableName = "Test Strip.app"
             BlueprintName = "Bg-Mon"
             ReferencedContainer = "container:Logglu.xcodeproj">
          </BuildableReference>
@@ -95,7 +95,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8A45D83A1CB337E6007558B4"
-            BuildableName = "Logglu.app"
+            BuildableName = "Test Strip.app"
             BlueprintName = "Bg-Mon"
             ReferencedContainer = "container:Logglu.xcodeproj">
          </BuildableReference>
