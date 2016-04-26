@@ -15,8 +15,6 @@
 		8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8421CB337E6007558B4 /* Main.storyboard */; };
 		8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */; };
 		8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D84A1CB337E6007558B4 /* LaunchScreen.storyboard */; };
-		8A45D8571CB337E6007558B4 /* Bg_MonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8561CB337E6007558B4 /* Bg_MonTests.swift */; };
-		8A45D8621CB337E6007558B4 /* Bg_MonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8611CB337E6007558B4 /* Bg_MonUITests.swift */; };
 		8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D86F1CB33912007558B4 /* DashboardViewController.swift */; };
 		8A45D8721CB33BA3007558B4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A45D8711CB33BA3007558B4 /* HealthKit.framework */; };
 		8A45D8751CB351FB007558B4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8741CB351FB007558B4 /* MenuViewController.swift */; };
@@ -32,23 +30,6 @@
 		B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8A45D8531CB337E6007558B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A45D8331CB337E6007558B4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8A45D83A1CB337E6007558B4;
-			remoteInfo = "Bg-Mon";
-		};
-		8A45D85E1CB337E6007558B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8A45D8331CB337E6007558B4 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8A45D83A1CB337E6007558B4;
-			remoteInfo = "Bg-Mon";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		8A1EA8991CB7058200343019 /* pattern.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pattern.jpg; sourceTree = "<group>"; };
 		8A1EA89B1CB7085A00343019 /* pattern2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern2.png; sourceTree = "<group>"; };
@@ -62,10 +43,8 @@
 		8A45D8461CB337E6007558B4 /* Bg_Mon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bg_Mon.xcdatamodel; sourceTree = "<group>"; };
 		8A45D84B1CB337E6007558B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A45D84D1CB337E6007558B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A45D8521CB337E6007558B4 /* Bg-MonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bg-MonTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D8561CB337E6007558B4 /* Bg_MonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bg_MonTests.swift; sourceTree = "<group>"; };
 		8A45D8581CB337E6007558B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A45D85D1CB337E6007558B4 /* Bg-MonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bg-MonUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D8611CB337E6007558B4 /* Bg_MonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bg_MonUITests.swift; sourceTree = "<group>"; };
 		8A45D8631CB337E6007558B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A45D86F1CB33912007558B4 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -98,20 +77,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A45D84F1CB337E6007558B4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8A45D85A1CB337E6007558B4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -131,8 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				8A45D83B1CB337E6007558B4 /* Test Strip.app */,
-				8A45D8521CB337E6007558B4 /* Bg-MonTests.xctest */,
-				8A45D85D1CB337E6007558B4 /* Bg-MonUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,42 +192,6 @@
 			productReference = 8A45D83B1CB337E6007558B4 /* Test Strip.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8A45D8511CB337E6007558B4 /* Bg-MonTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8A45D8691CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-MonTests" */;
-			buildPhases = (
-				8A45D84E1CB337E6007558B4 /* Sources */,
-				8A45D84F1CB337E6007558B4 /* Frameworks */,
-				8A45D8501CB337E6007558B4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8A45D8541CB337E6007558B4 /* PBXTargetDependency */,
-			);
-			name = "Bg-MonTests";
-			productName = "Bg-MonTests";
-			productReference = 8A45D8521CB337E6007558B4 /* Bg-MonTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		8A45D85C1CB337E6007558B4 /* Bg-MonUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8A45D86C1CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-MonUITests" */;
-			buildPhases = (
-				8A45D8591CB337E6007558B4 /* Sources */,
-				8A45D85A1CB337E6007558B4 /* Frameworks */,
-				8A45D85B1CB337E6007558B4 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8A45D85F1CB337E6007558B4 /* PBXTargetDependency */,
-			);
-			name = "Bg-MonUITests";
-			productName = "Bg-MonUITests";
-			productReference = 8A45D85D1CB337E6007558B4 /* Bg-MonUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -284,14 +211,6 @@
 							};
 						};
 					};
-					8A45D8511CB337E6007558B4 = {
-						CreatedOnToolsVersion = 7.3;
-						TestTargetID = 8A45D83A1CB337E6007558B4;
-					};
-					8A45D85C1CB337E6007558B4 = {
-						CreatedOnToolsVersion = 7.3;
-						TestTargetID = 8A45D83A1CB337E6007558B4;
-					};
 				};
 			};
 			buildConfigurationList = 8A45D8361CB337E6007558B4 /* Build configuration list for PBXProject "Logglu" */;
@@ -308,8 +227,6 @@
 			projectRoot = "";
 			targets = (
 				8A45D83A1CB337E6007558B4 /* Bg-Mon */,
-				8A45D8511CB337E6007558B4 /* Bg-MonTests */,
-				8A45D85C1CB337E6007558B4 /* Bg-MonUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -329,20 +246,6 @@
 				8A1EA89A1CB7058200343019 /* pattern.jpg in Resources */,
 				8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */,
 				8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8A45D8501CB337E6007558B4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8A45D85B1CB337E6007558B4 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,36 +316,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8A45D84E1CB337E6007558B4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8A45D8571CB337E6007558B4 /* Bg_MonTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8A45D8591CB337E6007558B4 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8A45D8621CB337E6007558B4 /* Bg_MonUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8A45D8541CB337E6007558B4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8A45D83A1CB337E6007558B4 /* Bg-Mon */;
-			targetProxy = 8A45D8531CB337E6007558B4 /* PBXContainerItemProxy */;
-		};
-		8A45D85F1CB337E6007558B4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8A45D83A1CB337E6007558B4 /* Bg-Mon */;
-			targetProxy = 8A45D85E1CB337E6007558B4 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8A45D8421CB337E6007558B4 /* Main.storyboard */ = {
@@ -577,52 +451,6 @@
 			};
 			name = Release;
 		};
-		8A45D86A1CB337E6007558B4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Bg-MonTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-MonTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bg-Mon.app/Bg-Mon";
-			};
-			name = Debug;
-		};
-		8A45D86B1CB337E6007558B4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "Bg-MonTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-MonTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bg-Mon.app/Bg-Mon";
-			};
-			name = Release;
-		};
-		8A45D86D1CB337E6007558B4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "Bg-MonUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-MonUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Bg-Mon";
-			};
-			name = Debug;
-		};
-		8A45D86E1CB337E6007558B4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "Bg-MonUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-MonUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "Bg-Mon";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -640,24 +468,6 @@
 			buildConfigurations = (
 				8A45D8671CB337E6007558B4 /* Debug */,
 				8A45D8681CB337E6007558B4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8A45D8691CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-MonTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8A45D86A1CB337E6007558B4 /* Debug */,
-				8A45D86B1CB337E6007558B4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8A45D86C1CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-MonUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8A45D86D1CB337E6007558B4 /* Debug */,
-				8A45D86E1CB337E6007558B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
