@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>EZAlertController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,12 +52,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D24F22CE22D8B7963B4AD0361CB0B1A</key>
+		<key>00BB443BAF62AE01F3B6A23D656A732C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>51B22FCD184B5B2CADDFEFAE38AD6365</key>
+		<key>80D639EDDB5F6601E32F54E5991C1C7A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B057F5BFF6128C3797B68A4C52DD470</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,12 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE5AD7851EA531896AF51F56A796C802</key>
+		<key>D49FB4046DAED42F09905075C75B9ADA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DE8E494C0F43603B8B4CDACADFBFD837</key>
+		<key>D5A51CC3BF65FE5CCD055D61E8CAB74B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

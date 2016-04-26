@@ -6,6 +6,7 @@ use_frameworks!
 target 'Bg-Mon' do
 pod 'SkyFloatingLabelTextField', '~> 1.0'
 pod 'Notie'
+pod 'EZAlertController', '0.3'
 pod 'BTNavigationDropdownMenu', :git => "https://github.com/mkral/BTNavigationDropdownMenu.git"
 pod 'Charts'
 pod 'MBProgressHUD'
@@ -13,11 +14,4 @@ pod 'UIImageColors',  :git => "https://github.com/jathu/UIImageColors.git"
 pod 'SlideMenuControllerSwift'
 end
 
-target 'Bg-MonTests' do
-
-end
-
-target 'Bg-MonUITests' do
-
-end
-
+	
