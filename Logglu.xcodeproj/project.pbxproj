@@ -23,6 +23,10 @@
 		8A797B691CD00F370082DFEF /* Test_Strip___UITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A797B681CD00F370082DFEF /* Test_Strip___UITest.m */; };
 		8A797B771CD00F560082DFEF /* Test_Strip___Bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A797B761CD00F560082DFEF /* Test_Strip___Bundle.m */; };
 		8A8105601CD06718007BA1E8 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A25C6161CCFD01F00B50B4E /* Media.xcassets */; };
+		8A8105671CD067E9007BA1E8 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A8105661CD067E9007BA1E8 /* NotificationCenter.framework */; };
+		8A81056A1CD067E9007BA1E8 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8105691CD067E9007BA1E8 /* TodayViewController.swift */; };
+		8A81056D1CD067E9007BA1E8 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A81056B1CD067E9007BA1E8 /* MainInterface.storyboard */; };
+		8A8105711CD067E9007BA1E8 /* Test Strip Today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8A8105651CD067E9007BA1E8 /* Test Strip Today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650D61CB8BDED00A86BE5 /* Meal.png */; };
 		8A9650DB1CB8C19C00A86BE5 /* Adjustment.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */; };
 		8A9650DD1CB8C1F500A86BE5 /* 24H.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DC1CB8C1F500A86BE5 /* 24H.png */; };
@@ -57,6 +61,13 @@
 			remoteGlobalIDString = 8A45D83A1CB337E6007558B4;
 			remoteInfo = "Bg-Mon";
 		};
+		8A81056F1CD067E9007BA1E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A45D8331CB337E6007558B4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A8105641CD067E9007BA1E8;
+			remoteInfo = "Test Strip Today";
+		};
 		8AEC392D1CD024C100394F9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A45D8331CB337E6007558B4 /* Project object */;
@@ -74,6 +85,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8A8105751CD067E9007BA1E8 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8A8105711CD067E9007BA1E8 /* Test Strip Today.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AEC391C1CD0237D00394F9A /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -127,6 +149,11 @@
 		8A797B741CD00F560082DFEF /* Test Strip - Bundle.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test Strip - Bundle.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A797B761CD00F560082DFEF /* Test_Strip___Bundle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Test_Strip___Bundle.m"; sourceTree = "<group>"; };
 		8A797B781CD00F560082DFEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A8105651CD067E9007BA1E8 /* Test Strip Today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Test Strip Today.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A8105661CD067E9007BA1E8 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		8A8105691CD067E9007BA1E8 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		8A81056C1CD067E9007BA1E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		8A81056E1CD067E9007BA1E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A9650D61CB8BDED00A86BE5 /* Meal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Meal.png; sourceTree = "<group>"; };
 		8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Adjustment.png; sourceTree = "<group>"; };
 		8A9650DC1CB8C1F500A86BE5 /* 24H.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24H.png; sourceTree = "<group>"; };
@@ -178,6 +205,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A8105621CD067E9007BA1E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A8105671CD067E9007BA1E8 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AEC39281CD024C100394F9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,6 +233,7 @@
 				8A797B751CD00F560082DFEF /* Test Strip - Bundle */,
 				8AEC39201CD024C100394F9A /* Test Strip Watch */,
 				8AEC392F1CD024C100394F9A /* Test Strip Watch Extension */,
+				8A8105681CD067E9007BA1E8 /* Test Strip Today */,
 				8A45D83C1CB337E6007558B4 /* Products */,
 				E5734EEB76940CA15C27FEEF /* Pods */,
 				9C0435CD34FC9A7439C96182 /* Frameworks */,
@@ -212,6 +248,7 @@
 				8A797B741CD00F560082DFEF /* Test Strip - Bundle.xctest */,
 				8AEC391F1CD024C100394F9A /* Test Strip Watch.app */,
 				8AEC392B1CD024C100394F9A /* Test Strip Watch Extension.appex */,
+				8A8105651CD067E9007BA1E8 /* Test Strip Today.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -283,6 +320,16 @@
 			path = "Test Strip - Bundle";
 			sourceTree = "<group>";
 		};
+		8A8105681CD067E9007BA1E8 /* Test Strip Today */ = {
+			isa = PBXGroup;
+			children = (
+				8A8105691CD067E9007BA1E8 /* TodayViewController.swift */,
+				8A81056B1CD067E9007BA1E8 /* MainInterface.storyboard */,
+				8A81056E1CD067E9007BA1E8 /* Info.plist */,
+			);
+			path = "Test Strip Today";
+			sourceTree = "<group>";
+		};
 		8AEC39201CD024C100394F9A /* Test Strip Watch */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +362,7 @@
 				8A2C1A851CC8116700159962 /* Charts.framework */,
 				8A45D8711CB33BA3007558B4 /* HealthKit.framework */,
 				B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */,
+				8A8105661CD067E9007BA1E8 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -342,11 +390,13 @@
 				02A6409DAC7BA80ACC66C6F7 /* Embed Pods Frameworks */,
 				FECFC09B2493CBD41811F4E9 /* Copy Pods Resources */,
 				8AEC391C1CD0237D00394F9A /* Embed Watch Content */,
+				8A8105751CD067E9007BA1E8 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				8AEC39381CD024C100394F9A /* PBXTargetDependency */,
+				8A8105701CD067E9007BA1E8 /* PBXTargetDependency */,
 			);
 			name = "Bg-Mon";
 			productName = "Bg-Mon";
@@ -388,6 +438,23 @@
 			productName = "Test Strip - Bundle";
 			productReference = 8A797B741CD00F560082DFEF /* Test Strip - Bundle.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8A8105641CD067E9007BA1E8 /* Test Strip Today */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A8105721CD067E9007BA1E8 /* Build configuration list for PBXNativeTarget "Test Strip Today" */;
+			buildPhases = (
+				8A8105611CD067E9007BA1E8 /* Sources */,
+				8A8105621CD067E9007BA1E8 /* Frameworks */,
+				8A8105631CD067E9007BA1E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Test Strip Today";
+			productName = "Test Strip Today";
+			productReference = 8A8105651CD067E9007BA1E8 /* Test Strip Today.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		8AEC391E1CD024C100394F9A /* Test Strip Watch */ = {
 			isa = PBXNativeTarget;
@@ -453,6 +520,10 @@
 						CreatedOnToolsVersion = 7.3;
 						TestTargetID = 8A45D83A1CB337E6007558B4;
 					};
+					8A8105641CD067E9007BA1E8 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = Z48RKT6B3T;
+					};
 					8AEC391E1CD024C100394F9A = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = Z48RKT6B3T;
@@ -491,6 +562,7 @@
 				8A797B731CD00F560082DFEF /* Test Strip - Bundle */,
 				8AEC391E1CD024C100394F9A /* Test Strip Watch */,
 				8AEC392A1CD024C100394F9A /* Test Strip Watch Extension */,
+				8A8105641CD067E9007BA1E8 /* Test Strip Today */,
 			);
 		};
 /* End PBXProject section */
@@ -524,6 +596,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A8105631CD067E9007BA1E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A81056D1CD067E9007BA1E8 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +709,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A8105611CD067E9007BA1E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A81056A1CD067E9007BA1E8 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AEC39271CD024C100394F9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -651,6 +739,11 @@
 			isa = PBXTargetDependency;
 			target = 8A45D83A1CB337E6007558B4 /* Bg-Mon */;
 			targetProxy = 8A797B791CD00F560082DFEF /* PBXContainerItemProxy */;
+		};
+		8A8105701CD067E9007BA1E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A8105641CD067E9007BA1E8 /* Test Strip Today */;
+			targetProxy = 8A81056F1CD067E9007BA1E8 /* PBXContainerItemProxy */;
 		};
 		8AEC392E1CD024C100394F9A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -679,6 +772,14 @@
 				8A45D84B1CB337E6007558B4 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8A81056B1CD067E9007BA1E8 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8A81056C1CD067E9007BA1E8 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		8AEC39211CD024C100394F9A /* Interface.storyboard */ = {
@@ -783,6 +884,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Bg-Mon/Bg-Mon.entitlements";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Bg-Mon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -797,6 +899,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Bg-Mon/Bg-Mon.entitlements";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Bg-Mon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -848,6 +951,32 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Test-Strip---Bundle";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Test Strip.app/Test Strip";
+			};
+			name = Release;
+		};
+		8A8105731CD067E9007BA1E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				INFOPLIST_FILE = "Test Strip Today/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-Mon.Test-Strip-Today";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8A8105741CD067E9007BA1E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				INFOPLIST_FILE = "Test Strip Today/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-Mon.Test-Strip-Today";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -953,6 +1082,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8A8105721CD067E9007BA1E8 /* Build configuration list for PBXNativeTarget "Test Strip Today" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A8105731CD067E9007BA1E8 /* Debug */,
+				8A8105741CD067E9007BA1E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		8AEC393A1CD024C100394F9A /* Build configuration list for PBXNativeTarget "Test Strip Watch Extension" */ = {
 			isa = XCConfigurationList;

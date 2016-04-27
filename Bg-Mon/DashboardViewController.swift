@@ -446,9 +446,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 				if (maxArray.maxElement() != nil) {
 					self.defaults!.setDouble(maxArray.maxElement()!, forKey: "highscore")
 					self.defaults!.setDouble(maxArray.minElement()!, forKey: "lowscore")
+                    let averageOfMgDL = maxArray.reduce(0, combine: +) / Double(maxArray.count)
+                    self.defaults?.setDouble(averageOfMgDL, forKey: "average")
 					self.defaults!.synchronize()
 				}
-      
+               
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                     if self.objectAlreadyExist("meals") {
                         self.mealsArray = (self.defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
