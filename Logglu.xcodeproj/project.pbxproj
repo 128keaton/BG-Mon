@@ -22,6 +22,7 @@
 		8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */; };
 		8A797B691CD00F370082DFEF /* Test_Strip___UITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A797B681CD00F370082DFEF /* Test_Strip___UITest.m */; };
 		8A797B771CD00F560082DFEF /* Test_Strip___Bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A797B761CD00F560082DFEF /* Test_Strip___Bundle.m */; };
+		8A8105601CD06718007BA1E8 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A25C6161CCFD01F00B50B4E /* Media.xcassets */; };
 		8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650D61CB8BDED00A86BE5 /* Meal.png */; };
 		8A9650DB1CB8C19C00A86BE5 /* Adjustment.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */; };
 		8A9650DD1CB8C1F500A86BE5 /* 24H.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DC1CB8C1F500A86BE5 /* 24H.png */; };
@@ -531,6 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AEC39251CD024C100394F9A /* Assets.xcassets in Resources */,
+				8A8105601CD06718007BA1E8 /* Media.xcassets in Resources */,
 				8AEC39231CD024C100394F9A /* Interface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -882,7 +884,7 @@
 		8AEC393F1CD024C100394F9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = "Test Strip Watch/Test Strip Watch.entitlements";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = Test_Strip_Watch_Extension;
@@ -899,7 +901,7 @@
 		8AEC39401CD024C100394F9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = "Test Strip Watch/Test Strip Watch.entitlements";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = Test_Strip_Watch_Extension;
@@ -959,6 +961,7 @@
 				8AEC393C1CD024C100394F9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8AEC393E1CD024C100394F9A /* Build configuration list for PBXNativeTarget "Test Strip Watch" */ = {
 			isa = XCConfigurationList;
@@ -967,6 +970,7 @@
 				8AEC39401CD024C100394F9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
