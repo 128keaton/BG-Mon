@@ -127,7 +127,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         tableView!.backgroundView = backgroundView
         tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
-        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("meals") != nil){
+            defaults?.setObject(NSUserDefaults.standardUserDefaults().objectForKey("meals"), forKey: "meals")
+            defaults?.synchronize()
+        }
 		if objectAlreadyExist("meals") {
 			mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
 		} else {
