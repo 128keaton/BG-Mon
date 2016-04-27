@@ -22,18 +22,18 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             view.backgroundColor = UIColor.clearColor()
         }
         if ((defaults?.doubleForKey("highscore")) != nil) {
-            high?.text = "\(defaults?.doubleForKey("highscore") as Double!) mg/dL"
+            high?.text = "\(defaults!.doubleForKey("highscore")) mg/dL"
         }else{
             high?.text = "No data"
         }
         
         if ((defaults?.doubleForKey("lowscore")) != nil) {
-            low?.text = "\(defaults?.doubleForKey("lowscore") as Double!) mg/dL"
+            low?.text = "\(defaults!.doubleForKey("lowscore")) mg/dL"
         }else{
             low?.text = "No data"
         }
         if ((defaults?.doubleForKey("average")) != nil) {
-            average?.text = "\(defaults?.doubleForKey("average") as Double!) mg/dL"
+            average?.text = "\(defaults!.doubleForKey("average")) mg/dL"
         }else{
             average?.text = "No data"
         }

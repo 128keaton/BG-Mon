@@ -187,7 +187,10 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		switch indexPath.row {
 		case 0:
-			self.performSelector(#selector(self.chooseImage))
+            if indexPath.section == 0{
+               self.performSelector(#selector(self.chooseImage)) 
+            }
+			
 			self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		default:
 			self.tableView.deselectRowAtIndexPath(indexPath, animated: true)

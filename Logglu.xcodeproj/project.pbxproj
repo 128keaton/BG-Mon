@@ -958,8 +958,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = "Test Strip Today/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-Mon.Test-Strip-Today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -971,8 +971,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = "Test Strip Today/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bittank.Bg-Mon.Test-Strip-Today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1090,6 +1090,7 @@
 				8A8105741CD067E9007BA1E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8AEC393A1CD024C100394F9A /* Build configuration list for PBXNativeTarget "Test Strip Watch Extension" */ = {
 			isa = XCConfigurationList;
