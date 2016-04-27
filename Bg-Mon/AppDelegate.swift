@@ -9,15 +9,26 @@
 import UIKit
 import CoreData
 import SlideMenuControllerSwift
+import WatchConnectivity
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
+        if WCSession.isSupported() {
+            session = WCSession.defaultSession()
+        }
         return true
     }
 
@@ -121,5 +132,40 @@ extension NSUserDefaults {
         }
         return isFirstLaunch
     }
+}
+
+extension AppDelegate: WCSessionDelegate {
+
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        if message["type"] as! String == "request" {
+          
+       
+            print("Sending from WatchKit")
+        }else if message["type"] as! String == "diabeticInformation"{
+            
+        }else if message["type"] as! String == "transmit" {
+            
+            if objectAlreadyExist("meals") {
+                let meals = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")!.objectForKey("meals")?.mutableCopy() as! NSMutableArray
+                meals.addObject(message["data"] as! NSMutableDictionary)
+                replyHandler(["message": "successfully saved into existing array"])
+                print("Existing Array")
+                NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.setObject(meals, forKey: "meals")
+            }else{
+                let meals = NSMutableArray()
+                meals.addObject(message["data"] as! NSMutableDictionary)
+                replyHandler(["message": "successfully saved into new array"])
+                NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.setObject(meals, forKey: "meals")
+            }
+            
+            
+            print("Saving from WatchKit")
+        }
+    }
+    func objectAlreadyExist(key: String) -> Bool {
+        return NSUserDefaults(suiteName: "group.com.128keaton.test-strip")!.objectForKey(key) != nil
+    }
+    
 }
 

@@ -170,9 +170,27 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! MealCell
         let type = mealArray![indexPath.row]["type"] as! String
-		cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String)\nmg/dL"
-		cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String)\ncarbs"
-		cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String)\nunits"
+        //TODO - clean this monstrosity up
+        if(mealArray![indexPath.row]["bloodGlucose"] is String){
+            cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String)\nmg/dL"
+        }else{
+            cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! Double)\nmg/dL"
+        }
+        if(mealArray![indexPath.row]["carbs"] is String){
+            cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String)\ncarbs"
+        }else{
+            cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! Double)\ncarbs"
+        }
+        if(mealArray![indexPath.row]["insulin"] is String){
+            cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String)\nunits"
+        }else{
+            cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! Double)\nunits"
+        }
+        
+        
+		
+		
+	
         cell.type?.text = mealArray![indexPath.row]["type"] as? String
 		cell.backgroundColor = UIColor.blackColor()
         cell.time?.text = self.getTime(indexPath)

@@ -9,7 +9,7 @@
 import Foundation
 import WatchKit
 import HealthKit
-import UIKit
+import WatchConnectivity
 class BloodGlucose: WKInterfaceController {
     @IBOutlet var bgPicker: WKInterfacePicker!
 
@@ -139,6 +139,14 @@ class Success: WKInterfaceController{
 }
 class HealthKitUploader: NSObject {
     
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+    }
     
     private var healthStore = HKHealthStore()
     let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
@@ -186,22 +194,17 @@ class HealthKitUploader: NSObject {
     func saveLocally(carbs: Double, bloodGlucose: Double, insulin: Double){
         
         let beetusDictionary = ["type" : "Full Meal", "bloodGlucose" : bloodGlucose, "carbs" : carbs, "insulin" : insulin, "date": NSDate()]
+
+        if(WCSession.isSupported()){
+            session = WCSession.defaultSession()
+            session!.sendMessage(["data" : beetusDictionary, "type" : "transmit"], replyHandler:  { (response) -> Void in
+                    print(response["message"])
         
-        
-        print(beetusDictionary)
-       
-        var mealsArray: NSMutableArray?
-        
-        if objectAlreadyExist("meals") {
-            mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
-        }else{
-            mealsArray = NSMutableArray()
+                }, errorHandler:  { (error) -> Void in
+                    
+                    print(error)
+            })
         }
-        
-        mealsArray?.insertObject(beetusDictionary, atIndex: 0)
-        
-        defaults!.setObject(mealsArray, forKey: "meals")
-        defaults!.synchronize()
         self.uploadToHealthKit(bloodGlucose, carbAmount: carbs)
     }
     
@@ -244,4 +247,8 @@ class HealthKitUploader: NSObject {
     }
 
 
+}
+
+extension HealthKitUploader: WCSessionDelegate {
+    
 }

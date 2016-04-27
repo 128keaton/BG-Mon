@@ -134,9 +134,16 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 			mealsArray = NSMutableArray()
 		}
 		for object in mealsArray! {
-			let meal = object["insulin"] as! String
-
+            if object["insulin"] is String {
+                let meal = object["insulin"] as! String
+                
                 sampleInsulin.append(Double(meal)!)
+            }else{
+                let meal = object["insulin"] as! Double
+                
+                sampleInsulin.append(meal)
+            }
+           
 		}
 
 		sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
@@ -334,9 +341,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 if (indexPath.row < self.mealsArray?.count && self.mealsArray != nil) {
                     let stopIT = self.mealsArray![indexPath.row];
                     let xcodeSTOPBREAKING = stopIT["date"] as! NSDate
-                    let REALLYITSGETTINGOLD = stopIT["carbs"] as! String
+                    let REALLYITSGETTINGOLD = stopIT["carbs"]
+                    if(REALLYITSGETTINGOLD is String){
+                        cell.carbs!.text = "\(REALLYITSGETTINGOLD as! String)\ncarbs"
+                    }else{
+                        cell.carbs!.text = "\(REALLYITSGETTINGOLD as! Double)\ncarbs"
+                    }
                     cell.time?.text = formatter.stringFromDate(xcodeSTOPBREAKING)
-                    cell.carbs!.text = "\(REALLYITSGETTINGOLD)\ncarbs"
+                    
                 }
             } else {
                 cell.insulin?.text = "No data"
@@ -446,10 +458,20 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                     self.sampleInsulin.removeAll()
                     for object in self.mealsArray! {
-                        let meal = object["insulin"] as! String
+                       
+                        
+                        if object["insulin"] is String {
+                            let meal = object["insulin"] as! String
+                            
+                            self.sampleInsulin.append(Double(meal)!)
+                        }else{
+                            let meal = object["insulin"] as! Double
+                            
+                            self.sampleInsulin.append(meal)
+                        }
                         
        
-                        self.sampleInsulin.append(Double(meal)!)
+                        
                     }
 					self.tableView!.reloadData()
                     self.insulinChart?.notifyDataSetChanged()
