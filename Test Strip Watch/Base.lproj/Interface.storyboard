@@ -5,12 +5,13 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--Add Meal-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Test_Strip_Watch" customModuleProvider="target">
+                <controller title="Add Meal" alwaysBounce="YES" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Test_Strip_Watch" customModuleProvider="target">
                     <items>
-                        <button width="0.69999999999999996" height="0.69999999999999996" alignment="center" verticalAlignment="center" title="Add" id="X7G-rb-iNl">
+                        <button width="0.69999999999999996" height="0.80000000000000004" alignment="center" verticalAlignment="center" title="Add Meal" id="X7G-rb-iNl">
+                            <color key="backgroundColor" red="0.34935549440000002" green="0.80892913509999997" blue="0.42647987230000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="f5f-VI-Ozv" kind="push" id="tbJ-0y-1H3"/>
                             </connections>
@@ -20,30 +21,84 @@
             </objects>
             <point key="canvasLocation" x="565" y="430"/>
         </scene>
-        <!--Meal-->
+        <!--mg/dL-->
         <scene sceneID="4Xa-35-EIn">
             <objects>
-                <controller id="f5f-VI-Ozv" customClass="Meal" customModule="Test_Strip_Watch_Extension">
+                <controller identifier="Blood Glucose" title="mg/dL" id="f5f-VI-Ozv" customClass="BloodGlucose" customModule="Test_Strip_Watch_Extension">
                     <items>
-                        <label width="136" height="36.5" alignment="center" text="Add Meal:" textAlignment="center" id="F4m-la-2p5">
+                        <label width="136" height="36.5" alignment="center" text="Blood Glucose:" textAlignment="center" id="F4m-la-2p5">
                             <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
                         </label>
-                        <picker height="100" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="75q-Lp-LCQ"/>
-                        <separator alignment="left" id="DsR-1Y-obq"/>
-                        <picker height="100" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="NSZ-la-2Rg"/>
-                        <button width="1" alignment="left" title="Save" id="Ssl-9H-D9f">
+                        <picker height="0.5" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="75q-Lp-LCQ">
                             <connections>
-                                <action selector="dismiss" destination="f5f-VI-Ozv" id="WZz-s4-mbW"/>
+                                <action selector="pickerAction:" destination="f5f-VI-Ozv" id="9eH-Qd-lj9"/>
+                            </connections>
+                        </picker>
+                        <separator alignment="left" id="DsR-1Y-obq"/>
+                        <button width="1" alignment="left" title="Next" id="Ssl-9H-D9f">
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="moveToCarbs" destination="f5f-VI-Ozv" id="rTV-bT-eEh"/>
                             </connections>
                         </button>
                     </items>
                     <connections>
                         <outlet property="bgPicker" destination="75q-Lp-LCQ" id="pl2-Dg-SHX"/>
-                        <outlet property="carbPicker" destination="NSZ-la-2Rg" id="ZBd-pW-57H"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="869" y="430"/>
+            <point key="canvasLocation" x="840" y="430"/>
+        </scene>
+        <!--Carbs-->
+        <scene sceneID="AI2-Up-0KN">
+            <objects>
+                <controller identifier="Carbohydrates" title="Carbs" animationDuration="0.59999999999999998" id="EH8-Yy-GUr" customClass="Carbohydrates" customModule="Test_Strip_Watch_Extension">
+                    <items>
+                        <label width="136" height="36.5" alignment="center" text="Carbohydrates:" textAlignment="center" id="mCR-rs-1mc">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                        </label>
+                        <picker height="0.5" alignment="left" focusStyle="stack" indicatorMode="shownWhileFocused" id="lDn-XV-4Dv">
+                            <connections>
+                                <action selector="pickerAction:" destination="EH8-Yy-GUr" id="HLJ-RV-eU1"/>
+                            </connections>
+                        </picker>
+                        <separator alignment="left" id="dRy-sN-hFa"/>
+                        <button width="1" alignment="left" title="Calculate" id="2pF-6O-g2v">
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="moveAndCalculate" destination="EH8-Yy-GUr" id="x9R-tk-XIL"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="carbPicker" destination="lDn-XV-4Dv" id="Cgx-p8-y6p"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1085" y="430"/>
+        </scene>
+        <!--Success-->
+        <scene sceneID="ZyD-aV-AdU">
+            <objects>
+                <controller identifier="Success" title="Success" id="UmK-sF-ZRL" customClass="Success" customModule="Test_Strip_Watch_Extension">
+                    <items>
+                        <label width="1" height="0.20000000000000001" alignment="left" text="You should dose:" textAlignment="center" id="tag-r8-OgI"/>
+                        <label width="1" height="0.5" alignment="left" text="10 units" textAlignment="center" id="QRy-pj-vkC">
+                            <fontDescription key="font" type="boldSystem" pointSize="21"/>
+                        </label>
+                        <button width="1" alignment="left" title="OK" id="veO-uW-8q4">
+                            <color key="backgroundColor" red="0.34935549437178104" green="0.80892913510101017" blue="0.42647987227855011" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="save" destination="UmK-sF-ZRL" id="JZE-KZ-d8E"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="dosageLabel" destination="QRy-pj-vkC" id="tJZ-Pd-7GJ"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1332" y="430"/>
         </scene>
     </scenes>
 </document>

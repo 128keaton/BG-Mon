@@ -8,38 +8,36 @@
 
 import Foundation
 import WatchKit
-class Meal: WKInterfaceController {
+import HealthKit
+import UIKit
+class BloodGlucose: WKInterfaceController {
     @IBOutlet var bgPicker: WKInterfacePicker!
-    @IBOutlet var carbPicker: WKInterfacePicker!
+
+    var bloodGlucose: [Double]?
+    var selectedBG: Int?
     
-    let items = NSMutableArray(capacity: 300)
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
         var pickerItems: [WKPickerItem] = []
-        var carbItems: [WKPickerItem] = []
+    
         
         for i in 0..<300 {
             let pickerItem = WKPickerItem()
             pickerItem.title =  "\(i) mg/dL"
             pickerItems.append(pickerItem)
-            
+            bloodGlucose?.append(Double(i) )
         }
-        for i in 0..<200 {
-            let pickerItem = WKPickerItem()
-            pickerItem.title =  "\(i) g"
-            carbItems.append(pickerItem)
-            
-        }
-        
+
         bgPicker?.setItems(pickerItems)
         bgPicker?.focus()
         bgPicker.setSelectedItemIndex(120)
         
-        carbPicker.setItems(carbItems)
-        carbPicker.setSelectedItemIndex(40)
-
-        // Configure interface objects here.
     }
+    @IBAction func pickerAction(index: Int) {
+       WKInterfaceDevice.currentDevice().playHaptic(.Click)
+        selectedBG = index
+    }
+    
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
@@ -50,7 +48,200 @@ class Meal: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
-    @IBAction func dismiss(){
-        dismissController()
+    @IBAction func moveToCarbs(){
+        if selectedBG == nil {
+            selectedBG = 120
+        }
+        self.pushControllerWithName("Carbohydrates", context: ["segue": "hierarchical", "data": Double(selectedBG!)])
     }
+}
+
+class Carbohydrates: WKInterfaceController {
+    @IBOutlet var carbPicker: WKInterfacePicker!
+    var healthManagement = HealthKitUploader()
+    
+    internal var bloodGlucose: Double?
+    
+    var carbs: [Double]?
+    
+    var selectedCarb: Int?
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        var carbItems: [WKPickerItem] = []
+        bloodGlucose = context!["data"] as? Double
+        for i in 0..<200 {
+            let pickerItem = WKPickerItem()
+            pickerItem.title =  "\(i) g"
+            carbItems.append(pickerItem)
+            carbs?.append(Double(i))
+            
+        }
+        carbPicker.setItems(carbItems)
+        carbPicker.setSelectedItemIndex(40)
+        carbPicker.setSelectedItemIndex(65)
+        // Configure interface objects here.
+    }
+    @IBAction func pickerAction(index: Int) {
+        WKInterfaceDevice.currentDevice().playHaptic(.Click)
+        selectedCarb = index
+    }
+    
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    @IBAction func moveAndCalculate(){
+        if selectedCarb == nil {
+            selectedCarb = 65
+        }
+        self.pushControllerWithName("Success", context: ["segue": "hierarchical", "data": healthManagement.calculateInsulin(bloodGlucose!, carbs: Double(selectedCarb!)), "carbs" : Double(selectedCarb!), "bloodGlucose" : Double(bloodGlucose!)])
+    }
+
+
+}
+class Success: WKInterfaceController{
+    internal var insulin: Double?
+    @IBOutlet var dosageLabel: WKInterfaceLabel?
+    var beetusDictionary: NSMutableDictionary?
+    let healthManager = HealthKitUploader()
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        insulin = context!["data"] as? Double
+        beetusDictionary = context?.mutableCopy() as? NSMutableDictionary
+        if insulin != nil{
+            dosageLabel?.setText("\( Int(round(insulin!))) Units")
+        }
+        // Configure interface objects here.
+    }
+
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    @IBAction func save(){
+        healthManager.saveLocally(beetusDictionary?.objectForKey("carbs") as! Double, bloodGlucose: beetusDictionary?.objectForKey("bloodGlucose") as! Double, insulin: Double(insulin!))
+        print("saving")
+        self.popToRootController()
+    }
+    
+}
+class HealthKitUploader: NSObject {
+    
+    
+    private var healthStore = HKHealthStore()
+    let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
+    func uploadToHealthKit(bloodGlucoseLevel: Double, carbAmount: Double){
+        
+        
+        var prefUnit: HKUnit?
+        var prefUnitCarbs: HKUnit?
+        let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+        let sampleTypeCarbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
+        
+        let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
+        let bloodGlucose = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+        
+        let healthKitTypes = Set<HKQuantityType>(arrayLiteral: carbs!, bloodGlucose!)
+        
+        self.healthStore.requestAuthorizationToShareTypes(healthKitTypes as Set, readTypes: healthKitTypes as Set) { (success, error) -> Void in
+            if (success) {
+                NSLog("HealthKit authorization success...")
+                
+                self.healthStore.preferredUnitsForQuantityTypes(healthKitTypes as Set, completion: { (preferredUnits, error) -> Void in
+                    if (error == nil) {
+                        NSLog("...preferred unts %@", preferredUnits)
+                        prefUnit = preferredUnits[sampleType!]
+                        prefUnitCarbs = preferredUnits[sampleTypeCarbs!]
+                        let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
+                        
+                        let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
+                        
+                        let quantityCarbs = HKQuantity(unit: prefUnitCarbs!, doubleValue: carbAmount)
+                        
+                        let quantitySampleCarbs = HKQuantitySample(type: sampleTypeCarbs!, quantity: quantityCarbs, startDate: NSDate(), endDate: NSDate())
+                        
+                        self.healthStore.saveObjects([quantitySample, quantitySampleCarbs]) { (success, error) -> Void in
+                            if (success) {
+                                NSLog("Saved blood glucose level")
+                            }
+                            print("Blood glucose: \(bloodGlucoseLevel)")
+                        }
+                    }
+                })
+            }
+        }
+    }
+    func saveLocally(carbs: Double, bloodGlucose: Double, insulin: Double){
+        
+        let beetusDictionary = ["type" : "Full Meal", "bloodGlucose" : bloodGlucose, "carbs" : carbs, "insulin" : insulin, "date": NSDate()]
+        
+        
+        print(beetusDictionary)
+       
+        var mealsArray: NSMutableArray?
+        
+        if objectAlreadyExist("meals") {
+            mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
+        }else{
+            mealsArray = NSMutableArray()
+        }
+        
+        mealsArray?.insertObject(beetusDictionary, atIndex: 0)
+        
+        defaults!.setObject(mealsArray, forKey: "meals")
+        defaults!.synchronize()
+        self.uploadToHealthKit(bloodGlucose, carbAmount: carbs)
+    }
+    
+    func objectAlreadyExist(key: String) -> Bool {
+        return defaults!.objectForKey(key) != nil
+    }
+    func calculateInsulin(glucose: Double, carbs: Double) -> Double{
+        
+        
+        var target: Double? = 120
+        var ratio: Double? = 8
+        var sensitivity: Double? = 30
+        
+    
+        var dosage: Double?
+        
+        if objectAlreadyExist("target") {
+            target = defaults!.objectForKey("target")?.doubleValue
+        }
+        if objectAlreadyExist("ratio") {
+            ratio = defaults!.objectForKey("ratio")?.doubleValue
+        }
+        if objectAlreadyExist("sensitivity") {
+            sensitivity = defaults!.objectForKey("sensitivity")?.doubleValue
+        }
+        // Calulating correction
+        var correction = glucose - target!
+        correction = correction / sensitivity!
+        if correction < 0 {
+            correction = 0
+        }
+        
+        var carbCalulation = carbs
+        carbCalulation = carbCalulation / ratio!
+        
+        dosage = carbCalulation + correction
+        
+        return dosage!
+        
+    }
+
+
 }

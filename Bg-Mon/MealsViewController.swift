@@ -20,14 +20,14 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     let effect = UIBlurEffect(style: .Dark)
     let resizingMask = UIViewAutoresizing.FlexibleWidth
 	var addViewController: AddMeal?
-
+    let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
 	@IBOutlet var glucoseField: UITextField?
 	@IBOutlet var insulinField: UITextField?
 	@IBOutlet var carbsField: UITextField?
 
     override func awakeFromNib() {
         if objectAlreadyExist("meals") {
-            mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray
+            mealArray = defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray
         }
         super.awakeFromNib()
     }
@@ -72,8 +72,8 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 			default:
 				print("Did select item at index: \(indexPath)")
 			}
-            NSUserDefaults.standardUserDefaults().setObject(configType?.rawValue, forKey: "configType")
-            NSUserDefaults.standardUserDefaults().synchronize()
+            self.defaults!.setObject(configType?.rawValue, forKey: "configType")
+            self.defaults!.synchronize()
 
 			self.navigationController!.presentViewController(addViewControllerNavigation, animated: true, completion: nil)
            
@@ -103,7 +103,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
         if objectAlreadyExist("meals") {
-            mealArray = NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray
+            mealArray = defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray
         }
         if mealArray?.count != 0 && mealArray != nil {
             if(mealArray?.count == 1){
@@ -133,7 +133,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     }
 
 	func objectAlreadyExist(key: String) -> Bool {
-		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
+		return defaults!.objectForKey(key) != nil
 	}
 
     
@@ -156,8 +156,8 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         self.mealArray?.removeObjectAtIndex(indexPath.row)
         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        NSUserDefaults.standardUserDefaults().setObject(self.mealArray, forKey: "meals")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        defaults!.setObject(self.mealArray, forKey: "meals")
+        defaults!.synchronize()
     }
 	@IBAction func openMenu() {
 		openLeft()
@@ -230,7 +230,7 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
     let effect = UIBlurEffect(style: .Dark)
     let resizingMask = UIViewAutoresizing.FlexibleWidth.union(UIViewAutoresizing.FlexibleHeight)
     
-    
+    let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
      private var healthStore = HKHealthStore()
     enum AddType: String {
 
@@ -242,7 +242,7 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         self.tableView.beginUpdates()
-        self.configurationType  = NSUserDefaults.standardUserDefaults().objectForKey("configType") as? String
+        self.configurationType  = defaults!.objectForKey("configType") as? String
         self.tableView.endUpdates()
         self.tableView.reloadData()
         self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .None)
@@ -292,9 +292,9 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
     }
     override func viewDidAppear(animated: Bool) {
         
-        if self.tableView(tableView, titleForHeaderInSection: 0) != NSUserDefaults.standardUserDefaults().objectForKey("configType") as? String{
+        if self.tableView(tableView, titleForHeaderInSection: 0) != defaults!.objectForKey("configType") as? String{
             self.tableView.beginUpdates()
-            self.configurationType  = NSUserDefaults.standardUserDefaults().objectForKey("configType") as? String
+            self.configurationType  = defaults!.objectForKey("configType") as? String
             self.tableView.endUpdates()
             self.tableView.reloadData()
             self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
@@ -406,15 +406,15 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         var mealsArray: NSMutableArray?
         
         if objectAlreadyExist("meals") {
-            mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
+            mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
         }else{
             mealsArray = NSMutableArray()
         }
 
         mealsArray?.insertObject(beetusDictionary!, atIndex: 0)
         
-        NSUserDefaults.standardUserDefaults().setObject(mealsArray, forKey: "meals")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        defaults!.setObject(mealsArray, forKey: "meals")
+        defaults!.synchronize()
         if (self.bloodGlucoseCell != nil) {
             self.bloodGlucoseCell?.bloodGlucose?.text = ""
         }
@@ -500,13 +500,13 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 		var dosage: Double?
 
 		if objectAlreadyExist("target") {
-			target = NSUserDefaults.standardUserDefaults().objectForKey("target")?.doubleValue
+			target = defaults!.objectForKey("target")?.doubleValue
 		}
 		if objectAlreadyExist("ratio") {
-			ratio = NSUserDefaults.standardUserDefaults().objectForKey("ratio")?.doubleValue
+			ratio = defaults!.objectForKey("ratio")?.doubleValue
 		}
 		if objectAlreadyExist("sensitivity") {
-			sensitivity = NSUserDefaults.standardUserDefaults().objectForKey("sensitivity")?.doubleValue
+			sensitivity = defaults!.objectForKey("sensitivity")?.doubleValue
 		}
 		// Calulating correction
 		var correction = glucose! - target!
@@ -533,11 +533,11 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         
         
         if objectAlreadyExist("target") {
-            target = NSUserDefaults.standardUserDefaults().objectForKey("target")?.doubleValue
+            target = defaults!.objectForKey("target")?.doubleValue
         }
 
         if objectAlreadyExist("sensitivity") {
-            sensitivity = NSUserDefaults.standardUserDefaults().objectForKey("sensitivity")?.doubleValue
+            sensitivity = defaults!.objectForKey("sensitivity")?.doubleValue
         }
         // Calulating correction
         var correction = glucose! - target!
@@ -550,7 +550,7 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         
     }
 	func objectAlreadyExist(key: String) -> Bool {
-		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
+		return defaults!.objectForKey(key) != nil
 	}
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		let viewController = segue.destinationViewController as! SuccessViewController

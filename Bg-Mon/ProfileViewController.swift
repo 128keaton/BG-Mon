@@ -40,7 +40,7 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 	@IBOutlet var profileImage: UIImageView?
 
 	let imagePicker = UIImagePickerController()
-
+    let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		if objectAlreadyExist("profile-pic") {
@@ -70,9 +70,9 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 
 		imagePicker.delegate = self
 		profileImage?.addGestureRecognizer(tapGesture)
-		highscore?.text = "\(NSUserDefaults.standardUserDefaults().doubleForKey("highscore")) mg/dL"
+		highscore?.text = "\(defaults!.doubleForKey("highscore")) mg/dL"
 
-		lowscore?.text = "\(NSUserDefaults.standardUserDefaults().doubleForKey("lowscore")) mg/dL"
+		lowscore?.text = "\(defaults!.doubleForKey("lowscore")) mg/dL"
 
 		profileImage?.layer.cornerRadius = (profileImage?.bounds.width)! / 2
 		profileImage?.layer.borderWidth = 2
@@ -84,22 +84,22 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 		openLeft()
 	}
 	func objectAlreadyExist(key: String) -> Bool {
-		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
+		return defaults!.objectForKey(key) != nil
 	}
 	func fetchImage(key: String) -> NSData {
-		return NSUserDefaults.standardUserDefaults().dataForKey(key)!
+		return defaults!.dataForKey(key)!
 	}
 	func saveImage(key: String, data: UIImage) {
-		NSUserDefaults.standardUserDefaults().setObject(UIImageJPEGRepresentation(data, 100), forKey: "profile-pic")
-		NSUserDefaults.standardUserDefaults().synchronize()
+		defaults!.setObject(UIImageJPEGRepresentation(data, 100), forKey: "profile-pic")
+		defaults!.synchronize()
 	}
 	func saveName(key: String, name: String) {
-		NSUserDefaults.standardUserDefaults().setObject(name, forKey: "profile-name")
-		NSUserDefaults.standardUserDefaults().synchronize()
+		defaults!.setObject(name, forKey: "profile-name")
+		defaults!.synchronize()
 	}
 
 	func fetchUsername(key: String) -> NSString {
-		return NSUserDefaults.standardUserDefaults().objectForKey(key)! as! NSString
+		return defaults!.objectForKey(key)! as! NSString
 	}
 
 	func notifyNextOfKin() {
@@ -151,20 +151,20 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 
 	@IBAction func saveAll() {
         if sensitivity?.text != "" {
-            NSUserDefaults.standardUserDefaults().setObject(sensitivity?.text, forKey: "sensitivity")
+            defaults!.setObject(sensitivity?.text, forKey: "sensitivity")
         }
         if carbRatio?.text != "" {
-              NSUserDefaults.standardUserDefaults().setObject(carbRatio?.text, forKey: "ratio")
+              defaults!.setObject(carbRatio?.text, forKey: "ratio")
         }
         if targetBG?.text != "" {
-              NSUserDefaults.standardUserDefaults().setObject(targetBG?.text, forKey: "target")
+              defaults!.setObject(targetBG?.text, forKey: "target")
         }
         
         if doctorEmail?.text != "" {
-            NSUserDefaults.standardUserDefaults().setObject(doctorEmail?.text, forKey: "dr-email")
+            defaults!.setObject(doctorEmail?.text, forKey: "dr-email")
         }
         if doctorName?.text != "" {
-            NSUserDefaults.standardUserDefaults().setObject(doctorName?.text, forKey: "dr-name")
+            defaults!.setObject(doctorName?.text, forKey: "dr-name")
         }
         for view in self.view.subviews {
             if view is UITextField{
@@ -173,7 +173,7 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
             }
         }
         self.view.endEditing(true)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        defaults!.synchronize()
 		hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
 		let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
 		dispatch_async(dispatch_get_global_queue(priority, 0)) {

@@ -42,7 +42,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	var sampleInsulin = [Double]()
 	let effect = UIBlurEffect(style: .Dark)
 	let resizingMask = UIViewAutoresizing.FlexibleWidth
-    
+    let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
 
 	var mealsArray: NSMutableArray?
 	override func awakeFromNib() {
@@ -53,7 +53,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		super.viewDidLoad()
         
         self.configureGraphs()
-
+        
         
         let items = ["Add Meal", "Add Correction", "Add Slow Release"]
         if let navigationController = navigationController {
@@ -92,8 +92,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             default:
                 print("Did select item at index: \(indexPath)")
             }
-            NSUserDefaults.standardUserDefaults().setObject(configType?.rawValue, forKey: "configType")
-            NSUserDefaults.standardUserDefaults().synchronize()
+            self.defaults!.setObject(configType?.rawValue, forKey: "configType")
+            self.defaults!.synchronize()
             
             self.navigationController!.presentViewController(addViewControllerNavigation, animated: true, completion: nil)
             
@@ -129,7 +129,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
         
 		if objectAlreadyExist("meals") {
-			mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
+			mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
 		} else {
 			mealsArray = NSMutableArray()
 		}
@@ -267,7 +267,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
 	func objectAlreadyExist(key: String) -> Bool {
-		return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
+		return defaults!.objectForKey(key) != nil
 	}
 
 
@@ -432,15 +432,16 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 				}
 
 				if (maxArray.maxElement() != nil) {
-					NSUserDefaults.standardUserDefaults().setDouble(maxArray.maxElement()!, forKey: "highscore")
-					NSUserDefaults.standardUserDefaults().setDouble(maxArray.minElement()!, forKey: "lowscore")
-					NSUserDefaults.standardUserDefaults().synchronize()
+					self.defaults!.setDouble(maxArray.maxElement()!, forKey: "highscore")
+					self.defaults!.setDouble(maxArray.minElement()!, forKey: "lowscore")
+					self.defaults!.synchronize()
 				}
       
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                     if self.objectAlreadyExist("meals") {
-                        self.mealsArray = (NSUserDefaults.standardUserDefaults().objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
+                        self.mealsArray = (self.defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
                     } else {
+                        
                         self.mealsArray = NSMutableArray()
                     }
                     self.sampleInsulin.removeAll()
@@ -508,14 +509,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             mail.mailComposeDelegate = self
       
             mail.setSubject("Insulin and Blood Glucose Graph \(NSDate())")
-            if NSUserDefaults.standardUserDefaults().objectForKey("dr-email") != nil &&  NSUserDefaults.standardUserDefaults().objectForKey("dr-name") != nil{
-                if(isValidEmail(NSUserDefaults.standardUserDefaults().objectForKey("dr-email") as! String) == false){
+            if defaults!.objectForKey("dr-email") != nil &&  defaults!.objectForKey("dr-name") != nil{
+                if(isValidEmail(defaults!.objectForKey("dr-email") as! String) == false){
                     EZAlertController.alert("Invalid email", message: "The email for your doctor is invalid", acceptMessage: "OK") { () -> () in
                         print("Accepted their fate")
                     }
                 }
-                      mail.setToRecipients([NSUserDefaults.standardUserDefaults().objectForKey("dr-email") as! String])
-                mail.setMessageBody("Dear \(NSUserDefaults.standardUserDefaults().objectForKey("dr-name") as! String), <br> Enclosed is a copy of my blood sugar and insulin data. Hope this is good news!", isHTML: true)
+                      mail.setToRecipients([defaults!.objectForKey("dr-email") as! String])
+                mail.setMessageBody("Dear \(defaults!.objectForKey("dr-name") as! String), <br> Enclosed is a copy of my blood sugar and insulin data. Hope this is good news!", isHTML: true)
             }
             if options["csv"] as! Bool != false {
                 mail.addAttachmentData(csv, mimeType: "text/csv", fileName: "Data \(NSDate()).csv")
