@@ -9,6 +9,7 @@
 import UIKit
 import NotificationCenter
 import QuartzCore
+import Foundation
 class TodayViewController: UITableViewController, NCWidgetProviding {
     
     @IBOutlet var high: UILabel?
@@ -28,12 +29,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         }
         
         if ((defaults?.doubleForKey("lowscore")) != nil) {
-            low?.text = "\(defaults!.doubleForKey("lowscore")) mg/dL"
+            low?.text = "\(Int(round(defaults!.doubleForKey("lowscore")))) mg/dL"
         }else{
             low?.text = "No data"
         }
         if ((defaults?.doubleForKey("average")) != nil) {
-            average?.text = "\(defaults!.doubleForKey("average")) mg/dL"
+            average?.text = "\(round(defaults!.doubleForKey("average"))) mg/dL"
         }else{
             average?.text = "No data"
         }

@@ -193,7 +193,7 @@ class HealthKitUploader: NSObject {
     }
     func saveLocally(carbs: Double, bloodGlucose: Double, insulin: Double){
         
-        let beetusDictionary = ["type" : "Full Meal", "bloodGlucose" : bloodGlucose, "carbs" : carbs, "insulin" : insulin, "date": NSDate()]
+        let beetusDictionary = ["type" : "Full Meal", "bloodGlucose" : String(bloodGlucose), "carbs" : String(carbs), "insulin" : Int(round(insulin)), "date": NSDate()]
 
         if(WCSession.isSupported()){
             session = WCSession.defaultSession()
@@ -219,6 +219,36 @@ class HealthKitUploader: NSObject {
         var sensitivity: Double? = 30
         
     
+        
+        if(WCSession.isSupported()){
+            session = WCSession.defaultSession()
+            session!.sendMessage(["type" : "diabeticInformation"], replyHandler:  { (response) -> Void in
+               
+                let informationDictionary: [String : String]?
+                if response["data"] is [String:String]{
+                    informationDictionary = response["data"] as? [String: String]
+                    if let val = informationDictionary!["target"] {
+                        target = Double(val)
+                    }
+                    if let val = informationDictionary!["ratio"] {
+                        ratio = Double(val)
+                    }
+                    if let val = informationDictionary!["sensitivity"] {
+                        sensitivity = Double(val)
+                    }
+                }else{
+                    print(response["message"])
+                }
+                
+             
+                
+                }, errorHandler:  { (error) -> Void in
+                    
+                    print(error)
+            })
+        }
+
+        
         var dosage: Double?
         
         if objectAlreadyExist("target") {

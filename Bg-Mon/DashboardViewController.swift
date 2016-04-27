@@ -14,7 +14,7 @@ import BTNavigationDropdownMenu
 import MessageUI
 import Photos
 import EZAlertController
-
+import WatchConnectivity
 let healthKitStore: HKHealthStore = HKHealthStore()
 
 class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChartViewDelegate, MFMailComposeViewControllerDelegate {
@@ -23,6 +23,15 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	var preferredUnits = [NSObject: AnyObject]()
 	var healthStore = HKHealthStore()
 
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+    }
+    
     var menuView: BTNavigationDropdownMenu?
     var nav: UINavigationController?
     
@@ -47,6 +56,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	var mealsArray: NSMutableArray?
 	override func awakeFromNib() {
 		super.awakeFromNib()
+       
 	}
 
 	override func viewDidLoad() {
@@ -54,6 +64,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         self.configureGraphs()
         
+        
+        if WCSession.isSupported() {
+            session = WCSession.defaultSession()
+            session?.delegate = self
+            session?.activateSession()
+        }
         
         let items = ["Add Meal", "Add Correction", "Add Slow Release"]
         if let navigationController = navigationController {
@@ -127,11 +143,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         tableView!.backgroundView = backgroundView
         tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
-        if(NSUserDefaults.standardUserDefaults().objectForKey("meals") != nil){
-            defaults?.setObject(NSUserDefaults.standardUserDefaults().objectForKey("meals"), forKey: "meals")
-            defaults?.synchronize()
-        }
-		if objectAlreadyExist("meals") {
+    
+		if objectAlreadyExist("meals")  {
 			mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
 		} else {
 			mealsArray = NSMutableArray()
@@ -434,13 +447,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let row = entry.xIndex
        self.tableView?.selectRowAtIndexPath(NSIndexPath.init(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
     }
-	private func refreshData() {
+	func refreshData() {
 		NSLog("refreshData......")
 		let timeSortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
 		let query = HKSampleQuery(sampleType: self.sampleType, predicate: nil, limit: 0, sortDescriptors: [timeSortDescriptor]) { (query, objects, error) -> Void in
 			if (error == nil) {
 				self.results = objects as! [HKQuantitySample]
-				var maxArray = Array<Double>()
+				/*var maxArray = Array<Double>()
 				for sample in self.results {
 					let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
 					maxArray.append(doubleValue)
@@ -452,7 +465,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                     let averageOfMgDL = maxArray.reduce(0, combine: +) / Double(maxArray.count)
                     self.defaults?.setDouble(averageOfMgDL, forKey: "average")
 					self.defaults!.synchronize()
-				}
+				}*/
+                
+                
+                
                
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                     if self.objectAlreadyExist("meals") {
@@ -461,23 +477,36 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                         
                         self.mealsArray = NSMutableArray()
                     }
+                    var maxArray: [Double] = []
                     self.sampleInsulin.removeAll()
                     for object in self.mealsArray! {
-                       
+                        
+                   
                         
                         if object["insulin"] is String {
                             let meal = object["insulin"] as! String
                             
                             self.sampleInsulin.append(Double(meal)!)
+                            maxArray.append(Double(meal)!)
                         }else{
                             let meal = object["insulin"] as! Double
                             
                             self.sampleInsulin.append(meal)
+                            maxArray.append(meal)
                         }
+                        
                         
        
                         
                     }
+                    if (maxArray.maxElement() != nil) {
+                        self.defaults!.setDouble(maxArray.maxElement()!, forKey: "highscore")
+                        self.defaults!.setDouble(maxArray.minElement()!, forKey: "lowscore")
+                        let averageOfMgDL = maxArray.reduce(0, combine: +) / Double(maxArray.count)
+                        self.defaults?.setDouble(averageOfMgDL, forKey: "average")
+                        self.defaults!.synchronize()
+                    }
+                    
 					self.tableView!.reloadData()
                     self.insulinChart?.notifyDataSetChanged()
                     self.configureGraphs()
@@ -669,4 +698,76 @@ public func >=(lhs: NSDate, rhs: NSDate) -> Bool
 }
 //-------------------------------------------------------------
 
+extension DashboardViewController: WCSessionDelegate {
 
+	func fetchUsername(key: String) -> NSString {
+		let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
+		return defaults!.objectForKey(key)! as! NSString
+	}
+
+	func session(session: WCSession, didReceiveMessage message: [String: AnyObject], replyHandler: ([String: AnyObject]) -> Void) {
+		if message["type"] as! String == "request" {
+
+			print("Sending from WatchKit")
+		} else if message["type"] as! String == "diabeticInformation" {
+			var informationArray: [String: String]?
+
+			if objectAlreadyExist("target") {
+				informationArray?.updateValue(fetchUsername("target") as String, forKey: "target")
+			}
+			if objectAlreadyExist("ratio") {
+				informationArray?.updateValue(fetchUsername("ratio") as String, forKey: "sensitivity")
+			}
+			if objectAlreadyExist("sensitivity") {
+				informationArray?.updateValue(fetchUsername("sensitivity") as String, forKey: "target")
+			}
+            if informationArray != nil {
+                replyHandler(["data": informationArray!])
+            }else{
+                replyHandler(["data": "no data", "message" : "informationArray was nil"])
+            }
+			
+		} else if message["type"] as! String == "transmit" {
+
+			if objectAlreadyExist("meals") {
+				let meals = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")!.objectForKey("meals")?.mutableCopy() as! NSMutableArray
+				meals.insertObject(message["data"]as! NSMutableDictionary, atIndex: 0)
+				replyHandler(["message": "successfully saved into existing array"])
+				print("Existing Array")
+				NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.setObject(meals, forKey: "meals")
+				NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.synchronize()
+                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+					//self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+                    /*for object in meals {
+                        if object["insulin"] is String {
+                            let meal = object["insulin"] as! String
+                            
+                            self.sampleInsulin.append(Double(meal)!)
+                        }else{
+                            let meal = object["insulin"] as! Double
+                            
+                            self.sampleInsulin.append(meal)
+                        }
+                        
+                    }
+                    self.mealsArray = meals.mutableCopy() as? NSMutableArray
+                    
+                    self.tableView?.reloadData()
+					self.insulinChart?.notifyDataSetChanged()
+                    self.upd*/
+                    self.refreshData()
+				}
+			} else {
+				let meals = NSMutableArray()
+				meals.insertObject(message["data"]as! NSMutableDictionary, atIndex: 0)
+				replyHandler(["message": "successfully saved into new array"])
+				NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.setObject(meals, forKey: "meals")
+				NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.synchronize()
+                self.tableView?.reloadData()
+                self.insulinChart?.reloadInputViews()
+			}
+
+			print("Saving from WatchKit")
+		}
+	}
+}
