@@ -36,6 +36,7 @@ class BloodGlucose: WKInterfaceController {
     @IBAction func pickerAction(index: Int) {
        WKInterfaceDevice.currentDevice().playHaptic(.Click)
         selectedBG = index
+        print("Selected index: \(index)")
     }
     
     
@@ -49,9 +50,6 @@ class BloodGlucose: WKInterfaceController {
         super.didDeactivate()
     }
     @IBAction func moveToCarbs(){
-        if selectedBG == nil {
-            selectedBG = 120
-        }
         self.pushControllerWithName("Carbohydrates", context: ["segue": "hierarchical", "data": Double(selectedBG!)])
     }
 }
@@ -150,48 +148,7 @@ class HealthKitUploader: NSObject {
     
     private var healthStore = HKHealthStore()
     let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
-    func uploadToHealthKit(bloodGlucoseLevel: Double, carbAmount: Double){
-        
-        
-        var prefUnit: HKUnit?
-        var prefUnitCarbs: HKUnit?
-        let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
-        let sampleTypeCarbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
-        
-        let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
-        let bloodGlucose = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
-        
-        let healthKitTypes = Set<HKQuantityType>(arrayLiteral: carbs!, bloodGlucose!)
-        
-        self.healthStore.requestAuthorizationToShareTypes(healthKitTypes as Set, readTypes: healthKitTypes as Set) { (success, error) -> Void in
-            if (success) {
-                NSLog("HealthKit authorization success...")
-                
-                self.healthStore.preferredUnitsForQuantityTypes(healthKitTypes as Set, completion: { (preferredUnits, error) -> Void in
-                    if (error == nil) {
-                        NSLog("...preferred unts %@", preferredUnits)
-                        prefUnit = preferredUnits[sampleType!]
-                        prefUnitCarbs = preferredUnits[sampleTypeCarbs!]
-                        let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
-                        
-                        let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
-                        
-                        let quantityCarbs = HKQuantity(unit: prefUnitCarbs!, doubleValue: carbAmount)
-                        
-                        let quantitySampleCarbs = HKQuantitySample(type: sampleTypeCarbs!, quantity: quantityCarbs, startDate: NSDate(), endDate: NSDate())
-                        
-                        self.healthStore.saveObjects([quantitySample, quantitySampleCarbs]) { (success, error) -> Void in
-                            if (success) {
-                                NSLog("Saved blood glucose level")
-                            }
-                            print("Blood glucose: \(bloodGlucoseLevel)")
-                        }
-                    }
-                })
-            }
-        }
-    }
-    func saveLocally(carbs: Double, bloodGlucose: Double, insulin: Double){
+       func saveLocally(carbs: Double, bloodGlucose: Double, insulin: Double){
         
         let beetusDictionary = ["type" : "Full Meal", "bloodGlucose" : String(bloodGlucose), "carbs" : String(carbs), "insulin" : Int(round(insulin)), "date": NSDate()]
 
@@ -205,7 +162,6 @@ class HealthKitUploader: NSObject {
                     print(error)
             })
         }
-        self.uploadToHealthKit(bloodGlucose, carbAmount: carbs)
     }
     
     func objectAlreadyExist(key: String) -> Bool {
@@ -229,13 +185,17 @@ class HealthKitUploader: NSObject {
                     informationDictionary = response["data"] as? [String: String]
                     if let val = informationDictionary!["target"] {
                         target = Double(val)
+                        self.defaults?.setObject(val, forKey: "target")
                     }
                     if let val = informationDictionary!["ratio"] {
                         ratio = Double(val)
+                        self.defaults?.setObject(val, forKey: "ratio")
                     }
                     if let val = informationDictionary!["sensitivity"] {
                         sensitivity = Double(val)
+                        self.defaults?.setObject(val, forKey: "sensitivity")
                     }
+                    self.defaults?.synchronize()
                 }else{
                     print(response["message"])
                 }

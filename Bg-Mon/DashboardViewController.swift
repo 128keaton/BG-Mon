@@ -219,11 +219,9 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 }
                 
 
-                let sample = self.results[i];
-                let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
-                let prefUnit = self.preferredUnits[sampleType!]
-                let doubleValue = sample.quantity.doubleValueForUnit(prefUnit as! HKUnit)
-                bgVals.append(ChartDataEntry(value: doubleValue, xIndex: i))
+                let meal = self.mealsArray![i] as! NSMutableDictionary
+    
+                bgVals.append(ChartDataEntry(value: Double(meal["bloodGlucose"] as! String)!, xIndex: i))
             }
            
         }
@@ -339,110 +337,78 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
 
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return results.count
+		return sampleInsulin.count
 	}
 
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-		if (indexPath.row < mealsArray?.count) {
-            let cell = self.tableView?.dequeueReusableCellWithIdentifier("cell") as! MealCell
-            let sample = self.results[indexPath.row];
-            
-            if indexPath.row < self.sampleInsulin.count {
-                let integer = Int(self.sampleInsulin[indexPath.row])
-                cell.insulin?.text = "\(integer)\nunits"
-                let formatter = NSDateFormatter()
-                formatter.dateStyle = .ShortStyle
-                formatter.timeStyle = .ShortStyle
-                if (indexPath.row < self.mealsArray?.count && self.mealsArray != nil) {
-                    let stopIT = self.mealsArray![indexPath.row];
-                    let xcodeSTOPBREAKING = stopIT["date"] as! NSDate
-                    let REALLYITSGETTINGOLD = stopIT["carbs"]
-                    if(REALLYITSGETTINGOLD is String){
-                        cell.carbs!.text = "\(REALLYITSGETTINGOLD as! String)\ncarbs"
-                    }else{
-                        cell.carbs!.text = "\(REALLYITSGETTINGOLD as! Double)\ncarbs"
-                    }
-                    cell.time?.text = formatter.stringFromDate(xcodeSTOPBREAKING)
-                    
-                }
-            } else {
-                cell.insulin?.text = "No data"
-            }
-            cell.bloodGlucose?.layer.cornerRadius = 5
-            cell.bloodGlucose?.clipsToBounds = true
-            cell.bloodGlucose?.backgroundColor = self.view.tintColor
-            cell.bloodGlucose?.textColor = UIColor.whiteColor()
-            
-            let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
-            
-            cell.bloodGlucose!.text = "\(doubleValue)\nmg/dL"
-
-            
-            
-            cell.carbs?.textColor = UIColor.blackColor()
-            cell.carbs?.layer.cornerRadius = 5
-            cell.carbs?.clipsToBounds = true
-            cell.carbs?.backgroundColor = UIColor.whiteColor()
-            
-            cell.insulin?.layer.cornerRadius = 5
-            
-            cell.insulin?.clipsToBounds = true
-            cell.insulin?.backgroundColor = UIColor.greenColor()
-            
-            cell.time?.textColor = UIColor.whiteColor()
-            cell.time?.clipsToBounds = true
-            cell.time?.layer.cornerRadius = 5
-            cell.backgroundColor = UIColor.clearColor()
-            cell.contentView.backgroundColor = UIColor.clearColor()
-            
-			let type = mealsArray![indexPath.row]["type"] as! String
-			if (type == "Full Meal") {
-				cell.mealType?.image = UIImage.init(named: "Meal.png")
-			} else if (type == "Insulin Correction") {
-				cell.mealType?.image = UIImage.init(named: "Adjustment.png")
-			} else if (type == "Long Lasting") {
-				cell.mealType?.image = UIImage.init(named: "24H.png")
-			}
-            cell.insulinLabel?.hidden = false
-            cell.carbLabel?.hidden = false
-            cell.carbs?.hidden = false
-            cell.insulin?.hidden = false
-            return cell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tableView!.dequeueReusableCellWithIdentifier("cell") as! MealCell
+        let type = mealsArray![indexPath.row]["type"] as! String
+        //TODO - clean this monstrosity up
+        if(mealsArray![indexPath.row]["bloodGlucose"] is String){
+            cell.bloodGlucose?.text = "\(mealsArray![indexPath.row]["bloodGlucose"] as! String)\nmg/dL"
         }else{
-            let cell = self.tableView?.dequeueReusableCellWithIdentifier("healthkit") as! HealthKitCell
-            let sample = self.results[indexPath.row];
-            
-            let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
-            
-            cell.bloodGlucose!.text = "\(doubleValue)\nmg/dL"
-            cell.bloodGlucose?.layer.cornerRadius = 5
-            cell.bloodGlucose?.clipsToBounds = true
-            cell.bloodGlucose?.backgroundColor = self.view.tintColor
-            cell.bloodGlucose?.textColor = UIColor.whiteColor()
-            
-            
-            cell.time?.textColor = UIColor.whiteColor()
-            cell.time?.clipsToBounds = true
-            cell.time?.layer.cornerRadius = 5
-            cell.backgroundColor = UIColor.clearColor()
-            cell.contentView.backgroundColor = UIColor.clearColor()
-            
-            cell.mealType?.image = UIImage.init(named: "HealthKit_iOS_8_icon.png")
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "MM/dd/yy"
-            formatter.timeStyle = .ShortStyle
-            formatter.dateStyle = .ShortStyle
-            cell.time?.text = formatter.stringFromDate(self.results[indexPath.row].startDate)
-            
-            cell.bloodGlucose?.autoresizingMask = .FlexibleWidth
-            cell.bloodGlucose?.center = cell.center
-            return cell
+            cell.bloodGlucose?.text = "\(mealsArray![indexPath.row]["bloodGlucose"] as! Double)\nmg/dL"
         }
+        if(mealsArray![indexPath.row]["carbs"] is String){
+            cell.carbs?.text = "\(mealsArray![indexPath.row]["carbs"] as! String)\ncarbs"
+        }else{
+            cell.carbs?.text = "\(mealsArray![indexPath.row]["carbs"] as! Double)\ncarbs"
+        }
+        if(mealsArray![indexPath.row]["insulin"] is String){
+            cell.insulin?.text = "\(mealsArray![indexPath.row]["insulin"] as! String)\nunits"
+        }else{
+            cell.insulin?.text = "\(mealsArray![indexPath.row]["insulin"] as! Double)\nunits"
+        }
+        
+        
+        
+        
+        
+        cell.type?.text = mealsArray![indexPath.row]["type"] as? String
+        cell.backgroundColor = UIColor.blackColor()
+        cell.time?.text = self.getTime(indexPath)
+        
+        cell.bloodGlucose?.layer.cornerRadius = 5
+        cell.bloodGlucose?.clipsToBounds = true
+        cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
+        cell.bloodGlucose?.textColor = UIColor.blackColor()
+        
+        cell.carbs?.layer.cornerRadius = 5
+        cell.carbs?.clipsToBounds = true
+        cell.carbs?.backgroundColor = self.view.tintColor
+        
+        cell.insulin?.layer.cornerRadius = 5
+        cell.insulin?.clipsToBounds = true
+        cell.insulin?.backgroundColor = UIColor.greenColor()
+        
+        cell.time?.textColor = UIColor.whiteColor()
+        cell.time?.clipsToBounds = true
+        cell.time?.layer.cornerRadius = 5
+        
+        
+        if(type == "Full Meal"){
+            cell.mealType?.image = UIImage.init(named: "Meal.png")
+        }else if(type == "Insulin Correction"){
+            cell.mealType?.image = UIImage.init(named: "Adjustment.png")
+        }else if(type == "Long Lasting"){
+            cell.mealType?.image = UIImage.init(named: "24H.png")
+        }
+        return cell
+    }
+    func getTime(indexPath: NSIndexPath) -> String{
+        let dictionary = mealsArray![indexPath.row] as! NSMutableDictionary
+        if let exists = dictionary["date"]{
+            let formatter = NSDateFormatter()
+            formatter.dateStyle = .ShortStyle
+            formatter.timeStyle = .ShortStyle
+            return formatter.stringFromDate(exists as! NSDate)
+        }else{
+            return "No time recorded"
+        }
+    }
+    
 
-	}
-
-
+    
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
         let row = entry.xIndex
        self.tableView?.selectRowAtIndexPath(NSIndexPath.init(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
@@ -453,21 +419,6 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		let query = HKSampleQuery(sampleType: self.sampleType, predicate: nil, limit: 0, sortDescriptors: [timeSortDescriptor]) { (query, objects, error) -> Void in
 			if (error == nil) {
 				self.results = objects as! [HKQuantitySample]
-				/*var maxArray = Array<Double>()
-				for sample in self.results {
-					let doubleValue = sample.quantity.doubleValueForUnit(self.preferredUnit)
-					maxArray.append(doubleValue)
-				}
-
-				if (maxArray.maxElement() != nil) {
-					self.defaults!.setDouble(maxArray.maxElement()!, forKey: "highscore")
-					self.defaults!.setDouble(maxArray.minElement()!, forKey: "lowscore")
-                    let averageOfMgDL = maxArray.reduce(0, combine: +) / Double(maxArray.count)
-                    self.defaults?.setDouble(averageOfMgDL, forKey: "average")
-					self.defaults!.synchronize()
-				}*/
-                
-                
                 
                
 				NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
@@ -507,7 +458,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                         self.defaults!.synchronize()
                     }
                     
-					self.tableView!.reloadData()
+					//self.tableView!.reloadData()
+                    self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
                     self.insulinChart?.notifyDataSetChanged()
                     self.configureGraphs()
 	
@@ -729,6 +681,49 @@ extension DashboardViewController: WCSessionDelegate {
 			
 		} else if message["type"] as! String == "transmit" {
 
+            
+            func uploadToHealthKit(bloodGlucoseLevel: Double, carbAmount: Double){
+                
+                
+                var prefUnit: HKUnit?
+                var prefUnitCarbs: HKUnit?
+                let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+                let sampleTypeCarbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
+                
+                let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
+                let bloodGlucose = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+                
+                let healthKitTypes = Set<HKQuantityType>(arrayLiteral: carbs!, bloodGlucose!)
+                
+                self.healthStore.requestAuthorizationToShareTypes(healthKitTypes as Set, readTypes: healthKitTypes as Set) { (success, error) -> Void in
+                    if (success) {
+                        NSLog("HealthKit authorization success...")
+                        
+                        self.healthStore.preferredUnitsForQuantityTypes(healthKitTypes as Set, completion: { (preferredUnits, error) -> Void in
+                            if (error == nil) {
+                                NSLog("...preferred unts %@", preferredUnits)
+                                prefUnit = preferredUnits[sampleType!]
+                                prefUnitCarbs = preferredUnits[sampleTypeCarbs!]
+                                let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
+                                
+                                let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
+                                
+                                let quantityCarbs = HKQuantity(unit: prefUnitCarbs!, doubleValue: carbAmount)
+                                
+                                let quantitySampleCarbs = HKQuantitySample(type: sampleTypeCarbs!, quantity: quantityCarbs, startDate: NSDate(), endDate: NSDate())
+                                
+                                self.healthStore.saveObjects([quantitySample, quantitySampleCarbs]) { (success, error) -> Void in
+                                    if (success) {
+                                        NSLog("Saved blood glucose level")
+                                    }
+                                    print("Blood glucose: \(bloodGlucoseLevel)")
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+
 			if objectAlreadyExist("meals") {
 				let meals = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")!.objectForKey("meals")?.mutableCopy() as! NSMutableArray
 				meals.insertObject(message["data"]as! NSMutableDictionary, atIndex: 0)
@@ -736,38 +731,62 @@ extension DashboardViewController: WCSessionDelegate {
 				print("Existing Array")
 				NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.setObject(meals, forKey: "meals")
 				NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.synchronize()
-                dispatch_async(dispatch_get_main_queue()) { [unowned self] in
-					//self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
-                    /*for object in meals {
-                        if object["insulin"] is String {
-                            let meal = object["insulin"] as! String
-                            
-                            self.sampleInsulin.append(Double(meal)!)
-                        }else{
-                            let meal = object["insulin"] as! Double
-                            
-                            self.sampleInsulin.append(meal)
-                        }
-                        
-                    }
-                    self.mealsArray = meals.mutableCopy() as? NSMutableArray
-                    
-                    self.tableView?.reloadData()
-					self.insulinChart?.notifyDataSetChanged()
-                    self.upd*/
-                    self.refreshData()
-				}
+                let messageData = message["data"] as! NSMutableDictionary
+                self.uploadToHealthKit(Double(messageData["bloodGlucose"] as! String)!, carbAmount: Double(messageData["carbs"] as! String)!)
+                self.refreshData()
+				
 			} else {
 				let meals = NSMutableArray()
 				meals.insertObject(message["data"]as! NSMutableDictionary, atIndex: 0)
 				replyHandler(["message": "successfully saved into new array"])
 				NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.setObject(meals, forKey: "meals")
 				NSUserDefaults(suiteName: "group.com.128keaton.test-strip")?.synchronize()
-                self.tableView?.reloadData()
-                self.insulinChart?.reloadInputViews()
+                self.refreshData()
 			}
 
 			print("Saving from WatchKit")
 		}
 	}
+    func uploadToHealthKit(bloodGlucoseLevel: Double, carbAmount: Double){
+        
+        
+        var prefUnit: HKUnit?
+        var prefUnitCarbs: HKUnit?
+        let sampleType = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+        let sampleTypeCarbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
+        
+        let carbs = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierDietaryCarbohydrates)
+        let bloodGlucose = HKQuantityType.quantityTypeForIdentifier(HKQuantityTypeIdentifierBloodGlucose)
+        
+        let healthKitTypes = Set<HKQuantityType>(arrayLiteral: carbs!, bloodGlucose!)
+        
+        self.healthStore.requestAuthorizationToShareTypes(healthKitTypes as Set, readTypes: healthKitTypes as Set) { (success, error) -> Void in
+            if (success) {
+                NSLog("HealthKit authorization success...")
+                
+                self.healthStore.preferredUnitsForQuantityTypes(healthKitTypes as Set, completion: { (preferredUnits, error) -> Void in
+                    if (error == nil) {
+                        NSLog("...preferred unts %@", preferredUnits)
+                        prefUnit = preferredUnits[sampleType!]
+                        prefUnitCarbs = preferredUnits[sampleTypeCarbs!]
+                        let quantity = HKQuantity(unit: prefUnit!, doubleValue: bloodGlucoseLevel)
+                        
+                        let quantitySample = HKQuantitySample(type: sampleType!, quantity: quantity, startDate: NSDate(), endDate: NSDate())
+                        
+                        let quantityCarbs = HKQuantity(unit: prefUnitCarbs!, doubleValue: carbAmount)
+                        
+                        let quantitySampleCarbs = HKQuantitySample(type: sampleTypeCarbs!, quantity: quantityCarbs, startDate: NSDate(), endDate: NSDate())
+                        
+                        self.healthStore.saveObjects([quantitySample, quantitySampleCarbs]) { (success, error) -> Void in
+                            if (success) {
+                                NSLog("Saved blood glucose level")
+                            }
+                            print("Blood glucose: \(bloodGlucoseLevel)")
+                        }
+                    }
+                })
+            }
+        }
+    }
+
 }

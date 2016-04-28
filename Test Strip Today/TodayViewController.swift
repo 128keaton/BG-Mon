@@ -18,7 +18,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
      let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, 3 * 100.0);
+        self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, 320);
         for view in self.tableView.subviews {
             view.backgroundColor = UIColor.clearColor()
         }
@@ -55,7 +55,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         // Do any additional setup after loading the view from its nib.
     }
-    
+    @IBAction func openHome(){
+        self.extensionContext!.openURL(NSURL(string: "test-strip://")!, completionHandler: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
