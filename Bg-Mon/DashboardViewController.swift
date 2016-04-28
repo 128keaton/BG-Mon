@@ -317,6 +317,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	@IBAction func openMenu() {
+        menuView?.hide()
 		openLeft()
 	}
 

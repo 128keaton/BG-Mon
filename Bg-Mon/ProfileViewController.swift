@@ -21,7 +21,7 @@ public extension UIImage {
 	}
 }
 
-class ProfileViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 	@IBOutlet var highscore: UILabel?
 	@IBOutlet var lowscore: UILabel?
     
@@ -36,6 +36,7 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 	@IBOutlet var name: UITextField?
 
 	var hud: MBProgressHUD?
+    
 
 	@IBOutlet var profileImage: UIImageView?
 
@@ -65,6 +66,18 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
         if objectAlreadyExist("dr-name") {
             doctorName!.text = fetchUsername("dr-name") as String
         }
+        name?.delegate = self
+        targetBG?.delegate = self
+        sensitivity?.delegate = self
+        carbRatio?.delegate = self
+        doctorName?.delegate = self
+        
+        name?.nextField = targetBG
+        targetBG?.nextField = sensitivity
+        sensitivity?.nextField = carbRatio
+        carbRatio?.nextField = doctorName
+        doctorName?.nextField = doctorEmail
+        
 
 		let tapGesture = UIGestureRecognizer.init(target: self, action: #selector(ProfileViewController.chooseImage))
 
@@ -111,6 +124,11 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 			hud!.hide(true)
 		}
 	}
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.nextField?.becomeFirstResponder()
+        return true
+    }
+    
 	func chooseImage() {
 		let alertController = UIAlertController.init(title: "What do you want to do?", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
 		let deleteButton = UIAlertAction.init(title: "Delete", style: UIAlertActionStyle.Destructive, handler: { (action) in
@@ -221,3 +239,16 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 		dismissViewControllerAnimated(true, completion: nil)
 	}
 }
+private var kAssociationKeyNextField: UInt8 = 0
+
+extension UITextField {
+    var nextField: UITextField? {
+        get {
+            return objc_getAssociatedObject(self, &kAssociationKeyNextField) as? UITextField
+        }
+        set(newField) {
+            objc_setAssociatedObject(self, &kAssociationKeyNextField, newField, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+}
+

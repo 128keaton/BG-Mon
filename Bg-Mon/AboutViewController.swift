@@ -25,4 +25,7 @@ class AboutViewController: UIViewController {
     func dismiss(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    @IBAction func getSupport(){
+        UIApplication.sharedApplication().openURL(NSURL(string: "http://128keaton.com")!)
+    }
 }

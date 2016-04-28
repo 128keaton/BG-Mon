@@ -160,6 +160,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
         defaults!.synchronize()
     }
 	@IBAction func openMenu() {
+        menuView?.hide()
 		openLeft()
 	}
 

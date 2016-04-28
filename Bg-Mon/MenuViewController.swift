@@ -18,7 +18,7 @@ class MenuViewController: UITableViewController {
     var dashboardViewController: UIViewController?
     var mealsViewController: UIViewController?
     var aboutViewController: UIViewController?
-    
+    let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
     
     override func viewDidLoad() {
         
@@ -63,7 +63,7 @@ class MenuViewController: UITableViewController {
         
     }
 
-   @objc func updateView(){
+   func updateView(){
         print("updating View")
         if objectAlreadyExist("profile-pic") {
             profileImage?.image = UIImage.init(data: fetchImage("profile-pic"))
@@ -81,6 +81,9 @@ class MenuViewController: UITableViewController {
 
         
     }
+    override func viewDidAppear(animated: Bool) {
+        self.updateView()
+    }
     @IBAction func presentAbout(){
         self.performSegueWithIdentifier("about", sender: self)
     }
@@ -97,13 +100,13 @@ class MenuViewController: UITableViewController {
         }
     }
     func objectAlreadyExist(key: String) -> Bool {
-        return NSUserDefaults.standardUserDefaults().objectForKey(key) != nil
+        return defaults!.objectForKey(key) != nil
     }
     func fetchImage(key: String) -> NSData{
-        return NSUserDefaults.standardUserDefaults().dataForKey(key)!
+        return defaults!.dataForKey(key)!
     }
     func fetchUsername(key: String) -> NSString{
-        return NSUserDefaults.standardUserDefaults().objectForKey(key)! as! NSString
+        return defaults!.objectForKey(key)! as! NSString
     }
     
     
