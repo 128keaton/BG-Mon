@@ -16,29 +16,31 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     @IBOutlet var high: UILabel?
     @IBOutlet var low: UILabel?
     @IBOutlet var average: UILabel?
-    
+    let maxCount = 4
+    let database = "meals"
     var mealsArray: NSMutableArray?
     
      let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
     override func viewDidLoad() {
         super.viewDidLoad()
-        if objectAlreadyExist("meals")  {
+        if objectAlreadyExist(database)  {
             mealsArray = NSMutableArray()
-            for i in 0..<4 {
-                    mealsArray?.addObject((defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!![i])
+            for i in 0..<maxCount {
+                    mealsArray?.addObject((defaults!.objectForKey(database)?.mutableCopy() as? NSMutableArray?)!![i])
             }
-            self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(4 * 150));
+            self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(maxCount * 150));
         } else {
             self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(44));
             let backgroundView = UILabel(frame: self.view.frame)
             backgroundView.text = "No readings"
             backgroundView.textAlignment = .Center
             backgroundView.textColor = UIColor.whiteColor()
+            backgroundView.backgroundColor = UIColor.clearColor()
             self.tableView.backgroundView = backgroundView
             
         }
        
-        
+        self.tableView.backgroundColor = UIColor.clearColor()
         
         
         // Do any additional setup after loading the view from its nib.
@@ -73,10 +75,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         
         
-        
+        cell.backgroundColor = UIColor.clearColor()
         
         cell.type?.text = mealsArray![indexPath.row]["type"] as? String
-        cell.backgroundColor = UIColor.blackColor()
+
         cell.time?.text = self.getTime(indexPath)
         
         cell.bloodGlucose?.layer.cornerRadius = 5
@@ -124,8 +126,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if objectAlreadyExist("meals")  {
-            return 4
+        if objectAlreadyExist(database)  {
+            return maxCount
         }else{
             return 0
         }
@@ -143,12 +145,12 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
-        if objectAlreadyExist("meals")  {
+        if objectAlreadyExist(database)  {
             mealsArray = NSMutableArray()
-            for i in 0..<4 {
+            for i in 0..<maxCount {
                 mealsArray?.addObject((defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!![i])
             }
-            self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(4 * 150));
+            self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(maxCount * 150));
         } else {
             self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(44));
             let backgroundView = UILabel(frame: self.view.frame)
