@@ -43,6 +43,7 @@
 		8AEC39351CD024C100394F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AEC39341CD024C100394F9A /* Assets.xcassets */; };
 		8AEC39391CD024C100394F9A /* Test Strip Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8AEC391F1CD024C100394F9A /* Test Strip Watch.app */; };
 		8AEC39421CD0261700394F9A /* MealController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEC39411CD0261700394F9A /* MealController.swift */; };
+		8AFB6EC71CD2C49B00C4E8A6 /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC51FF51CB4187500E1872E /* SuperCell.swift */; };
 		B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */; };
 /* End PBXBuildFile section */
 
@@ -721,6 +722,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A81056A1CD067E9007BA1E8 /* TodayViewController.swift in Sources */,
+				8AFB6EC71CD2C49B00C4E8A6 /* SuperCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
