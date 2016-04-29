@@ -21,11 +21,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-fq-LEv" customClass="CombinedChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="108" width="414" height="330"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="284"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="h2G-UQ-z9p">
+                                        <variation key="heightClass=compact-widthClass=compact" constant="150"/>
+                                    </constraint>
+                                </constraints>
                             </view>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="IZh-1j-j40">
-                                <rect key="frame" x="0.0" y="438" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="392" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Data" id="aGD-kn-Y8J">
                                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="N0E-2P-pGr">
@@ -38,10 +43,12 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Msg-Je-6u4">
-                                <rect key="frame" x="0.0" y="482" width="414" height="254"/>
+                                <rect key="frame" x="0.0" y="436" width="414" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="254" id="j0m-RM-0XR"/>
+                                    <constraint firstAttribute="height" constant="300" id="fk4-99-HlA">
+                                        <variation key="heightClass=compact-widthClass=compact" constant="150"/>
+                                    </constraint>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="diR-yu-M0D" customClass="MealCell" customModule="Test_Strip" customModuleProvider="target">
@@ -51,6 +58,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2am-Z7-uxl">
+                                                    <rect key="frame" x="8" y="17" width="90" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="KXq-7o-wNX"/>
+                                                        <constraint firstAttribute="height" constant="90" id="sOz-Xi-f3s"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="120.0           mg/dL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6b-Gc-vb0">
                                                     <rect key="frame" x="106" y="17" width="94" height="90"/>
                                                     <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
@@ -85,13 +99,6 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2am-Z7-uxl">
-                                                    <rect key="frame" x="8" y="17" width="90" height="90"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="KXq-7o-wNX"/>
-                                                        <constraint firstAttribute="height" constant="90" id="sOz-Xi-f3s"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="n0a-EU-J5f" firstAttribute="top" secondItem="n6b-Gc-vb0" secondAttribute="top" id="2X0-zc-GNa"/>
@@ -276,7 +283,10 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rSc-rK-ufO">
-                                <rect key="frame" x="82" y="72" width="250" height="29"/>
+                                <rect key="frame" x="57" y="72" width="300" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="nbC-97-AOu"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Six Hours"/>
                                     <segment title="12 Hours"/>
@@ -297,13 +307,18 @@
                             <constraint firstAttribute="trailing" secondItem="p5i-fq-LEv" secondAttribute="trailing" id="SYT-dc-bMy"/>
                             <constraint firstItem="p5i-fq-LEv" firstAttribute="trailing" secondItem="IZh-1j-j40" secondAttribute="trailing" id="Thd-0o-45t"/>
                             <constraint firstItem="Msg-Je-6u4" firstAttribute="top" secondItem="IZh-1j-j40" secondAttribute="bottom" id="VgL-kY-qVy"/>
-                            <constraint firstItem="rSc-rK-ufO" firstAttribute="leading" secondItem="eNa-pV-cnr" secondAttribute="leadingMargin" constant="62" id="VhU-wC-WSa"/>
+                            <constraint firstItem="rSc-rK-ufO" firstAttribute="leading" secondItem="eNa-pV-cnr" secondAttribute="leadingMargin" constant="37" id="VhU-wC-WSa"/>
                             <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="eNa-pV-cnr" secondAttribute="leading" id="cxY-jn-6R6"/>
                             <constraint firstItem="IZh-1j-j40" firstAttribute="trailing" secondItem="Msg-Je-6u4" secondAttribute="trailing" id="eOa-o2-GuA"/>
                             <constraint firstItem="IZh-1j-j40" firstAttribute="top" secondItem="p5i-fq-LEv" secondAttribute="bottom" id="qm7-71-m68"/>
                             <constraint firstItem="IZh-1j-j40" firstAttribute="leading" secondItem="Msg-Je-6u4" secondAttribute="leading" id="sOb-sH-pBg"/>
                             <constraint firstItem="Msg-Je-6u4" firstAttribute="bottom" secondItem="4DY-Ln-2zO" secondAttribute="top" id="vL9-Vt-xyA"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="LjA-7x-ike"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="ctR-tj-j6B">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="qby-42-tfu">
@@ -328,7 +343,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YHP-wm-Wdt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1921" y="-89"/>
+            <point key="canvasLocation" x="1863" y="-49"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IrC-gi-Dqf">
