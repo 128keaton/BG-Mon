@@ -797,7 +797,6 @@
                                                 <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                     <color key="value" red="1" green="1" blue="1" alpha="0.68552048141891897" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Blood Glucose"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <outlet property="delegate" destination="GwE-iu-6UC" id="Eiu-93-sf3"/>
@@ -928,9 +927,9 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="26 units" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TcV-Ub-lWW">
-                                            <rect key="frame" x="229" y="5" width="363" height="30"/>
+                                            <rect key="frame" x="365" y="5" width="227" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="363" id="Kpf-dM-4Ou"/>
+                                                <constraint firstAttribute="width" constant="227" id="Da0-Ct-oa1"/>
                                             </constraints>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -941,21 +940,22 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </textField>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Lasting Insulin:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgI-ff-DhB">
-                                            <rect key="frame" x="8" y="9" width="198" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insulin Units:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buq-Aq-2Da">
+                                            <rect key="frame" x="8" y="9" width="122" height="23"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="122" id="h89-QK-g3w"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="hgI-ff-DhB" firstAttribute="leading" secondItem="Rz9-Rn-lbD" secondAttribute="leadingMargin" id="9rO-iW-ZUb"/>
-                                        <constraint firstItem="hgI-ff-DhB" firstAttribute="top" secondItem="Rz9-Rn-lbD" secondAttribute="topMargin" constant="1" id="DMG-HY-7At"/>
-                                        <constraint firstItem="TcV-Ub-lWW" firstAttribute="top" secondItem="Rz9-Rn-lbD" secondAttribute="topMargin" constant="-3" id="EfV-Hu-hb1"/>
-                                        <constraint firstItem="hgI-ff-DhB" firstAttribute="centerY" secondItem="Rz9-Rn-lbD" secondAttribute="centerY" id="Izm-VP-UdU"/>
-                                        <constraint firstItem="TcV-Ub-lWW" firstAttribute="leading" secondItem="hgI-ff-DhB" secondAttribute="trailing" constant="23" id="ZsE-H4-1Sz"/>
-                                        <constraint firstItem="TcV-Ub-lWW" firstAttribute="trailing" secondItem="Rz9-Rn-lbD" secondAttribute="trailingMargin" id="ZyY-kO-P7r"/>
-                                        <constraint firstItem="TcV-Ub-lWW" firstAttribute="centerY" secondItem="hgI-ff-DhB" secondAttribute="centerY" id="xtj-Pj-cJw"/>
+                                        <constraint firstItem="TcV-Ub-lWW" firstAttribute="centerY" secondItem="buq-Aq-2Da" secondAttribute="centerY" id="0rh-cw-b5q"/>
+                                        <constraint firstItem="TcV-Ub-lWW" firstAttribute="top" secondItem="Rz9-Rn-lbD" secondAttribute="topMargin" constant="-3" id="8J9-eE-aqJ"/>
+                                        <constraint firstItem="buq-Aq-2Da" firstAttribute="leading" secondItem="Rz9-Rn-lbD" secondAttribute="leadingMargin" id="FcL-h0-Suy"/>
+                                        <constraint firstItem="TcV-Ub-lWW" firstAttribute="centerY" secondItem="Rz9-Rn-lbD" secondAttribute="centerY" id="T9T-9w-vfG"/>
+                                        <constraint firstItem="TcV-Ub-lWW" firstAttribute="trailing" secondItem="Rz9-Rn-lbD" secondAttribute="trailingMargin" id="oof-UG-Pqt"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

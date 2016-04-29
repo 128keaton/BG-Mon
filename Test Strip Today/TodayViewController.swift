@@ -28,7 +28,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             for i in 0..<maxCount {
                     mealsArray?.addObject((defaults!.objectForKey(database)?.mutableCopy() as? NSMutableArray?)!![i])
             }
-            self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(maxCount * 150));
+            self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(maxCount * 120));
         } else {
             self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(44));
             let backgroundView = UILabel(frame: self.view.frame)
@@ -150,7 +150,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             for i in 0..<maxCount {
                 mealsArray?.addObject((defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!![i])
             }
-            self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(maxCount * 150));
+            self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(maxCount * 120));
         } else {
             self.preferredContentSize = CGSizeMake(self.preferredContentSize.width, CGFloat(44));
             let backgroundView = UILabel(frame: self.view.frame)

@@ -598,9 +598,9 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 			cell = self.tableView.dequeueReusableCellWithIdentifier("bloodGlucose")
 		} else if self.configurationType == "Insulin Correction" && indexPath.row == 1 {
 			cell = self.tableView.dequeueReusableCellWithIdentifier("insulin")
-		} else if self.configurationType == "Long Lasting" && indexPath.row == 0 {
+		} else if self.configurationType == "Long Lasting" && indexPath.row == 0 && cell == nil {
 			cell = self.tableView.dequeueReusableCellWithIdentifier("bloodGlucose")
-		} else if self.configurationType == "Long Lasting" && indexPath.row == 1 {
+		} else if self.configurationType == "Long Lasting" && indexPath.row == 1   && cell == nil{
 			cell = self.tableView.dequeueReusableCellWithIdentifier("longLasting")
 		}
 		if (cell == nil) {
