@@ -35,6 +35,8 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
     
 	@IBOutlet var name: UITextField?
 
+    @IBOutlet var discardButton: UIBarButtonItem?
+    
 	var hud: MBProgressHUD?
     
 
@@ -188,6 +190,7 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
             }
         }
         self.view.endEditing(true)
+        discardButton?.enabled = true
         defaults!.synchronize()
 		hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
 		let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
@@ -198,6 +201,51 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 			}
 		}
 	}
+    @IBAction func discardChanges(){
+        self.view.endEditing(true)
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+     
+            if self.objectAlreadyExist("profile-pic") {
+                self.profileImage?.image = UIImage.init(data: self.fetchImage("profile-pic"))
+            }
+            
+            if self.objectAlreadyExist("profile-name") {
+                self.name!.text = self.fetchUsername("profile-name") as String
+            }else{
+                self.name!.text = ""
+            }
+            if self.objectAlreadyExist("target") {
+                self.targetBG?.text = self.fetchUsername("target") as String
+            }else{
+                self.targetBG?.text = ""
+            }
+            if self.objectAlreadyExist("ratio") {
+                self.carbRatio?.text = self.fetchUsername("ratio") as String
+            }else{
+                self.carbRatio?.text = ""
+            }
+            if self.objectAlreadyExist("sensitivity") {
+                self.sensitivity?.text = self.fetchUsername("sensitivity") as String
+            }else{
+                self.sensitivity?.text = ""
+            }
+            if self.objectAlreadyExist("dr-email") {
+                self.doctorEmail!.text = self.fetchUsername("dr-email") as String
+            }else{
+                self.doctorEmail!.text = ""
+            }
+            if self.objectAlreadyExist("dr-name") {
+                self.doctorName!.text = self.fetchUsername("dr-name") as String
+            }else{
+                self.doctorName?.text = ""
+            }
+            }, completion: nil)
+        
+        discardButton?.enabled = false
+        
+        
+    }
 
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		switch indexPath.row {
@@ -211,6 +259,9 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 			self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		}
 	}
+    func textFieldDidBeginEditing(textField: UITextField) {
+        discardButton?.enabled = true
+    }
 	func updateProfileImage(image: UIImage) {
 		let transitionOptions: UIViewAnimationOptions = [.TransitionFlipFromTop, .ShowHideTransitionViews]
 

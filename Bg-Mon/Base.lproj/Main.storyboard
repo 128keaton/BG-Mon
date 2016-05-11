@@ -27,10 +27,10 @@
                                         <rect key="frame" x="3" y="0.0" width="377" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-fq-LEv" customClass="CombinedChartView" customModule="Charts">
-                                                <rect key="frame" x="0.0" y="59" width="377" height="241"/>
+                                                <rect key="frame" x="0.0" y="64" width="377" height="236"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="241" id="27M-ra-DXR"/>
+                                                    <constraint firstAttribute="height" constant="236" id="27M-ra-DXR"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="h2G-UQ-z9p"/>
                                                     <constraint firstAttribute="height" constant="238" id="iDL-Mu-0i3"/>
                                                 </constraints>
@@ -64,6 +64,12 @@
                                                                 <action selector="configureForSegment" destination="PLj-F4-KPK" eventType="valueChanged" id="cSG-WF-WHC"/>
                                                             </connections>
                                                         </segmentedControl>
+                                                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Rbv-DS-C49">
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <connections>
+                                                                <action selector="export" destination="PLj-F4-KPK" id="SkC-Tf-0Nk"/>
+                                                            </connections>
+                                                        </barButtonItem>
                                                     </navigationItem>
                                                 </items>
                                             </navigationBar>
@@ -81,7 +87,7 @@
                                         <constraints>
                                             <constraint firstItem="G5b-FI-3q1" firstAttribute="top" secondItem="p5i-fq-LEv" secondAttribute="bottom" constant="51" id="62N-Z9-CLz"/>
                                             <constraint firstItem="p5i-fq-LEv" firstAttribute="bottom" secondItem="UcX-I5-bBQ" secondAttribute="top" id="7aa-z7-gt7"/>
-                                            <constraint firstItem="p5i-fq-LEv" firstAttribute="top" secondItem="jv2-jw-YjV" secondAttribute="top" constant="59" id="AtD-gJ-cdK"/>
+                                            <constraint firstItem="p5i-fq-LEv" firstAttribute="top" secondItem="jv2-jw-YjV" secondAttribute="top" constant="64" id="AtD-gJ-cdK"/>
                                             <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="jv2-jw-YjV" secondAttribute="leading" id="C2v-Zp-XaB"/>
                                             <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="G5b-FI-3q1" secondAttribute="leading" id="EbP-aL-STm"/>
                                             <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="UcX-I5-bBQ" secondAttribute="leading" id="EzZ-fz-JQV"/>
@@ -1173,7 +1179,7 @@
                                                         <constraint firstAttribute="width" constant="97" id="pbq-yb-5Vy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1204,7 +1210,7 @@
                                                         <constraint firstAttribute="width" constant="97" id="5rU-B7-gND"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1235,7 +1241,7 @@
                                                         <constraint firstAttribute="width" constant="97" id="iyi-G0-EiU"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1261,7 +1267,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Dr. Hyde" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lk8-8f-ih0">
                                                     <rect key="frame" x="131" y="7" width="461" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doctor's Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqq-pX-vmG">
                                                     <rect key="frame" x="8" y="11" width="119" height="21"/>
@@ -1387,7 +1393,7 @@
                         <barButtonItem key="leftBarButtonItem" enabled="NO" title="Discard" id="w78-bu-WFC">
                             <color key="tintColor" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="openMenu" destination="yV0-uu-YWX" id="vvE-No-JuF"/>
+                                <action selector="discardChanges" destination="yV0-uu-YWX" id="LQ4-ah-Dso"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Save" id="FgK-Px-2FA">
@@ -1399,6 +1405,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="carbRatio" destination="Pg1-KX-IGZ" id="p6N-Kk-QXW"/>
+                        <outlet property="discardButton" destination="w78-bu-WFC" id="XrO-Db-QAf"/>
                         <outlet property="doctorEmail" destination="0oS-Dg-cQT" id="Qdc-kR-VEa"/>
                         <outlet property="doctorName" destination="Lk8-8f-ih0" id="ZsY-hN-pgk"/>
                         <outlet property="highscore" destination="sJp-hN-n8p" id="hiL-hR-EWb"/>

@@ -92,7 +92,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         cell.insulin?.layer.cornerRadius = 5
         cell.insulin?.clipsToBounds = true
-        cell.insulin?.backgroundColor = UIColor.greenColor()
+        cell.insulin?.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.8)
         
         cell.time?.textColor = UIColor.whiteColor()
         cell.time?.clipsToBounds = true

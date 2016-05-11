@@ -128,6 +128,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
         }
   
         self.tableView.separatorStyle = .SingleLine
+        self.tableView.backgroundView = nil
         return 1
     }
 
