@@ -9,11 +9,10 @@
 import Foundation
 import UIKit
 import BTNavigationDropdownMenu
-import Notie
 import HealthKit
 class MealsViewController: UITableViewController, UITextFieldDelegate {
 
-	var menuView: BTNavigationDropdownMenu?
+	var menuView: BTNavigationDropdownMenu!
 	var mealArray: NSMutableArray?
 	var nav: UINavigationController?
 
@@ -45,13 +44,13 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		let addViewControllerNavigation = storyboard.instantiateViewControllerWithIdentifier("AddMeal") as! UINavigationController
 		self.addViewController = addViewControllerNavigation.viewControllers[0] as? AddMeal
 
-		menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
+        menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "", items: items)
 		menuView?.cellSeparatorColor = UIColor.clearColor()
 		menuView?.cellTextLabelAlignment = NSTextAlignment.Center
 		menuView?.cellBackgroundColor = UIColor.blackColor()
 		menuView?.cellTextLabelColor = UIColor.whiteColor()
         self.tableView.backgroundColor = UIColor.blackColor()
-		menuView?.checkMarkImage = nil
+        menuView.checkMarkImage = nil
 		menuView?.cellHeight = 100
 		menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
 
@@ -119,16 +118,17 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if mealArray?.count == 0 || mealArray == nil {
             let label = UILabel.init(frame: self.view.frame)
-            label.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.4)
-            label.text = "No data"
+            label.textColor = UIColor.whiteColor()
+            label.text = "No meals"
             label.tag = 6
             self.tableView.separatorStyle = .None
             label.textAlignment = .Center
-            self.tableView.backgroundView?.addSubview(label)
+            self.tableView.backgroundView = label
             return 1
         }
   
         self.tableView.separatorStyle = .SingleLine
+        self.tableView.backgroundView = nil
         return 1
     }
 
@@ -159,10 +159,6 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
         defaults!.setObject(self.mealArray, forKey: "meals")
         defaults!.synchronize()
     }
-	@IBAction func openMenu() {
-        menuView?.hide()
-		openLeft()
-	}
 
     
 	@IBAction func addMeal() {

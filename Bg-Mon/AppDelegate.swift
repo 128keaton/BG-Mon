@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import SlideMenuControllerSwift
 import WatchConnectivity
 
 @UIApplicationMain

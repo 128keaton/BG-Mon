@@ -15,6 +15,8 @@ import MessageUI
 import Photos
 import EZAlertController
 import WatchConnectivity
+import PagingMenuController
+import GaugeKit
 let healthKitStore: HKHealthStore = HKHealthStore()
 
 class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChartViewDelegate, MFMailComposeViewControllerDelegate {
@@ -32,13 +34,19 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    var menuView: BTNavigationDropdownMenu?
+    var menuView: BTNavigationDropdownMenu!
     var nav: UINavigationController?
     
     @IBOutlet var hourSelector: UISegmentedControl?
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
+    
+    @IBOutlet var pagingMenuController: PagingMenuController?
 
+    
+    @IBOutlet var pagingView: UIView?
+
+    @IBOutlet var scrollyMcScrollface: UIScrollView?
 	@IBOutlet var tableView: UITableView?
 
 	@IBOutlet var lineChart: LineChartView?
@@ -81,14 +89,16 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let addViewControllerNavigation = storyboard.instantiateViewControllerWithIdentifier("AddMeal") as! UINavigationController
         self.addViewController = addViewControllerNavigation.viewControllers[0] as? AddMeal
         
-        menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
+         menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "", items: items)
         menuView?.cellSeparatorColor = UIColor.clearColor()
         menuView?.cellTextLabelAlignment = NSTextAlignment.Center
         menuView?.cellBackgroundColor = UIColor.blackColor()
         menuView?.cellTextLabelColor = UIColor.whiteColor()
-        self.tableView!.backgroundColor = UIColor.blackColor()
-        menuView?.checkMarkImage = nil
+        //self.tableView!.backgroundColor = UIColor.blackColor()
+        menuView.checkMarkImage = nil
         menuView?.cellHeight = 100
+        menuView.animationDuration = 0.1
+        
         menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
 
             var configType: AddMeal.AddType?
@@ -123,6 +133,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         insulinChart!.descriptionText = "";
         insulinChart!.noDataTextDescription = "Data will be loaded soon."
+        insulinChart?.backgroundColor = UIColor.clearColor()
         
         insulinChart!.drawBarShadowEnabled = false
         insulinChart!.drawValueAboveBarEnabled = true
@@ -134,15 +145,51 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         insulinChart!.drawBordersEnabled = false
         insulinChart?.gridBackgroundColor = UIColor.clearColor()
         insulinChart!.maxVisibleValueCount = 15
+        insulinChart!.rightAxis.labelTextColor = UIColor.whiteColor()
+        insulinChart!.leftAxis.labelTextColor = UIColor.whiteColor()
         let backgroundView = UIView(frame: view.bounds)
         backgroundView.autoresizingMask = resizingMask
         backgroundView.addSubview(self.buildImageView())
         backgroundView.addSubview(self.buildBlurView())
         
-        self.view.addSubview(backgroundView)
+      
         
-        tableView!.backgroundView = backgroundView
-        tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
+        self.view.addSubview(backgroundView)
+        self.view.sendSubviewToBack(backgroundView)
+      
+       
+        let average = (self.storyboard?.instantiateViewControllerWithIdentifier("Averages"))! as UIViewController
+        let dose = (self.storyboard?.instantiateViewControllerWithIdentifier("Dose"))! as UIViewController
+        
+      
+        average.view.backgroundColor = UIColor.clearColor()
+        dose.view.backgroundColor = UIColor.clearColor()
+        
+        dose.view.translatesAutoresizingMaskIntoConstraints = false
+        average.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let viewControllers = [average, dose]
+        
+        let options = PagingMenuOptions()
+        options.menuHeight = 35
+        options.scrollEnabled = true
+        options.menuSelectedItemCenter = true
+        options.backgroundColor = UIColor.clearColor()
+        options.textColor = UIColor.whiteColor()
+        options.selectedTextColor = UIColor.whiteColor()
+        options.menuPosition = .Bottom
+        options.menuItemMode = .RoundRect(radius: 7, horizontalPadding: 0, verticalPadding: 3, selectedColor: self.view.tintColor)
+        options.menuDisplayMode = .Standard(widthMode: .Flexible, centerItem: true, scrollingMode: .PagingEnabled)
+        
+        pagingMenuController!.setup(viewControllers: viewControllers, options: options)
+        
+        pagingMenuController?.view.backgroundColor = UIColor.clearColor()
+        
+        scrollyMcScrollface?.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            
+        pagingView!.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+       
+   
     
 		if objectAlreadyExist("meals")  {
 			mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
@@ -183,6 +230,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 		self.healthStore.executeQuery(query)
 	}
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // you can set this name in 'segue.embed' in storyboard
+        if segue.identifier == "embed" {
+            let connectContainerViewController = segue.destinationViewController as!  PagingMenuController
+            pagingMenuController = connectContainerViewController
+        }
+    }
+    
     @IBAction func configureForSegment(){
         
             self.refreshData()
@@ -240,9 +295,11 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
         data.setValueTextColor(UIColor.whiteColor())
-        self.insulinChart?.gridBackgroundColor = UIColor.blackColor()
-        self.insulinChart?.backgroundColor = UIColor.blackColor()
-        
+     
+            if self.sampleInsulin.count == 0{
+                self.insulinChart!.rightAxis.labelTextColor = UIColor.clearColor()
+                self.insulinChart!.leftAxis.labelTextColor = UIColor.clearColor()
+            }
         self.insulinChart?.legend.textColor = UIColor.whiteColor()
         
         self.insulinChart!.xAxis.labelPosition = .Bottom
@@ -297,7 +354,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 		dispatch_sync(serialQueue, { () -> Void in
 			self.authorizeHealthKit(nil)
-			self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+		//	self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
 
 			let query = HKObserverQuery(sampleType: self.sampleType, predicate: nil) { (query, completionHandler, error) -> Void in
 				NSLog("Observer fired for .... %@", query.sampleType!.identifier);
@@ -309,16 +366,17 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 			self.healthStore.executeQuery(query)
 		})
+        scrollyMcScrollface?.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + pagingView!.frame.height)
+        for view in (scrollyMcScrollface?.subviews)!{
+            view.userInteractionEnabled = true
+        }
+
+		
 		super.viewDidAppear(true)
 	}
 
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         insulinChart?.highlightValue(ChartHighlight.init(xIndex: indexPath.row, dataSetIndex: 0))
-		self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
-	}
-	@IBAction func openMenu() {
-        menuView?.hide()
-		openLeft()
 	}
 
 
@@ -460,7 +518,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                     
 					//self.tableView!.reloadData()
-                    self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+             //       self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
                     self.insulinChart?.notifyDataSetChanged()
                     self.configureGraphs()
 	
@@ -791,3 +849,28 @@ extension DashboardViewController: WCSessionDelegate {
     }
 
 }
+
+extension UIScrollView{
+    func setContentViewSize(offset:CGFloat = 0.0) {
+        // dont show scroll indicators
+        showsHorizontalScrollIndicator = false
+        showsVerticalScrollIndicator = false
+        
+        var maxHeight : CGFloat = 0
+        for view in subviews {
+            if view.hidden {
+                continue
+            }
+            let newHeight = view.frame.origin.y + view.frame.height
+            if newHeight > maxHeight {
+                maxHeight = newHeight
+            }
+        }
+        // set content size
+        contentSize = CGSize(width: contentSize.width, height: maxHeight + offset)
+        // show scroll indicators
+        showsHorizontalScrollIndicator = true
+        showsVerticalScrollIndicator = true
+    }
+}
+
