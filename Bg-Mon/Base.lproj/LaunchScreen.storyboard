@@ -13,11 +13,11 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Strip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBR-AI-WdP">
-                                <rect key="frame" x="192" y="261" width="216" height="77"/>
+                                <rect key="frame" x="52" y="213" width="216" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="216" id="Jv7-aB-J6u"/>
                                 </constraints>
@@ -32,7 +32,13 @@
                             <constraint firstItem="yBR-AI-WdP" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="SFR-LW-sxY"/>
                             <constraint firstItem="yBR-AI-WdP" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZU0-uC-Gla"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="DXx-A5-e10"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

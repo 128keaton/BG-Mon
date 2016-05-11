@@ -94,7 +94,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         menuView?.cellBackgroundColor = UIColor.blackColor()
         menuView?.cellTextLabelColor = UIColor.whiteColor()
         //self.tableView!.backgroundColor = UIColor.blackColor()
-
+        menuView.checkMarkImage = nil
         menuView?.cellHeight = 100
         menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
 
@@ -321,7 +321,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		})
         var BGVals: [CGFloat] = []
 		var CarbVals: [CGFloat] = []
-		for i in 0 ..< 7 {
+        var forInt = 0
+        if(7 > mealsArray?.count){
+            forInt = (mealsArray?.count)!
+        }else{
+            forInt = 7
+        }
+		for i in 0..<forInt {
             
             if(mealsArray![i]["bloodGlucose"] is String){
                 	BGVals.append(CGFloat((mealsArray![i]["bloodGlucose"] as! NSString).doubleValue))

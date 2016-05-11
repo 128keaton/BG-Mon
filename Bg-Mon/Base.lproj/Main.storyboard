@@ -20,160 +20,173 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-fq-LEv" customClass="CombinedChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="108" width="320" height="238"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKS-Td-ISR">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rSc-rK-ufO">
+                                        <rect key="frame" x="51" y="307" width="218" height="29"/>
+                                        <segments>
+                                            <segment title="Six Hours"/>
+                                            <segment title="12 Hours"/>
+                                            <segment title="24 Hours"/>
+                                        </segments>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <action selector="configureForSegment" destination="PLj-F4-KPK" eventType="valueChanged" id="cSG-WF-WHC"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-fq-LEv" customClass="CombinedChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="40" width="320" height="260"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="260" id="27M-ra-DXR"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="h2G-UQ-z9p"/>
+                                            <constraint firstAttribute="height" constant="238" id="iDL-Mu-0i3"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="h2G-UQ-z9p"/>
+                                                <exclude reference="iDL-Mu-0i3"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="h2G-UQ-z9p"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEM-tm-Qe9" customClass="Gauge" customModule="GaugeKit">
+                                        <rect key="frame" x="177" y="415" width="135" height="34"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="QQR-AO-RqF"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                <color key="value" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="colorsArray" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="120"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="rate">
+                                                <real key="value" value="120"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="reverse" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXh-53-qL7">
+                                        <rect key="frame" x="177" y="457" width="135" height="47"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="47" id="4lK-j9-jQh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uge-sW-NDN" customClass="Gauge" customModule="GaugeKit">
+                                        <rect key="frame" x="8" y="415" width="135" height="34"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                                <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                                <color key="value" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="colorsArray" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
+                                                <integer key="value" value="3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="120"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="rate">
+                                                <real key="value" value="120"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="reverse" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="47u-us-rXw">
+                                        <rect key="frame" x="0.0" y="344" width="320" height="44"/>
+                                        <items>
+                                            <navigationItem title="Weekly Average" id="q89-Hg-9Og"/>
+                                        </items>
+                                    </navigationBar>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fX8-7O-U14">
+                                        <rect key="frame" x="8" y="457" width="135" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="135" id="QTh-CK-p2L"/>
+                                            <constraint firstAttribute="height" constant="47" id="V6S-fy-86m"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="V6S-fy-86m"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="h2G-UQ-z9p"/>
-                                    <constraint firstAttribute="height" constant="238" id="iDL-Mu-0i3"/>
+                                    <constraint firstItem="OEM-tm-Qe9" firstAttribute="trailing" secondItem="EKS-Td-ISR" secondAttribute="trailingMargin" id="5MU-KY-1IP"/>
+                                    <constraint firstItem="OEM-tm-Qe9" firstAttribute="bottom" secondItem="uge-sW-NDN" secondAttribute="bottom" id="5k0-NE-VzR"/>
+                                    <constraint firstItem="OEM-tm-Qe9" firstAttribute="top" secondItem="uge-sW-NDN" secondAttribute="top" id="8BQ-Au-Zd2"/>
+                                    <constraint firstItem="OEM-tm-Qe9" firstAttribute="leading" secondItem="VXh-53-qL7" secondAttribute="leading" id="9ci-5o-3BJ"/>
+                                    <constraint firstItem="47u-us-rXw" firstAttribute="trailing" secondItem="p5i-fq-LEv" secondAttribute="trailing" id="AEd-dS-UzV"/>
+                                    <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="EKS-Td-ISR" secondAttribute="leading" id="Aq1-E1-A9f"/>
+                                    <constraint firstAttribute="bottom" secondItem="fX8-7O-U14" secondAttribute="bottom" constant="64" id="DO7-t1-CQy"/>
+                                    <constraint firstAttribute="bottom" secondItem="OEM-tm-Qe9" secondAttribute="bottom" constant="119" id="HOw-Or-Xbx"/>
+                                    <constraint firstItem="fX8-7O-U14" firstAttribute="firstBaseline" secondItem="VXh-53-qL7" secondAttribute="firstBaseline" id="ORy-aG-6C9"/>
+                                    <constraint firstItem="VXh-53-qL7" firstAttribute="top" secondItem="OEM-tm-Qe9" secondAttribute="bottom" constant="8" symbolic="YES" id="Pfq-Ix-yNW"/>
+                                    <constraint firstItem="fX8-7O-U14" firstAttribute="trailing" secondItem="uge-sW-NDN" secondAttribute="trailing" id="R8X-7g-oOD"/>
+                                    <constraint firstAttribute="bottom" secondItem="p5i-fq-LEv" secondAttribute="bottom" constant="267" id="SBe-I2-DDG"/>
+                                    <constraint firstItem="fX8-7O-U14" firstAttribute="leading" secondItem="EKS-Td-ISR" secondAttribute="leadingMargin" id="VgF-BY-Clg"/>
+                                    <constraint firstItem="fX8-7O-U14" firstAttribute="top" secondItem="uge-sW-NDN" secondAttribute="bottom" constant="8" id="VtZ-5F-CBI"/>
+                                    <constraint firstItem="47u-us-rXw" firstAttribute="leading" secondItem="p5i-fq-LEv" secondAttribute="leading" id="Vyx-YE-u1e"/>
+                                    <constraint firstItem="fX8-7O-U14" firstAttribute="baseline" secondItem="VXh-53-qL7" secondAttribute="baseline" constant="-1" id="W0j-Bw-56a"/>
+                                    <constraint firstItem="fX8-7O-U14" firstAttribute="leading" secondItem="uge-sW-NDN" secondAttribute="leading" id="g2w-IR-GDA"/>
+                                    <constraint firstItem="OEM-tm-Qe9" firstAttribute="top" secondItem="47u-us-rXw" secondAttribute="bottom" constant="27" id="kCd-OY-T7v"/>
+                                    <constraint firstItem="VXh-53-qL7" firstAttribute="leading" secondItem="fX8-7O-U14" secondAttribute="trailing" constant="34" id="kER-9Q-x7Z"/>
+                                    <constraint firstItem="OEM-tm-Qe9" firstAttribute="top" secondItem="EKS-Td-ISR" secondAttribute="top" constant="415" id="lQh-vv-TVC"/>
+                                    <constraint firstItem="OEM-tm-Qe9" firstAttribute="bottom" secondItem="uge-sW-NDN" secondAttribute="bottom" id="laV-gZ-esp"/>
+                                    <constraint firstAttribute="trailing" secondItem="p5i-fq-LEv" secondAttribute="trailing" id="tH4-jV-gq8"/>
+                                    <constraint firstItem="rSc-rK-ufO" firstAttribute="centerX" secondItem="p5i-fq-LEv" secondAttribute="centerX" id="tSf-Co-6Sa"/>
+                                    <constraint firstItem="VXh-53-qL7" firstAttribute="top" secondItem="OEM-tm-Qe9" secondAttribute="bottom" constant="8" symbolic="YES" id="tbg-zj-qo7"/>
+                                    <constraint firstItem="p5i-fq-LEv" firstAttribute="top" secondItem="EKS-Td-ISR" secondAttribute="top" constant="41" id="v4P-wY-Nxf"/>
+                                    <constraint firstItem="47u-us-rXw" firstAttribute="top" secondItem="rSc-rK-ufO" secondAttribute="bottom" constant="9" id="vhU-lU-lOv"/>
+                                    <constraint firstItem="OEM-tm-Qe9" firstAttribute="trailing" secondItem="VXh-53-qL7" secondAttribute="trailing" id="yGg-Xh-7MC"/>
+                                    <constraint firstItem="p5i-fq-LEv" firstAttribute="centerX" secondItem="EKS-Td-ISR" secondAttribute="centerX" id="yed-ZX-Liw"/>
+                                    <constraint firstItem="rSc-rK-ufO" firstAttribute="top" secondItem="p5i-fq-LEv" secondAttribute="bottom" constant="7" id="ytZ-g2-H8j"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="h2G-UQ-z9p"/>
-                                        <exclude reference="iDL-Mu-0i3"/>
+                                        <exclude reference="v4P-wY-Nxf"/>
+                                        <exclude reference="HOw-Or-Xbx"/>
+                                        <exclude reference="laV-gZ-esp"/>
+                                        <exclude reference="DO7-t1-CQy"/>
+                                        <exclude reference="ORy-aG-6C9"/>
+                                        <exclude reference="Pfq-Ix-yNW"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=compact-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="h2G-UQ-z9p"/>
-                                    </mask>
-                                </variation>
-                            </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rSc-rK-ufO">
-                                <rect key="frame" x="51" y="72" width="218" height="29"/>
-                                <segments>
-                                    <segment title="Six Hours"/>
-                                    <segment title="12 Hours"/>
-                                    <segment title="24 Hours"/>
-                                </segments>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <action selector="configureForSegment" destination="PLj-F4-KPK" eventType="valueChanged" id="cSG-WF-WHC"/>
-                                </connections>
-                            </segmentedControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEM-tm-Qe9" customClass="Gauge" customModule="GaugeKit">
-                                <rect key="frame" x="176" y="404" width="124" height="34"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="colorsArray" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                        <real key="value" value="120"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rate">
-                                        <real key="value" value="120"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="reverse" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXh-53-qL7">
-                                <rect key="frame" x="176" y="440" width="124" height="47"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="4lK-j9-jQh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uge-sW-NDN" customClass="Gauge" customModule="GaugeKit">
-                                <rect key="frame" x="20" y="404" width="124" height="34"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="colorsArray" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                        <real key="value" value="120"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rate">
-                                        <real key="value" value="120"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="reverse" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fX8-7O-U14">
-                                <rect key="frame" x="20" y="440" width="124" height="47"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="124" id="QTh-CK-p2L"/>
-                                    <constraint firstAttribute="height" constant="47" id="V6S-fy-86m"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="V6S-fy-86m"/>
-                                    </mask>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Averages:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjJ-r7-m0u">
-                                <rect key="frame" x="0.0" y="354" width="320" height="45"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="OEM-tm-Qe9" secondAttribute="trailing" constant="4" id="11N-wh-uyr"/>
-                            <constraint firstAttribute="trailing" secondItem="p5i-fq-LEv" secondAttribute="trailing" id="2Ms-UY-Eqw"/>
-                            <constraint firstItem="fX8-7O-U14" firstAttribute="firstBaseline" secondItem="VXh-53-qL7" secondAttribute="firstBaseline" id="37L-9Q-ESG"/>
-                            <constraint firstItem="uge-sW-NDN" firstAttribute="top" secondItem="OEM-tm-Qe9" secondAttribute="top" id="4Ca-Wh-USZ"/>
-                            <constraint firstItem="4DY-Ln-2zO" firstAttribute="top" secondItem="fX8-7O-U14" secondAttribute="bottom" constant="81" id="4cs-Oi-HQm"/>
-                            <constraint firstItem="uge-sW-NDN" firstAttribute="top" secondItem="eNa-pV-cnr" secondAttribute="top" constant="404" id="5v9-id-j3u"/>
-                            <constraint firstItem="fX8-7O-U14" firstAttribute="baseline" secondItem="VXh-53-qL7" secondAttribute="baseline" id="9TT-Ak-hlg"/>
-                            <constraint firstItem="rSc-rK-ufO" firstAttribute="top" secondItem="lo9-ho-1qM" secondAttribute="bottom" constant="8" symbolic="YES" id="Evc-er-laP"/>
-                            <constraint firstAttribute="bottom" secondItem="uge-sW-NDN" secondAttribute="bottom" constant="130" id="FaG-vc-KdS"/>
-                            <constraint firstItem="uge-sW-NDN" firstAttribute="leading" secondItem="fX8-7O-U14" secondAttribute="leading" id="LWk-7v-gOZ"/>
-                            <constraint firstItem="rSc-rK-ufO" firstAttribute="centerX" secondItem="eNa-pV-cnr" secondAttribute="centerX" id="LjA-7x-ike"/>
-                            <constraint firstItem="OEM-tm-Qe9" firstAttribute="trailing" secondItem="VXh-53-qL7" secondAttribute="trailing" id="Om7-Ch-W7x"/>
-                            <constraint firstItem="rSc-rK-ufO" firstAttribute="centerX" secondItem="p5i-fq-LEv" secondAttribute="centerX" id="Qgt-6f-81q"/>
-                            <constraint firstItem="uge-sW-NDN" firstAttribute="bottom" secondItem="OEM-tm-Qe9" secondAttribute="bottom" id="Rn8-5c-q3f"/>
-                            <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="WjJ-r7-m0u" secondAttribute="leading" id="TcE-em-kpE"/>
-                            <constraint firstItem="p5i-fq-LEv" firstAttribute="leading" secondItem="eNa-pV-cnr" secondAttribute="leading" id="WI7-7a-WI7"/>
-                            <constraint firstItem="p5i-fq-LEv" firstAttribute="trailing" secondItem="WjJ-r7-m0u" secondAttribute="trailing" id="Who-E3-6tR"/>
-                            <constraint firstItem="fX8-7O-U14" firstAttribute="top" secondItem="uge-sW-NDN" secondAttribute="bottom" constant="2" id="XBg-fI-3aR"/>
-                            <constraint firstItem="uge-sW-NDN" firstAttribute="top" secondItem="p5i-fq-LEv" secondAttribute="bottom" constant="58" id="Xyz-Cr-9qV"/>
-                            <constraint firstItem="uge-sW-NDN" firstAttribute="leading" secondItem="eNa-pV-cnr" secondAttribute="leadingMargin" constant="4" id="b9i-x3-AMQ"/>
-                            <constraint firstItem="VXh-53-qL7" firstAttribute="top" secondItem="OEM-tm-Qe9" secondAttribute="bottom" constant="2" id="bWs-5j-GZE"/>
-                            <constraint firstItem="OEM-tm-Qe9" firstAttribute="leading" secondItem="VXh-53-qL7" secondAttribute="leading" id="c4b-yL-nP5"/>
-                            <constraint firstItem="uge-sW-NDN" firstAttribute="trailing" secondItem="fX8-7O-U14" secondAttribute="trailing" id="ce4-fS-bJr"/>
-                            <constraint firstItem="WjJ-r7-m0u" firstAttribute="top" secondItem="p5i-fq-LEv" secondAttribute="bottom" constant="8" symbolic="YES" id="cjS-rZ-sB7"/>
-                            <constraint firstItem="OEM-tm-Qe9" firstAttribute="leading" secondItem="uge-sW-NDN" secondAttribute="trailing" constant="32" id="gjD-58-6PR"/>
-                            <constraint firstItem="OEM-tm-Qe9" firstAttribute="width" secondItem="uge-sW-NDN" secondAttribute="width" id="k6W-Ve-jkB"/>
-                            <constraint firstItem="uge-sW-NDN" firstAttribute="top" secondItem="WjJ-r7-m0u" secondAttribute="bottom" constant="5" id="mD8-TM-WeF"/>
-                            <constraint firstItem="VXh-53-qL7" firstAttribute="firstBaseline" secondItem="fX8-7O-U14" secondAttribute="firstBaseline" id="oCp-gw-LhE"/>
-                            <constraint firstItem="p5i-fq-LEv" firstAttribute="top" secondItem="lo9-ho-1qM" secondAttribute="bottom" constant="44" id="ocp-7q-EcZ"/>
-                            <constraint firstItem="4DY-Ln-2zO" firstAttribute="top" secondItem="VXh-53-qL7" secondAttribute="bottom" constant="32" id="ppc-79-MHM"/>
-                            <constraint firstItem="VXh-53-qL7" firstAttribute="baseline" secondItem="fX8-7O-U14" secondAttribute="baseline" id="vnT-m7-SbF"/>
+                            <constraint firstItem="EKS-Td-ISR" firstAttribute="width" secondItem="eNa-pV-cnr" secondAttribute="width" id="5fd-Up-Sxp"/>
+                            <constraint firstItem="EKS-Td-ISR" firstAttribute="height" secondItem="eNa-pV-cnr" secondAttribute="height" id="FJA-fe-Kj9"/>
+                            <constraint firstItem="EKS-Td-ISR" firstAttribute="centerY" secondItem="eNa-pV-cnr" secondAttribute="centerY" id="PKn-h5-VOf"/>
+                            <constraint firstItem="EKS-Td-ISR" firstAttribute="leading" secondItem="eNa-pV-cnr" secondAttribute="leading" id="swn-jk-CtL"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="LjA-7x-ike"/>
-                                <exclude reference="FaG-vc-KdS"/>
-                                <exclude reference="37L-9Q-ESG"/>
-                                <exclude reference="9TT-Ak-hlg"/>
-                                <exclude reference="XBg-fI-3aR"/>
-                                <exclude reference="4cs-Oi-HQm"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Dashboard" id="tFe-qp-qN8"/>
                     <navigationItem key="navigationItem" title="Dashboard" id="ctR-tj-j6B">

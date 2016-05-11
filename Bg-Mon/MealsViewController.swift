@@ -51,7 +51,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		menuView?.cellBackgroundColor = UIColor.blackColor()
 		menuView?.cellTextLabelColor = UIColor.whiteColor()
         self.tableView.backgroundColor = UIColor.blackColor()
-
+        menuView.checkMarkImage = nil
 		menuView?.cellHeight = 100
 		menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
 
