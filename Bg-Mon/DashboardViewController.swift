@@ -15,6 +15,7 @@ import MessageUI
 import Photos
 import EZAlertController
 import WatchConnectivity
+import PagingMenuController
 import GaugeKit
 let healthKitStore: HKHealthStore = HKHealthStore()
 
@@ -39,15 +40,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet var hourSelector: UISegmentedControl?
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
+    
+    @IBOutlet var pagingMenuController: PagingMenuController?
 
     
-    @IBOutlet var bgLabel: UILabel?
-    @IBOutlet var carbLabel: UILabel?
-    @IBOutlet var bgGauge: Gauge?
-    @IBOutlet var carbGauge: Gauge?
-    @IBOutlet var unitGauge: Gauge?
-    @IBOutlet var unitLabel: UILabel?
-    
+    @IBOutlet var pagingView: UIView?
+
+    @IBOutlet var scrollyMcScrollface: UIScrollView?
 	@IBOutlet var tableView: UITableView?
 
 	@IBOutlet var lineChart: LineChartView?
@@ -98,6 +97,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         //self.tableView!.backgroundColor = UIColor.blackColor()
         menuView.checkMarkImage = nil
         menuView?.cellHeight = 100
+        menuView.animationDuration = 0.1
+        
         menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
 
             var configType: AddMeal.AddType?
@@ -151,12 +152,45 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         backgroundView.addSubview(self.buildImageView())
         backgroundView.addSubview(self.buildBlurView())
         
+        scrollyMcScrollface?.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 260)
+        
         self.view.addSubview(backgroundView)
         self.view.sendSubviewToBack(backgroundView)
+      
+        pagingMenuController = self.storyboard?.instantiateViewControllerWithIdentifier("PagingController") as? PagingMenuController
+        let average = (self.storyboard?.instantiateViewControllerWithIdentifier("Averages"))! as UIViewController
+        let dose = (self.storyboard?.instantiateViewControllerWithIdentifier("Dose"))! as UIViewController
         
+        pagingMenuController?.view.frame = CGRectMake(0, self.view.bounds.size.height - 260 - (self.tabBarController?.tabBar.frame.size.height)!, self.view.bounds.width, 260)
+        average.view.backgroundColor = UIColor.clearColor()
+        dose.view.backgroundColor = UIColor.clearColor()
         
-       
-
+        dose.view.translatesAutoresizingMaskIntoConstraints = false
+        average.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let viewControllers = [average, dose]
+        
+        let options = PagingMenuOptions()
+        options.menuHeight = 35
+        options.scrollEnabled = true
+        options.menuSelectedItemCenter = true
+        options.backgroundColor = UIColor.clearColor()
+        options.textColor = UIColor.whiteColor()
+        options.selectedTextColor = UIColor.whiteColor()
+        options.menuPosition = .Bottom
+        options.menuItemMode = .RoundRect(radius: 7, horizontalPadding: 0, verticalPadding: 3, selectedColor: self.view.tintColor)
+        options.menuDisplayMode = .Standard(widthMode: .Flexible, centerItem: true, scrollingMode: .PagingEnabled)
+        pagingMenuController!.setup(viewControllers: viewControllers, options: options)
+        
+        pagingMenuController?.view.backgroundColor = UIColor.clearColor()
+        
+    
+            
+        self.addChildViewController(pagingMenuController!)
+            
+        self.view.addSubview((pagingMenuController?.view)!)
+        
+   
     
 		if objectAlreadyExist("meals")  {
 			mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
@@ -325,58 +359,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 			self.healthStore.executeQuery(query)
 		})
-        var BGVals: [CGFloat] = []
-		var CarbVals: [CGFloat] = []
-        var UnitVals: [CGFloat] = []
-        var forInt = 0
-        if(7 > mealsArray?.count){
-            forInt = (mealsArray?.count)!
-        }else{
-            forInt = 7
-        }
-		for i in 0..<forInt {
-            
-            if(mealsArray![i]["bloodGlucose"] is String){
-                	BGVals.append(CGFloat((mealsArray![i]["bloodGlucose"] as! NSString).doubleValue))
-            }else{
-                	BGVals.append(CGFloat(mealsArray![i]["bloodGlucose"] as! Double))
-            }
-            if(mealsArray![i]["carbs"] is String){
-                CarbVals.append(CGFloat((mealsArray![i]["carbs"] as! NSString).doubleValue))
-            }else{
-                CarbVals.append(CGFloat(mealsArray![i]["carbs"] as! Double))
-            }
-            
-            if(mealsArray![i]["insulin"] is String){
-                UnitVals.append(CGFloat((mealsArray![i]["insulin"] as! NSString).doubleValue))
-            }else{
-                UnitVals.append(CGFloat(mealsArray![i]["insulin"] as! Double))
-            }
-            
-            
-		}
-        
 
-		let bgAvg = BGVals.reduce(0, combine: +) / CGFloat(BGVals.count)
-		let carbAvg = CarbVals.reduce(0, combine: +) / CGFloat(CarbVals.count)
-        let unitAvg = UnitVals.reduce(0, combine: +) / CGFloat(UnitVals.count)
-        
-        if forInt == 0 {
-            bgGauge?.rate = 0
-            carbGauge?.rate = 0
-            unitGauge?.rate = 0
-            unitLabel?.text = "No data"
-            bgLabel?.text = "No data"
-            carbLabel?.text = "No data"
-        }else{
-            bgGauge?.rate = ceil(bgAvg)
-            unitGauge?.rate = ceil(unitAvg)
-            carbGauge?.rate = ceil(carbAvg)
-            bgLabel?.text = "\(ceil(bgAvg)) mg/Dl"
-            carbLabel?.text = "\(ceil(carbAvg)) g"
-            unitLabel?.text = "\(ceil(unitAvg)) units"
-        }
-
+		
 		super.viewDidAppear(true)
 	}
 

@@ -95,7 +95,7 @@ class AveragesViewController: UIViewController {
 			bgGauge?.rate = ceil(bgAvg)
 			unitGauge?.rate = ceil(unitAvg)
 			carbGauge?.rate = ceil(carbAvg)
-			bgLabel?.text = "\(ceil(bgAvg)) mg/Dl"
+			bgLabel?.text = "\(ceil(bgAvg)) mg/dL"
 			carbLabel?.text = "\(ceil(carbAvg)) g"
 			unitLabel?.text = "\(ceil(unitAvg)) units"
 		}
