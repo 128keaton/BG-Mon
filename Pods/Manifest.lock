@@ -31,7 +31,7 @@ CHECKOUT OPTIONS:
     :commit: 9bf511e5f1be31bfbaeac5d742caec7da286a25c
     :git: https://github.com/128keaton/Charts.git
   UIImageColors:
-    :commit: 4843cce131449b097431ed45edede4fd62c2365e
+    :commit: 73e83efcfbcf717f04aa6849d8ff3f344b71531c
     :git: https://github.com/jathu/UIImageColors.git
 
 SPEC CHECKSUMS:
