@@ -15,6 +15,7 @@ import MessageUI
 import Photos
 import EZAlertController
 import WatchConnectivity
+import GaugeKit
 let healthKitStore: HKHealthStore = HKHealthStore()
 
 class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChartViewDelegate, MFMailComposeViewControllerDelegate {
@@ -32,13 +33,19 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    var menuView: BTNavigationDropdownMenu?
+    var menuView: BTNavigationDropdownMenu!
     var nav: UINavigationController?
     
     @IBOutlet var hourSelector: UISegmentedControl?
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
 
+    
+    @IBOutlet var bgLabel: UILabel?
+    @IBOutlet var carbLabel: UILabel?
+    @IBOutlet var bgGauge: Gauge?
+    @IBOutlet var carbGauge: Gauge?
+    
 	@IBOutlet var tableView: UITableView?
 
 	@IBOutlet var lineChart: LineChartView?
@@ -81,13 +88,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         let addViewControllerNavigation = storyboard.instantiateViewControllerWithIdentifier("AddMeal") as! UINavigationController
         self.addViewController = addViewControllerNavigation.viewControllers[0] as? AddMeal
         
-        menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
+         menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "", items: items)
         menuView?.cellSeparatorColor = UIColor.clearColor()
         menuView?.cellTextLabelAlignment = NSTextAlignment.Center
         menuView?.cellBackgroundColor = UIColor.blackColor()
         menuView?.cellTextLabelColor = UIColor.whiteColor()
-        self.tableView!.backgroundColor = UIColor.blackColor()
-        menuView?.checkMarkImage = nil
+        //self.tableView!.backgroundColor = UIColor.blackColor()
+
         menuView?.cellHeight = 100
         menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
 
@@ -123,6 +130,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         insulinChart!.descriptionText = "";
         insulinChart!.noDataTextDescription = "Data will be loaded soon."
+        insulinChart?.backgroundColor = UIColor.clearColor()
         
         insulinChart!.drawBarShadowEnabled = false
         insulinChart!.drawValueAboveBarEnabled = true
@@ -134,15 +142,18 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         insulinChart!.drawBordersEnabled = false
         insulinChart?.gridBackgroundColor = UIColor.clearColor()
         insulinChart!.maxVisibleValueCount = 15
+        
         let backgroundView = UIView(frame: view.bounds)
         backgroundView.autoresizingMask = resizingMask
         backgroundView.addSubview(self.buildImageView())
         backgroundView.addSubview(self.buildBlurView())
         
         self.view.addSubview(backgroundView)
+        self.view.sendSubviewToBack(backgroundView)
         
-        tableView!.backgroundView = backgroundView
-        tableView!.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
+        
+       
+
     
 		if objectAlreadyExist("meals")  {
 			mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
@@ -240,8 +251,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
         data.setValueTextColor(UIColor.whiteColor())
-        self.insulinChart?.gridBackgroundColor = UIColor.blackColor()
-        self.insulinChart?.backgroundColor = UIColor.blackColor()
+     
         
         self.insulinChart?.legend.textColor = UIColor.whiteColor()
         
@@ -297,7 +307,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 		dispatch_sync(serialQueue, { () -> Void in
 			self.authorizeHealthKit(nil)
-			self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
+		//	self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Automatic)
 
 			let query = HKObserverQuery(sampleType: self.sampleType, predicate: nil) { (query, completionHandler, error) -> Void in
 				NSLog("Observer fired for .... %@", query.sampleType!.identifier);
@@ -309,12 +319,37 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 			self.healthStore.executeQuery(query)
 		})
+        var BGVals: [CGFloat] = []
+		var CarbVals: [CGFloat] = []
+		for i in 0 ..< 7 {
+            
+            if(mealsArray![i]["bloodGlucose"] is String){
+                	BGVals.append(CGFloat((mealsArray![i]["bloodGlucose"] as! NSString).doubleValue))
+            }else{
+                	BGVals.append(CGFloat(mealsArray![i]["bloodGlucose"] as! Double))
+            }
+            if(mealsArray![i]["carbs"] is String){
+                CarbVals.append(CGFloat((mealsArray![i]["carbs"] as! NSString).doubleValue))
+            }else{
+                CarbVals.append(CGFloat(mealsArray![i]["carbs"] as! Double))
+            }
+            
+		}
+
+		let bgAvg = BGVals.reduce(0, combine: +) / CGFloat(BGVals.count)
+		let carbAvg = CarbVals.reduce(0, combine: +) / CGFloat(CarbVals.count)
+
+		bgGauge?.rate = ceil(bgAvg)
+		carbGauge?.rate = ceil(carbAvg)
+        bgLabel?.text = "\(ceil(bgAvg)) mg/Dl"
+        carbLabel?.text = "\(ceil(carbAvg)) g"
+
 		super.viewDidAppear(true)
 	}
 
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         insulinChart?.highlightValue(ChartHighlight.init(xIndex: indexPath.row, dataSetIndex: 0))
-		self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
+	//	self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	@IBAction func openMenu() {
         menuView?.hide()
@@ -460,7 +495,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                     
 					//self.tableView!.reloadData()
-                    self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+             //       self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
                     self.insulinChart?.notifyDataSetChanged()
                     self.configureGraphs()
 	

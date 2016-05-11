@@ -13,7 +13,7 @@ import Notie
 import HealthKit
 class MealsViewController: UITableViewController, UITextFieldDelegate {
 
-	var menuView: BTNavigationDropdownMenu?
+	var menuView: BTNavigationDropdownMenu!
 	var mealArray: NSMutableArray?
 	var nav: UINavigationController?
 
@@ -45,13 +45,13 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		let addViewControllerNavigation = storyboard.instantiateViewControllerWithIdentifier("AddMeal") as! UINavigationController
 		self.addViewController = addViewControllerNavigation.viewControllers[0] as? AddMeal
 
-		menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "Hello", items: items, maxWidth: 100)
+        menuView = BTNavigationDropdownMenu.init(navigationController: self.navigationController, title: "", items: items)
 		menuView?.cellSeparatorColor = UIColor.clearColor()
 		menuView?.cellTextLabelAlignment = NSTextAlignment.Center
 		menuView?.cellBackgroundColor = UIColor.blackColor()
 		menuView?.cellTextLabelColor = UIColor.whiteColor()
         self.tableView.backgroundColor = UIColor.blackColor()
-		menuView?.checkMarkImage = nil
+
 		menuView?.cellHeight = 100
 		menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
 

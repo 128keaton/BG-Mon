@@ -17,8 +17,6 @@
 		8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D84A1CB337E6007558B4 /* LaunchScreen.storyboard */; };
 		8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D86F1CB33912007558B4 /* DashboardViewController.swift */; };
 		8A45D8721CB33BA3007558B4 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A45D8711CB33BA3007558B4 /* HealthKit.framework */; };
-		8A45D8751CB351FB007558B4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8741CB351FB007558B4 /* MenuViewController.swift */; };
-		8A45D8771CB3528E007558B4 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8761CB3528E007558B4 /* MenuManager.swift */; };
 		8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */; };
 		8A797B691CD00F370082DFEF /* Test_Strip___UITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A797B681CD00F370082DFEF /* Test_Strip___UITest.m */; };
 		8A797B771CD00F560082DFEF /* Test_Strip___Bundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A797B761CD00F560082DFEF /* Test_Strip___Bundle.m */; };
@@ -141,8 +139,6 @@
 		8A45D86F1CB33912007558B4 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		8A45D8711CB33BA3007558B4 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		8A45D8731CB33BA3007558B4 /* Bg-Mon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Bg-Mon.entitlements"; sourceTree = "<group>"; };
-		8A45D8741CB351FB007558B4 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		8A45D8761CB3528E007558B4 /* MenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8A797B661CD00F370082DFEF /* Test Strip - UITest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test Strip - UITest.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A797B681CD00F370082DFEF /* Test_Strip___UITest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Test_Strip___UITest.m"; sourceTree = "<group>"; };
@@ -222,6 +218,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B03F627F41A8D1171E7CC6F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -265,14 +268,12 @@
 				8A9650DC1CB8C1F500A86BE5 /* 24H.png */,
 				8A45D8731CB33BA3007558B4 /* Bg-Mon.entitlements */,
 				8A45D83E1CB337E6007558B4 /* AppDelegate.swift */,
-				8A45D8741CB351FB007558B4 /* MenuViewController.swift */,
 				8A45D8421CB337E6007558B4 /* Main.storyboard */,
 				8AEC38F41CD01E9400394F9A /* AboutViewController.swift */,
 				8AB1BE2D1CB5F5ED00A291E7 /* SuccessViewController.swift */,
 				8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */,
 				8AC51FF51CB4187500E1872E /* SuperCell.swift */,
 				8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */,
-				8A45D8761CB3528E007558B4 /* MenuManager.swift */,
 				8A45D86F1CB33912007558B4 /* DashboardViewController.swift */,
 				8A9650DE1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png */,
 				8A1EA8991CB7058200343019 /* pattern.jpg */,
@@ -386,12 +387,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A45D8661CB337E6007558B4 /* Build configuration list for PBXNativeTarget "Bg-Mon" */;
 			buildPhases = (
-				FEB2A528771A1BF5FFCC8082 /* Check Pods Manifest.lock */,
+				FEB2A528771A1BF5FFCC8082 /* 📦 Check Pods Manifest.lock */,
 				8A45D8371CB337E6007558B4 /* Sources */,
 				8A45D8381CB337E6007558B4 /* Frameworks */,
 				8A45D8391CB337E6007558B4 /* Resources */,
-				02A6409DAC7BA80ACC66C6F7 /* Embed Pods Frameworks */,
-				FECFC09B2493CBD41811F4E9 /* Copy Pods Resources */,
+				02A6409DAC7BA80ACC66C6F7 /* 📦 Embed Pods Frameworks */,
+				FECFC09B2493CBD41811F4E9 /* 📦 Copy Pods Resources */,
 				8AEC391C1CD0237D00394F9A /* Embed Watch Content */,
 				8A8105751CD067E9007BA1E8 /* Embed App Extensions */,
 			);
@@ -465,6 +466,7 @@
 			buildPhases = (
 				8AEC391D1CD024C100394F9A /* Resources */,
 				8AEC393D1CD024C100394F9A /* Embed App Extensions */,
+				B03F627F41A8D1171E7CC6F5 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -636,14 +638,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02A6409DAC7BA80ACC66C6F7 /* Embed Pods Frameworks */ = {
+		02A6409DAC7BA80ACC66C6F7 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,14 +653,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FEB2A528771A1BF5FFCC8082 /* Check Pods Manifest.lock */ = {
+		FEB2A528771A1BF5FFCC8082 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,14 +668,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FECFC09B2493CBD41811F4E9 /* Copy Pods Resources */ = {
+		FECFC09B2493CBD41811F4E9 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,9 +697,7 @@
 				8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */,
 				8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */,
 				8AB1BE281CB46EFA00A291E7 /* MealsViewController.swift in Sources */,
-				8A45D8771CB3528E007558B4 /* MenuManager.swift in Sources */,
 				8AEC38F51CD01E9400394F9A /* AboutViewController.swift in Sources */,
-				8A45D8751CB351FB007558B4 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,7 +893,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Bg-Mon/Bg-Mon.entitlements";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = "Bg-Mon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -908,7 +908,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Bg-Mon/Bg-Mon.entitlements";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				INFOPLIST_FILE = "Bg-Mon/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
