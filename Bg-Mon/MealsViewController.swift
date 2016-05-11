@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import BTNavigationDropdownMenu
-import Notie
 import HealthKit
 class MealsViewController: UITableViewController, UITextFieldDelegate {
 
@@ -159,10 +158,6 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
         defaults!.setObject(self.mealArray, forKey: "meals")
         defaults!.synchronize()
     }
-	@IBAction func openMenu() {
-        menuView?.hide()
-		openLeft()
-	}
 
     
 	@IBAction func addMeal() {

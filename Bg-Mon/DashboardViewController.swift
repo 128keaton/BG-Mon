@@ -45,6 +45,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet var carbLabel: UILabel?
     @IBOutlet var bgGauge: Gauge?
     @IBOutlet var carbGauge: Gauge?
+    @IBOutlet var unitGauge: Gauge?
+    @IBOutlet var unitLabel: UILabel?
     
 	@IBOutlet var tableView: UITableView?
 
@@ -142,7 +144,8 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         insulinChart!.drawBordersEnabled = false
         insulinChart?.gridBackgroundColor = UIColor.clearColor()
         insulinChart!.maxVisibleValueCount = 15
-        
+        insulinChart!.rightAxis.labelTextColor = UIColor.whiteColor()
+        insulinChart!.leftAxis.labelTextColor = UIColor.whiteColor()
         let backgroundView = UIView(frame: view.bounds)
         backgroundView.autoresizingMask = resizingMask
         backgroundView.addSubview(self.buildImageView())
@@ -252,7 +255,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
         data.setValueTextColor(UIColor.whiteColor())
      
-        
+            if self.sampleInsulin.count == 0{
+                self.insulinChart!.rightAxis.labelTextColor = UIColor.clearColor()
+                self.insulinChart!.leftAxis.labelTextColor = UIColor.clearColor()
+            }
         self.insulinChart?.legend.textColor = UIColor.whiteColor()
         
         self.insulinChart!.xAxis.labelPosition = .Bottom
@@ -321,6 +327,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 		})
         var BGVals: [CGFloat] = []
 		var CarbVals: [CGFloat] = []
+        var UnitVals: [CGFloat] = []
         var forInt = 0
         if(7 > mealsArray?.count){
             forInt = (mealsArray?.count)!
@@ -340,26 +347,41 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
                 CarbVals.append(CGFloat(mealsArray![i]["carbs"] as! Double))
             }
             
+            if(mealsArray![i]["insulin"] is String){
+                UnitVals.append(CGFloat((mealsArray![i]["insulin"] as! NSString).doubleValue))
+            }else{
+                UnitVals.append(CGFloat(mealsArray![i]["insulin"] as! Double))
+            }
+            
+            
 		}
+        
 
 		let bgAvg = BGVals.reduce(0, combine: +) / CGFloat(BGVals.count)
 		let carbAvg = CarbVals.reduce(0, combine: +) / CGFloat(CarbVals.count)
-
-		bgGauge?.rate = ceil(bgAvg)
-		carbGauge?.rate = ceil(carbAvg)
-        bgLabel?.text = "\(ceil(bgAvg)) mg/Dl"
-        carbLabel?.text = "\(ceil(carbAvg)) g"
+        let unitAvg = UnitVals.reduce(0, combine: +) / CGFloat(UnitVals.count)
+        
+        if forInt == 0 {
+            bgGauge?.rate = 0
+            carbGauge?.rate = 0
+            unitGauge?.rate = 0
+            unitLabel?.text = "No data"
+            bgLabel?.text = "No data"
+            carbLabel?.text = "No data"
+        }else{
+            bgGauge?.rate = ceil(bgAvg)
+            unitGauge?.rate = ceil(unitAvg)
+            carbGauge?.rate = ceil(carbAvg)
+            bgLabel?.text = "\(ceil(bgAvg)) mg/Dl"
+            carbLabel?.text = "\(ceil(carbAvg)) g"
+            unitLabel?.text = "\(ceil(unitAvg)) units"
+        }
 
 		super.viewDidAppear(true)
 	}
 
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         insulinChart?.highlightValue(ChartHighlight.init(xIndex: indexPath.row, dataSetIndex: 0))
-	//	self.tableView?.deselectRowAtIndexPath(indexPath, animated: true)
-	}
-	@IBAction func openMenu() {
-        menuView?.hide()
-		openLeft()
 	}
 
 

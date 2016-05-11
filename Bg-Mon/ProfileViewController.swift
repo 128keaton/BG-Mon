@@ -93,9 +93,6 @@ class ProfileViewController: UITableViewController, UIImagePickerControllerDeleg
 		profileImage?.clipsToBounds = true
 	}
   
-	@IBAction func openMenu() {
-		openLeft()
-	}
 	func objectAlreadyExist(key: String) -> Bool {
 		return defaults!.objectForKey(key) != nil
 	}

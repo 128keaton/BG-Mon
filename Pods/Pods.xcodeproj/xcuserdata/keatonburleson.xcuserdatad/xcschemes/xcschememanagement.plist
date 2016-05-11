@@ -34,7 +34,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Notie.xcscheme</key>
+		<key>PagingMenuController-PagingMenuController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PagingMenuController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -49,11 +54,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SlideMenuControllerSwift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>UIImageColors.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,11 +62,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>08E4AEE87F75A5E586466DA3EF33D1DA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>0CC3AC85291D76DF4348A46011097C3C</key>
 		<dict>
 			<key>primary</key>
@@ -77,17 +72,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>23D4B5C9CC657B68134305BFEB076270</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5BBB34170986C897E8931C1768FD6EE3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72F38805EE619850094319C4BBA0E0BA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>80D639EDDB5F6601E32F54E5991C1C7A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A5B25F61ED99CAF727F3A1A1B2803158</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BFE0EF9959EEB8118BAF35E8741F796C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,12 +97,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D5A47F474EF967E59CD82C81428E364B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DE3B4ACD72A070E4EB349308D68CDF32</key>
+		<key>C723EE472E59859F9ACE29A31AEB5925</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -113,6 +108,11 @@
 			<true/>
 		</dict>
 		<key>FD23F1DA220A44C7E84F356B64871271</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FDBEEDCEFFCE94926797CD2319C371FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

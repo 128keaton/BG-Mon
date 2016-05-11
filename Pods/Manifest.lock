@@ -6,9 +6,8 @@ PODS:
   - EZAlertController (0.3)
   - GaugeKit (0.3.2)
   - MBProgressHUD (0.9.2)
-  - Notie (1.0.4)
+  - PagingMenuController (0.9.1)
   - SkyFloatingLabelTextField (1.2.0)
-  - SlideMenuControllerSwift (2.1.1)
   - UIImageColors (1.0.3)
 
 DEPENDENCIES:
@@ -17,9 +16,8 @@ DEPENDENCIES:
   - EZAlertController (= 0.3)
   - GaugeKit
   - MBProgressHUD
-  - Notie
+  - PagingMenuController
   - SkyFloatingLabelTextField (~> 1.0)
-  - SlideMenuControllerSwift
   - UIImageColors (from `https://github.com/jathu/UIImageColors.git`)
 
 EXTERNAL SOURCES:
@@ -42,11 +40,10 @@ SPEC CHECKSUMS:
   EZAlertController: 178808422e5281c3ffb20c28cb3eb555088bf07e
   GaugeKit: 4d5c3491521ed2d6e2f83cac5f51d0cd09db8989
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
-  Notie: 1acc7a2dd65b7ddbecd0d7bff0f71ef83df11caf
+  PagingMenuController: 95bab00761e1ba4f4f9fa6bf22ac71b065a675aa
   SkyFloatingLabelTextField: ea2d0818757ff6263169f470a5dca4718700ba85
-  SlideMenuControllerSwift: 82ada9b04e03538c84d034cf1c09e5849c0113f7
   UIImageColors: 3c3b04ecd5786d3235f7f783316c6ef0f631216d
 
-PODFILE CHECKSUM: 276d91c8cb6ee4eab1a0ac9a9529106064bea25d
+PODFILE CHECKSUM: 929c59df7bab591baf35f861397a54bae6f7334c
 
 COCOAPODS: 1.0.0

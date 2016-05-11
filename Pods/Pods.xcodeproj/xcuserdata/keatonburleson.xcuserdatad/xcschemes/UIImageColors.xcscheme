@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'DE3B4ACD72A070E4EB349308D68CDF32'
+               BlueprintIdentifier = '72F38805EE619850094319C4BBA0E0BA'
                BlueprintName = 'UIImageColors'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'UIImageColors.framework'>
