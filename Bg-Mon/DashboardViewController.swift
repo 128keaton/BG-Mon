@@ -152,16 +152,16 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         backgroundView.addSubview(self.buildImageView())
         backgroundView.addSubview(self.buildBlurView())
         
-        scrollyMcScrollface?.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + 260)
+      
         
         self.view.addSubview(backgroundView)
         self.view.sendSubviewToBack(backgroundView)
       
-        pagingMenuController = self.storyboard?.instantiateViewControllerWithIdentifier("PagingController") as? PagingMenuController
+       
         let average = (self.storyboard?.instantiateViewControllerWithIdentifier("Averages"))! as UIViewController
         let dose = (self.storyboard?.instantiateViewControllerWithIdentifier("Dose"))! as UIViewController
         
-        pagingMenuController?.view.frame = CGRectMake(0, self.view.bounds.size.height - 260 - (self.tabBarController?.tabBar.frame.size.height)!, self.view.bounds.width, 260)
+      
         average.view.backgroundColor = UIColor.clearColor()
         dose.view.backgroundColor = UIColor.clearColor()
         
@@ -180,16 +180,15 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         options.menuPosition = .Bottom
         options.menuItemMode = .RoundRect(radius: 7, horizontalPadding: 0, verticalPadding: 3, selectedColor: self.view.tintColor)
         options.menuDisplayMode = .Standard(widthMode: .Flexible, centerItem: true, scrollingMode: .PagingEnabled)
+        
         pagingMenuController!.setup(viewControllers: viewControllers, options: options)
         
         pagingMenuController?.view.backgroundColor = UIColor.clearColor()
         
-    
+        scrollyMcScrollface?.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
             
-        self.addChildViewController(pagingMenuController!)
-            
-        self.view.addSubview((pagingMenuController?.view)!)
-        
+        pagingView!.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+       
    
     
 		if objectAlreadyExist("meals")  {
@@ -231,6 +230,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 		self.healthStore.executeQuery(query)
 	}
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // you can set this name in 'segue.embed' in storyboard
+        if segue.identifier == "embed" {
+            let connectContainerViewController = segue.destinationViewController as!  PagingMenuController
+            pagingMenuController = connectContainerViewController
+        }
+    }
+    
     @IBAction func configureForSegment(){
         
             self.refreshData()
@@ -359,6 +366,10 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 			self.healthStore.executeQuery(query)
 		})
+        scrollyMcScrollface?.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + pagingView!.frame.height)
+        for view in (scrollyMcScrollface?.subviews)!{
+            view.userInteractionEnabled = true
+        }
 
 		
 		super.viewDidAppear(true)
@@ -838,3 +849,28 @@ extension DashboardViewController: WCSessionDelegate {
     }
 
 }
+
+extension UIScrollView{
+    func setContentViewSize(offset:CGFloat = 0.0) {
+        // dont show scroll indicators
+        showsHorizontalScrollIndicator = false
+        showsVerticalScrollIndicator = false
+        
+        var maxHeight : CGFloat = 0
+        for view in subviews {
+            if view.hidden {
+                continue
+            }
+            let newHeight = view.frame.origin.y + view.frame.height
+            if newHeight > maxHeight {
+                maxHeight = newHeight
+            }
+        }
+        // set content size
+        contentSize = CGSize(width: contentSize.width, height: maxHeight + offset)
+        // show scroll indicators
+        showsHorizontalScrollIndicator = true
+        showsVerticalScrollIndicator = true
+    }
+}
+

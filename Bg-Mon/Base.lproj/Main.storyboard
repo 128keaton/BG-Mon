@@ -20,10 +20,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKS-Td-ISR">
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKS-Td-ISR">
                                 <rect key="frame" x="-4" y="0.0" width="383" height="667"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jv2-jw-YjV" userLabel="Content View">
+                                    <view tag="101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jv2-jw-YjV" userLabel="Content View">
                                         <rect key="frame" x="3" y="0.0" width="377" height="667"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-fq-LEv" customClass="CombinedChartView" customModule="Charts">
@@ -73,7 +73,7 @@
                                                     <constraint firstAttribute="height" constant="260" id="6Fm-TF-yy9"/>
                                                 </constraints>
                                                 <connections>
-                                                    <segue destination="OaM-uh-LLT" kind="embed" id="UbY-gj-Pxd"/>
+                                                    <segue destination="OaM-uh-LLT" kind="embed" identifier="embed" id="UbY-gj-Pxd"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>
@@ -188,32 +188,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="251"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwF-rr-AeT" customClass="Gauge" customModule="GaugeKit">
-                                <rect key="frame" x="-5" y="28" width="148" height="17"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="colorsArray" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                        <real key="value" value="120"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rate">
-                                        <real key="value" value="120"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="reverse" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gls-GP-qqc">
-                                <rect key="frame" x="232" y="45" width="147" height="47"/>
+                                <rect key="frame" x="224" y="45" width="156" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="DZg-L6-oNz"/>
                                 </constraints>
@@ -221,53 +197,20 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2FC-RC-H51" customClass="Gauge" customModule="GaugeKit">
-                                <rect key="frame" x="232" y="28" width="147" height="17"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="PtG-9s-8FO"/>
-                                    <constraint firstAttribute="width" constant="135" id="aJG-cg-hWf"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="colorsArray" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                        <real key="value" value="120"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rate">
-                                        <real key="value" value="120"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="reverse" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="aJG-cg-hWf"/>
-                                        <exclude reference="PtG-9s-8FO"/>
-                                    </mask>
-                                </variation>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHn-S5-AAS">
-                                <rect key="frame" x="-5" y="54" width="148" height="29"/>
+                                <rect key="frame" x="-4" y="54" width="156" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="5yl-X4-fj2"/>
                                     <constraint firstAttribute="width" constant="135" id="JFB-Lz-LHR"/>
+                                    <constraint firstAttribute="width" constant="156" id="WQl-aU-pGG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="JFB-Lz-LHR"/>
                                         <exclude reference="5yl-X4-fj2"/>
+                                        <exclude reference="JFB-Lz-LHR"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -311,46 +254,113 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ye-9U-JGM">
-                                <rect key="frame" x="-3" y="128" width="381" height="24"/>
+                                <rect key="frame" x="-7" y="128" width="389" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SwF-rr-AeT" customClass="Gauge" customModule="GaugeKit">
+                                <rect key="frame" x="4" y="28" width="138" height="17"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="colorsArray" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                        <real key="value" value="120"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rate">
+                                        <real key="value" value="120"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="reverse" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2FC-RC-H51" customClass="Gauge" customModule="GaugeKit">
+                                <rect key="frame" x="233" y="28" width="138" height="17"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="PtG-9s-8FO"/>
+                                    <constraint firstAttribute="width" constant="135" id="aJG-cg-hWf"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.4549019608" green="1" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="1" green="0.074020686490000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="colorsArray" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="gaugeTypeInt">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircle" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                        <real key="value" value="120"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rate">
+                                        <real key="value" value="120"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="reverse" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aJG-cg-hWf"/>
+                                        <exclude reference="PtG-9s-8FO"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2FC-RC-H51" firstAttribute="trailing" secondItem="Gls-GP-qqc" secondAttribute="trailing" id="0PT-ml-6L6"/>
-                            <constraint firstItem="Gls-GP-qqc" firstAttribute="top" secondItem="2FC-RC-H51" secondAttribute="bottom" id="1MM-oc-hpN"/>
-                            <constraint firstItem="e2M-pZ-2Qu" firstAttribute="top" secondItem="AHn-S5-AAS" secondAttribute="bottom" constant="-20" id="27k-ed-5rC"/>
-                            <constraint firstItem="SwF-rr-AeT" firstAttribute="trailing" secondItem="AHn-S5-AAS" secondAttribute="trailing" id="BCG-Pc-p6d"/>
+                            <constraint firstItem="2FC-RC-H51" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leading" constant="233" id="Bss-Bk-3cD"/>
+                            <constraint firstItem="Gls-GP-qqc" firstAttribute="top" secondItem="2FC-RC-H51" secondAttribute="bottom" id="D88-p7-0b3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2FC-RC-H51" secondAttribute="trailing" constant="-12" id="DIe-Nt-VqF"/>
+                            <constraint firstItem="SwF-rr-AeT" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leadingMargin" constant="-12" id="EnN-IT-t4h"/>
+                            <constraint firstItem="2FC-RC-H51" firstAttribute="leading" secondItem="SwF-rr-AeT" secondAttribute="trailing" constant="91" id="Fwf-qK-QDU"/>
                             <constraint firstItem="5Ye-9U-JGM" firstAttribute="centerY" secondItem="e2M-pZ-2Qu" secondAttribute="centerY" id="GQL-jf-urd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2FC-RC-H51" secondAttribute="trailing" constant="-20" id="M1e-us-V8S"/>
+                            <constraint firstItem="2FC-RC-H51" firstAttribute="centerX" secondItem="Gls-GP-qqc" secondAttribute="centerX" id="Gfo-5Q-6WI"/>
+                            <constraint firstItem="SwF-rr-AeT" firstAttribute="bottom" secondItem="2FC-RC-H51" secondAttribute="bottom" id="HtU-wA-NIW"/>
                             <constraint firstItem="5Ye-9U-JGM" firstAttribute="top" secondItem="Gls-GP-qqc" secondAttribute="bottom" constant="36" id="Obd-Tb-fP4"/>
+                            <constraint firstItem="Gls-GP-qqc" firstAttribute="leading" secondItem="AHn-S5-AAS" secondAttribute="trailing" constant="72" id="Pze-HU-3zP"/>
+                            <constraint firstItem="AHn-S5-AAS" firstAttribute="top" secondItem="SwF-rr-AeT" secondAttribute="bottom" constant="9" id="SPM-qK-2al"/>
                             <constraint firstItem="SwF-rr-AeT" firstAttribute="bottom" secondItem="2FC-RC-H51" secondAttribute="bottom" id="SeE-dr-BNp"/>
-                            <constraint firstItem="2FC-RC-H51" firstAttribute="bottom" secondItem="SwF-rr-AeT" secondAttribute="bottom" id="Wdg-fG-GpF"/>
-                            <constraint firstItem="Gls-GP-qqc" firstAttribute="leading" secondItem="AHn-S5-AAS" secondAttribute="trailing" constant="89" id="WgY-l2-mjh"/>
+                            <constraint firstItem="SwF-rr-AeT" firstAttribute="top" secondItem="2FC-RC-H51" secondAttribute="top" id="WBg-Zo-i6i"/>
                             <constraint firstItem="5Ye-9U-JGM" firstAttribute="centerX" secondItem="e2M-pZ-2Qu" secondAttribute="centerX" id="YdB-Jp-fFN"/>
+                            <constraint firstItem="SwF-rr-AeT" firstAttribute="width" secondItem="2FC-RC-H51" secondAttribute="width" id="Yhk-iG-n90"/>
                             <constraint firstItem="e2M-pZ-2Qu" firstAttribute="centerX" secondItem="F9N-U4-hze" secondAttribute="centerX" id="ZRO-I8-Myu"/>
-                            <constraint firstItem="SwF-rr-AeT" firstAttribute="top" secondItem="2FC-RC-H51" secondAttribute="top" id="acZ-y4-ErS"/>
                             <constraint firstItem="AHn-S5-AAS" firstAttribute="top" secondItem="SwF-rr-AeT" secondAttribute="bottom" constant="1" id="au2-Jz-qXZ"/>
-                            <constraint firstItem="Gls-GP-qqc" firstAttribute="centerY" secondItem="AHn-S5-AAS" secondAttribute="centerY" id="ea5-9R-NtR"/>
-                            <constraint firstItem="5Ye-9U-JGM" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leadingMargin" constant="-19" id="gaE-Ip-7z5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2FC-RC-H51" secondAttribute="trailing" constant="-12" id="cIP-TJ-iGG"/>
+                            <constraint firstItem="5Ye-9U-JGM" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leadingMargin" constant="-23" id="gaE-Ip-7z5"/>
                             <constraint firstAttribute="bottom" secondItem="SwF-rr-AeT" secondAttribute="bottom" constant="206" id="h8N-Rz-ZAY"/>
-                            <constraint firstItem="2FC-RC-H51" firstAttribute="leading" secondItem="Gls-GP-qqc" secondAttribute="leading" id="mMy-CV-g4I"/>
+                            <constraint firstItem="SwF-rr-AeT" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leadingMargin" constant="-12" id="lmU-bY-BaH"/>
+                            <constraint firstItem="AHn-S5-AAS" firstAttribute="centerY" secondItem="Gls-GP-qqc" secondAttribute="centerY" id="m6Z-xd-W32"/>
                             <constraint firstItem="Gls-GP-qqc" firstAttribute="top" secondItem="F9N-U4-hze" secondAttribute="top" constant="45" id="mgv-fE-kSf"/>
-                            <constraint firstItem="SwF-rr-AeT" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leadingMargin" constant="-21" id="o7W-vK-oT3"/>
                             <constraint firstItem="AHn-S5-AAS" firstAttribute="centerY" secondItem="Gls-GP-qqc" secondAttribute="centerY" id="pg0-87-S7f"/>
                             <constraint firstItem="u9P-6f-JK1" firstAttribute="top" secondItem="e2M-pZ-2Qu" secondAttribute="bottom" constant="20" id="rAC-za-Vsc"/>
-                            <constraint firstItem="2FC-RC-H51" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leading" constant="232" id="x5F-yG-9Y3"/>
-                            <constraint firstItem="SwF-rr-AeT" firstAttribute="leading" secondItem="AHn-S5-AAS" secondAttribute="leading" id="xQD-65-2nr"/>
-                            <constraint firstItem="2FC-RC-H51" firstAttribute="top" secondItem="WzS-Jn-wbV" secondAttribute="bottom" constant="8" id="yV5-iU-lS8"/>
+                            <constraint firstItem="AHn-S5-AAS" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leadingMargin" constant="-20" id="sjx-ax-8Yu"/>
+                            <constraint firstItem="SwF-rr-AeT" firstAttribute="leading" secondItem="F9N-U4-hze" secondAttribute="leadingMargin" constant="-5" id="t3U-UE-hWR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2FC-RC-H51" secondAttribute="trailing" constant="-8" id="tfp-ih-AHy"/>
+                            <constraint firstItem="2FC-RC-H51" firstAttribute="top" secondItem="WzS-Jn-wbV" secondAttribute="bottom" constant="8" symbolic="YES" id="wta-oH-erd"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="SeE-dr-BNp"/>
                                 <exclude reference="h8N-Rz-ZAY"/>
+                                <exclude reference="lmU-bY-BaH"/>
+                                <exclude reference="t3U-UE-hWR"/>
                                 <exclude reference="au2-Jz-qXZ"/>
                                 <exclude reference="pg0-87-S7f"/>
+                                <exclude reference="Bss-Bk-3cD"/>
+                                <exclude reference="DIe-Nt-VqF"/>
+                                <exclude reference="tfp-ih-AHy"/>
                                 <exclude reference="rAC-za-Vsc"/>
                             </mask>
                         </variation>
