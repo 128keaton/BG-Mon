@@ -119,12 +119,12 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if mealArray?.count == 0 || mealArray == nil {
             let label = UILabel.init(frame: self.view.frame)
-            label.textColor = UIColor.whiteColor().colorWithAlphaComponent(0.4)
-            label.text = "No data"
+            label.textColor = UIColor.whiteColor()
+            label.text = "No meals"
             label.tag = 6
             self.tableView.separatorStyle = .None
             label.textAlignment = .Center
-            self.tableView.backgroundView?.addSubview(label)
+            self.tableView.backgroundView = label
             return 1
         }
   

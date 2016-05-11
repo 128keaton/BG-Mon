@@ -36,10 +36,10 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-fq-LEv" customClass="CombinedChartView" customModule="Charts">
-                                        <rect key="frame" x="0.0" y="40" width="320" height="260"/>
+                                        <rect key="frame" x="0.0" y="64" width="320" height="236"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="260" id="27M-ra-DXR"/>
+                                            <constraint firstAttribute="height" constant="236" id="27M-ra-DXR"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="h2G-UQ-z9p"/>
                                             <constraint firstAttribute="height" constant="238" id="iDL-Mu-0i3"/>
                                         </constraints>
@@ -118,7 +118,7 @@
                                     <navigationBar contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="47u-us-rXw">
                                         <rect key="frame" x="0.0" y="344" width="320" height="44"/>
                                         <items>
-                                            <navigationItem title="Weekly Average" id="q89-Hg-9Og"/>
+                                            <navigationItem title="Weekly Averages" id="q89-Hg-9Og"/>
                                         </items>
                                     </navigationBar>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fX8-7O-U14">
@@ -149,7 +149,7 @@
                                     <constraint firstItem="fX8-7O-U14" firstAttribute="firstBaseline" secondItem="VXh-53-qL7" secondAttribute="firstBaseline" id="ORy-aG-6C9"/>
                                     <constraint firstItem="VXh-53-qL7" firstAttribute="top" secondItem="OEM-tm-Qe9" secondAttribute="bottom" constant="8" symbolic="YES" id="Pfq-Ix-yNW"/>
                                     <constraint firstItem="fX8-7O-U14" firstAttribute="trailing" secondItem="uge-sW-NDN" secondAttribute="trailing" id="R8X-7g-oOD"/>
-                                    <constraint firstAttribute="bottom" secondItem="p5i-fq-LEv" secondAttribute="bottom" constant="267" id="SBe-I2-DDG"/>
+                                    <constraint firstAttribute="bottom" secondItem="p5i-fq-LEv" secondAttribute="bottom" constant="268" id="SBe-I2-DDG"/>
                                     <constraint firstItem="fX8-7O-U14" firstAttribute="leading" secondItem="EKS-Td-ISR" secondAttribute="leadingMargin" id="VgF-BY-Clg"/>
                                     <constraint firstItem="fX8-7O-U14" firstAttribute="top" secondItem="uge-sW-NDN" secondAttribute="bottom" constant="8" id="VtZ-5F-CBI"/>
                                     <constraint firstItem="47u-us-rXw" firstAttribute="leading" secondItem="p5i-fq-LEv" secondAttribute="leading" id="Vyx-YE-u1e"/>
@@ -203,6 +203,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="bgGauge" destination="OEM-tm-Qe9" id="rEy-5G-WSg"/>
