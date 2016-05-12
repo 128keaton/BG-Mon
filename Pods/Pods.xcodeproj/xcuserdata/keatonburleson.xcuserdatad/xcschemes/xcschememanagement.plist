@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MMMaterialDesignSpinner.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>PagingMenuController-PagingMenuController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,7 +87,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>72F38805EE619850094319C4BBA0E0BA</key>
+		<key>64C44EE6DA7C14CE49FA16522C9D0DAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>68DD50BE9CDFC880B2A369AB468E633A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +107,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C723EE472E59859F9ACE29A31AEB5925</key>
+		<key>D6C627972003C2FB483EE799705B091F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,12 +117,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FD23F1DA220A44C7E84F356B64871271</key>
+		<key>FA46995B87A5023C1297704B032841EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FDBEEDCEFFCE94926797CD2319C371FD</key>
+		<key>FD23F1DA220A44C7E84F356B64871271</key>
 		<dict>
 			<key>primary</key>
 			<true/>

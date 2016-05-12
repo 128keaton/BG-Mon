@@ -41,8 +41,6 @@
 		8AEC39351CD024C100394F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8AEC39341CD024C100394F9A /* Assets.xcassets */; };
 		8AEC39391CD024C100394F9A /* Test Strip Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 8AEC391F1CD024C100394F9A /* Test Strip Watch.app */; };
 		8AEC39421CD0261700394F9A /* MealController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEC39411CD0261700394F9A /* MealController.swift */; };
-		8AF03DED1CE2E8F500795B6F /* AveragesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF03DEC1CE2E8F500795B6F /* AveragesViewController.swift */; };
-		8AF03DEF1CE2F3D500795B6F /* LastDoseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF03DEE1CE2F3D500795B6F /* LastDoseViewController.swift */; };
 		8AFB6EC71CD2C49B00C4E8A6 /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC51FF51CB4187500E1872E /* SuperCell.swift */; };
 		B360203EC17EEE1769DE5B59 /* Pods_Bg_Mon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */; };
 /* End PBXBuildFile section */
@@ -175,8 +173,6 @@
 		8AEC39411CD0261700394F9A /* MealController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealController.swift; sourceTree = "<group>"; };
 		8AEC39431CD0519000394F9A /* Test Strip Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Test Strip Watch Extension.entitlements"; sourceTree = "<group>"; };
 		8AEC39441CD051A400394F9A /* Test Strip Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Test Strip Watch.entitlements"; sourceTree = "<group>"; };
-		8AF03DEC1CE2E8F500795B6F /* AveragesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AveragesViewController.swift; sourceTree = "<group>"; };
-		8AF03DEE1CE2F3D500795B6F /* LastDoseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastDoseViewController.swift; sourceTree = "<group>"; };
 		8AF03F341CD1702A0001789A /* Test Strip Today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Test Strip Today.entitlements"; sourceTree = "<group>"; };
 		B03D6073B02C671DEBA6CAA9 /* Pods_Bg_Mon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bg_Mon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E091F18638122BDD2E48DF7C /* Pods-Bg-Mon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bg-Mon.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bg-Mon/Pods-Bg-Mon.release.xcconfig"; sourceTree = "<group>"; };
@@ -273,8 +269,6 @@
 				8A45D8731CB33BA3007558B4 /* Bg-Mon.entitlements */,
 				8A45D83E1CB337E6007558B4 /* AppDelegate.swift */,
 				8A45D8421CB337E6007558B4 /* Main.storyboard */,
-				8AF03DEC1CE2E8F500795B6F /* AveragesViewController.swift */,
-				8AF03DEE1CE2F3D500795B6F /* LastDoseViewController.swift */,
 				8AEC38F41CD01E9400394F9A /* AboutViewController.swift */,
 				8AB1BE2D1CB5F5ED00A291E7 /* SuccessViewController.swift */,
 				8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */,
@@ -697,14 +691,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */,
-				8AF03DEF1CE2F3D500795B6F /* LastDoseViewController.swift in Sources */,
 				8AB1BE2E1CB5F5ED00A291E7 /* SuccessViewController.swift in Sources */,
 				8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */,
 				8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */,
 				8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */,
 				8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */,
 				8AB1BE281CB46EFA00A291E7 /* MealsViewController.swift in Sources */,
-				8AF03DED1CE2E8F500795B6F /* AveragesViewController.swift in Sources */,
 				8AEC38F51CD01E9400394F9A /* AboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

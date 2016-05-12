@@ -17,9 +17,11 @@ import EZAlertController
 import WatchConnectivity
 import PagingMenuController
 import GaugeKit
+import MBProgressHUD
+import MMMaterialDesignSpinner
 let healthKitStore: HKHealthStore = HKHealthStore()
 
-class DashboardViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ChartViewDelegate, MFMailComposeViewControllerDelegate {
+class DashboardViewController: UIViewController, ChartViewDelegate, MFMailComposeViewControllerDelegate {
 
 	private var objects = [HKQuantityType!]()
 	var preferredUnits = [NSObject: AnyObject]()
@@ -41,13 +43,21 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
     
-    @IBOutlet var pagingMenuController: PagingMenuController?
 
+
+    @IBOutlet var bgLabel: UILabel?
+    @IBOutlet var carbLabel: UILabel?
+    @IBOutlet var bgGauge: Gauge?
+    @IBOutlet var carbGauge: Gauge?
+    @IBOutlet var unitGauge: Gauge?
+    @IBOutlet var unitLabel: UILabel?
     
-    @IBOutlet var pagingView: UIView?
+    @IBOutlet var doseLabel: UILabel?
+    @IBOutlet var doseGauge: Gauge?
+
 
     @IBOutlet var scrollyMcScrollface: UIScrollView?
-	@IBOutlet var tableView: UITableView?
+
 
 	@IBOutlet var lineChart: LineChartView?
 	@IBOutlet weak var insulinChart: CombinedChartView?
@@ -57,7 +67,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
 	private var results = [HKQuantitySample]()
 	var sampleInsulin = [Double]()
-	let effect = UIBlurEffect(style: .Dark)
+	let effect = UIBlurEffect(style: .Light)
 	let resizingMask = UIViewAutoresizing.FlexibleWidth
     let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
 
@@ -137,60 +147,25 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         insulinChart!.drawBarShadowEnabled = false
         insulinChart!.drawValueAboveBarEnabled = true
-        insulinChart?.scaleXEnabled = true
-        insulinChart?.scaleYEnabled = true
-        insulinChart!.maxVisibleValueCount = 60
-        insulinChart!.pinchZoomEnabled = false
-        insulinChart!.drawGridBackgroundEnabled = true
-        insulinChart!.drawBordersEnabled = false
+        insulinChart?.userInteractionEnabled = false
+        insulinChart!.drawGridBackgroundEnabled = false
+        insulinChart!.drawBordersEnabled = true
         insulinChart?.gridBackgroundColor = UIColor.clearColor()
-        insulinChart!.maxVisibleValueCount = 15
-        insulinChart!.rightAxis.labelTextColor = UIColor.whiteColor()
-        insulinChart!.leftAxis.labelTextColor = UIColor.whiteColor()
-        let backgroundView = UIView(frame: view.bounds)
-        backgroundView.autoresizingMask = resizingMask
-        backgroundView.addSubview(self.buildImageView())
-        backgroundView.addSubview(self.buildBlurView())
-        
-      
-        
-        self.view.addSubview(backgroundView)
-        self.view.sendSubviewToBack(backgroundView)
-      
-       
-        let average = (self.storyboard?.instantiateViewControllerWithIdentifier("Averages"))! as UIViewController
-        let dose = (self.storyboard?.instantiateViewControllerWithIdentifier("Dose"))! as UIViewController
-        
-      
-        average.view.backgroundColor = UIColor.clearColor()
-        dose.view.backgroundColor = UIColor.clearColor()
-        
-        dose.view.translatesAutoresizingMaskIntoConstraints = false
-        average.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        let viewControllers = [average, dose]
-        
-        let options = PagingMenuOptions()
-        options.menuHeight = 35
-        options.scrollEnabled = true
-        options.menuSelectedItemCenter = true
-        options.backgroundColor = UIColor.clearColor()
-        options.textColor = UIColor.whiteColor()
-        options.selectedTextColor = UIColor.whiteColor()
-        options.menuPosition = .Bottom
-        options.menuItemMode = .RoundRect(radius: 7, horizontalPadding: 0, verticalPadding: 3, selectedColor: self.view.tintColor)
-        options.menuDisplayMode = .Standard(widthMode: .Flexible, centerItem: true, scrollingMode: .PagingEnabled)
-        
-        pagingMenuController!.setup(viewControllers: viewControllers, options: options)
-        
-        pagingMenuController?.view.backgroundColor = UIColor.clearColor()
-        
-        scrollyMcScrollface?.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-            
-        pagingView!.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-       
-   
+        insulinChart?.borderColor = self.view.tintColor
+        insulinChart?.leftAxis.drawGridLinesEnabled = false
+        insulinChart?.rightAxis.drawGridLinesEnabled = false
+        insulinChart?.xAxis.drawGridLinesEnabled = false
+        insulinChart?.drawGridBackgroundEnabled = false
+        insulinChart?.xAxis.labelPosition = .BottomInside
+        insulinChart?.leftAxis.labelPosition = .InsideChart
+        insulinChart?.rightAxis.labelPosition = .InsideChart
+        insulinChart?.leftAxis.spaceTop = 0.8
+        insulinChart?.drawOrder = [CombinedChartView.DrawOrder.Line.rawValue, CombinedChartView.DrawOrder.Bar.rawValue]
+        insulinChart?.drawValueAboveBarEnabled
+        insulinChart?.xAxis.labelPosition = .BothSided
     
+       
+        
 		if objectAlreadyExist("meals")  {
 			mealsArray = (defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray?)!
 		} else {
@@ -230,13 +205,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 		self.healthStore.executeQuery(query)
 	}
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // you can set this name in 'segue.embed' in storyboard
-        if segue.identifier == "embed" {
-            let connectContainerViewController = segue.destinationViewController as!  PagingMenuController
-            pagingMenuController = connectContainerViewController
-        }
-    }
+
     
     @IBAction func configureForSegment(){
         
@@ -286,28 +255,38 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         chartDataSet.setColor(self.view.tintColor, alpha: 1.0);
         chartDataSet.axisDependency = .Left
         chartDataSet.mode = LineChartDataSet.Mode.CubicBezier
-        chartDataSet.fill = ChartFill(color: UIColor.clearColor())
+        chartDataSet.drawFilledEnabled = false
+        chartDataSet.fillAlpha = 1.0
+        
+        chartDataSet.fill = ChartFill(color: self.view.tintColor)
+    
         let barChartDataSet = BarChartDataSet(yVals: insulinVals, label: "Insulin Units")
-        barChartDataSet.valueTextColor = UIColor.whiteColor()
+        barChartDataSet.valueTextColor = UIColor.blackColor()
         barChartDataSet.setColor(UIColor.greenColor(), alpha: 1.0)
-   
+        barChartDataSet.barSpace =  0.35
+      
         let data: CombinedChartData = CombinedChartData(xVals: timeVals)
-        data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
         data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
-        data.setValueTextColor(UIColor.whiteColor())
-     
+        data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
+        
+    
+        data.setValueTextColor(UIColor.blackColor())
+    
             if self.sampleInsulin.count == 0{
                 self.insulinChart!.rightAxis.labelTextColor = UIColor.clearColor()
                 self.insulinChart!.leftAxis.labelTextColor = UIColor.clearColor()
             }
-        self.insulinChart?.legend.textColor = UIColor.whiteColor()
+          
         
-        self.insulinChart!.xAxis.labelPosition = .Bottom
+        self.insulinChart?.setVisibleXRange(minXRange: CGFloat(bgVals.count), maxXRange: CGFloat(bgVals.count))
+        self.insulinChart?.setVisibleYRangeMaximum(400, axis: .Left)
+        self.insulinChart!.xAxis.labelPosition = .Top
         self.insulinChart!.animate(xAxisDuration: 0.5, yAxisDuration: 1.0)
-
-  
+        self.insulinChart?.scaleXEnabled = true
+      
         self.insulinChart?.data = data
-        self.insulinChart?.xAxis.labelTextColor = UIColor.whiteColor()
+        self.insulinChart?.xAxis.labelTextColor = UIColor.blackColor()
+        self.insulinChart?.notifyDataSetChanged()
     
         self.view.reloadInputViews()
              })
@@ -366,10 +345,82 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
 			self.healthStore.executeQuery(query)
 		})
-        scrollyMcScrollface?.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height + pagingView!.frame.height)
-        for view in (scrollyMcScrollface?.subviews)!{
-            view.userInteractionEnabled = true
+        
+
+        
+        var BGVals: [CGFloat] = []
+        var CarbVals: [CGFloat] = []
+        var UnitVals: [CGFloat] = []
+        var forInt = 0
+        if (7 > mealsArray?.count) {
+            forInt = (mealsArray?.count)!
+        } else {
+            forInt = 7
         }
+        
+        for i in 0 ..< forInt {
+            
+            if (mealsArray![i]["bloodGlucose"] is String) {
+                BGVals.append(CGFloat((mealsArray![i]["bloodGlucose"] as! NSString).doubleValue))
+            } else {
+                BGVals.append(CGFloat(mealsArray![i]["bloodGlucose"] as! Double))
+            }
+            if (mealsArray![i]["carbs"] is String) {
+                CarbVals.append(CGFloat((mealsArray![i]["carbs"] as! NSString).doubleValue))
+            } else {
+                CarbVals.append(CGFloat(mealsArray![i]["carbs"] as! Double))
+            }
+            
+            if (mealsArray![i]["insulin"] is String) {
+                UnitVals.append(CGFloat((mealsArray![i]["insulin"] as! NSString).doubleValue))
+            } else {
+                UnitVals.append(CGFloat(mealsArray![i]["insulin"] as! Double))
+            }
+            
+        }
+        
+        var DoseVals: [CGFloat] = []
+        if mealsArray?.count != 0 {
+            
+            let meal = mealsArray?.lastObject
+            if (meal!["insulin"] is String) {
+                DoseVals.append(CGFloat((meal!["insulin"] as! NSString).doubleValue))
+            } else {
+                DoseVals.append(CGFloat(meal!["insulin"] as! Double))
+            }
+            doseGauge?.rate = ceil(DoseVals.first!)
+            
+            doseLabel?.text = "\(ceil(DoseVals.first!)) units"
+        } else {
+            doseGauge?.rate = 0
+            doseLabel?.text = "No data"
+        }
+        
+        
+        scrollyMcScrollface?.contentSize = CGSizeMake(self.view.frame.width, scrollyMcScrollface!.contentSize.height)
+        
+        let bgAvg = BGVals.reduce(0, combine: +) / CGFloat(BGVals.count)
+        let carbAvg = CarbVals.reduce(0, combine: +) / CGFloat(CarbVals.count)
+        let unitAvg = UnitVals.reduce(0, combine: +) / CGFloat(UnitVals.count)
+        
+        if forInt == 0 {
+            bgGauge?.rate = 0
+            carbGauge?.rate = 0
+            unitGauge?.rate = 0
+            unitLabel?.text = "No data"
+            bgLabel?.text = "No data"
+            carbLabel?.text = "No data"
+        } else {
+            bgGauge?.rate = ceil(bgAvg)
+            unitGauge?.rate = ceil(unitAvg)
+            carbGauge?.rate = ceil(carbAvg)
+            bgLabel?.text = "\(ceil(bgAvg)) mg/dL"
+            carbLabel?.text = "\(ceil(carbAvg)) g"
+            unitLabel?.text = "\(ceil(unitAvg)) units"
+        }
+        
+
+        
 
 		
 		super.viewDidAppear(true)
@@ -380,81 +431,12 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 	}
 
 
-    func buildImageView() -> UIImageView {
-        let imageView = UIImageView(image: UIImage(named: "pattern.jpg"))
-        imageView.frame = view.bounds
-        imageView.autoresizingMask = resizingMask
-        return imageView
-    }
-    
-    func buildBlurView() -> UIVisualEffectView {
-        let blurView = UIVisualEffectView(effect: effect)
-        blurView.frame = view.bounds
-        blurView.autoresizingMask = resizingMask
-        return blurView
-    }
-    
 
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return sampleInsulin.count
 	}
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView!.dequeueReusableCellWithIdentifier("cell") as! MealCell
-        let type = mealsArray![indexPath.row]["type"] as! String
-        //TODO - clean this monstrosity up
-        if(mealsArray![indexPath.row]["bloodGlucose"] is String){
-            cell.bloodGlucose?.text = "\(mealsArray![indexPath.row]["bloodGlucose"] as! String)\nmg/dL"
-        }else{
-            cell.bloodGlucose?.text = "\(mealsArray![indexPath.row]["bloodGlucose"] as! Double)\nmg/dL"
-        }
-        if(mealsArray![indexPath.row]["carbs"] is String){
-            cell.carbs?.text = "\(mealsArray![indexPath.row]["carbs"] as! String)\ncarbs"
-        }else{
-            cell.carbs?.text = "\(mealsArray![indexPath.row]["carbs"] as! Double)\ncarbs"
-        }
-        if(mealsArray![indexPath.row]["insulin"] is String){
-            cell.insulin?.text = "\(mealsArray![indexPath.row]["insulin"] as! String)\nunits"
-        }else{
-            cell.insulin?.text = "\(mealsArray![indexPath.row]["insulin"] as! Double)\nunits"
-        }
-        
-        
-        
-        
-        
-        cell.type?.text = mealsArray![indexPath.row]["type"] as? String
-        cell.backgroundColor = UIColor.blackColor()
-        cell.time?.text = self.getTime(indexPath)
-        
-        cell.bloodGlucose?.layer.cornerRadius = 5
-        cell.bloodGlucose?.clipsToBounds = true
-        cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
-        cell.bloodGlucose?.textColor = UIColor.blackColor()
-        
-        cell.carbs?.layer.cornerRadius = 5
-        cell.carbs?.clipsToBounds = true
-        cell.carbs?.backgroundColor = self.view.tintColor
-        
-        cell.insulin?.layer.cornerRadius = 5
-        cell.insulin?.clipsToBounds = true
-        cell.insulin?.backgroundColor = UIColor.greenColor()
-        
-        cell.time?.textColor = UIColor.whiteColor()
-        cell.time?.clipsToBounds = true
-        cell.time?.layer.cornerRadius = 5
-        
-        
-        if(type == "Full Meal"){
-            cell.mealType?.image = UIImage.init(named: "Meal.png")
-        }else if(type == "Insulin Correction"){
-            cell.mealType?.image = UIImage.init(named: "Adjustment.png")
-        }else if(type == "Long Lasting"){
-            cell.mealType?.image = UIImage.init(named: "24H.png")
-        }
-        return cell
-    }
-    func getTime(indexPath: NSIndexPath) -> String{
+       func getTime(indexPath: NSIndexPath) -> String{
         let dictionary = mealsArray![indexPath.row] as! NSMutableDictionary
         if let exists = dictionary["date"]{
             let formatter = NSDateFormatter()
@@ -469,8 +451,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
 
     
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        let row = entry.xIndex
-       self.tableView?.selectRowAtIndexPath(NSIndexPath.init(forRow: row, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
+        
     }
 	func refreshData() {
 		NSLog("refreshData......")
@@ -541,11 +522,21 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
             formatter.dateStyle = .ShortStyle
             formatter.timeStyle = .ShortStyle
             for i in 0..<self.sampleInsulin.count{
-                let object = self.results[i]
-                let doubleValue = object.quantity.doubleValueForUnit(self.preferredUnit)
-                writeString.appendString("\(doubleValue) mg/dL, \(formatter.stringFromDate(self.results[i].startDate)), \r\n")
+                    guard let object = self.results.atIndex(i)
+                        else {continue}
+                
+                    let doubleValue = object.quantity.doubleValueForUnit(self.preferredUnit)
+                    writeString.appendString("\(doubleValue) mg/dL, \(formatter.stringFromDate(self.results[i].startDate)), \r\n")
+                
                 
             }
+            let hud = MBProgressHUD.init(view: self.view)
+            let spinner = MMMaterialDesignSpinner.init(frame: CGRectMake(0, 0, 40, 40))
+            spinner.lineWidth = 1.5
+            spinner.tintColor = self.view.tintColor
+            spinner.startAnimating()
+            hud.customView = spinner
+            hud.show(true)
             self.sendEmail(NSData(), csv: writeString.dataUsingEncoding(NSUTF8StringEncoding)!, options: ["csv" : true, "snapshot" : false])
 
             
@@ -553,7 +544,13 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
         
         let snapshot = UIAlertAction.init(title: "Snapshot of Graph", style: .Default, handler: { (action) in
           
-            
+            let hud = MBProgressHUD.init(view: self.view)
+            let spinner = MMMaterialDesignSpinner.init(frame: CGRectMake(0, 0, 40, 40))
+            spinner.tintColor = self.view.tintColor
+            spinner.lineWidth = 1.5
+            spinner.startAnimating()
+            hud.customView = spinner
+            hud.show(true)
             self.sendEmail(UIImagePNGRepresentation((self.insulinChart?.getSnapshot())!)!, csv: NSData(), options: ["csv" : false, "snapshot" : true])
         
         })
@@ -571,10 +568,14 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func sendEmail(snapshot: NSData, csv: NSData, options: NSDictionary) {
+        
         if MFMailComposeViewController.canSendMail() {
+           
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
       
+    
+            
             mail.setSubject("Insulin and Blood Glucose Graph \(NSDate())")
             if defaults!.objectForKey("dr-email") != nil &&  defaults!.objectForKey("dr-name") != nil{
                 if(isValidEmail(defaults!.objectForKey("dr-email") as! String) == false){
@@ -607,6 +608,7 @@ class DashboardViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -849,6 +851,16 @@ extension DashboardViewController: WCSessionDelegate {
     }
 
 }
+
+extension Array {
+    func atIndex(index: Int) -> Element? {
+        if index < 0 || index > self.count - 1 {
+            return nil
+        }
+        return self[index]
+    }
+}
+
 
 extension UIScrollView{
     func setContentViewSize(offset:CGFloat = 0.0) {

@@ -6,6 +6,7 @@ use_frameworks!
 target 'Bg-Mon' do
 pod 'SkyFloatingLabelTextField', '~> 1.0'
 pod 'EZAlertController', '0.3'
+pod "MMMaterialDesignSpinner"
 pod "GaugeKit"
 pod "PagingMenuController"
 pod 'BTNavigationDropdownMenu', '~> 0.2.1'
