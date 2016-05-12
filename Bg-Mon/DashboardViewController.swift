@@ -43,17 +43,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
     
-
-
-    @IBOutlet var bgLabel: UILabel?
-    @IBOutlet var carbLabel: UILabel?
-    @IBOutlet var bgGauge: Gauge?
-    @IBOutlet var carbGauge: Gauge?
-    @IBOutlet var unitGauge: Gauge?
-    @IBOutlet var unitLabel: UILabel?
-    
-    @IBOutlet var doseLabel: UILabel?
-    @IBOutlet var doseGauge: Gauge?
+    var embedGauges: EmbedGauges?
 
 
     @IBOutlet var scrollyMcScrollface: UIScrollView?
@@ -216,6 +206,12 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
         menuView?.show()
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if  segue.identifier == "embed" {
+            embedGauges = segue.destinationViewController as? EmbedGauges
+        }
+    }
     func configureGraphs(){
         let serialQueue: dispatch_queue_t = dispatch_queue_create("com.128keaton.refreshQueue", nil)
         
@@ -283,6 +279,8 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
                 self.insulinChart?.xAxis.enabled = false
                 self.insulinChart?.noDataText = "No data"
                 self.insulinChart?.infoTextColor = self.view.tintColor
+                self.insulinChart?.data = nil
+                self.insulinChart?.setNeedsDisplay()
             }
 
 
@@ -352,7 +350,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
 			self.healthStore.executeQuery(query)
 		})
         
-
+        
         
         var BGVals: [CGFloat] = []
         var CarbVals: [CGFloat] = []
@@ -394,12 +392,12 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
             } else {
                 DoseVals.append(CGFloat(meal!["insulin"] as! Double))
             }
-            doseGauge?.rate = ceil(DoseVals.first!)
+            embedGauges?.doseGauge?.rate = ceil(DoseVals.first!)
             
-            doseLabel?.text = "\(ceil(DoseVals.first!)) units"
+            embedGauges?.doseLabel?.text = "\(ceil(DoseVals.first!)) units"
         } else {
-            doseGauge?.rate = 0
-            doseLabel?.text = "No data"
+            embedGauges?.doseGauge?.rate = 0
+            embedGauges?.doseLabel?.text = "No data"
         }
         
         
@@ -410,19 +408,19 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
         let unitAvg = UnitVals.reduce(0, combine: +) / CGFloat(UnitVals.count)
         
         if forInt == 0 {
-            bgGauge?.rate = 0
-            carbGauge?.rate = 0
-            unitGauge?.rate = 0
-            unitLabel?.text = "No data"
-            bgLabel?.text = "No data"
-            carbLabel?.text = "No data"
+            embedGauges?.bgGauge?.rate = 0
+            embedGauges?.carbGauge?.rate = 0
+            embedGauges?.unitGauge?.rate = 0
+            embedGauges?.unitLabel?.text = "No data"
+            embedGauges?.bgLabel?.text = "No data"
+            embedGauges?.carbLabel?.text = "No data"
         } else {
-            bgGauge?.rate = ceil(bgAvg)
-            unitGauge?.rate = ceil(unitAvg)
-            carbGauge?.rate = ceil(carbAvg)
-            bgLabel?.text = "\(ceil(bgAvg)) mg/dL"
-            carbLabel?.text = "\(ceil(carbAvg)) g"
-            unitLabel?.text = "\(ceil(unitAvg)) units"
+            embedGauges?.bgGauge?.rate = ceil(bgAvg)
+            embedGauges?.unitGauge?.rate = ceil(unitAvg)
+            embedGauges?.carbGauge?.rate = ceil(carbAvg)
+            embedGauges?.bgLabel?.text = "\(ceil(bgAvg)) mg/dL"
+            embedGauges?.carbLabel?.text = "\(ceil(carbAvg)) g"
+            embedGauges?.unitLabel?.text = "\(ceil(unitAvg)) units"
         }
         
 

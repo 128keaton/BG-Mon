@@ -11,6 +11,7 @@
 		8A1EA89C1CB7085A00343019 /* pattern2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA89B1CB7085A00343019 /* pattern2.png */; };
 		8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA89D1CB7092100343019 /* bananas.jpg */; };
 		8A25C6171CCFD01F00B50B4E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A25C6161CCFD01F00B50B4E /* Media.xcassets */; };
+		8A352B491CE409DE00C09FAC /* EmbedGauges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A352B481CE409DE00C09FAC /* EmbedGauges.swift */; };
 		8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D83E1CB337E6007558B4 /* AppDelegate.swift */; };
 		8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8421CB337E6007558B4 /* Main.storyboard */; };
 		8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */; };
@@ -126,6 +127,7 @@
 		8A25C6121CCE78D300B50B4E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8A25C6161CCFD01F00B50B4E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8A2C1A851CC8116700159962 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Bg-Mon-dtwmpflrjllmhdcvtsjxdsjoeavc/Build/Products/Debug-iphoneos/Charts.framework"; sourceTree = "<group>"; };
+		8A352B481CE409DE00C09FAC /* EmbedGauges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedGauges.swift; sourceTree = "<group>"; };
 		8A45D83B1CB337E6007558B4 /* Test Strip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Strip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D83E1CB337E6007558B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A45D8431CB337E6007558B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				8AC51FF51CB4187500E1872E /* SuperCell.swift */,
 				8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */,
 				8A45D86F1CB33912007558B4 /* DashboardViewController.swift */,
+				8A352B481CE409DE00C09FAC /* EmbedGauges.swift */,
 				8A9650DE1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png */,
 				8A1EA8991CB7058200343019 /* pattern.jpg */,
 				8A1EA89D1CB7092100343019 /* bananas.jpg */,
@@ -693,6 +696,7 @@
 				8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */,
 				8AB1BE2E1CB5F5ED00A291E7 /* SuccessViewController.swift in Sources */,
 				8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */,
+				8A352B491CE409DE00C09FAC /* EmbedGauges.swift in Sources */,
 				8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */,
 				8A45D8701CB33912007558B4 /* DashboardViewController.swift in Sources */,
 				8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */,

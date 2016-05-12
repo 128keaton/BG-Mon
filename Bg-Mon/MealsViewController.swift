@@ -49,7 +49,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		menuView?.cellTextLabelAlignment = NSTextAlignment.Center
 		menuView?.cellBackgroundColor = UIColor.blackColor()
 		menuView?.cellTextLabelColor = UIColor.whiteColor()
-        self.tableView.backgroundColor = UIColor.blackColor()
+        
         menuView.checkMarkImage = nil
 		menuView?.cellHeight = 100
 		menuView?.didSelectItemAtIndexHandler = { (indexPath: Int) -> () in
@@ -86,19 +86,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
     func manuallyUpdateTableView(){
         self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .Middle)
     }
-    func buildImageView() -> UIImageView {
-        let imageView = UIImageView(image: UIImage(named: "pattern.jpg"))
-        imageView.frame = view.bounds
-        imageView.autoresizingMask = resizingMask
-        return imageView
-    }
-    
-    func buildBlurView() -> UIVisualEffectView {
-        let blurView = UIVisualEffectView(effect: effect)
-        blurView.frame = view.bounds
-        blurView.autoresizingMask = resizingMask
-        return blurView
-    }
+
     
     override func viewDidAppear(animated: Bool) {
         if objectAlreadyExist("meals") {
@@ -189,13 +177,13 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 		
 	
         cell.type?.text = mealArray![indexPath.row]["type"] as? String
-		cell.backgroundColor = UIColor.blackColor()
+		cell.backgroundColor = UIColor.whiteColor()
         cell.time?.text = self.getTime(indexPath)
         
         cell.bloodGlucose?.layer.cornerRadius = 5
         cell.bloodGlucose?.clipsToBounds = true
-        cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
-        cell.bloodGlucose?.textColor = UIColor.blackColor()
+     //  cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
+      //  cell.bloodGlucose?.textColor = UIColor.blackColor()
         
         cell.carbs?.layer.cornerRadius = 5
         cell.carbs?.clipsToBounds = true
@@ -203,7 +191,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
         
         cell.insulin?.layer.cornerRadius = 5
         cell.insulin?.clipsToBounds = true
-        cell.insulin?.backgroundColor = UIColor.greenColor()
+       // cell.insulin?.backgroundColor = UIColor.greenColor()
         
         cell.time?.textColor = UIColor.whiteColor()
         cell.time?.clipsToBounds = true
@@ -242,7 +230,7 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
 	@IBOutlet var correctionCell: CorrectionCell?
 	@IBOutlet var longLastingCell: LongLasting?
     var intValue: Int?
-    let effect = UIBlurEffect(style: .Dark)
+    let effect = UIBlurEffect(style: .Light)
     let resizingMask = UIViewAutoresizing.FlexibleWidth.union(UIViewAutoresizing.FlexibleHeight)
     
     let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
@@ -261,15 +249,8 @@ class AddMeal: UITableViewController, UITextFieldDelegate {
         self.tableView.endUpdates()
         self.tableView.reloadData()
         self.tableView.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: .None)
-        let backgroundView = UIView.init(frame: self.view.frame)
-        
-        
-        
-        backgroundView.autoresizingMask = resizingMask
-        backgroundView.addSubview(self.buildImageView())
-        backgroundView.addSubview(self.buildBlurView())
-        tableView.backgroundView = backgroundView
-        tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
+        self.tableView.backgroundColor = self.view.tintColor
+
         
 	}
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
