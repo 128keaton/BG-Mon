@@ -257,7 +257,8 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
         chartDataSet.mode = LineChartDataSet.Mode.CubicBezier
         chartDataSet.drawFilledEnabled = false
         chartDataSet.fillAlpha = 1.0
-        
+        chartDataSet.circleColors = [self.view.tintColor]
+        chartDataSet.circleHoleColor = self.view.tintColor
         chartDataSet.fill = ChartFill(color: self.view.tintColor)
     
         let barChartDataSet = BarChartDataSet(yVals: insulinVals, label: "Insulin Units")
@@ -276,10 +277,15 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
                 self.insulinChart!.rightAxis.labelTextColor = UIColor.clearColor()
                 self.insulinChart!.leftAxis.labelTextColor = UIColor.clearColor()
             }
-          
-        
-        self.insulinChart?.setVisibleXRange(minXRange: CGFloat(bgVals.count), maxXRange: CGFloat(bgVals.count))
-        self.insulinChart?.setVisibleYRangeMaximum(400, axis: .Left)
+            if bgVals.count != 0{
+                self.insulinChart?.setVisibleXRange(minXRange: CGFloat(bgVals.count), maxXRange: CGFloat(bgVals.count))
+            }else{
+                self.insulinChart?.xAxis.enabled = false
+                self.insulinChart?.noDataText = "No data"
+                self.insulinChart?.infoTextColor = self.view.tintColor
+            }
+
+
         self.insulinChart!.xAxis.labelPosition = .Top
         self.insulinChart!.animate(xAxisDuration: 0.5, yAxisDuration: 1.0)
         self.insulinChart?.scaleXEnabled = true
