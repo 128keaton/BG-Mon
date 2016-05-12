@@ -394,7 +394,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
             }
             embedGauges?.doseGauge?.rate = ceil(DoseVals.first!)
             
-            embedGauges?.doseLabel?.text = "\(ceil(DoseVals.first!)) units"
+            embedGauges?.doseLabel?.text = "last dose: \(ceil(DoseVals.first!)) units"
         } else {
             embedGauges?.doseGauge?.rate = 0
             embedGauges?.doseLabel?.text = "No data"
