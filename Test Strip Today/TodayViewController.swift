@@ -79,7 +79,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         cell.type?.text = mealsArray![indexPath.row]["type"] as? String
 
-        cell.time?.text = self.getTime(indexPath)
+    //    cell.time?.text = self.getTime(indexPath)
         
         cell.bloodGlucose?.layer.cornerRadius = 5
         cell.bloodGlucose?.clipsToBounds = true
@@ -94,8 +94,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         cell.insulin?.clipsToBounds = true
         cell.insulin?.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.8)
         
-        cell.time?.textColor = UIColor.whiteColor()
-        cell.time?.clipsToBounds = true
+      //  cell.time?.textColor = UIColor.whiteColor()
+       /* cell.time?.clipsToBounds = true
         cell.time?.layer.cornerRadius = 5
         
         
@@ -105,7 +105,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             cell.mealType?.image = UIImage.init(named: "Adjustment.png")
         }else if(type == "Long Lasting"){
             cell.mealType?.image = UIImage.init(named: "24H.png")
-        }
+        }*/
         return cell
     }
     func getTime(indexPath: NSIndexPath) -> String{

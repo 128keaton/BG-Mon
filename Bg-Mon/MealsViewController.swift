@@ -24,6 +24,7 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
 	@IBOutlet var insulinField: UITextField?
 	@IBOutlet var carbsField: UITextField?
 
+  
     override func awakeFromNib() {
         if objectAlreadyExist("meals") {
             mealArray = defaults!.objectForKey("meals")?.mutableCopy() as? NSMutableArray
@@ -31,6 +32,8 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
         super.awakeFromNib()
     }
 	override func viewDidLoad() {
+        
+        
 		super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MealsViewController.manuallyUpdateTableView), name: "newCell", object: nil)
         
@@ -157,70 +160,102 @@ class MealsViewController: UITableViewController, UITextFieldDelegate {
         let type = mealArray![indexPath.row]["type"] as! String
         //TODO - clean this monstrosity up
         if(mealArray![indexPath.row]["bloodGlucose"] is String){
-            cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String)\nmg/dL"
+            cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! String)"
         }else{
-            cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! Double)\nmg/dL"
+            cell.bloodGlucose?.text = "\(mealArray![indexPath.row]["bloodGlucose"] as! Double)"
         }
         if(mealArray![indexPath.row]["carbs"] is String){
-            cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String)\ncarbs"
+            cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! String)"
         }else{
-            cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! Double)\ncarbs"
+            cell.carbs?.text = "\(mealArray![indexPath.row]["carbs"] as! Double)"
         }
         if(mealArray![indexPath.row]["insulin"] is String){
-            cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String)\nunits"
+            cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! String)"
         }else{
-            cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! Double)\nunits"
+            cell.insulin?.text = "\(mealArray![indexPath.row]["insulin"] as! Double)"
         }
         
-        
-		
-		
-	
         cell.type?.text = mealArray![indexPath.row]["type"] as? String
 		cell.backgroundColor = UIColor.whiteColor()
-        cell.time?.text = self.getTime(indexPath)
+        cell.date?.text = self.getDate(indexPath)
+        cell.timeLabel?.text = self.getTime(indexPath)
+        cell.gradientView?.direction = .Horizontal
+        cell.gradientView?.colors = [UIColor(red: 0.4549, green: 0.9294, blue: 0.4627, alpha: 1.0), UIColor(red: 0.4627, green: 0.9176, blue: 0.4471, alpha: 1.0), UIColor(red: 0.4549, green: 0.9294, blue: 0.4627, alpha: 1.0)]
+       
+        var target: Double?
+        var currentGlucose: Double?
+        if(mealArray![indexPath.row]["bloodGlucose"] is String){
+           currentGlucose = (mealArray![indexPath.row]["bloodGlucose"] as! NSString).doubleValue
+        }else{
+            currentGlucose = mealArray![indexPath.row]["bloodGlucose"] as? Double
+        }
         
-        cell.bloodGlucose?.layer.cornerRadius = 5
-        cell.bloodGlucose?.clipsToBounds = true
-     //  cell.bloodGlucose?.backgroundColor = UIColor.whiteColor()
-      //  cell.bloodGlucose?.textColor = UIColor.blackColor()
-        
-        cell.carbs?.layer.cornerRadius = 5
-        cell.carbs?.clipsToBounds = true
-        cell.carbs?.backgroundColor = self.view.tintColor
-        
-        cell.insulin?.layer.cornerRadius = 5
-        cell.insulin?.clipsToBounds = true
-       // cell.insulin?.backgroundColor = UIColor.greenColor()
-        
-        cell.time?.textColor = UIColor.whiteColor()
-        cell.time?.clipsToBounds = true
-        cell.time?.layer.cornerRadius = 5
-
+        if objectAlreadyExist("target") {
+            target = defaults!.objectForKey("target")?.doubleValue
+            if currentGlucose! > target! + 1 {
+                //Warning Yellow
+                cell.gradientView?.colors = [UIColor(red: 0.9569, green: 0.949, blue: 0.4667, alpha: 1.0), UIColor(red: 0.9176, green: 0.8902, blue: 0.5059, alpha: 1.0), UIColor(red: 0.9569, green: 0.949, blue: 0.4667, alpha: 1.0)]
+            }else if currentGlucose <= 70{
+                //Reginald Red
+                cell.gradientView?.colors = [UIColor(red: 0.9373, green: 0.2314, blue: 0.2314, alpha: 1.0), UIColor(red: 0.898, green: 0.3765, blue: 0.4549, alpha: 1.0), UIColor(red: 0.9373, green: 0.2314, blue: 0.2314, alpha: 1.0)]
+            }
+        }
         
         if(type == "Full Meal"){
-            cell.mealType?.image = UIImage.init(named: "Meal.png")
+            cell.type?.text = "Meal"
         }else if(type == "Insulin Correction"){
-            cell.mealType?.image = UIImage.init(named: "Adjustment.png")
+            cell.type?.text = "Correction"
         }else if(type == "Long Lasting"){
-            cell.mealType?.image = UIImage.init(named: "24H.png")
+            cell.type?.text = "Long Lasting"
         }
 		return cell
 	}
     
-    func getTime(indexPath: NSIndexPath) -> String{
+
+    
+    func getDate(indexPath: NSIndexPath) -> String{
         let dictionary = mealArray![indexPath.row] as! NSMutableDictionary
         if let exists = dictionary["date"]{
             let formatter = NSDateFormatter()
-            formatter.dateStyle = .ShortStyle
-            formatter.timeStyle = .ShortStyle
-            return formatter.stringFromDate(exists as! NSDate)
+            formatter.dateFormat = "dd"
+            
+            return "\(formatter.stringFromDate(exists as! NSDate))\(daySuffix(exists as! NSDate))"
         }else{
             return "No time recorded"
         }
     }
     
+    func getTime(indexPath: NSIndexPath) -> String{
+        let dictionary = mealArray![indexPath.row] as! NSMutableDictionary
+        if let exists = dictionary["date"]{
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "hh"
+            let finalTime = formatter.stringFromDate(exists as! NSDate).stringByReplacingOccurrencesOfString("0", withString: "")
+            return "\(finalTime) o' clock"
+        }else{
+            return "No time recorded"
+        }
+    }
+
+    
+    
+    func daySuffix(date: NSDate) -> String {
+        let calendar = NSCalendar.currentCalendar()
+        let dayOfMonth = calendar.component(.Day, fromDate: date)
+        switch dayOfMonth {
+        case 1: fallthrough
+        case 21: fallthrough
+        case 31: return "st"
+        case 2: fallthrough
+        case 22: return "nd"
+        case 3: fallthrough
+        case 23: return "rd"
+        default: return "th"
+        }
+    }
+    
 }
+
 
 
 class AddMeal: UITableViewController, UITextFieldDelegate {

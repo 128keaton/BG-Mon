@@ -12,6 +12,13 @@
 		8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8A1EA89D1CB7092100343019 /* bananas.jpg */; };
 		8A25C6171CCFD01F00B50B4E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A25C6161CCFD01F00B50B4E /* Media.xcassets */; };
 		8A352B491CE409DE00C09FAC /* EmbedGauges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A352B481CE409DE00C09FAC /* EmbedGauges.swift */; };
+		8A352B4D1CE4170F00C09FAC /* Insulin.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A352B4A1CE4170F00C09FAC /* Insulin.png */; };
+		8A352B4E1CE4170F00C09FAC /* BloodGlucose.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A352B4B1CE4170F00C09FAC /* BloodGlucose.png */; };
+		8A352B4F1CE4170F00C09FAC /* Carbs.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A352B4C1CE4170F00C09FAC /* Carbs.png */; };
+		8A352B531CE41B3400C09FAC /* type.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A352B521CE41B3400C09FAC /* type.png */; };
+		8A352B551CE41BEF00C09FAC /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A352B541CE41BEF00C09FAC /* blue.png */; };
+		8A352B5F1CE423E700C09FAC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A352B5E1CE423E700C09FAC /* GradientView.swift */; };
+		8A352B601CE423E700C09FAC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A352B5E1CE423E700C09FAC /* GradientView.swift */; };
 		8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D83E1CB337E6007558B4 /* AppDelegate.swift */; };
 		8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A45D8421CB337E6007558B4 /* Main.storyboard */; };
 		8A45D8471CB337E6007558B4 /* Bg_Mon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */; };
@@ -29,7 +36,6 @@
 		8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650D61CB8BDED00A86BE5 /* Meal.png */; };
 		8A9650DB1CB8C19C00A86BE5 /* Adjustment.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */; };
 		8A9650DD1CB8C1F500A86BE5 /* 24H.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DC1CB8C1F500A86BE5 /* 24H.png */; };
-		8A9650DF1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A9650DE1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png */; };
 		8AB1BE281CB46EFA00A291E7 /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */; };
 		8AB1BE2E1CB5F5ED00A291E7 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1BE2D1CB5F5ED00A291E7 /* SuccessViewController.swift */; };
 		8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC51FF51CB4187500E1872E /* SuperCell.swift */; };
@@ -128,6 +134,13 @@
 		8A25C6161CCFD01F00B50B4E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8A2C1A851CC8116700159962 /* Charts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Charts.framework; path = "../../Library/Developer/Xcode/DerivedData/Bg-Mon-dtwmpflrjllmhdcvtsjxdsjoeavc/Build/Products/Debug-iphoneos/Charts.framework"; sourceTree = "<group>"; };
 		8A352B481CE409DE00C09FAC /* EmbedGauges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbedGauges.swift; sourceTree = "<group>"; };
+		8A352B4A1CE4170F00C09FAC /* Insulin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Insulin.png; sourceTree = "<group>"; };
+		8A352B4B1CE4170F00C09FAC /* BloodGlucose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BloodGlucose.png; sourceTree = "<group>"; };
+		8A352B4C1CE4170F00C09FAC /* Carbs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Carbs.png; sourceTree = "<group>"; };
+		8A352B521CE41B3400C09FAC /* type.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = type.png; sourceTree = "<group>"; };
+		8A352B541CE41BEF00C09FAC /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
+		8A352B5D1CE423E700C09FAC /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		8A352B5E1CE423E700C09FAC /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8A45D83B1CB337E6007558B4 /* Test Strip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Strip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A45D83E1CB337E6007558B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A45D8431CB337E6007558B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -156,7 +169,6 @@
 		8A9650D61CB8BDED00A86BE5 /* Meal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Meal.png; sourceTree = "<group>"; };
 		8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Adjustment.png; sourceTree = "<group>"; };
 		8A9650DC1CB8C1F500A86BE5 /* 24H.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 24H.png; sourceTree = "<group>"; };
-		8A9650DE1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HealthKit_iOS_8_icon.png; sourceTree = "<group>"; };
 		8AB1BE271CB46EFA00A291E7 /* MealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
 		8AB1BE2D1CB5F5ED00A291E7 /* SuccessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		8AC51FF51CB4187500E1872E /* SuperCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperCell.swift; sourceTree = "<group>"; };
@@ -264,6 +276,11 @@
 			isa = PBXGroup;
 			children = (
 				8A25C6161CCFD01F00B50B4E /* Media.xcassets */,
+				8A352B4A1CE4170F00C09FAC /* Insulin.png */,
+				8A352B4B1CE4170F00C09FAC /* BloodGlucose.png */,
+				8A352B4C1CE4170F00C09FAC /* Carbs.png */,
+				8A352B541CE41BEF00C09FAC /* blue.png */,
+				8A352B521CE41B3400C09FAC /* type.png */,
 				8A25C6121CCE78D300B50B4E /* README.md */,
 				8A9650D61CB8BDED00A86BE5 /* Meal.png */,
 				8A9650DA1CB8C19C00A86BE5 /* Adjustment.png */,
@@ -278,13 +295,14 @@
 				8A45D87C1CB363C8007558B4 /* ProfileViewController.swift */,
 				8A45D86F1CB33912007558B4 /* DashboardViewController.swift */,
 				8A352B481CE409DE00C09FAC /* EmbedGauges.swift */,
-				8A9650DE1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png */,
 				8A1EA8991CB7058200343019 /* pattern.jpg */,
 				8A1EA89D1CB7092100343019 /* bananas.jpg */,
 				8A1EA89B1CB7085A00343019 /* pattern2.png */,
 				8A45D84A1CB337E6007558B4 /* LaunchScreen.storyboard */,
 				8A45D84D1CB337E6007558B4 /* Info.plist */,
 				8A45D8451CB337E6007558B4 /* Bg_Mon.xcdatamodeld */,
+				8A352B5D1CE423E700C09FAC /* GradientView.h */,
+				8A352B5E1CE423E700C09FAC /* GradientView.swift */,
 			);
 			name = Logglu;
 			path = "Bg-Mon";
@@ -585,14 +603,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A352B4F1CE4170F00C09FAC /* Carbs.png in Resources */,
 				8A25C6171CCFD01F00B50B4E /* Media.xcassets in Resources */,
+				8A352B4D1CE4170F00C09FAC /* Insulin.png in Resources */,
 				8A9650DD1CB8C1F500A86BE5 /* 24H.png in Resources */,
 				8A9650DB1CB8C19C00A86BE5 /* Adjustment.png in Resources */,
 				8A45D84C1CB337E6007558B4 /* LaunchScreen.storyboard in Resources */,
 				8A1EA89C1CB7085A00343019 /* pattern2.png in Resources */,
 				8A45D8441CB337E6007558B4 /* Main.storyboard in Resources */,
-				8A9650DF1CBAC7B000A86BE5 /* HealthKit_iOS_8_icon.png in Resources */,
 				8A1EA89A1CB7058200343019 /* pattern.jpg in Resources */,
+				8A352B4E1CE4170F00C09FAC /* BloodGlucose.png in Resources */,
+				8A352B551CE41BEF00C09FAC /* blue.png in Resources */,
+				8A352B531CE41B3400C09FAC /* type.png in Resources */,
 				8A1EA89E1CB7092100343019 /* bananas.jpg in Resources */,
 				8A9650D71CB8BDED00A86BE5 /* Meal.png in Resources */,
 			);
@@ -695,6 +717,7 @@
 			files = (
 				8A45D87D1CB363C8007558B4 /* ProfileViewController.swift in Sources */,
 				8AB1BE2E1CB5F5ED00A291E7 /* SuccessViewController.swift in Sources */,
+				8A352B5F1CE423E700C09FAC /* GradientView.swift in Sources */,
 				8AC51FF61CB4187500E1872E /* SuperCell.swift in Sources */,
 				8A352B491CE409DE00C09FAC /* EmbedGauges.swift in Sources */,
 				8A45D83F1CB337E6007558B4 /* AppDelegate.swift in Sources */,
@@ -727,6 +750,7 @@
 			files = (
 				8A81056A1CD067E9007BA1E8 /* TodayViewController.swift in Sources */,
 				8AFB6EC71CD2C49B00C4E8A6 /* SuperCell.swift in Sources */,
+				8A352B601CE423E700C09FAC /* GradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

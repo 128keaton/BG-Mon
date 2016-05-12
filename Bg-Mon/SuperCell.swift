@@ -12,20 +12,12 @@ class MealCell: UITableViewCell {
 	@IBOutlet weak var bloodGlucose: UILabel?
 	@IBOutlet weak var insulin: UILabel?
 	@IBOutlet weak var carbs: UILabel?
-    @IBOutlet weak var time: UILabel?
+    @IBOutlet weak var date: UILabel?
     @IBOutlet weak var type: UILabel?
-    @IBOutlet weak var mealType: UIImageView?
+    @IBOutlet weak var timeLabel: UILabel?
+    @IBOutlet var gradientView: GradientView?
     
-    @IBOutlet weak var insulinLabel: UILabel?
-    @IBOutlet weak var carbLabel: UILabel?
-    @IBOutlet weak var bloodGlucoseLabel: UILabel?
-    
-    required init?(coder aDecoder: NSCoder) {
-        time?.textColor = UIColor.whiteColor()
-        time?.clipsToBounds = true
-        time?.layer.cornerRadius = 5
-        super.init(coder: aDecoder)
-    }
+
 
     
     
