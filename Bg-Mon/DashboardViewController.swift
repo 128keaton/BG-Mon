@@ -43,7 +43,15 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
 	var sampleType: HKQuantityType!
 	var preferredUnit: HKUnit!
     
-    var embedGauges: EmbedGauges?
+    @IBOutlet var bgLabel: UILabel?
+    @IBOutlet var carbLabel: UILabel?
+    @IBOutlet var bgGauge: Gauge?
+    @IBOutlet var carbGauge: Gauge?
+    @IBOutlet var unitGauge: Gauge?
+    @IBOutlet var unitLabel: UILabel?
+    
+    @IBOutlet var doseLabel: UILabel?
+    @IBOutlet var doseGauge: Gauge?
 
 
     @IBOutlet var scrollyMcScrollface: UIScrollView?
@@ -207,11 +215,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if  segue.identifier == "embed" {
-            embedGauges = segue.destinationViewController as? EmbedGauges
-        }
-    }
+ 
     func configureGraphs(){
         let serialQueue: dispatch_queue_t = dispatch_queue_create("com.128keaton.refreshQueue", nil)
         
@@ -392,35 +396,35 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
             } else {
                 DoseVals.append(CGFloat(meal!["insulin"] as! Double))
             }
-            embedGauges?.doseGauge?.rate = ceil(DoseVals.first!)
+            doseGauge?.rate = ceil(DoseVals.first!)
             
-            embedGauges?.doseLabel?.text = "last dose: \(ceil(DoseVals.first!)) units"
+            doseLabel?.text = "last dose: \(ceil(DoseVals.first!)) units"
         } else {
-            embedGauges?.doseGauge?.rate = 0
-            embedGauges?.doseLabel?.text = "No data"
+            doseGauge?.rate = 0
+            doseLabel?.text = "No data"
         }
         
         
-        scrollyMcScrollface?.contentSize = CGSizeMake(self.view.frame.width, scrollyMcScrollface!.contentSize.height)
+        scrollyMcScrollface?.contentSize = CGSizeMake(self.view.frame.width, 603)
         
         let bgAvg = BGVals.reduce(0, combine: +) / CGFloat(BGVals.count)
         let carbAvg = CarbVals.reduce(0, combine: +) / CGFloat(CarbVals.count)
         let unitAvg = UnitVals.reduce(0, combine: +) / CGFloat(UnitVals.count)
         
         if forInt == 0 {
-            embedGauges?.bgGauge?.rate = 0
-            embedGauges?.carbGauge?.rate = 0
-            embedGauges?.unitGauge?.rate = 0
-            embedGauges?.unitLabel?.text = "No data"
-            embedGauges?.bgLabel?.text = "No data"
-            embedGauges?.carbLabel?.text = "No data"
+            bgGauge?.rate = 0
+            carbGauge?.rate = 0
+            unitGauge?.rate = 0
+            unitLabel?.text = "No data"
+            bgLabel?.text = "No data"
+            carbLabel?.text = "No data"
         } else {
-            embedGauges?.bgGauge?.rate = ceil(bgAvg)
-            embedGauges?.unitGauge?.rate = ceil(unitAvg)
-            embedGauges?.carbGauge?.rate = ceil(carbAvg)
-            embedGauges?.bgLabel?.text = "\(ceil(bgAvg)) mg/dL"
-            embedGauges?.carbLabel?.text = "\(ceil(carbAvg)) g"
-            embedGauges?.unitLabel?.text = "\(ceil(unitAvg)) units"
+            bgGauge?.rate = ceil(bgAvg)
+            unitGauge?.rate = ceil(unitAvg)
+            carbGauge?.rate = ceil(carbAvg)
+            bgLabel?.text = "\(ceil(bgAvg)) mg/dL"
+            carbLabel?.text = "\(ceil(carbAvg)) g"
+            unitLabel?.text = "\(ceil(unitAvg)) units"
         }
         
 
