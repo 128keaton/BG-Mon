@@ -85,23 +85,23 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Charts/Charts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EZAlertController/EZAlertController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GaugeKit/GaugeKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MMMaterialDesignSpinner/MMMaterialDesignSpinner.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PagingMenuController/PagingMenuController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftCharts/SwiftCharts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIImageColors/UIImageColors.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/BTNavigationDropdownMenu/BTNavigationDropdownMenu.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Charts/Charts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EZAlertController/EZAlertController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GaugeKit/GaugeKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MMMaterialDesignSpinner/MMMaterialDesignSpinner.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PagingMenuController/PagingMenuController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftCharts/SwiftCharts.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIImageColors/UIImageColors.framework"
 fi

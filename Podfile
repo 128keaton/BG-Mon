@@ -10,7 +10,7 @@ pod "MMMaterialDesignSpinner"
 pod "GaugeKit"
 pod "PagingMenuController"
 pod 'BTNavigationDropdownMenu', '~> 0.2.1'
-pod 'Charts', :git => "https://github.com/128keaton/Charts.git"
+pod 'SwiftCharts', '~> 0.3'
 pod 'MBProgressHUD'
 pod 'UIImageColors',  :git => "https://github.com/jathu/UIImageColors.git"
 end

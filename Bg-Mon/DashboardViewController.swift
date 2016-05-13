@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Charts
 import HealthKit
 import BTNavigationDropdownMenu
 import MessageUI
@@ -17,11 +16,12 @@ import EZAlertController
 import WatchConnectivity
 import PagingMenuController
 import GaugeKit
+import SwiftCharts
 import MBProgressHUD
 import MMMaterialDesignSpinner
 let healthKitStore: HKHealthStore = HKHealthStore()
 
-class DashboardViewController: UIViewController, ChartViewDelegate, MFMailComposeViewControllerDelegate {
+class DashboardViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
 	private var objects = [HKQuantityType!]()
 	var preferredUnits = [NSObject: AnyObject]()
@@ -52,16 +52,30 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
     
     @IBOutlet var doseLabel: UILabel?
     @IBOutlet var doseGauge: Gauge?
-
+    
+    @IBOutlet var chartPlaceholder: UIView?
+    var chart: Chart?
 
     @IBOutlet var scrollyMcScrollface: UIScrollView?
 
     @IBOutlet var gaugeStack: UIStackView?
 
-	@IBOutlet var lineChart: LineChartView?
-	@IBOutlet weak var insulinChart: CombinedChartView?
-
     var addViewController: AddMeal?
+    
+     var iPhoneChartSettings: ChartSettings {
+        let chartSettings = ChartSettings()
+        chartSettings.leading = 0
+        chartSettings.top = 0
+        chartSettings.trailing = 0
+        chartSettings.bottom = 0
+        chartSettings.labelsToAxisSpacingX = 5
+        chartSettings.labelsToAxisSpacingY = 5
+        chartSettings.axisTitleLabelsToLabelsSpacing = 4
+        chartSettings.axisStrokeWidth = 0.2
+        chartSettings.spacingBetweenAxesX = 8
+        chartSettings.spacingBetweenAxesY = 8
+        return chartSettings
+    }
     
     
 	private var results = [HKQuantitySample]()
@@ -70,6 +84,12 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
 	let resizingMask = UIViewAutoresizing.FlexibleWidth
     let defaults = NSUserDefaults(suiteName: "group.com.128keaton.test-strip")
 
+    var insulinData: [(title: String, value: Double)] = []
+    var glucoseData: [(title: String, value: Double)] = []
+    
+    
+ 
+    
 	var mealsArray: NSMutableArray?
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -138,46 +158,16 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
             self.addViewController = nil
         }
 
-        insulinChart!.delegate = self;
-        insulinChart!.descriptionText = "";
-        
-        insulinChart?.leftAxis.drawGridLinesEnabled = false
-        insulinChart?.rightAxis.drawGridLinesEnabled = false
-        insulinChart?.xAxis.drawGridLinesEnabled = false
-        insulinChart?.drawGridBackgroundEnabled = false
-        insulinChart?.leftAxis.drawAxisLineEnabled = false
-        insulinChart?.rightAxis.drawAxisLineEnabled = false
-        insulinChart!.drawGridBackgroundEnabled = false
-        insulinChart!.drawBordersEnabled = false
-        insulinChart?.leftAxis.drawLabelsEnabled = false
-        insulinChart?.rightAxis.drawLabelsEnabled = false
-        insulinChart?.gridBackgroundColor = UIColor.clearColor()
-        insulinChart?.dragEnabled = false
-        /*legend */
-        insulinChart?.legend.enabled = false
- 
-        
-        insulinChart?.backgroundColor = UIColor.clearColor()
-        insulinChart?.leftAxis.spaceTop = 1.9
-        insulinChart?.setViewPortOffsets(left: 0, top: 0, right: 0, bottom: 0)
-        insulinChart!.drawBarShadowEnabled = false
-        
-         self.insulinChart?.autoScaleMinMaxEnabled = true
-        insulinChart!.drawValueAboveBarEnabled = false
-
-        
-
-        insulinChart?.gridBackgroundColor = UIColor.clearColor()
-        insulinChart?.dragEnabled = false
+    
         
         
         
-        insulinChart?.drawOrder = [CombinedChartView.DrawOrder.Line.rawValue, CombinedChartView.DrawOrder.Bar.rawValue]
+    
         
     
         let swipeLeft = UISwipeGestureRecognizer.init(target: self, action: #selector(DashboardViewController.swipe))
         swipeLeft.direction = .Left
-        self.insulinChart?.addGestureRecognizer(swipeLeft)
+
         
         
 		if objectAlreadyExist("meals")  {
@@ -274,8 +264,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
 
 		dispatch_sync(serialQueue, { () -> Void in
 
-			var insulinVals: [BarChartDataEntry] = []
-			var bgVals: [ChartDataEntry] = [ChartDataEntry]()
+	
 
 			for i in 0 ..< self.sampleInsulin.count {
 
@@ -286,71 +275,109 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
 
 				if (now.isBetweeen(date: then, andDate: NSDate())) {
 					
-                    insulinVals.append(BarChartDataEntry(value: self.sampleInsulin[i], xIndex: i, data: self.sampleInsulin[i]))
-					
+                 
+                    self.insulinData.append(("\(self.sampleInsulin[i])", self.sampleInsulin[i]))
 
 					let meal = self.mealsArray![i] as! NSMutableDictionary
+                    let glucose = meal["bloodGlucose"]
+                    if(glucose is String){
+                        self.glucoseData.append(("\(meal["bloodGlucose"])", Double(meal["bloodGlucose"] as! String)!))
+                    }else{
+                        self.glucoseData.append(("\(meal["bloodGlucose"])", Double(meal["bloodGlucose"] as! Double)))
+                    }
 
-					bgVals.append(ChartDataEntry(value: Double(meal["bloodGlucose"] as! String)!, xIndex: i))
-				}
+								}
 			}
-
-			let timeVals = self.getYAxisCount(self.sampleInsulin.count)
-			let chartDataSet = LineChartDataSet(yVals: bgVals, label: "Blood Glucose")
-			chartDataSet.setColor(UIColor.whiteColor(), alpha: 1.0);
-
-            chartDataSet.mode = LineChartDataSet.Mode.CubicBezier
-			chartDataSet.drawFilledEnabled = false
-			chartDataSet.circleRadius = 10
-			chartDataSet.lineDashLengths = [10]
-            chartDataSet.calcMinMax(start: 0, end: 240)
-			chartDataSet.circleColors = [UIColor.whiteColor()]
-			chartDataSet.circleHoleColor = UIColor.whiteColor()
-			chartDataSet.fillAlpha = 1.0
-        
             
-			chartDataSet.fill = ChartFill(color: UIColor.whiteColor())
-
-			let barChartDataSet = BarChartDataSet(yVals: insulinVals, label: "Insulin Units")
-			barChartDataSet.valueTextColor = UIColor.whiteColor()
-            barChartDataSet.barBorderColor = UIColor.whiteColor()
-            barChartDataSet.barBorderWidth = 2
-			barChartDataSet.setColors([UIColor(hue: 11 / 360, saturation: 73 / 100, brightness: 83 / 100, alpha: 1.0), UIColor(hue: 337 / 360, saturation: 69 / 100, brightness: 65 / 100, alpha: 1.0),], alpha: 1.0)
-			barChartDataSet.barSpace = 0.90
-            barChartDataSet.calcMinMax(start: 1, end: 26)
+            let bars: [ChartBarModel] = self.insulinData.enumerate().flatMap {index, tuple in
+                [
+                    ChartBarModel(constant: ChartAxisValueDouble(index), axisValue1: ChartAxisValueDouble(0), axisValue2: ChartAxisValueDouble(tuple.value), bgColor: UIColor.greenColor()),
+                    
+                ]
+            }
+            let labelSettings = ChartLabelSettings(font: UIFont.systemFontOfSize(20))
             
-			let data: CombinedChartData = CombinedChartData(xVals: timeVals)
+          
             
-			data.lineData = LineChartData(xVals: timeVals, dataSets: [chartDataSet])
-			data.barData = BarChartData(xVals: timeVals, dataSets: [barChartDataSet])
+            let xModel = ChartAxisModel(axisValues: [EmptyAxisValue.init(0)], axisTitleLabel: ChartAxisLabel(text: "Axis title", settings: labelSettings))
+            let yModel = ChartAxisModel(axisValues: [EmptyAxisValue.init(0)], axisTitleLabel: ChartAxisLabel(text: "Axis title", settings: labelSettings.defaultVertical()))
+            let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: self.iPhoneChartSettings, chartFrame: self.chartPlaceholder!.frame, xModel: xModel, yModel: yModel)
+            let chartFrame = self.chartPlaceholder?.frame
            
-			data.setValueTextColor(UIColor.whiteColor())
-
-			if self.sampleInsulin.count == 0 {
-				self.insulinChart!.rightAxis.labelTextColor = UIColor.clearColor()
-				self.insulinChart!.leftAxis.labelTextColor = UIColor.clearColor()
-			}
-			if bgVals.count != 0 {
-				
-			} else {
-				self.insulinChart?.xAxis.enabled = false
-				self.insulinChart?.noDataText = "No data"
-				self.insulinChart?.infoTextColor = UIColor.whiteColor()
-				self.insulinChart?.data = nil
-				self.insulinChart?.setNeedsDisplay()
-			}
+            let (xAxis, yAxis, innerFrame) = (coordsSpace.xAxis, coordsSpace.yAxis, coordsSpace.chartInnerFrame)
             
-			self.insulinChart!.xAxis.labelPosition = .Top
-			self.insulinChart!.animate(xAxisDuration: 0.5, yAxisDuration: 1.0)
-
-			self.insulinChart?.data = data
-			self.insulinChart?.xAxis.labelTextColor = UIColor.whiteColor()
-			self.insulinChart?.notifyDataSetChanged()
+            let barsLayer = ChartBarsLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, bars: bars, horizontal: false, barWidth: 25, animDuration: 0.5)
             
-          //  self.insulinChart?.setVisibleYRangeMaximum(30, axis: .Left)
-            self.insulinChart?.setVisibleXRange(minXRange: 1, maxXRange: CGFloat((insulinVals.count)))
-			self.view.reloadInputViews()
-			self.insulinChart?.setNeedsDisplay()
+            // labels layer
+            // create chartpoints for the top and bottom of the bars, where we will show the labels
+            let labelChartPoints = bars.map {bar in
+                ChartPoint(x: bar.constant, y: bar.axisValue2)
+            }
+            let formatter = NSNumberFormatter()
+            formatter.maximumFractionDigits = 2
+            let labelsLayer = ChartPointsViewsLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, chartPoints: labelChartPoints, viewGenerator: {(chartPointModel, layer, chart) -> UIView? in
+                let label = HandlingLabel()
+                let posOffset: CGFloat = 10
+                
+                let pos = chartPointModel.chartPoint.y.scalar > 0
+                
+                let yOffset = pos ? -posOffset : posOffset
+                label.text = "\(formatter.stringFromNumber(chartPointModel.chartPoint.y.scalar)!)%"
+                label.font = UIFont.systemFontOfSize(12)
+                label.sizeToFit()
+                label.center = CGPointMake(chartPointModel.screenLoc.x, pos ? innerFrame.origin.y : innerFrame.origin.y + innerFrame.size.height)
+                label.alpha = 0
+                
+                label.movedToSuperViewHandler = {[weak label] in
+                    UIView.animateWithDuration(0.3, animations: {
+                        label?.alpha = 1
+                        label?.center.y = chartPointModel.screenLoc.y + yOffset
+                    })
+                }
+                return label
+                
+                }, displayDelay: 0.5) // show after bars animation
+            
+            // line layer
+            let lineChartPoints = self.glucoseData.enumerate().map {index, tuple in ChartPoint(x: ChartAxisValueDouble(index), y: ChartAxisValueDouble(tuple.value))}
+            let lineModel = ChartLineModel(chartPoints: lineChartPoints, lineColor: UIColor.blackColor(), lineWidth: 2, animDuration: 0.5, animDelay: 1)
+            let lineLayer = ChartPointsLineLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, lineModels: [lineModel])
+            
+            let circleViewGenerator = {(chartPointModel: ChartPointLayerModel, layer: ChartPointsLayer, chart: Chart) -> UIView? in
+                let color = UIColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1)
+                let circleView = ChartPointEllipseView(center: chartPointModel.screenLoc, diameter: 6)
+                circleView.animDuration = 0.5
+                circleView.fillColor = color
+                return circleView
+            }
+
+            
+            
+            // show a gap between positive and negative bar
+            let dummyZeroYChartPoint = ChartPoint(x: ChartAxisValueDouble(0), y: ChartAxisValueDouble(0))
+            let yZeroGapLayer = ChartPointsViewsLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, chartPoints: [dummyZeroYChartPoint], viewGenerator: {(chartPointModel, layer, chart) -> UIView? in
+                let height: CGFloat = 2
+                let v = UIView(frame: CGRectMake(innerFrame.origin.x + 2, chartPointModel.screenLoc.y - height / 2, innerFrame.origin.x + innerFrame.size.height, height))
+                v.backgroundColor = UIColor.whiteColor()
+                return v
+            })
+            
+            let theChart = Chart(
+                frame: self.chartPlaceholder!.frame,
+                layers: [
+                    xAxis,
+                    yAxis,
+                    barsLayer,
+                    labelsLayer,
+                    yZeroGapLayer,
+                    lineLayer,
+             
+                ]
+            )
+            self.view.addSubview(theChart.view)
+            self.chart = theChart
+
+
 			
 		})
         //main thread
@@ -428,7 +455,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
 				if (error == nil) {
 					self.refreshData()
 				}
-				self.insulinChart?.notifyDataSetChanged()
+			
 			}
 
 			self.healthStore.executeQuery(query)
@@ -514,7 +541,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
 	}
 
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        insulinChart?.highlightValue(ChartHighlight.init(xIndex: indexPath.row, dataSetIndex: 0))
+        
 	}
 
 
@@ -537,9 +564,8 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
     
 
     
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        
-    }
+
+
 	func refreshData() {
 		NSLog("refreshData......")
 		let timeSortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
@@ -587,7 +613,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
                     
 					//self.tableView!.reloadData()
              //       self.tableView!.reloadSections(NSIndexSet.init(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
-                    self.insulinChart?.notifyDataSetChanged()
+                  
                     self.configureGraphs()
 	
 				})
@@ -638,7 +664,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate, MFMailCompos
             spinner.startAnimating()
             hud.customView = spinner
             hud.show(true)
-            self.sendEmail(UIImagePNGRepresentation((self.insulinChart?.getSnapshot())!)!, csv: NSData(), options: ["csv" : false, "snapshot" : true])
+          //  self.sendEmail(UIImagePNGRepresentation((self.insulinChart?.getSnapshot())!)!, csv: NSData(), options: ["csv" : false, "snapshot" : true])
         
         })
 
@@ -989,5 +1015,9 @@ extension UINavigationController {
     }
 }
 
-
+class EmptyAxisValue: ChartAxisValueDouble {
+    override var labels: [ChartAxisLabel] {
+        return []
+    }
+}
 

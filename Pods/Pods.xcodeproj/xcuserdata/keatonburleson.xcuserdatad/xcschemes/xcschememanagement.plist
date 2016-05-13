@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Charts.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>EZAlertController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -59,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftCharts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UIImageColors.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,6 +67,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>053DFCC8A976D18C08240159EB782DCC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0CC3AC85291D76DF4348A46011097C3C</key>
 		<dict>
 			<key>primary</key>
@@ -87,11 +92,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>64C44EE6DA7C14CE49FA16522C9D0DAB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>68DD50BE9CDFC880B2A369AB468E633A</key>
 		<dict>
 			<key>primary</key>
@@ -102,22 +102,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C6828C2508515BC0428D6BDAA1292DC9</key>
+		<key>8F46FF69E1D32EC353D4929B5190BA97</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D6C627972003C2FB483EE799705B091F</key>
+		<key>AA425A3E467FC1F7D8DBF265A0A5DF34</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D1738CC4E1E51A8F0F905FA744C12B44</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FA46995B87A5023C1297704B032841EF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
